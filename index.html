@@ -2,56 +2,48 @@
 <html lang="fa" dir="rtl">
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#17659c">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<meta name="theme-color"
+      content="#17659c">
 
 <title>برای زهرا 🤍</title>
 
+
 <style>
+
+/* ==================================================
+   FONT
+================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
 
-/* ================================
+
+/* ==================================================
    RESET
-================================ */
+================================================== */
 
 *{
+
     box-sizing:border-box;
+
     margin:0;
+
     padding:0;
+
 }
+
 
 html{
+
     scroll-behavior:smooth;
+
 }
 
-/* ================================
-   COLORS
-================================ */
-
-:root{
-
-    --blue-dark:#07365b;
-    --blue:#258ac5;
-    --blue-light:#82d8ff;
-    --ice:#dff7ff;
-
-    --white:#ffffff;
-    --text:#f7fdff;
-
-    --muted:#d3e8f3;
-    --muted2:#a9c7d8;
-
-    --glass:rgba(20,105,160,.20);
-    --glass-light:rgba(190,235,255,.16);
-
-    --line:rgba(220,248,255,.30);
-}
-
-/* ================================
-   BODY
-================================ */
 
 body{
 
@@ -59,9 +51,10 @@ body{
 
     font-family:'Vazirmatn',sans-serif;
 
-    color:var(--text);
+    color:#f7fdff;
 
     overflow-x:hidden;
+
 
     background:
 
@@ -74,6 +67,7 @@ body{
 
         url("blue-rose.jpg");
 
+
     background-size:cover;
 
     background-position:center;
@@ -81,10 +75,13 @@ body{
     background-attachment:fixed;
 
     background-repeat:no-repeat;
+
 }
 
 
-/* نورهای محیط */
+/* ==================================================
+   BACKGROUND LIGHT
+================================================== */
 
 body::before{
 
@@ -97,6 +94,7 @@ body::before{
     pointer-events:none;
 
     z-index:-1;
+
 
     background:
 
@@ -117,10 +115,13 @@ body::before{
             rgba(255,255,255,.04),
             rgba(0,30,60,.20)
         );
+
 }
 
 
-/* ذرات نور */
+/* ==================================================
+   SOFT PARTICLES
+================================================== */
 
 body::after{
 
@@ -134,7 +135,8 @@ body::after{
 
     z-index:-1;
 
-    opacity:.45;
+    opacity:.35;
+
 
     background-image:
 
@@ -144,28 +146,469 @@ body::after{
             transparent 1.5px
         );
 
+
     background-size:
         110px 110px;
 
+
     animation:
-        sparkle 12s linear infinite;
+        sparkle 14s linear infinite;
+
 }
+
 
 @keyframes sparkle{
 
     from{
-        transform:translateY(0);
+
+        transform:
+            translateY(0);
+
     }
 
     to{
-        transform:translateY(-110px);
+
+        transform:
+            translateY(-110px);
+
     }
+
 }
 
 
-/* ================================
-   CONTAINER
-================================ */
+/* ==================================================
+   ENTRY SCREEN
+================================================== */
+
+.entry-screen{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:9999;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-align:center;
+
+    cursor:pointer;
+
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(3,35,65,.55),
+            rgba(20,105,160,.28),
+            rgba(2,25,55,.70)
+        ),
+
+        url("blue-rose.jpg");
+
+
+    background-size:cover;
+
+    background-position:center;
+
+
+    transition:
+
+        opacity 1.2s ease,
+
+        visibility 1.2s ease;
+
+}
+
+
+.entry-screen::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+
+    background:
+
+        radial-gradient(
+            circle at 50% 40%,
+            rgba(220,250,255,.22),
+            transparent 32%
+        ),
+
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.05),
+            rgba(0,30,60,.28)
+        );
+
+
+    pointer-events:none;
+
+}
+
+
+.entry-screen.hide{
+
+    opacity:0;
+
+    visibility:hidden;
+
+    pointer-events:none;
+
+}
+
+
+/* ==================================================
+   ENTRY CONTENT
+================================================== */
+
+.entry-content{
+
+    position:relative;
+
+    z-index:2;
+
+    width:90%;
+
+    max-width:400px;
+
+    padding:35px 25px;
+
+
+    animation:
+        entryAppear 1.5s ease;
+
+}
+
+
+.entry-glow{
+
+    position:absolute;
+
+    width:320px;
+
+    height:320px;
+
+    border-radius:50%;
+
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(130,220,255,.20),
+            transparent 70%
+        );
+
+
+    filter:blur(10px);
+
+
+    animation:
+        glowPulse 3s ease-in-out infinite;
+
+}
+
+
+/* ==================================================
+   ENTRY ROSE
+================================================== */
+
+.entry-rose{
+
+    font-size:82px;
+
+    margin-bottom:20px;
+
+
+    filter:
+
+        hue-rotate(145deg)
+
+        saturate(1.7)
+
+        brightness(1.15);
+
+
+    text-shadow:
+
+        0 0 20px
+        rgba(150,230,255,.55),
+
+        0 0 55px
+        rgba(80,180,255,.35);
+
+
+    animation:
+        roseFloat 3s ease-in-out infinite;
+
+}
+
+
+/* ==================================================
+   ENTRY LINE
+================================================== */
+
+.entry-line{
+
+    width:65px;
+
+    height:1px;
+
+    margin:
+        0 auto 25px;
+
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            #d9f8ff,
+            transparent
+        );
+
+
+    box-shadow:
+
+        0 0 15px
+        rgba(190,240,255,.7);
+
+}
+
+
+/* ==================================================
+   ENTRY TITLE
+================================================== */
+
+.entry-content h2{
+
+    color:#ffffff;
+
+    font-size:22px;
+
+    font-weight:400;
+
+    margin-bottom:10px;
+
+
+    text-shadow:
+
+        0 2px 20px
+        rgba(0,35,70,.7),
+
+        0 0 25px
+        rgba(150,230,255,.25);
+
+}
+
+
+.entry-content p{
+
+    color:#d3edf5;
+
+    font-size:12px;
+
+    font-weight:300;
+
+    margin-bottom:30px;
+
+}
+
+
+/* ==================================================
+   TOUCH BUTTON
+================================================== */
+
+.touch-circle{
+
+    width:65px;
+
+    height:65px;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:50%;
+
+
+    border:
+
+        1px solid
+        rgba(220,250,255,.50);
+
+
+    background:
+
+        rgba(170,230,255,.10);
+
+
+    box-shadow:
+
+        0 0 0 0
+        rgba(150,230,255,.35),
+
+        0 0 30px
+        rgba(100,210,255,.20),
+
+        inset 0 1px 0
+        rgba(255,255,255,.30);
+
+
+    animation:
+        touchPulse 2s ease-out infinite;
+
+}
+
+
+.touch-circle span{
+
+    color:#ffffff;
+
+    font-size:25px;
+
+    line-height:1;
+
+
+    text-shadow:
+
+        0 0 15px
+        rgba(190,240,255,.7);
+
+}
+
+
+/* ==================================================
+   ENTRY ANIMATIONS
+================================================== */
+
+@keyframes entryAppear{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(20px)
+            scale(.96);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+
+@keyframes roseFloat{
+
+    0%,
+    100%{
+
+        transform:
+            translateY(0)
+            rotate(-2deg);
+
+    }
+
+    50%{
+
+        transform:
+            translateY(-8px)
+            rotate(2deg);
+
+    }
+
+}
+
+
+@keyframes glowPulse{
+
+    0%,
+    100%{
+
+        opacity:.55;
+
+        transform:
+            scale(.9);
+
+    }
+
+    50%{
+
+        opacity:1;
+
+        transform:
+            scale(1.08);
+
+    }
+
+}
+
+
+@keyframes touchPulse{
+
+    0%{
+
+        box-shadow:
+
+            0 0 0 0
+            rgba(150,230,255,.40),
+
+            0 0 30px
+            rgba(100,210,255,.20);
+
+    }
+
+    70%{
+
+        box-shadow:
+
+            0 0 0 22px
+            rgba(150,230,255,0),
+
+            0 0 40px
+            rgba(100,210,255,.25);
+
+    }
+
+    100%{
+
+        box-shadow:
+
+            0 0 0 0
+            rgba(150,230,255,0),
+
+            0 0 30px
+            rgba(100,210,255,.20);
+
+    }
+
+}
+
+
+/* ==================================================
+   MAIN CONTAINER
+================================================== */
 
 .container{
 
@@ -175,12 +618,13 @@ body::after{
 
     padding:
         58px 0 65px;
+
 }
 
 
-/* ================================
+/* ==================================================
    HERO
-================================ */
+================================================== */
 
 .hero{
 
@@ -188,6 +632,7 @@ body::after{
 
     animation:
         fadeUp 1s ease;
+
 }
 
 
@@ -203,8 +648,12 @@ body::after{
 
     direction:ltr;
 
+
     text-shadow:
-        0 0 20px rgba(130,220,255,.55);
+
+        0 0 20px
+        rgba(130,220,255,.55);
+
 }
 
 
@@ -220,6 +669,7 @@ h1{
 
     color:#ffffff;
 
+
     text-shadow:
 
         0 4px 25px
@@ -227,6 +677,7 @@ h1{
 
         0 0 30px
         rgba(160,230,255,.25);
+
 }
 
 
@@ -240,8 +691,12 @@ h1{
 
     font-weight:300;
 
+
     text-shadow:
-        0 2px 12px rgba(0,30,60,.55);
+
+        0 2px 12px
+        rgba(0,30,60,.55);
+
 }
 
 
@@ -254,6 +709,7 @@ h1{
     margin:
         32px auto 36px;
 
+
     background:
 
         linear-gradient(
@@ -263,16 +719,18 @@ h1{
             transparent
         );
 
+
     box-shadow:
 
         0 0 15px
         rgba(130,220,255,.7);
+
 }
 
 
-/* ================================
-   SONG CARD
-================================ */
+/* ==================================================
+   MUSIC CARD
+================================================== */
 
 .song-card{
 
@@ -281,11 +739,15 @@ h1{
     padding:
         34px 20px 28px;
 
+
     border-radius:32px;
 
+
     border:
+
         1px solid
         rgba(220,248,255,.35);
+
 
     background:
 
@@ -296,11 +758,14 @@ h1{
             rgba(5,55,95,.18)
         );
 
+
     backdrop-filter:
         blur(24px);
 
+
     -webkit-backdrop-filter:
         blur(24px);
+
 
     box-shadow:
 
@@ -313,14 +778,15 @@ h1{
         inset 0 -1px 0
         rgba(255,255,255,.08);
 
+
     overflow:hidden;
+
 
     animation:
         fadeUp 1s ease .15s both;
+
 }
 
-
-/* درخشش بالای کارت */
 
 .song-card::before{
 
@@ -339,7 +805,9 @@ h1{
     transform:
         translateX(-50%);
 
+
     border-radius:50%;
+
 
     background:
 
@@ -349,11 +817,11 @@ h1{
             transparent 70%
         );
 
+
     pointer-events:none;
+
 }
 
-
-/* خط نور */
 
 .song-card::after{
 
@@ -369,6 +837,7 @@ h1{
 
     height:1px;
 
+
     background:
 
         linear-gradient(
@@ -378,102 +847,15 @@ h1{
             transparent
         );
 
+
     opacity:.7;
+
 }
 
 
-/* ================================
-   ROSE MARK
-================================ */
-
-.rose-mark{
-
-    width:104px;
-
-    height:104px;
-
-    margin:
-        0 auto 24px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    position:relative;
-
-    background:
-
-        radial-gradient(
-            circle at 45% 35%,
-            rgba(220,250,255,.40),
-            rgba(55,165,215,.20) 48%,
-            rgba(5,65,105,.25) 75%
-        );
-
-    border:
-        1px solid
-        rgba(220,250,255,.42);
-
-    box-shadow:
-
-        0 15px 55px
-        rgba(30,160,225,.25),
-
-        inset 0 0 35px
-        rgba(220,250,255,.15);
-}
-
-
-.rose-mark::before{
-
-    content:"🌹";
-
-    font-size:53px;
-
-    filter:
-        hue-rotate(145deg)
-        saturate(1.8)
-        brightness(1.2);
-
-    transform:
-        rotate(-8deg);
-
-    text-shadow:
-
-        0 0 18px
-        rgba(150,230,255,.55);
-}
-
-
-.rose-mark::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:9px;
-
-    height:9px;
-
-    border-radius:50%;
-
-    background:#ffffff;
-
-    box-shadow:
-
-        0 0 18px #c9f4ff,
-
-        0 0 35px #7bdcff;
-}
-
-
-/* ================================
+/* ==================================================
    SONG TITLE
-================================ */
+================================================== */
 
 .song-title{
 
@@ -489,10 +871,12 @@ h1{
 
     color:#ffffff;
 
+
     text-shadow:
 
         0 2px 15px
         rgba(0,40,75,.55);
+
 }
 
 
@@ -507,12 +891,13 @@ h1{
     font-weight:300;
 
     margin-bottom:28px;
+
 }
 
 
-/* ================================
+/* ==================================================
    CONTROLS
-================================ */
+================================================== */
 
 .controls{
 
@@ -525,6 +910,7 @@ h1{
     gap:17px;
 
     direction:ltr;
+
 }
 
 
@@ -536,15 +922,20 @@ h1{
 
     border-radius:50%;
 
+
     border:
+
         1px solid
         rgba(210,245,255,.34);
+
 
     background:
 
         rgba(160,225,255,.10);
 
+
     color:#e4f9ff;
+
 
     display:flex;
 
@@ -552,15 +943,20 @@ h1{
 
     justify-content:center;
 
+
     cursor:pointer;
 
     font-size:14px;
 
+
     transition:.25s ease;
 
+
     box-shadow:
+
         inset 0 1px 0
         rgba(255,255,255,.12);
+
 }
 
 
@@ -568,21 +964,26 @@ h1{
 
     transform:scale(1.08);
 
+
     background:
         rgba(150,225,255,.22);
+
 
     border-color:
         rgba(220,250,255,.65);
 
+
     box-shadow:
+
         0 0 25px
         rgba(80,200,255,.20);
+
 }
 
 
-/* ================================
+/* ==================================================
    PLAY BUTTON
-================================ */
+================================================== */
 
 .play-button{
 
@@ -592,9 +993,12 @@ h1{
 
     border-radius:50%;
 
+
     border:
+
         1px solid
         rgba(220,250,255,.70);
+
 
     background:
 
@@ -605,11 +1009,13 @@ h1{
             rgba(20,90,150,.25)
         );
 
+
     color:#ffffff;
 
     font-size:21px;
 
     cursor:pointer;
+
 
     display:flex;
 
@@ -617,7 +1023,9 @@ h1{
 
     justify-content:center;
 
+
     transition:.3s ease;
+
 
     box-shadow:
 
@@ -629,12 +1037,14 @@ h1{
 
         inset 0 1px 0
         rgba(255,255,255,.55);
+
 }
 
 
 .play-button:hover{
 
     transform:scale(1.09);
+
 
     box-shadow:
 
@@ -643,6 +1053,7 @@ h1{
 
         0 0 40px
         rgba(130,225,255,.35);
+
 }
 
 
@@ -656,23 +1067,27 @@ h1{
             rgba(25,115,175,.30)
         );
 
+
     border-color:#d8f8ff;
+
 
     box-shadow:
 
         0 0 35px
         rgba(110,220,255,.45);
+
 }
 
 
-/* ================================
+/* ==================================================
    PROGRESS
-================================ */
+================================================== */
 
 .progress-wrap{
 
     margin:
         28px 2px 0;
+
 }
 
 
@@ -688,13 +1103,17 @@ h1{
 
         rgba(255,255,255,.16);
 
+
     overflow:hidden;
 
     cursor:pointer;
 
+
     box-shadow:
+
         inset 0 1px 3px
         rgba(0,30,60,.20);
+
 }
 
 
@@ -704,6 +1123,7 @@ h1{
 
     width:0%;
 
+
     background:
 
         linear-gradient(
@@ -712,12 +1132,15 @@ h1{
             #d7f7ff
         );
 
+
     border-radius:20px;
+
 
     box-shadow:
 
         0 0 14px
         rgba(150,230,255,.80);
+
 }
 
 
@@ -734,12 +1157,13 @@ h1{
     font-size:10px;
 
     margin-top:8px;
+
 }
 
 
-/* ================================
+/* ==================================================
    LYRICS
-================================ */
+================================================== */
 
 .lyrics-box{
 
@@ -748,7 +1172,9 @@ h1{
     padding:
         21px 12px 18px;
 
+
     border-radius:25px;
+
 
     background:
 
@@ -758,19 +1184,25 @@ h1{
             rgba(0,65,110,.17)
         );
 
+
     border:
+
         1px solid
         rgba(205,242,255,.22);
+
 
     height:300px;
 
     overflow-y:auto;
 
+
     scrollbar-width:thin;
 
     scrollbar-color:
+
         rgba(170,230,255,.45)
         transparent;
+
 }
 
 
@@ -788,10 +1220,12 @@ h1{
 
     direction:ltr;
 
+
     text-shadow:
 
         0 0 18px
         rgba(140,225,255,.45);
+
 }
 
 
@@ -802,6 +1236,7 @@ h1{
     flex-direction:column;
 
     gap:9px;
+
 }
 
 
@@ -816,12 +1251,13 @@ h1{
     line-height:2;
 
     padding:4px 7px;
+
 }
 
 
-/* ================================
+/* ==================================================
    HINT
-================================ */
+================================================== */
 
 .hint{
 
@@ -832,12 +1268,13 @@ h1{
     color:#c1dce7;
 
     margin-top:15px;
+
 }
 
 
-/* ================================
+/* ==================================================
    FOOTER
-================================ */
+================================================== */
 
 .footer{
 
@@ -845,8 +1282,11 @@ h1{
 
     margin-top:50px;
 
+
     animation:
+
         fadeUp 1s ease .3s both;
+
 }
 
 
@@ -860,8 +1300,12 @@ h1{
 
     font-weight:300;
 
+
     text-shadow:
-        0 2px 12px rgba(0,30,60,.45);
+
+        0 2px 12px
+        rgba(0,30,60,.45);
+
 }
 
 
@@ -872,8 +1316,10 @@ h1{
     margin:
         38px auto 0;
 
+
     padding:
         0 14px;
+
 
     color:#c8e0e9;
 
@@ -882,8 +1328,66 @@ h1{
     line-height:2.5;
 
     font-weight:300;
+
 }
 
+
+/* ==================================================
+   FINAL MESSAGE
+================================================== */
+
+.final-message{
+
+    opacity:1;
+
+    max-height:none;
+
+    overflow:visible;
+
+    text-align:center;
+
+    margin-top:30px;
+
+    padding:
+        20px 14px;
+
+
+    color:#e1f8ff;
+
+    font-size:13px;
+
+    line-height:2.5;
+
+
+    border-radius:22px;
+
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(180,235,255,.10),
+            rgba(0,65,110,.15)
+        );
+
+
+    border:
+
+        1px solid
+        rgba(210,245,255,.18);
+
+
+    box-shadow:
+
+        inset 0 1px 0
+        rgba(255,255,255,.10);
+
+}
+
+
+/* ==================================================
+   SIGNATURE
+================================================== */
 
 .signature{
 
@@ -893,51 +1397,18 @@ h1{
 
     font-size:12px;
 
+
     text-shadow:
-        0 0 15px rgba(120,220,255,.25);
+
+        0 0 15px
+        rgba(120,220,255,.25);
+
 }
 
 
-/* ================================
-   FINAL MESSAGE
-================================ */
-
-.final-message{
-
-    opacity:0;
-
-    max-height:0;
-
-    overflow:hidden;
-
-    text-align:center;
-
-    margin-top:0;
-
-    color:#e1f8ff;
-
-    font-size:13px;
-
-    line-height:2.5;
-
-    transition:
-        all 1.2s ease;
-}
-
-
-.final-message.show{
-
-    opacity:1;
-
-    max-height:170px;
-
-    margin-top:28px;
-}
-
-
-/* ================================
+/* ==================================================
    ANIMATION
-================================ */
+================================================== */
 
 @keyframes fadeUp{
 
@@ -947,6 +1418,7 @@ h1{
 
         transform:
             translateY(18px);
+
     }
 
     to{
@@ -955,13 +1427,15 @@ h1{
 
         transform:
             translateY(0);
+
     }
+
 }
 
 
-/* ================================
+/* ==================================================
    MOBILE
-================================ */
+================================================== */
 
 @media(max-width:420px){
 
@@ -972,21 +1446,28 @@ h1{
 
     }
 
+
     .container{
 
         padding:
             43px 0 55px;
+
     }
+
 
     h1{
 
         font-size:34px;
+
     }
+
 
     .small-title{
 
         letter-spacing:4px;
+
     }
+
 
     .song-card{
 
@@ -994,29 +1475,59 @@ h1{
             28px 15px 24px;
 
         border-radius:28px;
+
     }
+
 
     .song-title{
 
         font-size:17px;
+
     }
+
 
     .lyrics-box{
 
         height:285px;
+
     }
+
 
     .controls{
 
         gap:14px;
+
+    }
+
+
+    .entry-content h2{
+
+        font-size:20px;
+
+    }
+
+
+    .entry-rose{
+
+        font-size:72px;
+
+    }
+
+
+    .touch-circle{
+
+        width:60px;
+
+        height:60px;
+
     }
 
 }
 
 
-/* ================================
+/* ==================================================
    REDUCED MOTION
-================================ */
+================================================== */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1025,7 +1536,9 @@ h1{
         animation:none !important;
 
         transition:none !important;
+
     }
+
 }
 
 </style>
@@ -1035,22 +1548,103 @@ h1{
 
 <body>
 
+
+<!-- ==================================================
+     ENTRY SCREEN
+================================================== -->
+
+<div
+    class="entry-screen"
+    id="entryScreen">
+
+
+    <div class="entry-glow"></div>
+
+
+    <div class="entry-content">
+
+
+        <div class="entry-rose">
+
+            🌹
+
+        </div>
+
+
+        <div class="entry-line"></div>
+
+
+        <h2>
+
+            برای ورود لمس کن 🤍
+
+        </h2>
+
+
+        <p>
+
+            یه آهنگ برای تو...
+
+        </p>
+
+
+        <div class="touch-circle">
+
+            <span>♡</span>
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- ==================================================
+     BACKGROUND MUSIC
+================================================== -->
+
+<audio
+    id="backgroundMusic"
+    preload="auto"
+    loop>
+
+    <source
+        src="background.mp3"
+        type="audio/mpeg">
+
+</audio>
+
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
 <main class="container">
 
 
-<!-- ================================
+<!-- ==================================================
      HEADER
-================================ -->
+================================================== -->
 
 <section class="hero">
 
+
     <div class="small-title">
+
         A LITTLE SOMETHING FOR YOU
+
     </div>
 
+
     <h1>
+
         برای زهرا 🤍
+
     </h1>
+
 
     <p class="intro">
 
@@ -1062,19 +1656,19 @@ h1{
 
     </p>
 
+
     <div class="divider"></div>
+
 
 </section>
 
 
-<!-- ================================
+
+<!-- ==================================================
      MUSIC CARD
-================================ -->
+================================================== -->
 
 <section class="song-card">
-
-
-    <div class="rose-mark"></div>
 
 
     <div class="song-title">
@@ -1134,23 +1728,32 @@ h1{
             class="progress"
             id="progress">
 
+
             <div
                 class="progress-bar"
                 id="progressBar">
             </div>
+
 
         </div>
 
 
         <div class="time">
 
+
             <span id="currentTime">
+
                 0:00
+
             </span>
 
+
             <span id="duration">
+
                 0:00
+
             </span>
+
 
         </div>
 
@@ -1158,19 +1761,30 @@ h1{
     </div>
 
 
+
+    <!-- ==================================================
+         LYRICS
+    ================================================== -->
+
     <div class="lyrics-box">
 
 
         <div class="lyrics-title">
+
             LYRICS
+
         </div>
 
 
         <div class="lyrics">
 
+
             <div class="lyric-line">
+
                 متن آهنگ
+
             </div>
+
 
         </div>
 
@@ -1185,13 +1799,17 @@ h1{
     </div>
 
 
+    <!-- MAIN SONG -->
+
     <audio
         id="music"
         preload="metadata">
 
+
         <source
             src="song.mp3"
             type="audio/mpeg">
+
 
     </audio>
 
@@ -1199,65 +1817,92 @@ h1{
 </section>
 
 
-<!-- ================================
+
+<!-- ==================================================
      FOOTER
-================================ -->
+================================================== -->
 
 <footer class="footer">
 
 
     <p class="footer-text">
 
+
         امیدوارم هر کدومشون<br>
+
 
         یه جایی از روزت رو قشنگ‌تر کنن. 🌱
 
+
         <br><br>
+
 
         امیدوارم همیشه دلت خوش باشه،
 
+
         <br>
+
 
         ذهنت آروم باشه
 
+
         <br>
+
 
         و روزات پر از اتفاقای خوب.
 
+
     </p>
+
 
 
     <p class="personal-note">
 
+
         بعضی چیزا رو نمی‌شه خیلی خوب توضیح داد؛<br>
+
 
         گاهی فقط باید یه آهنگ رو برای یه نفر گذاشت<br>
 
+
         و گفت: «این برای توئه.»
+
 
     </p>
 
 
-    <div
-        class="final-message"
-        id="finalMessage">
+
+    <!-- ==================================================
+         ALWAYS VISIBLE MESSAGE
+    ================================================== -->
+
+    <div class="final-message">
+
 
         یادت نره این صفحه رو نگه داری...<br>
 
+
         چون ممکنه فردا یادت نباشه از کجا پیداش کردی 😂
+
 
         <br><br>
 
+
         از طرف همون کسی که هنوز<br>
 
+
         منتظر کشتی توی فرودگاهه 😂🤍
+
 
     </div>
 
 
+
     <div class="signature">
 
+
         برای یک آدم خاص :)
+
 
     </div>
 
@@ -1268,70 +1913,266 @@ h1{
 </main>
 
 
+
 <script>
 
-/* ================================
-   ELEMENTS
-================================ */
+/* ==================================================
+   ENTRY + BACKGROUND MUSIC
+================================================== */
+
+const entryScreen =
+    document.getElementById(
+        "entryScreen"
+    );
+
+
+const backgroundMusic =
+    document.getElementById(
+        "backgroundMusic"
+    );
+
+
+let musicStarted = false;
+
+
+/* ==================================================
+   FADE IN BACKGROUND MUSIC
+================================================== */
+
+function fadeInMusic(){
+
+    backgroundMusic.volume = 0;
+
+
+    const targetVolume = 0.32;
+
+    const duration = 2200;
+
+    const steps = 44;
+
+    const stepTime =
+        duration / steps;
+
+    const volumeStep =
+        targetVolume / steps;
+
+
+    let currentStep = 0;
+
+
+    const fade =
+        setInterval(function(){
+
+
+            currentStep++;
+
+
+            backgroundMusic.volume =
+                Math.min(
+                    targetVolume,
+                    currentStep * volumeStep
+                );
+
+
+            if(
+                currentStep >= steps
+            ){
+
+                clearInterval(fade);
+
+            }
+
+
+        },stepTime);
+
+}
+
+
+/* ==================================================
+   START EXPERIENCE
+================================================== */
+
+async function startExperience(){
+
+    if(musicStarted){
+
+        return;
+
+    }
+
+
+    musicStarted = true;
+
+
+    try{
+
+
+        backgroundMusic.volume = 0;
+
+
+        await backgroundMusic.play();
+
+
+        fadeInMusic();
+
+
+    }
+
+
+    catch(error){
+
+
+        console.log(
+            "Background music could not start:",
+            error
+        );
+
+
+    }
+
+
+    entryScreen.classList.add(
+        "hide"
+    );
+
+
+    setTimeout(
+        function(){
+
+            if(entryScreen){
+
+                entryScreen.remove();
+
+            }
+
+        },
+        1300
+    );
+
+}
+
+
+/* ==================================================
+   ENTRY CLICK
+================================================== */
+
+entryScreen.addEventListener(
+    "click",
+    startExperience
+);
+
+
+/* ==================================================
+   ENTRY TOUCH
+================================================== */
+
+entryScreen.addEventListener(
+    "touchstart",
+    startExperience,
+    {
+        passive:true
+    }
+);
+
+
+/* ==================================================
+   MAIN MUSIC ELEMENTS
+================================================== */
 
 const music =
-    document.getElementById("music");
+    document.getElementById(
+        "music"
+    );
+
 
 const playButton =
-    document.getElementById("playButton");
+    document.getElementById(
+        "playButton"
+    );
+
 
 const backButton =
-    document.getElementById("backButton");
+    document.getElementById(
+        "backButton"
+    );
+
 
 const forwardButton =
-    document.getElementById("forwardButton");
+    document.getElementById(
+        "forwardButton"
+    );
+
 
 const progress =
-    document.getElementById("progress");
+    document.getElementById(
+        "progress"
+    );
+
 
 const progressBar =
-    document.getElementById("progressBar");
+    document.getElementById(
+        "progressBar"
+    );
+
 
 const currentTime =
-    document.getElementById("currentTime");
+    document.getElementById(
+        "currentTime"
+    );
+
 
 const duration =
-    document.getElementById("duration");
+    document.getElementById(
+        "duration"
+    );
 
-const finalMessage =
-    document.getElementById("finalMessage");
 
-
-/* ================================
+/* ==================================================
    FORMAT TIME
-================================ */
+================================================== */
 
 function formatTime(seconds){
 
-    if(!Number.isFinite(seconds)){
+    if(
+        !Number.isFinite(seconds)
+    ){
+
         return "0:00";
+
     }
+
 
     seconds =
         Math.floor(seconds);
 
+
     const minutes =
-        Math.floor(seconds / 60);
+        Math.floor(
+            seconds / 60
+        );
+
 
     const secs =
         seconds % 60;
 
+
     return (
+
         minutes +
+
         ":" +
-        String(secs).padStart(2,"0")
+
+        String(secs)
+            .padStart(2,"0")
+
     );
+
 }
 
 
-/* ================================
-   PLAY / PAUSE
-================================ */
+/* ==================================================
+   PLAY / PAUSE MAIN SONG
+================================================== */
 
 playButton.addEventListener(
     "click",
@@ -1339,148 +2180,195 @@ playButton.addEventListener(
 
         try{
 
+
             if(music.paused){
 
+
                 await music.play();
+
 
                 playButton.classList.add(
                     "playing"
                 );
 
+
                 playButton.textContent =
                     "❚❚";
 
+
             }
+
 
             else{
 
+
                 music.pause();
+
 
                 playButton.classList.remove(
                     "playing"
                 );
 
+
                 playButton.textContent =
                     "▶";
+
+
             }
 
+
         }
+
 
         catch(error){
 
+
             console.error(error);
 
+
         }
+
 
     }
 );
 
 
-/* ================================
-   BACK 15 SEC
-================================ */
+/* ==================================================
+   BACK 15 SECONDS
+================================================== */
 
 backButton.addEventListener(
     "click",
     function(){
 
+
         music.currentTime =
+
             Math.max(
                 0,
                 music.currentTime - 15
             );
 
+
     }
 );
 
 
-/* ================================
-   FORWARD 15 SEC
-================================ */
+/* ==================================================
+   FORWARD 15 SECONDS
+================================================== */
 
 forwardButton.addEventListener(
     "click",
     function(){
 
-        if(!Number.isFinite(
-            music.duration
-        )){
+
+        if(
+            !Number.isFinite(
+                music.duration
+            )
+        ){
+
             return;
+
         }
 
+
         music.currentTime =
+
             Math.min(
                 music.duration,
                 music.currentTime + 15
             );
 
+
     }
 );
 
 
-/* ================================
+/* ==================================================
    METADATA
-================================ */
+================================================== */
 
 music.addEventListener(
     "loadedmetadata",
     function(){
 
+
         duration.textContent =
+
             formatTime(
                 music.duration
             );
+
 
     }
 );
 
 
-/* ================================
-   PROGRESS
-================================ */
+/* ==================================================
+   PROGRESS UPDATE
+================================================== */
 
 music.addEventListener(
     "timeupdate",
     function(){
 
+
         if(!music.duration){
+
             return;
+
         }
 
+
         const percent =
+
             (
                 music.currentTime /
                 music.duration
             ) * 100;
 
+
         progressBar.style.width =
+
             percent + "%";
 
+
         currentTime.textContent =
+
             formatTime(
                 music.currentTime
             );
+
 
     }
 );
 
 
-/* ================================
+/* ==================================================
    CLICK PROGRESS
-================================ */
+================================================== */
 
 progress.addEventListener(
     "click",
     function(event){
 
+
         if(!music.duration){
+
             return;
+
         }
 
+
         const rect =
+
             progress.getBoundingClientRect();
 
+
         const percent =
+
             Math.min(
                 1,
                 Math.max(
@@ -1492,43 +2380,49 @@ progress.addEventListener(
                 )
             );
 
+
         music.currentTime =
+
             percent *
             music.duration;
+
 
     }
 );
 
 
-/* ================================
-   SONG END
-================================ */
+/* ==================================================
+   MAIN SONG ENDED
+================================================== */
 
 music.addEventListener(
     "ended",
     function(){
 
+
         playButton.classList.remove(
             "playing"
         );
 
+
         playButton.textContent =
             "▶";
+
 
         progressBar.style.width =
             "0%";
 
+
         currentTime.textContent =
             "0:00";
 
-        finalMessage.classList.add(
-            "show"
-        );
 
     }
 );
 
 </script>
 
+
 </body>
-</html>
+
+   </html>
