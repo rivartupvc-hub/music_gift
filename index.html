@@ -9,13 +9,22 @@
       content="width=device-width, initial-scale=1.0">
 
 <meta name="theme-color"
-      content="#070b14">
+      content="#050810">
 
 <title>برای زهرا 🤍</title>
 
 <style>
 
+/* ================================
+   FONT
+================================ */
+
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
+
+
+/* ================================
+   RESET
+================================ */
 
 *{
     box-sizing:border-box;
@@ -23,20 +32,44 @@
     padding:0;
 }
 
+
+/* ================================
+   COLORS
+================================ */
+
 :root{
-    --bg:#070a12;
-    --bg2:#0b1220;
-    --blue:#4e8cff;
-    --blue2:#75b7ff;
-    --blue-soft:#9acbff;
-    --text:#f2f6ff;
-    --muted:#9da9bb;
-    --line:rgba(120,170,255,.18);
+
+    --bg:#04070e;
+
+    --blue:#6faaff;
+
+    --blue2:#9dccff;
+
+    --blue-soft:#c9e2ff;
+
+    --white:#f7faff;
+
+    --text:#edf4ff;
+
+    --muted:#c0cad8;
+
+    --muted2:#98a7ba;
+
+    --line:rgba(155,195,255,.20);
+
 }
 
+
+/* ================================
+   BODY
+================================ */
+
 html{
+
     scroll-behavior:smooth;
+
 }
+
 
 body{
 
@@ -46,65 +79,32 @@ body{
 
     color:var(--text);
 
-    background:
-
-        radial-gradient(
-            circle at 50% -10%,
-            rgba(60,130,255,.20),
-            transparent 35%
-        ),
-
-        radial-gradient(
-            circle at 0% 55%,
-            rgba(30,90,190,.13),
-            transparent 35%
-        ),
-
-        radial-gradient(
-            circle at 100% 85%,
-            rgba(70,110,220,.12),
-            transparent 35%
-        ),
-
-        linear-gradient(
-            145deg,
-            #05070d,
-            #0a0f1b 55%,
-            #060911
-        );
-
     overflow-x:hidden;
 
-}
+
+    background:
+
+        linear-gradient(
+
+            rgba(2,5,12,.76),
+
+            rgba(3,7,16,.91)
+
+        ),
+
+        url("blue-rose.jpg");
 
 
-/* --------------------------------
-   رز آبی پس زمینه
--------------------------------- */
+    background-size:cover;
 
-body::before{
+    background-position:center;
 
-    content:"🌹";
-
-    position:fixed;
-
-    left:-45px;
-    top:35%;
-
-    font-size:190px;
-
-    opacity:.035;
-
-    filter:
-        grayscale(.2)
-        blur(1px);
-
-    transform:
-        rotate(-18deg);
-
-    pointer-events:none;
+    background-attachment:fixed;
 
 }
+
+
+/* لایه ظریف روی کل صفحه */
 
 body::after{
 
@@ -112,30 +112,41 @@ body::after{
 
     position:fixed;
 
-    width:280px;
-    height:280px;
+    inset:0;
 
-    right:-150px;
-    top:12%;
+    pointer-events:none;
 
-    border-radius:50%;
+    z-index:-1;
+
 
     background:
 
         radial-gradient(
-            circle,
-            rgba(70,140,255,.12),
-            transparent 68%
-        );
 
-    pointer-events:none;
+            circle at 50% 15%,
+
+            rgba(75,145,255,.16),
+
+            transparent 32%
+
+        ),
+
+        radial-gradient(
+
+            circle at 15% 80%,
+
+            rgba(35,90,180,.12),
+
+            transparent 30%
+
+        );
 
 }
 
 
-/* --------------------------------
-   کانتینر
--------------------------------- */
+/* ================================
+   CONTAINER
+================================ */
 
 .container{
 
@@ -144,24 +155,28 @@ body::after{
     margin:auto;
 
     padding:
-        55px 0
-        55px;
+
+        58px 0
+
+        60px;
 
 }
 
 
-/* --------------------------------
-   هدر
--------------------------------- */
+/* ================================
+   HERO
+================================ */
 
 .hero{
 
     text-align:center;
 
     animation:
+
         fadeUp 1s ease;
 
 }
+
 
 .small-title{
 
@@ -169,13 +184,20 @@ body::after{
 
     letter-spacing:5px;
 
-    color:#75a9e8;
+    color:#a9d0ff;
 
-    margin-bottom:20px;
+    margin-bottom:21px;
 
     direction:ltr;
 
+    text-shadow:
+
+        0 0 18px
+
+        rgba(110,175,255,.25);
+
 }
+
 
 h1{
 
@@ -187,96 +209,141 @@ h1{
 
     letter-spacing:-1px;
 
+    color:#ffffff;
+
     text-shadow:
-        0 0 30px
-        rgba(90,150,255,.16);
+
+        0 0 25px
+
+        rgba(120,180,255,.18);
 
 }
 
+
 .intro{
 
-    color:#b4bfce;
+    color:#d4ddea;
 
     font-size:14px;
 
-    line-height:2.35;
+    line-height:2.4;
 
     font-weight:300;
 
 }
 
+
 .divider{
 
-    width:55px;
+    width:65px;
 
     height:1px;
 
     margin:
-        31px
+
+        32px
+
         auto
-        35px;
+
+        36px;
+
 
     background:
 
         linear-gradient(
+
             90deg,
+
             transparent,
-            #639cff,
+
+            #8fc5ff,
+
             transparent
+
         );
 
-    opacity:.8;
+
+    box-shadow:
+
+        0 0 12px
+
+        rgba(100,170,255,.35);
 
 }
 
 
-/* --------------------------------
-   کارت موزیک
--------------------------------- */
+/* ================================
+   SONG CARD
+================================ */
 
 .song-card{
 
     position:relative;
 
     padding:
-        30px
+
+        32px
+
         20px
-        25px;
+
+        27px;
+
 
     border-radius:30px;
 
+
     border:
+
         1px solid
-        rgba(120,175,255,.16);
+
+        rgba(160,200,255,.20);
+
 
     background:
 
         linear-gradient(
+
             145deg,
-            rgba(255,255,255,.055),
-            rgba(60,100,170,.025)
+
+            rgba(10,18,32,.76),
+
+            rgba(5,10,20,.58)
+
         );
 
+
     backdrop-filter:
+
         blur(18px);
+
+
+    -webkit-backdrop-filter:
+
+        blur(18px);
+
 
     box-shadow:
 
-        0 30px 80px
-        rgba(0,0,0,.42),
+        0 30px 90px
+
+        rgba(0,0,0,.55),
 
         inset 0 1px 0
-        rgba(255,255,255,.035);
+
+        rgba(255,255,255,.055);
+
 
     overflow:hidden;
 
+
     animation:
+
         fadeUp 1s ease .15s both;
 
 }
 
 
-/* نور داخلی کارت */
+/* نور بالای کارت */
 
 .song-card::before{
 
@@ -284,100 +351,124 @@ h1{
 
     position:absolute;
 
-    width:180px;
-    height:180px;
+    width:220px;
 
-    top:-90px;
+    height:220px;
+
+    top:-120px;
+
     left:50%;
 
     transform:translateX(-50%);
 
     border-radius:50%;
 
+
     background:
 
         radial-gradient(
+
             circle,
-            rgba(70,145,255,.15),
+
+            rgba(95,165,255,.18),
+
             transparent 70%
+
         );
+
 
     pointer-events:none;
 
 }
 
 
-/* --------------------------------
-   المان رز آبی
--------------------------------- */
+/* ================================
+   ROSE MARK
+================================ */
 
 .rose-mark{
 
     width:96px;
+
     height:96px;
 
     margin:
+
         0 auto
-        22px;
+
+        23px;
+
 
     border-radius:50%;
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
 
     position:relative;
 
+
     background:
 
         radial-gradient(
+
             circle at 50% 45%,
-            rgba(112,185,255,.28),
-            rgba(28,62,120,.16) 48%,
-            rgba(5,10,20,.2) 72%
+
+            rgba(120,190,255,.25),
+
+            rgba(20,50,100,.18) 50%,
+
+            rgba(0,5,15,.35) 75%
+
         );
 
+
     border:
+
         1px solid
-        rgba(115,175,255,.25);
+
+        rgba(145,195,255,.28);
+
 
     box-shadow:
 
-        0 15px 45px
-        rgba(30,100,220,.16),
+        0 15px 50px
 
-        inset 0 0 30px
-        rgba(80,150,255,.08);
+        rgba(30,105,220,.20),
+
+        inset 0 0 35px
+
+        rgba(100,170,255,.09);
 
 }
 
-
-/* گل به شکل نماد ظریف */
 
 .rose-mark::before{
 
     content:"✿";
 
-    font-size:51px;
+    font-size:52px;
 
-    color:#73b7ff;
+    color:#8ec5ff;
 
     text-shadow:
 
-        0 0 12px
-        rgba(80,155,255,.55),
+        0 0 13px
+
+        rgba(100,175,255,.65),
 
         0 0 35px
-        rgba(60,120,255,.28);
+
+        rgba(70,135,255,.35);
 
     transform:
+
         rotate(-12deg);
 
 }
 
-
-/* مرکز گل */
 
 .rose-mark::after{
 
@@ -386,22 +477,25 @@ h1{
     position:absolute;
 
     width:8px;
+
     height:8px;
 
     border-radius:50%;
 
-    background:#d5ebff;
+    background:#e4f2ff;
 
     box-shadow:
-        0 0 15px
-        #8ec8ff;
+
+        0 0 18px
+
+        #a4d2ff;
 
 }
 
 
-/* --------------------------------
-   عنوان آهنگ
--------------------------------- */
+/* ================================
+   SONG TITLE
+================================ */
 
 .song-title{
 
@@ -413,9 +507,12 @@ h1{
 
     line-height:1.9;
 
-    margin-bottom:5px;
+    margin-bottom:6px;
+
+    color:#ffffff;
 
 }
+
 
 .artist{
 
@@ -423,18 +520,18 @@ h1{
 
     font-size:13px;
 
-    color:#8293aa;
+    color:#aebfd3;
 
     font-weight:300;
 
-    margin-bottom:25px;
+    margin-bottom:27px;
 
 }
 
 
-/* --------------------------------
-   کنترل ها
--------------------------------- */
+/* ================================
+   CONTROLS
+================================ */
 
 .controls{
 
@@ -450,124 +547,173 @@ h1{
 
 }
 
+
 .control-button{
 
     width:45px;
+
     height:45px;
 
     border-radius:50%;
 
+
     border:
+
         1px solid
-        rgba(125,175,255,.20);
+
+        rgba(150,195,255,.25);
+
 
     background:
-        rgba(80,130,210,.06);
 
-    color:#a9c9ed;
+        rgba(80,130,210,.08);
+
+
+    color:#c2ddfa;
 
     display:flex;
 
     align-items:center;
+
     justify-content:center;
+
 
     cursor:pointer;
 
     font-size:14px;
 
+
     transition:
+
         .25s ease;
 
 }
+
 
 .control-button:hover{
 
     transform:scale(1.08);
 
     background:
-        rgba(80,140,240,.13);
+
+        rgba(80,140,240,.16);
 
     border-color:
-        rgba(125,185,255,.4);
+
+        rgba(145,200,255,.48);
 
 }
 
+
 .play-button{
 
-    width:66px;
-    height:66px;
+    width:68px;
+
+    height:68px;
 
     border-radius:50%;
 
+
     border:
+
         1px solid
-        rgba(120,180,255,.42);
+
+        rgba(150,205,255,.50);
+
 
     background:
 
         radial-gradient(
+
             circle at 40% 35%,
-            rgba(115,185,255,.18),
-            rgba(40,80,150,.10)
+
+            rgba(130,195,255,.25),
+
+            rgba(35,75,145,.12)
+
         );
 
-    color:#d9edff;
+
+    color:#f0f8ff;
 
     font-size:21px;
 
     cursor:pointer;
 
+
     display:flex;
 
     align-items:center;
+
     justify-content:center;
+
 
     transition:.3s ease;
 
+
     box-shadow:
 
-        0 10px 35px
-        rgba(30,100,220,.16);
+        0 10px 40px
+
+        rgba(30,100,220,.20),
+
+        0 0 25px
+
+        rgba(80,155,255,.08);
 
 }
+
 
 .play-button:hover{
 
-    transform:scale(1.07);
+    transform:scale(1.08);
 
     box-shadow:
 
-        0 12px 45px
-        rgba(50,130,255,.25);
+        0 14px 50px
+
+        rgba(50,130,255,.30),
+
+        0 0 25px
+
+        rgba(80,155,255,.15);
 
 }
+
 
 .play-button.playing{
 
     background:
 
         radial-gradient(
+
             circle,
-            rgba(80,155,255,.25),
-            rgba(35,75,140,.10)
+
+            rgba(90,165,255,.30),
+
+            rgba(35,75,140,.12)
+
         );
 
-    border-color:#72b5ff;
+    border-color:#91c9ff;
 
 }
 
 
-/* --------------------------------
-   پیشرفت
--------------------------------- */
+/* ================================
+   PROGRESS
+================================ */
 
 .progress-wrap{
 
     margin:
-        27px 2px
+
+        28px 2px
+
         0;
 
 }
+
 
 .progress{
 
@@ -578,7 +724,8 @@ h1{
     border-radius:20px;
 
     background:
-        rgba(255,255,255,.08);
+
+        rgba(255,255,255,.10);
 
     overflow:hidden;
 
@@ -586,27 +733,38 @@ h1{
 
 }
 
+
 .progress-bar{
 
     height:100%;
 
     width:0%;
 
+
     background:
 
         linear-gradient(
+
             90deg,
-            #4d83ff,
-            #80c4ff
+
+            #5795ff,
+
+            #a0d4ff
+
         );
+
 
     border-radius:20px;
 
+
     box-shadow:
-        0 0 10px
-        rgba(90,165,255,.45);
+
+        0 0 12px
+
+        rgba(100,175,255,.55);
 
 }
+
 
 .time{
 
@@ -616,7 +774,7 @@ h1{
 
     direction:ltr;
 
-    color:#69788c;
+    color:#9aabc0;
 
     font-size:10px;
 
@@ -625,55 +783,77 @@ h1{
 }
 
 
-/* --------------------------------
-   متن آهنگ
--------------------------------- */
+/* ================================
+   LYRICS
+================================ */
 
 .lyrics-box{
 
-    margin-top:25px;
+    margin-top:26px;
 
     padding:
+
         20px
+
         12px
+
         18px;
+
 
     border-radius:24px;
 
+
     background:
-        rgba(2,7,15,.32);
+
+        rgba(2,7,15,.42);
+
 
     border:
+
         1px solid
-        rgba(110,165,240,.10);
+
+        rgba(140,190,255,.13);
+
 
     height:300px;
 
     overflow-y:auto;
 
+
     scrollbar-width:thin;
 
     scrollbar-color:
-        rgba(100,160,240,.25)
+
+        rgba(120,180,255,.30)
+
         transparent;
 
 }
+
 
 .lyrics-title{
 
     text-align:center;
 
-    color:#7096c3;
+    color:#9ecaff;
 
     font-size:9px;
 
     letter-spacing:4px;
 
-    margin-bottom:17px;
+    margin-bottom:18px;
 
     direction:ltr;
 
+
+    text-shadow:
+
+        0 0 15px
+
+        rgba(100,175,255,.20);
+
 }
+
 
 .lyrics{
 
@@ -685,11 +865,12 @@ h1{
 
 }
 
+
 .lyric-line{
 
     text-align:center;
 
-    color:#8f9cad;
+    color:#b9c7d8;
 
     font-size:13px;
 
@@ -700,9 +881,9 @@ h1{
 }
 
 
-/* --------------------------------
-   راهنما
--------------------------------- */
+/* ================================
+   HINT
+================================ */
 
 .hint{
 
@@ -710,51 +891,33 @@ h1{
 
     font-size:10px;
 
-    color:#68778a;
+    color:#91a2b7;
 
-    margin-top:14px;
+    margin-top:15px;
 
 }
 
 
-/* --------------------------------
-   فوتر
--------------------------------- */
+/* ================================
+   FOOTER
+================================ */
 
 .footer{
 
     text-align:center;
 
-    margin-top:48px;
+    margin-top:50px;
 
     animation:
+
         fadeUp 1s ease .3s both;
 
 }
 
+
 .footer-text{
 
-    color:#9da8b8;
-
-    font-size:13px;
-
-    line-height:2.4;
-
-    font-weight:300;
-
-}
-
-.personal-note{
-
-    text-align:center;
-
-    margin:
-        38px auto
-        0;
-
-    padding:0 14px;
-
-    color:#929eae;
+    color:#c1ccd9;
 
     font-size:13px;
 
@@ -764,20 +927,48 @@ h1{
 
 }
 
+
+.personal-note{
+
+    text-align:center;
+
+    margin:
+
+        38px auto
+
+        0;
+
+
+    padding:
+
+        0 14px;
+
+
+    color:#aebdce;
+
+    font-size:13px;
+
+    line-height:2.5;
+
+    font-weight:300;
+
+}
+
+
 .signature{
 
-    margin-top:27px;
+    margin-top:28px;
 
-    color:#627994;
+    color:#8da8c6;
 
     font-size:12px;
 
 }
 
 
-/* --------------------------------
-   پیام پایانی
--------------------------------- */
+/* ================================
+   FINAL MESSAGE
+================================ */
 
 .final-message{
 
@@ -791,16 +982,20 @@ h1{
 
     margin-top:0;
 
-    color:#b9dcff;
+
+    color:#c5e4ff;
 
     font-size:13px;
 
     line-height:2.5;
 
+
     transition:
+
         all 1.2s ease;
 
 }
+
 
 .final-message.show{
 
@@ -813,9 +1008,9 @@ h1{
 }
 
 
-/* --------------------------------
-   انیمیشن
--------------------------------- */
+/* ================================
+   ANIMATION
+================================ */
 
 @keyframes fadeUp{
 
@@ -824,6 +1019,7 @@ h1{
         opacity:0;
 
         transform:
+
             translateY(18px);
 
     }
@@ -833,6 +1029,7 @@ h1{
         opacity:1;
 
         transform:
+
             translateY(0);
 
     }
@@ -840,17 +1037,18 @@ h1{
 }
 
 
-/* --------------------------------
-   موبایل
--------------------------------- */
+/* ================================
+   MOBILE
+================================ */
 
 @media(max-width:420px){
 
     .container{
 
-        padding-top:42px;
+        padding-top:43px;
 
     }
+
 
     h1{
 
@@ -858,14 +1056,19 @@ h1{
 
     }
 
+
     .song-card{
 
         padding:
-            26px
+
+            27px
+
             15px
+
             24px;
 
     }
+
 
     .song-title{
 
@@ -873,11 +1076,13 @@ h1{
 
     }
 
+
     .lyrics-box{
 
         height:285px;
 
     }
+
 
     .controls{
 
@@ -898,17 +1103,25 @@ h1{
 <main class="container">
 
 
-<!-- هدر -->
+<!-- ================================
+     HEADER
+================================ -->
 
 <section class="hero">
 
     <div class="small-title">
+
         A LITTLE SOMETHING FOR YOU
+
     </div>
 
+
     <h1>
+
         برای زهرا 🤍
+
     </h1>
+
 
     <p class="intro">
 
@@ -920,18 +1133,19 @@ h1{
 
     </p>
 
+
     <div class="divider"></div>
 
 </section>
 
 
 
-<!-- کارت آهنگ -->
+<!-- ================================
+     MUSIC CARD
+================================ -->
 
 <section class="song-card">
 
-
-    <!-- رز آبی -->
 
     <div class="rose-mark"></div>
 
@@ -950,14 +1164,13 @@ h1{
     </div>
 
 
-    <!-- کنترل -->
-
     <div class="controls">
 
 
         <button
             class="control-button"
-            id="backButton">
+            id="backButton"
+            aria-label="15 ثانیه عقب">
 
             ⏪
 
@@ -966,7 +1179,8 @@ h1{
 
         <button
             class="play-button"
-            id="playButton">
+            id="playButton"
+            aria-label="پخش آهنگ">
 
             ▶
 
@@ -975,19 +1189,18 @@ h1{
 
         <button
             class="control-button"
-            id="forwardButton">
+            id="forwardButton"
+            aria-label="15 ثانیه جلو">
 
             ⏩
 
         </button>
 
-
     </div>
 
 
-    <!-- نوار آهنگ -->
-
     <div class="progress-wrap">
+
 
         <div
             class="progress"
@@ -1007,6 +1220,7 @@ h1{
                 0:00
             </span>
 
+
             <span id="duration">
                 0:00
             </span>
@@ -1016,25 +1230,25 @@ h1{
     </div>
 
 
-    <!-- متن آهنگ -->
-
     <div class="lyrics-box">
 
+
         <div class="lyrics-title">
+
             LYRICS
+
         </div>
 
 
         <div class="lyrics">
 
-            <!--
-            متن آهنگ قبلی خودت را
-            اینجا نگه دار.
-            -->
 
             <div class="lyric-line">
+
                 متن آهنگ
+
             </div>
+
 
         </div>
 
@@ -1047,12 +1261,6 @@ h1{
 
     </div>
 
-
-    <!--
-        مهم:
-        فایل آهنگ باید در همان پوشه
-        index.html و با نام song.mp3 باشد.
-    -->
 
     <audio
         id="music"
@@ -1069,7 +1277,9 @@ h1{
 
 
 
-<!-- فوتر -->
+<!-- ================================
+     FOOTER
+================================ -->
 
 <footer class="footer">
 
@@ -1106,8 +1316,6 @@ h1{
     </p>
 
 
-    <!-- پیام مخفی -->
-
     <div
         class="final-message"
         id="finalMessage">
@@ -1142,35 +1350,49 @@ h1{
 <script>
 
 
+/* ================================
+   ELEMENTS
+================================ */
+
 const music =
     document.getElementById("music");
+
 
 const playButton =
     document.getElementById("playButton");
 
+
 const backButton =
     document.getElementById("backButton");
+
 
 const forwardButton =
     document.getElementById("forwardButton");
 
+
 const progress =
     document.getElementById("progress");
+
 
 const progressBar =
     document.getElementById("progressBar");
 
+
 const currentTime =
     document.getElementById("currentTime");
 
+
 const duration =
     document.getElementById("duration");
+
 
 const finalMessage =
     document.getElementById("finalMessage");
 
 
-/* زمان */
+/* ================================
+   TIME
+================================ */
 
 function formatTime(seconds){
 
@@ -1180,28 +1402,40 @@ function formatTime(seconds){
 
     }
 
+
     seconds =
         Math.floor(seconds);
+
 
     const minutes =
         Math.floor(seconds / 60);
 
+
     const secs =
         seconds % 60;
 
+
     return (
+
         minutes +
+
         ":" +
+
         String(secs).padStart(2,"0")
+
     );
 
 }
 
 
-/* پخش */
+/* ================================
+   PLAY / PAUSE
+================================ */
 
 playButton.addEventListener(
+
     "click",
+
     async function(){
 
         try{
@@ -1210,9 +1444,11 @@ playButton.addEventListener(
 
                 await music.play();
 
+
                 playButton.classList.add(
                     "playing"
                 );
+
 
                 playButton.textContent =
                     "❚❚";
@@ -1223,9 +1459,11 @@ playButton.addEventListener(
 
                 music.pause();
 
+
                 playButton.classList.remove(
                     "playing"
                 );
+
 
                 playButton.textContent =
                     "▶";
@@ -1241,29 +1479,43 @@ playButton.addEventListener(
         }
 
     }
+
 );
 
 
-/* عقب */
+/* ================================
+   BACK
+================================ */
 
 backButton.addEventListener(
+
     "click",
+
     function(){
 
         music.currentTime =
+
             Math.max(
+
                 0,
+
                 music.currentTime - 15
+
             );
 
     }
+
 );
 
 
-/* جلو */
+/* ================================
+   FORWARD
+================================ */
 
 forwardButton.addEventListener(
+
     "click",
+
     function(){
 
         if(!Number.isFinite(
@@ -1274,35 +1526,53 @@ forwardButton.addEventListener(
 
         }
 
+
         music.currentTime =
+
             Math.min(
+
                 music.duration,
+
                 music.currentTime + 15
+
             );
 
     }
+
 );
 
 
-/* مدت آهنگ */
+/* ================================
+   METADATA
+================================ */
 
 music.addEventListener(
+
     "loadedmetadata",
+
     function(){
 
         duration.textContent =
+
             formatTime(
+
                 music.duration
+
             );
 
     }
+
 );
 
 
-/* نوار پیشرفت */
+/* ================================
+   PROGRESS
+================================ */
 
 music.addEventListener(
+
     "timeupdate",
+
     function(){
 
         if(!music.duration){
@@ -1311,28 +1581,44 @@ music.addEventListener(
 
         }
 
+
         const percent =
+
             (
+
                 music.currentTime /
+
                 music.duration
+
             ) * 100;
 
+
         progressBar.style.width =
+
             percent + "%";
 
+
         currentTime.textContent =
+
             formatTime(
+
                 music.currentTime
+
             );
 
     }
+
 );
 
 
-/* کلیک روی نوار */
+/* ================================
+   CLICK PROGRESS
+================================ */
 
 progress.addEventListener(
+
     "click",
+
     function(event){
 
         if(!music.duration){
@@ -1341,55 +1627,80 @@ progress.addEventListener(
 
         }
 
+
         const rect =
+
             progress.getBoundingClientRect();
 
+
         const percent =
+
             Math.min(
+
                 1,
+
                 Math.max(
+
                     0,
+
                     (
+
                         event.clientX -
+
                         rect.left
+
                     ) / rect.width
+
                 )
+
             );
 
+
         music.currentTime =
+
             percent *
+
             music.duration;
 
     }
+
 );
 
 
-/* پایان آهنگ */
+/* ================================
+   END
+================================ */
 
 music.addEventListener(
+
     "ended",
+
     function(){
 
         playButton.classList.remove(
             "playing"
         );
 
+
         playButton.textContent =
             "▶";
+
 
         progressBar.style.width =
             "0%";
 
+
         currentTime.textContent =
             "0:00";
+
 
         finalMessage.classList.add(
             "show"
         );
 
     }
-);
 
+);
 
 </script>
 
