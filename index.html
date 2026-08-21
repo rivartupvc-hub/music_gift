@@ -2,25 +2,15 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<meta name="theme-color"
-      content="#050810">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17659c">
 
 <title>برای زهرا 🤍</title>
 
 <style>
 
-/* ================================
-   FONT
-================================ */
-
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
-
 
 /* ================================
    RESET
@@ -32,6 +22,9 @@
     padding:0;
 }
 
+html{
+    scroll-behavior:smooth;
+}
 
 /* ================================
    COLORS
@@ -39,37 +32,26 @@
 
 :root{
 
-    --bg:#04070e;
+    --blue-dark:#07365b;
+    --blue:#258ac5;
+    --blue-light:#82d8ff;
+    --ice:#dff7ff;
 
-    --blue:#6faaff;
+    --white:#ffffff;
+    --text:#f7fdff;
 
-    --blue2:#9dccff;
+    --muted:#d3e8f3;
+    --muted2:#a9c7d8;
 
-    --blue-soft:#c9e2ff;
+    --glass:rgba(20,105,160,.20);
+    --glass-light:rgba(190,235,255,.16);
 
-    --white:#f7faff;
-
-    --text:#edf4ff;
-
-    --muted:#c0cad8;
-
-    --muted2:#98a7ba;
-
-    --line:rgba(155,195,255,.20);
-
+    --line:rgba(220,248,255,.30);
 }
-
 
 /* ================================
    BODY
 ================================ */
-
-html{
-
-    scroll-behavior:smooth;
-
-}
-
 
 body{
 
@@ -81,19 +63,16 @@ body{
 
     overflow-x:hidden;
 
-
     background:
 
         linear-gradient(
-
-            rgba(2,5,12,.76),
-
-            rgba(3,7,16,.91)
-
+            135deg,
+            rgba(3,35,65,.52),
+            rgba(15,105,155,.28),
+            rgba(2,30,58,.62)
         ),
 
         url("blue-rose.jpg");
-
 
     background-size:cover;
 
@@ -101,10 +80,47 @@ body{
 
     background-attachment:fixed;
 
+    background-repeat:no-repeat;
 }
 
 
-/* لایه ظریف روی کل صفحه */
+/* نورهای محیط */
+
+body::before{
+
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    background:
+
+        radial-gradient(
+            circle at 25% 15%,
+            rgba(210,248,255,.30),
+            transparent 27%
+        ),
+
+        radial-gradient(
+            circle at 80% 65%,
+            rgba(80,190,255,.22),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            to bottom,
+            rgba(255,255,255,.04),
+            rgba(0,30,60,.20)
+        );
+}
+
+
+/* ذرات نور */
 
 body::after{
 
@@ -118,29 +134,32 @@ body::after{
 
     z-index:-1;
 
+    opacity:.45;
 
-    background:
-
-        radial-gradient(
-
-            circle at 50% 15%,
-
-            rgba(75,145,255,.16),
-
-            transparent 32%
-
-        ),
+    background-image:
 
         radial-gradient(
-
-            circle at 15% 80%,
-
-            rgba(35,90,180,.12),
-
-            transparent 30%
-
+            circle,
+            rgba(255,255,255,.55) 1px,
+            transparent 1.5px
         );
 
+    background-size:
+        110px 110px;
+
+    animation:
+        sparkle 12s linear infinite;
+}
+
+@keyframes sparkle{
+
+    from{
+        transform:translateY(0);
+    }
+
+    to{
+        transform:translateY(-110px);
+    }
 }
 
 
@@ -155,11 +174,7 @@ body::after{
     margin:auto;
 
     padding:
-
-        58px 0
-
-        60px;
-
+        58px 0 65px;
 }
 
 
@@ -172,9 +187,7 @@ body::after{
     text-align:center;
 
     animation:
-
         fadeUp 1s ease;
-
 }
 
 
@@ -184,24 +197,20 @@ body::after{
 
     letter-spacing:5px;
 
-    color:#a9d0ff;
+    color:#d4f5ff;
 
-    margin-bottom:21px;
+    margin-bottom:20px;
 
     direction:ltr;
 
     text-shadow:
-
-        0 0 18px
-
-        rgba(110,175,255,.25);
-
+        0 0 20px rgba(130,220,255,.55);
 }
 
 
 h1{
 
-    font-size:40px;
+    font-size:42px;
 
     font-weight:400;
 
@@ -213,16 +222,17 @@ h1{
 
     text-shadow:
 
-        0 0 25px
+        0 4px 25px
+        rgba(0,40,80,.45),
 
-        rgba(120,180,255,.18);
-
+        0 0 30px
+        rgba(160,230,255,.25);
 }
 
 
 .intro{
 
-    color:#d4ddea;
+    color:#e4f5fb;
 
     font-size:14px;
 
@@ -230,45 +240,33 @@ h1{
 
     font-weight:300;
 
+    text-shadow:
+        0 2px 12px rgba(0,30,60,.55);
 }
 
 
 .divider{
 
-    width:65px;
+    width:85px;
 
     height:1px;
 
     margin:
-
-        32px
-
-        auto
-
-        36px;
-
+        32px auto 36px;
 
     background:
 
         linear-gradient(
-
             90deg,
-
             transparent,
-
-            #8fc5ff,
-
+            #c4f3ff,
             transparent
-
         );
-
 
     box-shadow:
 
-        0 0 12px
-
-        rgba(100,170,255,.35);
-
+        0 0 15px
+        rgba(130,220,255,.7);
 }
 
 
@@ -281,69 +279,48 @@ h1{
     position:relative;
 
     padding:
+        34px 20px 28px;
 
-        32px
-
-        20px
-
-        27px;
-
-
-    border-radius:30px;
-
+    border-radius:32px;
 
     border:
-
         1px solid
-
-        rgba(160,200,255,.20);
-
+        rgba(220,248,255,.35);
 
     background:
 
         linear-gradient(
-
             145deg,
-
-            rgba(10,18,32,.76),
-
-            rgba(5,10,20,.58)
-
+            rgba(190,235,255,.19),
+            rgba(20,105,165,.20),
+            rgba(5,55,95,.18)
         );
 
-
     backdrop-filter:
-
-        blur(18px);
-
+        blur(24px);
 
     -webkit-backdrop-filter:
-
-        blur(18px);
-
+        blur(24px);
 
     box-shadow:
 
         0 30px 90px
-
-        rgba(0,0,0,.55),
+        rgba(0,25,55,.45),
 
         inset 0 1px 0
+        rgba(255,255,255,.30),
 
-        rgba(255,255,255,.055);
-
+        inset 0 -1px 0
+        rgba(255,255,255,.08);
 
     overflow:hidden;
 
-
     animation:
-
         fadeUp 1s ease .15s both;
-
 }
 
 
-/* نور بالای کارت */
+/* درخشش بالای کارت */
 
 .song-card::before{
 
@@ -351,34 +328,57 @@ h1{
 
     position:absolute;
 
-    width:220px;
+    width:280px;
 
-    height:220px;
+    height:280px;
 
-    top:-120px;
+    top:-170px;
 
     left:50%;
 
-    transform:translateX(-50%);
+    transform:
+        translateX(-50%);
 
     border-radius:50%;
-
 
     background:
 
         radial-gradient(
-
             circle,
-
-            rgba(95,165,255,.18),
-
+            rgba(190,245,255,.30),
             transparent 70%
-
         );
 
-
     pointer-events:none;
+}
 
+
+/* خط نور */
+
+.song-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:10%;
+
+    width:80%;
+
+    height:1px;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.75),
+            transparent
+        );
+
+    opacity:.7;
 }
 
 
@@ -388,16 +388,12 @@ h1{
 
 .rose-mark{
 
-    width:96px;
+    width:104px;
 
-    height:96px;
+    height:104px;
 
     margin:
-
-        0 auto
-
-        23px;
-
+        0 auto 24px;
 
     border-radius:50%;
 
@@ -409,64 +405,47 @@ h1{
 
     position:relative;
 
-
     background:
 
         radial-gradient(
-
-            circle at 50% 45%,
-
-            rgba(120,190,255,.25),
-
-            rgba(20,50,100,.18) 50%,
-
-            rgba(0,5,15,.35) 75%
-
+            circle at 45% 35%,
+            rgba(220,250,255,.40),
+            rgba(55,165,215,.20) 48%,
+            rgba(5,65,105,.25) 75%
         );
 
-
     border:
-
         1px solid
-
-        rgba(145,195,255,.28);
-
+        rgba(220,250,255,.42);
 
     box-shadow:
 
-        0 15px 50px
-
-        rgba(30,105,220,.20),
+        0 15px 55px
+        rgba(30,160,225,.25),
 
         inset 0 0 35px
-
-        rgba(100,170,255,.09);
-
+        rgba(220,250,255,.15);
 }
 
 
 .rose-mark::before{
 
-    content:"✿";
+    content:"🌹";
 
-    font-size:52px;
+    font-size:53px;
 
-    color:#8ec5ff;
+    filter:
+        hue-rotate(145deg)
+        saturate(1.8)
+        brightness(1.2);
+
+    transform:
+        rotate(-8deg);
 
     text-shadow:
 
-        0 0 13px
-
-        rgba(100,175,255,.65),
-
-        0 0 35px
-
-        rgba(70,135,255,.35);
-
-    transform:
-
-        rotate(-12deg);
-
+        0 0 18px
+        rgba(150,230,255,.55);
 }
 
 
@@ -476,20 +455,19 @@ h1{
 
     position:absolute;
 
-    width:8px;
+    width:9px;
 
-    height:8px;
+    height:9px;
 
     border-radius:50%;
 
-    background:#e4f2ff;
+    background:#ffffff;
 
     box-shadow:
 
-        0 0 18px
+        0 0 18px #c9f4ff,
 
-        #a4d2ff;
-
+        0 0 35px #7bdcff;
 }
 
 
@@ -507,10 +485,14 @@ h1{
 
     line-height:1.9;
 
-    margin-bottom:6px;
+    margin-bottom:7px;
 
     color:#ffffff;
 
+    text-shadow:
+
+        0 2px 15px
+        rgba(0,40,75,.55);
 }
 
 
@@ -520,12 +502,11 @@ h1{
 
     font-size:13px;
 
-    color:#aebfd3;
+    color:#d1ebf5;
 
     font-weight:300;
 
-    margin-bottom:27px;
-
+    margin-bottom:28px;
 }
 
 
@@ -544,32 +525,26 @@ h1{
     gap:17px;
 
     direction:ltr;
-
 }
 
 
 .control-button{
 
-    width:45px;
+    width:46px;
 
-    height:45px;
+    height:46px;
 
     border-radius:50%;
 
-
     border:
-
         1px solid
-
-        rgba(150,195,255,.25);
-
+        rgba(210,245,255,.34);
 
     background:
 
-        rgba(80,130,210,.08);
+        rgba(160,225,255,.10);
 
-
-    color:#c2ddfa;
+    color:#e4f9ff;
 
     display:flex;
 
@@ -577,16 +552,15 @@ h1{
 
     justify-content:center;
 
-
     cursor:pointer;
 
     font-size:14px;
 
+    transition:.25s ease;
 
-    transition:
-
-        .25s ease;
-
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.12);
 }
 
 
@@ -595,51 +569,47 @@ h1{
     transform:scale(1.08);
 
     background:
-
-        rgba(80,140,240,.16);
+        rgba(150,225,255,.22);
 
     border-color:
+        rgba(220,250,255,.65);
 
-        rgba(145,200,255,.48);
-
+    box-shadow:
+        0 0 25px
+        rgba(80,200,255,.20);
 }
 
 
+/* ================================
+   PLAY BUTTON
+================================ */
+
 .play-button{
 
-    width:68px;
+    width:70px;
 
-    height:68px;
+    height:70px;
 
     border-radius:50%;
 
-
     border:
-
         1px solid
-
-        rgba(150,205,255,.50);
-
+        rgba(220,250,255,.70);
 
     background:
 
         radial-gradient(
-
-            circle at 40% 35%,
-
-            rgba(130,195,255,.25),
-
-            rgba(35,75,145,.12)
-
+            circle at 35% 28%,
+            rgba(235,252,255,.75),
+            rgba(90,190,240,.40),
+            rgba(20,90,150,.25)
         );
 
-
-    color:#f0f8ff;
+    color:#ffffff;
 
     font-size:21px;
 
     cursor:pointer;
-
 
     display:flex;
 
@@ -647,37 +617,32 @@ h1{
 
     justify-content:center;
 
-
     transition:.3s ease;
-
 
     box-shadow:
 
-        0 10px 40px
+        0 12px 45px
+        rgba(20,145,220,.35),
 
-        rgba(30,100,220,.20),
+        0 0 30px
+        rgba(130,220,255,.22),
 
-        0 0 25px
-
-        rgba(80,155,255,.08);
-
+        inset 0 1px 0
+        rgba(255,255,255,.55);
 }
 
 
 .play-button:hover{
 
-    transform:scale(1.08);
+    transform:scale(1.09);
 
     box-shadow:
 
-        0 14px 50px
+        0 16px 55px
+        rgba(30,160,235,.45),
 
-        rgba(50,130,255,.30),
-
-        0 0 25px
-
-        rgba(80,155,255,.15);
-
+        0 0 40px
+        rgba(130,225,255,.35);
 }
 
 
@@ -686,17 +651,17 @@ h1{
     background:
 
         radial-gradient(
-
             circle,
-
-            rgba(90,165,255,.30),
-
-            rgba(35,75,140,.12)
-
+            rgba(140,225,255,.55),
+            rgba(25,115,175,.30)
         );
 
-    border-color:#91c9ff;
+    border-color:#d8f8ff;
 
+    box-shadow:
+
+        0 0 35px
+        rgba(110,220,255,.45);
 }
 
 
@@ -707,11 +672,7 @@ h1{
 .progress-wrap{
 
     margin:
-
-        28px 2px
-
-        0;
-
+        28px 2px 0;
 }
 
 
@@ -719,18 +680,21 @@ h1{
 
     width:100%;
 
-    height:4px;
+    height:5px;
 
     border-radius:20px;
 
     background:
 
-        rgba(255,255,255,.10);
+        rgba(255,255,255,.16);
 
     overflow:hidden;
 
     cursor:pointer;
 
+    box-shadow:
+        inset 0 1px 3px
+        rgba(0,30,60,.20);
 }
 
 
@@ -740,29 +704,20 @@ h1{
 
     width:0%;
 
-
     background:
 
         linear-gradient(
-
             90deg,
-
-            #5795ff,
-
-            #a0d4ff
-
+            #54b9ed,
+            #d7f7ff
         );
-
 
     border-radius:20px;
 
-
     box-shadow:
 
-        0 0 12px
-
-        rgba(100,175,255,.55);
-
+        0 0 14px
+        rgba(150,230,255,.80);
 }
 
 
@@ -774,12 +729,11 @@ h1{
 
     direction:ltr;
 
-    color:#9aabc0;
+    color:#c1dce8;
 
     font-size:10px;
 
     margin-top:8px;
-
 }
 
 
@@ -789,45 +743,34 @@ h1{
 
 .lyrics-box{
 
-    margin-top:26px;
+    margin-top:27px;
 
     padding:
+        21px 12px 18px;
 
-        20px
-
-        12px
-
-        18px;
-
-
-    border-radius:24px;
-
+    border-radius:25px;
 
     background:
 
-        rgba(2,7,15,.42);
-
+        linear-gradient(
+            145deg,
+            rgba(180,235,255,.10),
+            rgba(0,65,110,.17)
+        );
 
     border:
-
         1px solid
-
-        rgba(140,190,255,.13);
-
+        rgba(205,242,255,.22);
 
     height:300px;
 
     overflow-y:auto;
 
-
     scrollbar-width:thin;
 
     scrollbar-color:
-
-        rgba(120,180,255,.30)
-
+        rgba(170,230,255,.45)
         transparent;
-
 }
 
 
@@ -835,7 +778,7 @@ h1{
 
     text-align:center;
 
-    color:#9ecaff;
+    color:#d2f5ff;
 
     font-size:9px;
 
@@ -845,13 +788,10 @@ h1{
 
     direction:ltr;
 
-
     text-shadow:
 
-        0 0 15px
-
-        rgba(100,175,255,.20);
-
+        0 0 18px
+        rgba(140,225,255,.45);
 }
 
 
@@ -862,7 +802,6 @@ h1{
     flex-direction:column;
 
     gap:9px;
-
 }
 
 
@@ -870,14 +809,13 @@ h1{
 
     text-align:center;
 
-    color:#b9c7d8;
+    color:#d2e8f1;
 
     font-size:13px;
 
     line-height:2;
 
     padding:4px 7px;
-
 }
 
 
@@ -891,10 +829,9 @@ h1{
 
     font-size:10px;
 
-    color:#91a2b7;
+    color:#c1dce7;
 
     margin-top:15px;
-
 }
 
 
@@ -909,15 +846,13 @@ h1{
     margin-top:50px;
 
     animation:
-
         fadeUp 1s ease .3s both;
-
 }
 
 
 .footer-text{
 
-    color:#c1ccd9;
+    color:#e1f2f7;
 
     font-size:13px;
 
@@ -925,6 +860,8 @@ h1{
 
     font-weight:300;
 
+    text-shadow:
+        0 2px 12px rgba(0,30,60,.45);
 }
 
 
@@ -933,25 +870,18 @@ h1{
     text-align:center;
 
     margin:
-
-        38px auto
-
-        0;
-
+        38px auto 0;
 
     padding:
-
         0 14px;
 
-
-    color:#aebdce;
+    color:#c8e0e9;
 
     font-size:13px;
 
     line-height:2.5;
 
     font-weight:300;
-
 }
 
 
@@ -959,10 +889,12 @@ h1{
 
     margin-top:28px;
 
-    color:#8da8c6;
+    color:#b8d9e6;
 
     font-size:12px;
 
+    text-shadow:
+        0 0 15px rgba(120,220,255,.25);
 }
 
 
@@ -982,18 +914,14 @@ h1{
 
     margin-top:0;
 
-
-    color:#c5e4ff;
+    color:#e1f8ff;
 
     font-size:13px;
 
     line-height:2.5;
 
-
     transition:
-
         all 1.2s ease;
-
 }
 
 
@@ -1004,7 +932,6 @@ h1{
     max-height:170px;
 
     margin-top:28px;
-
 }
 
 
@@ -1019,9 +946,7 @@ h1{
         opacity:0;
 
         transform:
-
             translateY(18px);
-
     }
 
     to{
@@ -1029,11 +954,8 @@ h1{
         opacity:1;
 
         transform:
-
             translateY(0);
-
     }
-
 }
 
 
@@ -1043,53 +965,67 @@ h1{
 
 @media(max-width:420px){
 
-    .container{
+    body{
 
-        padding-top:43px;
+        background-attachment:
+            scroll;
 
     }
 
+    .container{
+
+        padding:
+            43px 0 55px;
+    }
 
     h1{
 
         font-size:34px;
-
     }
 
+    .small-title{
+
+        letter-spacing:4px;
+    }
 
     .song-card{
 
         padding:
+            28px 15px 24px;
 
-            27px
-
-            15px
-
-            24px;
-
+        border-radius:28px;
     }
-
 
     .song-title{
 
         font-size:17px;
-
     }
-
 
     .lyrics-box{
 
         height:285px;
-
     }
-
 
     .controls{
 
         gap:14px;
-
     }
 
+}
+
+
+/* ================================
+   REDUCED MOTION
+================================ */
+
+@media(prefers-reduced-motion:reduce){
+
+    *{
+
+        animation:none !important;
+
+        transition:none !important;
+    }
 }
 
 </style>
@@ -1098,7 +1034,6 @@ h1{
 
 
 <body>
-
 
 <main class="container">
 
@@ -1110,18 +1045,12 @@ h1{
 <section class="hero">
 
     <div class="small-title">
-
         A LITTLE SOMETHING FOR YOU
-
     </div>
 
-
     <h1>
-
         برای زهرا 🤍
-
     </h1>
-
 
     <p class="intro">
 
@@ -1133,11 +1062,9 @@ h1{
 
     </p>
 
-
     <div class="divider"></div>
 
 </section>
-
 
 
 <!-- ================================
@@ -1196,6 +1123,7 @@ h1{
 
         </button>
 
+
     </div>
 
 
@@ -1220,12 +1148,12 @@ h1{
                 0:00
             </span>
 
-
             <span id="duration">
                 0:00
             </span>
 
         </div>
+
 
     </div>
 
@@ -1234,23 +1162,18 @@ h1{
 
 
         <div class="lyrics-title">
-
             LYRICS
-
         </div>
 
 
         <div class="lyrics">
 
-
             <div class="lyric-line">
-
                 متن آهنگ
-
             </div>
 
-
         </div>
+
 
     </div>
 
@@ -1274,7 +1197,6 @@ h1{
 
 
 </section>
-
 
 
 <!-- ================================
@@ -1346,9 +1268,7 @@ h1{
 </main>
 
 
-
 <script>
-
 
 /* ================================
    ELEMENTS
@@ -1357,74 +1277,55 @@ h1{
 const music =
     document.getElementById("music");
 
-
 const playButton =
     document.getElementById("playButton");
-
 
 const backButton =
     document.getElementById("backButton");
 
-
 const forwardButton =
     document.getElementById("forwardButton");
-
 
 const progress =
     document.getElementById("progress");
 
-
 const progressBar =
     document.getElementById("progressBar");
-
 
 const currentTime =
     document.getElementById("currentTime");
 
-
 const duration =
     document.getElementById("duration");
-
 
 const finalMessage =
     document.getElementById("finalMessage");
 
 
 /* ================================
-   TIME
+   FORMAT TIME
 ================================ */
 
 function formatTime(seconds){
 
     if(!Number.isFinite(seconds)){
-
         return "0:00";
-
     }
-
 
     seconds =
         Math.floor(seconds);
 
-
     const minutes =
         Math.floor(seconds / 60);
-
 
     const secs =
         seconds % 60;
 
-
     return (
-
         minutes +
-
         ":" +
-
         String(secs).padStart(2,"0")
-
     );
-
 }
 
 
@@ -1433,9 +1334,7 @@ function formatTime(seconds){
 ================================ */
 
 playButton.addEventListener(
-
     "click",
-
     async function(){
 
         try{
@@ -1444,11 +1343,9 @@ playButton.addEventListener(
 
                 await music.play();
 
-
                 playButton.classList.add(
                     "playing"
                 );
-
 
                 playButton.textContent =
                     "❚❚";
@@ -1459,15 +1356,12 @@ playButton.addEventListener(
 
                 music.pause();
 
-
                 playButton.classList.remove(
                     "playing"
                 );
 
-
                 playButton.textContent =
                     "▶";
-
             }
 
         }
@@ -1479,66 +1373,48 @@ playButton.addEventListener(
         }
 
     }
-
 );
 
 
 /* ================================
-   BACK
+   BACK 15 SEC
 ================================ */
 
 backButton.addEventListener(
-
     "click",
-
     function(){
 
         music.currentTime =
-
             Math.max(
-
                 0,
-
                 music.currentTime - 15
-
             );
 
     }
-
 );
 
 
 /* ================================
-   FORWARD
+   FORWARD 15 SEC
 ================================ */
 
 forwardButton.addEventListener(
-
     "click",
-
     function(){
 
         if(!Number.isFinite(
             music.duration
         )){
-
             return;
-
         }
 
-
         music.currentTime =
-
             Math.min(
-
                 music.duration,
-
                 music.currentTime + 15
-
             );
 
     }
-
 );
 
 
@@ -1547,21 +1423,15 @@ forwardButton.addEventListener(
 ================================ */
 
 music.addEventListener(
-
     "loadedmetadata",
-
     function(){
 
         duration.textContent =
-
             formatTime(
-
                 music.duration
-
             );
 
     }
-
 );
 
 
@@ -1570,44 +1440,28 @@ music.addEventListener(
 ================================ */
 
 music.addEventListener(
-
     "timeupdate",
-
     function(){
 
         if(!music.duration){
-
             return;
-
         }
 
-
         const percent =
-
             (
-
                 music.currentTime /
-
                 music.duration
-
             ) * 100;
 
-
         progressBar.style.width =
-
             percent + "%";
 
-
         currentTime.textContent =
-
             formatTime(
-
                 music.currentTime
-
             );
 
     }
-
 );
 
 
@@ -1616,95 +1470,65 @@ music.addEventListener(
 ================================ */
 
 progress.addEventListener(
-
     "click",
-
     function(event){
 
         if(!music.duration){
-
             return;
-
         }
 
-
         const rect =
-
             progress.getBoundingClientRect();
 
-
         const percent =
-
             Math.min(
-
                 1,
-
                 Math.max(
-
                     0,
-
                     (
-
                         event.clientX -
-
                         rect.left
-
                     ) / rect.width
-
                 )
-
             );
 
-
         music.currentTime =
-
             percent *
-
             music.duration;
 
     }
-
 );
 
 
 /* ================================
-   END
+   SONG END
 ================================ */
 
 music.addEventListener(
-
     "ended",
-
     function(){
 
         playButton.classList.remove(
             "playing"
         );
 
-
         playButton.textContent =
             "▶";
-
 
         progressBar.style.width =
             "0%";
 
-
         currentTime.textContent =
             "0:00";
-
 
         finalMessage.classList.add(
             "show"
         );
 
     }
-
 );
 
 </script>
 
-
 </body>
-
 </html>
