@@ -2,17 +2,11 @@
 <html lang="fa" dir="rtl">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<meta name="theme-color"
-      content="#17659c">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#17659c">
 
 <title>برای زهرا 🤍</title>
-
 
 <style>
 
@@ -99,7 +93,7 @@ body::after {
 }
 
 
-/* ================= ENTRY ================= */
+/* ENTRY */
 
 .entry-screen {
     position: fixed;
@@ -109,8 +103,8 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: center;
-
     text-align: center;
+
     cursor: pointer;
 
     background:
@@ -159,16 +153,21 @@ body::after {
 .entry-content {
     position: relative;
     z-index: 2;
+
     width: 90%;
     max-width: 400px;
+
     padding: 35px 25px;
+
     animation: entryAppear 1.5s ease;
 }
 
 .entry-glow {
     position: absolute;
+
     width: 320px;
     height: 320px;
+
     border-radius: 50%;
 
     background:
@@ -179,6 +178,7 @@ body::after {
         );
 
     filter: blur(10px);
+
     animation: glowPulse 3s ease-in-out infinite;
 }
 
@@ -201,6 +201,7 @@ body::after {
 .entry-line {
     width: 65px;
     height: 1px;
+
     margin: 0 auto 25px;
 
     background:
@@ -236,6 +237,7 @@ body::after {
 .touch-circle {
     width: 65px;
     height: 65px;
+
     margin: auto;
 
     display: flex;
@@ -324,7 +326,7 @@ body::after {
 }
 
 
-/* ================= PASSWORD ================= */
+/* PASSWORD */
 
 .password-screen {
     position: fixed;
@@ -332,10 +334,11 @@ body::after {
     z-index: 10000;
 
     display: none;
+
     align-items: center;
     justify-content: center;
-
     text-align: center;
+
     padding: 25px;
 
     background:
@@ -363,7 +366,9 @@ body::after {
 .password-box {
     width: 90%;
     max-width: 360px;
+
     padding: 35px 25px;
+
     border-radius: 30px;
 
     background:
@@ -415,6 +420,7 @@ body::after {
 .password-input {
     width: 100%;
     height: 50px;
+
     border-radius: 18px;
 
     border:
@@ -427,9 +433,11 @@ body::after {
         rgba(0,35,65,.25);
 
     color: white;
+
     text-align: center;
 
     font-size: 20px;
+
     letter-spacing: 7px;
 
     font-family:
@@ -459,6 +467,7 @@ body::after {
 .password-button {
     width: 100%;
     height: 48px;
+
     margin-top: 15px;
 
     border:
@@ -481,7 +490,9 @@ body::after {
         sans-serif;
 
     font-size: 14px;
+
     cursor: pointer;
+
     transition: .25s ease;
 }
 
@@ -495,12 +506,15 @@ body::after {
 
 .password-error {
     min-height: 22px;
+
     margin-top: 12px;
 
     color: #ffd7df;
+
     font-size: 11px;
 
     opacity: 0;
+
     transition: .25s ease;
 }
 
@@ -526,14 +540,25 @@ body::after {
 }
 
 @keyframes passwordShake {
-    0%,100% { transform: translateX(0); }
-    25% { transform: translateX(-8px); }
-    50% { transform: translateX(8px); }
-    75% { transform: translateX(-5px); }
+    0%,100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
 }
 
 
-/* ================= MAIN ================= */
+/* MAIN */
 
 .container {
     width: min(92%,540px);
@@ -599,7 +624,7 @@ h1 {
 }
 
 
-/* ================= MUSIC CARD ================= */
+/* MUSIC CARD */
 
 .song-card {
     position: relative;
@@ -704,7 +729,7 @@ h1 {
 }
 
 
-/* ================= CONTROLS ================= */
+/* CONTROLS */
 
 .controls {
     display: flex;
@@ -730,10 +755,12 @@ h1 {
     color: #e4f9ff;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
     cursor: pointer;
+
     font-size: 14px;
 
     transition: .25s ease;
@@ -757,6 +784,9 @@ h1 {
         rgba(80,200,255,.20);
 }
 
+
+/* PLAY */
+
 .play-button {
     width: 70px;
     height: 70px;
@@ -776,10 +806,13 @@ h1 {
         );
 
     color: #ffffff;
+
     font-size: 21px;
+
     cursor: pointer;
 
     display: flex;
+
     align-items: center;
     justify-content: center;
 
@@ -810,12 +843,11 @@ h1 {
     border-color: #d8f8ff;
 
     box-shadow:
-        0 0 35px
-        rgba(110,220,255,.45);
+        0 0 35px rgba(110,220,255,.45);
 }
 
 
-/* ================= PROGRESS ================= */
+/* PROGRESS */
 
 .progress-wrap {
     margin:
@@ -832,6 +864,7 @@ h1 {
         rgba(255,255,255,.16);
 
     overflow: hidden;
+
     cursor: pointer;
 
     box-shadow:
@@ -853,8 +886,7 @@ h1 {
     border-radius: 20px;
 
     box-shadow:
-        0 0 14px
-        rgba(150,230,255,.80);
+        0 0 14px rgba(150,230,255,.80);
 }
 
 .time {
@@ -863,12 +895,14 @@ h1 {
     direction: ltr;
 
     color: #c1dce8;
+
     font-size: 10px;
+
     margin-top: 8px;
 }
 
 
-/* ================= LYRICS ================= */
+/* LYRICS */
 
 .lyrics-box {
     margin-top: 27px;
@@ -890,6 +924,7 @@ h1 {
         rgba(205,242,255,.22);
 
     height: 300px;
+
     overflow-y: auto;
 
     scrollbar-width: thin;
@@ -932,75 +967,24 @@ h1 {
     line-height: 2;
 
     padding: 4px 7px;
-
-    transition: .25s ease;
 }
-
-.lyric-line:hover {
-    color: #ffffff;
-
-    background:
-        rgba(170,230,255,.07);
-
-    border-radius: 12px;
-}
-
-
-/* ================= HINT ================= */
 
 .hint {
     text-align: center;
+
     font-size: 10px;
+
     color: #c1dce7;
+
     margin-top: 15px;
 }
 
 
-/* ================= SPECIAL MESSAGE ================= */
-
-.special-message {
-
-    margin:
-        28px auto 0;
-
-    padding:
-        20px 16px;
-
-    text-align: center;
-
-    border-radius: 24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(180,235,255,.10),
-            rgba(0,65,110,.15)
-        );
-
-    border:
-        1px solid
-        rgba(210,245,255,.18);
-
-    box-shadow:
-        inset 0 1px 0
-        rgba(255,255,255,.10);
-
-    color: #e1f8ff;
-
-    font-size: 13px;
-
-    line-height: 2.5;
-
-    text-shadow:
-        0 2px 12px
-        rgba(0,30,60,.40);
-}
-
-
-/* ================= FOOTER ================= */
+/* FOOTER */
 
 .footer {
     text-align: center;
+
     margin-top: 50px;
 
     animation:
@@ -1017,8 +1001,7 @@ h1 {
     font-weight: 300;
 
     text-shadow:
-        0 2px 12px
-        rgba(0,30,60,.45);
+        0 2px 12px rgba(0,30,60,.45);
 }
 
 .personal-note {
@@ -1039,6 +1022,47 @@ h1 {
     font-weight: 300;
 }
 
+
+/* FINAL MESSAGE */
+
+.final-message {
+    opacity: 1;
+
+    max-height: none;
+
+    overflow: visible;
+
+    text-align: center;
+
+    margin-top: 30px;
+
+    padding:
+        20px 14px;
+
+    color: #e1f8ff;
+
+    font-size: 13px;
+
+    line-height: 2.5;
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(180,235,255,.10),
+            rgba(0,65,110,.15)
+        );
+
+    border:
+        1px solid
+        rgba(210,245,255,.18);
+
+    box-shadow:
+        inset 0 1px 0
+        rgba(255,255,255,.10);
+}
+
 .signature {
     margin-top: 28px;
 
@@ -1047,12 +1071,8 @@ h1 {
     font-size: 12px;
 
     text-shadow:
-        0 0 15px
-        rgba(120,220,255,.25);
+        0 0 15px rgba(120,220,255,.25);
 }
-
-
-/* ================= ANIMATION ================= */
 
 @keyframes fadeUp {
     from {
@@ -1067,7 +1087,7 @@ h1 {
 }
 
 
-/* ================= MOBILE ================= */
+/* MOBILE */
 
 @media(max-width:420px) {
 
@@ -1127,17 +1147,17 @@ h1 {
         animation: none !important;
         transition: none !important;
     }
+
 }
 
 </style>
 
 </head>
 
-
 <body>
 
 
-<!-- ================= ENTRY SCREEN ================= -->
+<!-- ENTRY SCREEN -->
 
 <div
     class="entry-screen"
@@ -1170,7 +1190,7 @@ h1 {
 </div>
 
 
-<!-- ================= PASSWORD SCREEN ================= -->
+<!-- PASSWORD SCREEN -->
 
 <div
     class="password-screen"
@@ -1226,7 +1246,7 @@ h1 {
 </div>
 
 
-<!-- ================= BACKGROUND MUSIC ================= -->
+<!-- BACKGROUND MUSIC -->
 
 <audio
     id="backgroundMusic"
@@ -1240,10 +1260,9 @@ h1 {
 </audio>
 
 
-<!-- ================= MAIN ================= -->
+<!-- MAIN -->
 
 <main class="container">
-
 
 <section class="hero">
 
@@ -1270,7 +1289,7 @@ h1 {
 </section>
 
 
-<!-- ================= MUSIC CARD ================= -->
+<!-- MUSIC CARD -->
 
 <section class="song-card">
 
@@ -1345,7 +1364,7 @@ h1 {
     </div>
 
 
-    <!-- ================= LYRICS ================= -->
+    <!-- LYRICS -->
 
     <div class="lyrics-box">
 
@@ -1355,193 +1374,20 @@ h1 {
 
         <div class="lyrics">
 
-
             <div class="lyric-line">
-                از همون اولش
+                متن آهنگ
             </div>
-
-            <div class="lyric-line">
-                خیلی بینمون فرق بود
-            </div>
-
-            <div class="lyric-line">
-                من عاشق بارون بودم
-            </div>
-
-            <div class="lyric-line">
-                اون عاشقه برف بود
-            </div>
-
-            <div class="lyric-line">
-                من خیلی آروم بودم
-            </div>
-
-            <div class="lyric-line">
-                اون خیلی پر حرف بود
-            </div>
-
-            <div class="lyric-line">
-                ولی نگذریم از حق
-            </div>
-
-            <div class="lyric-line">
-                خیلی خوش قلب بود
-            </div>
-
-            <div class="lyric-line">
-                از الان بجز دوریه تو
-            </div>
-
-            <div class="lyric-line">
-                هیچی به من نزدیک نیس
-            </div>
-
-            <div class="lyric-line">
-                درد داره نرو
-            </div>
-
-            <div class="lyric-line">
-                جفتمون از دست میریم
-            </div>
-
-            <div class="lyric-line">
-                نمیفهمم داریم تقاص چیو پس میدیم
-            </div>
-
-            <div class="lyric-line">
-                برو ولی ببین کی برمیگرده
-            </div>
-
-            <div class="lyric-line">
-                من یا تو
-            </div>
-
-            <div class="lyric-line">
-                ببین تهش کی گریه کرده
-            </div>
-
-            <div class="lyric-line">
-                من یا تو
-            </div>
-
-            <div class="lyric-line">
-                تا صبح همه شهرو میگرده
-            </div>
-
-            <div class="lyric-line">
-                من یا تو
-            </div>
-
-            <div class="lyric-line">
-                حرفاتو الان بزن که دیگه دیره
-            </div>
-
-            <div class="lyric-line">
-                فردا
-            </div>
-
-            <div class="lyric-line">
-                اگه میخوای بری برو
-            </div>
-
-            <div class="lyric-line">
-                دست بردار
-            </div>
-
-            <div class="lyric-line">
-                نری دوباره باز بیای
-            </div>
-
-            <div class="lyric-line">
-                پس فردا
-            </div>
-
-            <div class="lyric-line">
-                میترسم دلم یاد بگیره بی تو پرواز
-            </div>
-
-            <div class="lyric-line">
-                به این شرایط بی تو عادت بکنم باز
-            </div>
-
-            <div class="lyric-line">
-                میترسم اینقدر از همدیگه خبر نگیریم
-            </div>
-
-            <div class="lyric-line">
-                تا یه جایی که جفتمون از این دوری بمیریم
-            </div>
-
-            <div class="lyric-line">
-                فراموشت نکردم فقط بیخیال شدم
-            </div>
-
-            <div class="lyric-line">
-                یادت باشه خودت رفتی من که زورت نکردم
-            </div>
-
-            <div class="lyric-line">
-                فراموشت نکردم
-            </div>
-
-            <div class="lyric-line">
-                برو ولی ببین کی برمیگرده
-            </div>
-
-            <div class="lyric-line">
-                من یا تو
-            </div>
-
-            <div class="lyric-line">
-                ببین تهش کی گریه کرده
-            </div>
-
-            <div class="lyric-line">
-                من یا تو
-            </div>
-
-            <div class="lyric-line">
-                تا صبح همه شهرو میگرده
-            </div>
-
-            <div class="lyric-line">
-                من یا تو
-            </div>
-
-            <div class="lyric-line">
-                حرفاتو الان بزن که دیگه دیره
-            </div>
-
-            <div class="lyric-line">
-                فردا
-            </div>
-
-            <div class="lyric-line">
-                اگه میخوای بری برو
-            </div>
-
-            <div class="lyric-line">
-                دست بردار
-            </div>
-
-            <div class="lyric-line">
-                نری دوباره باز بیای
-            </div>
-
-            <div class="lyric-line">
-                پس فردا
-            </div>
-
 
         </div>
 
     </div>
 
-
     <div class="hint">
         برای پخش آهنگ لمس کن
     </div>
 
+
+    <!-- MAIN SONG -->
 
     <audio
         id="music"
@@ -1556,24 +1402,7 @@ h1 {
 </section>
 
 
-<!-- ================= SPECIAL MESSAGE ================= -->
-
-<div class="special-message">
-
-    یادت نره این صفحه رو نگه داری...<br>
-
-    چون ممکنه فردا یادت نباشه از کجا پیداش کردی 😂
-
-    <br><br>
-
-    از طرف همون کسی که هنوز<br>
-
-    منتظر کشتی توی فرودگاهه 😂🤍
-
-</div>
-
-
-<!-- ================= FOOTER ================= -->
+<!-- FOOTER -->
 
 <footer class="footer">
 
@@ -1609,21 +1438,37 @@ h1 {
     </p>
 
 
-    <div class="signature">
+    <!-- متن جدید -->
 
-        برای یک آدم خاص :)
+    <div class="final-message">
+
+        یه یادآوری کوچیک برای روزایی که آلزایمرت دوباره فعال شد 😂<br>
+
+        این صفحه رو من ساختم،<br>
+
+        آهنگشم برای توئه،<br>
+
+        و آره... هنوز یادمه گفتی<br>
+
+        «برو فرودگاه بشین تا کشتی بیاد» 😂🤍
 
     </div>
 
-</footer>
 
+    <div class="signature">
+        برای یک آدم خاص :)
+    </div>
+
+</footer>
 
 </main>
 
 
 <script>
 
-/* ================= ELEMENTS ================= */
+/* ==================================================
+   ELEMENTS
+================================================== */
 
 const entryScreen =
     document.getElementById("entryScreen");
@@ -1647,16 +1492,19 @@ const passwordBox =
     document.getElementById("passwordBox");
 
 
-/* ================= PASSWORD ================= */
+/* ==================================================
+   PASSWORD
+================================================== */
 
 const correctPassword = "1385";
 
 let passwordOpened = false;
-
 let musicStarted = false;
 
 
-/* ================= BACKGROUND MUSIC ================= */
+/* ==================================================
+   FADE IN BACKGROUND MUSIC
+================================================== */
 
 function fadeInMusic() {
 
@@ -1699,6 +1547,10 @@ function fadeInMusic() {
 }
 
 
+/* ==================================================
+   START EXPERIENCE
+================================================== */
+
 async function startExperience() {
 
     if (musicStarted) {
@@ -1738,7 +1590,9 @@ async function startExperience() {
 }
 
 
-/* ================= PASSWORD SCREEN ================= */
+/* ==================================================
+   OPEN PASSWORD SCREEN
+================================================== */
 
 function openPasswordScreen() {
 
@@ -1758,6 +1612,10 @@ function openPasswordScreen() {
 }
 
 
+/* ==================================================
+   ENTRY CLICK
+================================================== */
+
 entryScreen.addEventListener(
     "click",
     openPasswordScreen
@@ -1772,7 +1630,9 @@ entryScreen.addEventListener(
 );
 
 
-/* ================= CHECK PASSWORD ================= */
+/* ==================================================
+   CHECK PASSWORD
+================================================== */
 
 async function checkPassword() {
 
@@ -1805,7 +1665,6 @@ async function checkPassword() {
         return;
     }
 
-
     passwordError.classList.add(
         "show"
     );
@@ -1831,11 +1690,19 @@ async function checkPassword() {
 }
 
 
+/* ==================================================
+   PASSWORD BUTTON
+================================================== */
+
 passwordButton.addEventListener(
     "click",
     checkPassword
 );
 
+
+/* ==================================================
+   ENTER KEY
+================================================== */
 
 passwordInput.addEventListener(
     "keydown",
@@ -1853,7 +1720,9 @@ passwordInput.addEventListener(
 );
 
 
-/* ================= MAIN MUSIC ================= */
+/* ==================================================
+   MAIN MUSIC
+================================================== */
 
 const music =
     document.getElementById("music");
@@ -1880,7 +1749,9 @@ const duration =
     document.getElementById("duration");
 
 
-/* ================= FORMAT TIME ================= */
+/* ==================================================
+   FORMAT TIME
+================================================== */
 
 function formatTime(seconds) {
 
@@ -1909,7 +1780,39 @@ function formatTime(seconds) {
 }
 
 
-/* ================= PLAY / PAUSE ================= */
+/* ==================================================
+   BACKGROUND MUSIC CONTROL
+================================================== */
+
+function pauseBackgroundMusic() {
+
+    if (!backgroundMusic.paused) {
+
+        backgroundMusic.pause();
+
+    }
+
+}
+
+
+function resumeBackgroundMusic() {
+
+    if (
+        backgroundMusic.paused &&
+        !music.ended
+    ) {
+
+        backgroundMusic.play()
+            .catch(() => {});
+
+    }
+
+}
+
+
+/* ==================================================
+   PLAY / PAUSE MAIN SONG
+================================================== */
 
 playButton.addEventListener(
     "click",
@@ -1918,6 +1821,13 @@ playButton.addEventListener(
         try {
 
             if (music.paused) {
+
+                /*
+                 * قبل از شروع آهنگ اصلی،
+                 * موزیک پس‌زمینه قطع می‌شود.
+                 */
+
+                pauseBackgroundMusic();
 
                 await music.play();
 
@@ -1941,6 +1851,13 @@ playButton.addEventListener(
                 playButton.textContent =
                     "▶";
 
+                /*
+                 * با توقف آهنگ اصلی،
+                 * موزیک پس‌زمینه برمی‌گردد.
+                 */
+
+                resumeBackgroundMusic();
+
             }
 
         }
@@ -1955,7 +1872,9 @@ playButton.addEventListener(
 );
 
 
-/* ================= BACK 15 ================= */
+/* ==================================================
+   BACK 15 SECONDS
+================================================== */
 
 backButton.addEventListener(
     "click",
@@ -1971,7 +1890,9 @@ backButton.addEventListener(
 );
 
 
-/* ================= FORWARD 15 ================= */
+/* ==================================================
+   FORWARD 15 SECONDS
+================================================== */
 
 forwardButton.addEventListener(
     "click",
@@ -1997,7 +1918,9 @@ forwardButton.addEventListener(
 );
 
 
-/* ================= METADATA ================= */
+/* ==================================================
+   METADATA
+================================================== */
 
 music.addEventListener(
     "loadedmetadata",
@@ -2012,7 +1935,9 @@ music.addEventListener(
 );
 
 
-/* ================= PROGRESS ================= */
+/* ==================================================
+   PROGRESS UPDATE
+================================================== */
 
 music.addEventListener(
     "timeupdate",
@@ -2040,7 +1965,9 @@ music.addEventListener(
 );
 
 
-/* ================= CLICK PROGRESS ================= */
+/* ==================================================
+   CLICK PROGRESS
+================================================== */
 
 progress.addEventListener(
     "click",
@@ -2072,7 +1999,9 @@ progress.addEventListener(
 );
 
 
-/* ================= ENDED ================= */
+/* ==================================================
+   MAIN SONG ENDED
+================================================== */
 
 music.addEventListener(
     "ended",
@@ -2091,12 +2020,18 @@ music.addEventListener(
         currentTime.textContent =
             "0:00";
 
+        /*
+         * بعد از تمام شدن آهنگ اصلی،
+         * موزیک پس‌زمینه دوباره پخش می‌شود.
+         */
+
+        backgroundMusic.play()
+            .catch(() => {});
+
     }
 );
 
 </script>
 
-
 </body>
-
-</html>
+          </html>
