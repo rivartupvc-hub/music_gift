@@ -1,455 +1,601 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>برای تو 🎧</title>
-
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      font-family: 'Vazirmatn', sans-serif;
-      color: #f5eee8;
-
-      background:
-        radial-gradient(
-          circle at 20% 10%,
-          rgba(178, 125, 115, 0.20),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 85% 85%,
-          rgba(125, 88, 82, 0.16),
-          transparent 35%
-        ),
-        #171516;
-
-      overflow-x: hidden;
-    }
-
-    .container {
-      width: min(92%, 520px);
-      margin: auto;
-      padding: 65px 0 55px;
-    }
-
-    /* HEADER */
-
-    .hero {
-      text-align: center;
-      animation: fadeUp 1s ease;
-    }
-
-    .small-title {
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: #c6a399;
-      margin-bottom: 22px;
-      direction: ltr;
-    }
-
-    h1 {
-      font-size: 40px;
-      font-weight: 400;
-      margin-bottom: 25px;
-    }
-
-    .intro {
-      color: #cec3bd;
-      font-size: 14px;
-      line-height: 2.3;
-      font-weight: 300;
-    }
-
-    .divider {
-      width: 42px;
-      height: 1px;
-      background: #b9968b;
-      margin: 32px auto 40px;
-      opacity: 0.7;
-    }
-
-    /* SONG CARD */
-
-    .song-card {
-      position: relative;
-      padding: 28px 22px 25px;
-
-      border-radius: 28px;
-
-      border: 1px solid rgba(220, 190, 178, 0.16);
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,0.055),
-          rgba(255,255,255,0.018)
-        );
-
-      backdrop-filter: blur(15px);
-
-      box-shadow:
-        0 25px 70px rgba(0,0,0,0.28);
-
-      animation: fadeUp 1s ease 0.15s both;
-    }
-
-    .music-symbol {
-      width: 90px;
-      height: 90px;
-
-      margin: 0 auto 25px;
-
-      border-radius: 25px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 34px;
-
-      color: #ead4ca;
-
-      background:
-        linear-gradient(
-          145deg,
-          #5d4640,
-          #292223
-        );
-
-      box-shadow:
-        0 15px 35px rgba(0,0,0,0.35);
-    }
-
-    .song-title {
-      text-align: center;
-
-      font-size: 19px;
-      font-weight: 500;
-
-      line-height: 1.8;
-
-      margin-bottom: 7px;
-    }
-
-    .artist {
-      text-align: center;
-
-      font-size: 13px;
-
-      color: #a99c97;
-
-      font-weight: 300;
-
-      margin-bottom: 28px;
-    }
-
-    /* PLAY BUTTON */
-
-    .play-button {
-      width: 64px;
-      height: 64px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin: auto;
-
-      border-radius: 50%;
-
-      border: 1px solid rgba(225,195,183,0.35);
-
-      background:
-        rgba(210,180,168,0.10);
-
-      color: #ead5cc;
-
-      font-size: 21px;
-
-      cursor: pointer;
-
-      transition: all 0.3s ease;
-
-      box-shadow:
-        0 10px 30px rgba(0,0,0,0.22);
-    }
-
-    .play-button:hover {
-      transform: scale(1.07);
-
-      background:
-        rgba(210,180,168,0.18);
-    }
-
-    .play-button.playing {
-      background:
-        rgba(210,180,168,0.20);
-
-      border-color: #c9a99d;
-    }
-
-    audio {
-      display: none;
-    }
-
-    .hint {
-      text-align: center;
-
-      font-size: 11px;
-
-      color: #827571;
-
-      margin-top: 17px;
-    }
-
-    /* FOOTER */
-
-    .footer {
-      text-align: center;
-
-      margin-top: 55px;
-
-      animation: fadeUp 1s ease 0.3s both;
-    }
-
-    .footer-text {
-      color: #bdb2ad;
-
-      font-size: 13px;
-
-      line-height: 2.3;
-
-      font-weight: 300;
-    }
-
-    .signature {
-      margin-top: 28px;
-
-      color: #9d8880;
-
-      font-size: 12px;
-    }
-
-    /* ANIMATION */
-
-    @keyframes fadeUp {
-
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-    }
-
-    @media (max-width: 420px) {
-
-      .container {
-        padding-top: 48px;
-      }
-
-      h1 {
-        font-size: 34px;
-      }
-
-      .song-card {
-        padding: 25px 18px;
-      }
-
-      .song-title {
-        font-size: 17px;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>برای تو 🎧</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  min-height:100vh;
+  font-family:'Vazirmatn',sans-serif;
+  color:#f5eee8;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(178,125,115,.20),transparent 30%),
+    radial-gradient(circle at 85% 85%,rgba(125,88,82,.16),transparent 35%),
+    #171516;
+  overflow-x:hidden;
+}
+
+.container{
+  width:min(92%,520px);
+  margin:auto;
+  padding:55px 0 50px;
+}
+
+.hero{
+  text-align:center;
+  animation:fadeUp 1s ease;
+}
+
+.small-title{
+  font-size:10px;
+  letter-spacing:4px;
+  color:#c6a399;
+  margin-bottom:20px;
+  direction:ltr;
+}
+
+h1{
+  font-size:40px;
+  font-weight:400;
+  margin-bottom:20px;
+}
+
+.intro{
+  color:#cec3bd;
+  font-size:14px;
+  line-height:2.3;
+  font-weight:300;
+}
+
+.divider{
+  width:42px;
+  height:1px;
+  background:#b9968b;
+  margin:30px auto 34px;
+  opacity:.7;
+}
+
+.song-card{
+  padding:28px 18px 24px;
+  border-radius:28px;
+  border:1px solid rgba(220,190,178,.16);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.055),
+      rgba(255,255,255,.018)
+    );
+  backdrop-filter:blur(15px);
+  box-shadow:0 25px 70px rgba(0,0,0,.28);
+  animation:fadeUp 1s ease .15s both;
+}
+
+.music-symbol{
+  width:90px;
+  height:90px;
+  margin:0 auto 22px;
+  border-radius:25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+  color:#ead4ca;
+  background:linear-gradient(145deg,#5d4640,#292223);
+  box-shadow:0 15px 35px rgba(0,0,0,.35);
+}
+
+.song-title{
+  text-align:center;
+  font-size:19px;
+  font-weight:500;
+  line-height:1.8;
+  margin-bottom:5px;
+}
+
+.artist{
+  text-align:center;
+  font-size:13px;
+  color:#a99c97;
+  font-weight:300;
+  margin-bottom:23px;
+}
+
+.play-button{
+  width:64px;
+  height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:auto;
+  border-radius:50%;
+  border:1px solid rgba(225,195,183,.35);
+  background:rgba(210,180,168,.10);
+  color:#ead5cc;
+  font-size:21px;
+  cursor:pointer;
+  transition:.3s;
+  box-shadow:0 10px 30px rgba(0,0,0,.22);
+}
+
+.play-button:hover{
+  transform:scale(1.07);
+  background:rgba(210,180,168,.18);
+}
+
+.play-button.playing{
+  background:rgba(210,180,168,.20);
+  border-color:#c9a99d;
+}
+
+.progress-wrap{
+  margin:25px 4px 0;
+}
+
+.progress{
+  width:100%;
+  height:4px;
+  border-radius:20px;
+  background:rgba(255,255,255,.10);
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#c9a99d;
+  border-radius:20px;
+}
+
+.time{
+  display:flex;
+  justify-content:space-between;
+  direction:ltr;
+  color:#827571;
+  font-size:10px;
+  margin-top:8px;
+}
+
+.lyrics-box{
+  margin-top:25px;
+  padding:18px 10px;
+  border-radius:22px;
+  background:rgba(0,0,0,.13);
+  border:1px solid rgba(220,190,178,.10);
+  max-height:310px;
+  overflow-y:auto;
+  scroll-behavior:smooth;
+}
+
+.lyrics-title{
+  text-align:center;
+  color:#a98f87;
+  font-size:10px;
+  letter-spacing:3px;
+  margin-bottom:15px;
+  direction:ltr;
+}
+
+.lyrics{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.lyric-line{
+  text-align:center;
+  color:#716561;
+  font-size:13px;
+  line-height:1.9;
+  padding:4px 7px;
+  border-radius:12px;
+  transition:all .35s ease;
+}
+
+.lyric-line.active{
+  color:#f1ddd4;
+  font-size:15px;
+  background:rgba(201,169,157,.10);
+  transform:scale(1.02);
+}
+
+.hint{
+  text-align:center;
+  font-size:11px;
+  color:#827571;
+  margin-top:14px;
+}
+
+.footer{
+  text-align:center;
+  margin-top:45px;
+}
+
+.footer-text{
+  color:#bdb2ad;
+  font-size:13px;
+  line-height:2.3;
+  font-weight:300;
+}
+
+.signature{
+  margin-top:25px;
+  color:#9d8880;
+  font-size:12px;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@media(max-width:420px){
+  .container{
+    padding-top:42px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+
+  .song-title{
+    font-size:17px;
+  }
+}
+</style>
 </head>
-
 
 <body>
 
-  <main class="container">
+<main class="container">
 
-    <!-- INTRO -->
+<section class="hero">
 
-    <section class="hero">
+<div class="small-title">
+A LITTLE SOMETHING
+</div>
 
-      <div class="small-title">
-        A LITTLE SOMETHING
-      </div>
+<h1>
+برای تو 🎧
+</h1>
 
-      <h1>
-        برای تو 🎧
-      </h1>
+<p class="intro">
+چندتا آهنگ برای وقت‌هایی که<br>
+دلت یه حال خوب، یه لبخند کوچیک<br>
+یا فقط چند دقیقه آرامش می‌خواد.
+</p>
 
-      <p class="intro">
+<div class="divider"></div>
 
-        چندتا آهنگ برای وقت‌هایی که<br>
+</section>
 
-        دلت یه حال خوب، یه لبخند کوچیک<br>
 
-        یا فقط چند دقیقه آرامش می‌خواد.
+<section class="song-card">
 
-      </p>
+<div class="music-symbol">
+♫
+</div>
 
-      <div class="divider"></div>
+<div class="song-title">
+من عاشق بارون بودم، اون عاشق برف بود
+</div>
 
-    </section>
+<div class="artist">
+عمیان
+</div>
 
 
-    <!-- SONG -->
+<button
+class="play-button"
+id="playButton"
+aria-label="پخش آهنگ">
+▶
+</button>
 
-    <section class="song-card">
 
-      <div class="music-symbol">
-        ♫
-      </div>
+<div class="progress-wrap">
 
+<div class="progress" id="progress">
+<div class="progress-bar" id="progressBar"></div>
+</div>
 
-      <div class="song-title">
+<div class="time">
+<span id="currentTime">0:00</span>
+<span id="duration">0:00</span>
+</div>
 
-        من عاشق بارون بودم، اون عاشق برف بود
+</div>
 
-      </div>
 
+<div class="lyrics-box" id="lyricsBox">
 
-      <div class="artist">
+<div class="lyrics-title">
+LYRICS
+</div>
 
-        عمیان
+<div class="lyrics" id="lyrics">
 
-      </div>
+<!--
+اینجا خطوط متن آهنگ خودت را قرار بده.
+هر خط باید داخل یک div جدا باشد.
 
+مثال:
 
-      <button
-        class="play-button"
-        id="playButton"
-        onclick="toggleMusic()"
-      >
+<div class="lyric-line">خط اول متن</div>
+<div class="lyric-line">خط دوم متن</div>
+<div class="lyric-line">خط سوم متن</div>
 
-        ▶
+-->
 
-      </button>
+<div class="lyric-line active">
+🎧 آهنگ را پخش کن...
+</div>
 
+<div class="lyric-line">
+متن آهنگ اینجا نمایش داده می‌شود
+</div>
 
-      <div class="hint">
+</div>
+</div>
 
-        برای پخش آهنگ لمس کن
 
-      </div>
+<div class="hint">
+برای پخش آهنگ لمس کن
+</div>
 
 
-      <!--
-        بعداً فایل آهنگ را اینجا قرار می‌دهیم
-      -->
+<audio id="music" preload="metadata">
+<source src="song.mp3" type="audio/mpeg">
+</audio>
 
-      <audio id="music">
+</section>
 
-        <source
-          src="songs/song.mp3"
-          type="audio/mpeg"
-        >
 
-      </audio>
+<footer class="footer">
 
-    </section>
+<p class="footer-text">
 
+امیدوارم هر کدومشون<br>
+یه جایی از روزت رو قشنگ‌تر کنن. 🌱
 
-    <!-- FOOTER -->
+<br><br>
 
-    <footer class="footer">
+امیدوارم همیشه دلت خوش باشه،
+<br>
+ذهنت آروم باشه
+<br>
+و روزات پر از اتفاقای خوب.
 
-      <p class="footer-text">
+</p>
 
-        امیدوارم هر کدومشون<br>
+<div class="signature">
+مواظب حال خوبت باش :)
+</div>
 
-        یه جایی از روزت رو قشنگ‌تر کنن. 🌱
+</footer>
 
-        <br><br>
+</main>
 
-        امیدوارم همیشه دلت خوش باشه،
 
-        <br>
+<script>
 
-        ذهنت آروم باشه
+const music =
+document.getElementById("music");
 
-        <br>
+const playButton =
+document.getElementById("playButton");
 
-        و روزات پر از اتفاقای خوب.
+const progress =
+document.getElementById("progress");
 
-      </p>
+const progressBar =
+document.getElementById("progressBar");
 
+const currentTime =
+document.getElementById("currentTime");
 
-      <div class="signature">
+const duration =
+document.getElementById("duration");
 
-        مواظب حال خوبت باش :)
+const lyricsBox =
+document.getElementById("lyricsBox");
 
-      </div>
+const lines =
+document.querySelectorAll(".lyric-line");
 
-    </footer>
 
-  </main>
+function formatTime(seconds){
 
+if(!Number.isFinite(seconds))
+return "0:00";
 
-  <script>
+const minutes =
+Math.floor(seconds / 60);
 
-    const music =
-      document.getElementById("music");
+const secs =
+Math.floor(seconds % 60);
 
-    const playButton =
-      document.getElementById("playButton");
+return minutes + ":" +
+String(secs).padStart(2,"0");
 
+}
 
-    function toggleMusic() {
 
-      if (music.paused) {
+playButton.addEventListener("click",async()=>{
 
-        music.play();
+try{
 
-        playButton.classList.add("playing");
+if(music.paused){
 
-        playButton.innerHTML = "❚❚";
+await music.play();
 
-      }
+playButton.classList.add("playing");
 
-      else {
+playButton.textContent="❚❚";
 
-        music.pause();
+}else{
 
-        playButton.classList.remove("playing");
+music.pause();
 
-        playButton.innerHTML = "▶";
+playButton.classList.remove("playing");
 
-      }
+playButton.textContent="▶";
 
-    }
+}
 
+}catch(error){
 
-    music.addEventListener(
-      "ended",
-      function () {
+console.log(error);
 
-        playButton.classList.remove("playing");
+}
 
-        playButton.innerHTML = "▶";
+});
 
-      }
-    );
 
-  </script>
+music.addEventListener("loadedmetadata",()=>{
+
+duration.textContent =
+formatTime(music.duration);
+
+});
+
+
+music.addEventListener("timeupdate",()=>{
+
+if(!music.duration)
+return;
+
+const percent =
+(music.currentTime / music.duration) * 100;
+
+progressBar.style.width =
+percent + "%";
+
+currentTime.textContent =
+formatTime(music.currentTime);
+
+});
+
+
+progress.addEventListener("click",(event)=>{
+
+if(!music.duration)
+return;
+
+const rect =
+progress.getBoundingClientRect();
+
+const percent =
+(event.clientX - rect.left) /
+rect.width;
+
+music.currentTime =
+Math.max(0,Math.min(1,percent)) *
+music.duration;
+
+});
+
+
+music.addEventListener("ended",()=>{
+
+playButton.classList.remove("playing");
+
+playButton.textContent="▶";
+
+progressBar.style.width="0%";
+
+currentTime.textContent="0:00";
+
+});
+
+
+/*
+  سیستم هماهنگ‌سازی متن
+
+  زمان شروع هر خط را اینجا بر حسب ثانیه قرار می‌دهیم.
+
+  مثال:
+
+  const lyricTimes = [
+    0,
+    4.2,
+    8.7,
+    13.1
+  ];
+
+  تعداد زمان‌ها باید با تعداد خطوط متن یکی باشد.
+*/
+
+const lyricTimes = [];
+
+
+function updateLyrics(){
+
+if(!lyricTimes.length)
+return;
+
+let activeIndex = -1;
+
+for(let i=0;i<lyricTimes.length;i++){
+
+if(music.currentTime >= lyricTimes[i]){
+activeIndex = i;
+}
+
+}
+
+lines.forEach((line,index)=>{
+
+line.classList.toggle(
+"active",
+index === activeIndex
+);
+
+});
+
+
+if(activeIndex >= 0){
+
+const activeLine =
+lines[activeIndex];
+
+if(activeLine){
+
+activeLine.scrollIntoView({
+behavior:"smooth",
+block:"center"
+});
+
+}
+
+}
+
+}
+
+
+music.addEventListener(
+"timeupdate",
+updateLyrics
+);
+
+</script>
 
 </body>
 </html>
