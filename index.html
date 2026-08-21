@@ -27,34 +27,24 @@
    RESET
 ================================================== */
 
-*{
-
-    box-sizing:border-box;
-
-    margin:0;
-
-    padding:0;
-
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-
-html{
-
-    scroll-behavior:smooth;
-
+html {
+    scroll-behavior: smooth;
 }
 
+body {
+    min-height: 100vh;
 
-body{
+    font-family: 'Vazirmatn', sans-serif;
 
-    min-height:100vh;
+    color: #f7fdff;
 
-    font-family:'Vazirmatn',sans-serif;
-
-    color:#f7fdff;
-
-    overflow-x:hidden;
-
+    overflow-x: hidden;
 
     background:
 
@@ -67,15 +57,10 @@ body{
 
         url("blue-rose.jpg");
 
-
-    background-size:cover;
-
-    background-position:center;
-
-    background-attachment:fixed;
-
-    background-repeat:no-repeat;
-
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 
@@ -83,18 +68,15 @@ body{
    BACKGROUND LIGHT
 ================================================== */
 
-body::before{
+body::before {
 
-    content:"";
+    content: "";
 
-    position:fixed;
+    position: fixed;
+    inset: 0;
 
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-1;
-
+    pointer-events: none;
+    z-index: -1;
 
     background:
 
@@ -115,7 +97,6 @@ body::before{
             rgba(255,255,255,.04),
             rgba(0,30,60,.20)
         );
-
 }
 
 
@@ -123,20 +104,17 @@ body::before{
    SOFT PARTICLES
 ================================================== */
 
-body::after{
+body::after {
 
-    content:"";
+    content: "";
 
-    position:fixed;
+    position: fixed;
+    inset: 0;
 
-    inset:0;
+    pointer-events: none;
+    z-index: -1;
 
-    pointer-events:none;
-
-    z-index:-1;
-
-    opacity:.35;
-
+    opacity: .35;
 
     background-image:
 
@@ -146,31 +124,20 @@ body::after{
             transparent 1.5px
         );
 
+    background-size: 110px 110px;
 
-    background-size:
-        110px 110px;
-
-
-    animation:
-        sparkle 14s linear infinite;
-
+    animation: sparkle 14s linear infinite;
 }
 
 
-@keyframes sparkle{
+@keyframes sparkle {
 
-    from{
-
-        transform:
-            translateY(0);
-
+    from {
+        transform: translateY(0);
     }
 
-    to{
-
-        transform:
-            translateY(-110px);
-
+    to {
+        transform: translateY(-110px);
     }
 
 }
@@ -180,24 +147,21 @@ body::after{
    ENTRY SCREEN
 ================================================== */
 
-.entry-screen{
+.entry-screen {
 
-    position:fixed;
+    position: fixed;
+    inset: 0;
 
-    inset:0;
+    z-index: 9999;
 
-    z-index:9999;
+    display: flex;
 
-    display:flex;
+    align-items: center;
+    justify-content: center;
 
-    align-items:center;
+    text-align: center;
 
-    justify-content:center;
-
-    text-align:center;
-
-    cursor:pointer;
-
+    cursor: pointer;
 
     background:
 
@@ -210,29 +174,21 @@ body::after{
 
         url("blue-rose.jpg");
 
-
-    background-size:cover;
-
-    background-position:center;
-
+    background-size: cover;
+    background-position: center;
 
     transition:
-
         opacity 1.2s ease,
-
         visibility 1.2s ease;
-
 }
 
 
-.entry-screen::before{
+.entry-screen::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
-
-    inset:0;
-
+    position: absolute;
+    inset: 0;
 
     background:
 
@@ -248,20 +204,15 @@ body::after{
             rgba(0,30,60,.28)
         );
 
-
-    pointer-events:none;
-
+    pointer-events: none;
 }
 
 
-.entry-screen.hide{
+.entry-screen.hide {
 
-    opacity:0;
-
-    visibility:hidden;
-
-    pointer-events:none;
-
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
 }
 
 
@@ -269,35 +220,28 @@ body::after{
    ENTRY CONTENT
 ================================================== */
 
-.entry-content{
+.entry-content {
 
-    position:relative;
+    position: relative;
+    z-index: 2;
 
-    z-index:2;
+    width: 90%;
+    max-width: 400px;
 
-    width:90%;
+    padding: 35px 25px;
 
-    max-width:400px;
-
-    padding:35px 25px;
-
-
-    animation:
-        entryAppear 1.5s ease;
-
+    animation: entryAppear 1.5s ease;
 }
 
 
-.entry-glow{
+.entry-glow {
 
-    position:absolute;
+    position: absolute;
 
-    width:320px;
+    width: 320px;
+    height: 320px;
 
-    height:320px;
-
-    border-radius:50%;
-
+    border-radius: 50%;
 
     background:
 
@@ -307,13 +251,9 @@ body::after{
             transparent 70%
         );
 
+    filter: blur(10px);
 
-    filter:blur(10px);
-
-
-    animation:
-        glowPulse 3s ease-in-out infinite;
-
+    animation: glowPulse 3s ease-in-out infinite;
 }
 
 
@@ -321,21 +261,16 @@ body::after{
    ENTRY ROSE
 ================================================== */
 
-.entry-rose{
+.entry-rose {
 
-    font-size:82px;
+    font-size: 82px;
 
-    margin-bottom:20px;
-
+    margin-bottom: 20px;
 
     filter:
-
         hue-rotate(145deg)
-
         saturate(1.7)
-
         brightness(1.15);
-
 
     text-shadow:
 
@@ -345,10 +280,7 @@ body::after{
         0 0 55px
         rgba(80,180,255,.35);
 
-
-    animation:
-        roseFloat 3s ease-in-out infinite;
-
+    animation: roseFloat 3s ease-in-out infinite;
 }
 
 
@@ -356,15 +288,12 @@ body::after{
    ENTRY LINE
 ================================================== */
 
-.entry-line{
+.entry-line {
 
-    width:65px;
+    width: 65px;
+    height: 1px;
 
-    height:1px;
-
-    margin:
-        0 auto 25px;
-
+    margin: 0 auto 25px;
 
     background:
 
@@ -375,12 +304,8 @@ body::after{
             transparent
         );
 
-
     box-shadow:
-
-        0 0 15px
-        rgba(190,240,255,.7);
-
+        0 0 15px rgba(190,240,255,.7);
 }
 
 
@@ -388,16 +313,14 @@ body::after{
    ENTRY TITLE
 ================================================== */
 
-.entry-content h2{
+.entry-content h2 {
 
-    color:#ffffff;
+    color: #ffffff;
 
-    font-size:22px;
+    font-size: 22px;
+    font-weight: 400;
 
-    font-weight:400;
-
-    margin-bottom:10px;
-
+    margin-bottom: 10px;
 
     text-shadow:
 
@@ -406,20 +329,17 @@ body::after{
 
         0 0 25px
         rgba(150,230,255,.25);
-
 }
 
 
-.entry-content p{
+.entry-content p {
 
-    color:#d3edf5;
+    color: #d3edf5;
 
-    font-size:12px;
+    font-size: 12px;
+    font-weight: 300;
 
-    font-weight:300;
-
-    margin-bottom:30px;
-
+    margin-bottom: 30px;
 }
 
 
@@ -427,33 +347,26 @@ body::after{
    TOUCH BUTTON
 ================================================== */
 
-.touch-circle{
+.touch-circle {
 
-    width:65px;
+    width: 65px;
+    height: 65px;
 
-    height:65px;
+    margin: auto;
 
-    margin:auto;
+    display: flex;
 
-    display:flex;
+    align-items: center;
+    justify-content: center;
 
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:50%;
-
+    border-radius: 50%;
 
     border:
-
         1px solid
         rgba(220,250,255,.50);
 
-
     background:
-
         rgba(170,230,255,.10);
-
 
     box-shadow:
 
@@ -466,27 +379,21 @@ body::after{
         inset 0 1px 0
         rgba(255,255,255,.30);
 
-
     animation:
         touchPulse 2s ease-out infinite;
-
 }
 
 
-.touch-circle span{
+.touch-circle span {
 
-    color:#ffffff;
+    color: #ffffff;
 
-    font-size:25px;
-
-    line-height:1;
-
+    font-size: 25px;
+    line-height: 1;
 
     text-shadow:
-
         0 0 15px
         rgba(190,240,255,.7);
-
 }
 
 
@@ -494,80 +401,68 @@ body::after{
    ENTRY ANIMATIONS
 ================================================== */
 
-@keyframes entryAppear{
+@keyframes entryAppear {
 
-    from{
-
-        opacity:0;
+    from {
+        opacity: 0;
 
         transform:
             translateY(20px)
             scale(.96);
-
     }
 
-    to{
-
-        opacity:1;
+    to {
+        opacity: 1;
 
         transform:
             translateY(0)
             scale(1);
-
     }
 
 }
 
 
-@keyframes roseFloat{
+@keyframes roseFloat {
 
     0%,
-    100%{
-
+    100% {
         transform:
             translateY(0)
             rotate(-2deg);
-
     }
 
-    50%{
-
+    50% {
         transform:
             translateY(-8px)
             rotate(2deg);
-
     }
 
 }
 
 
-@keyframes glowPulse{
+@keyframes glowPulse {
 
     0%,
-    100%{
-
-        opacity:.55;
+    100% {
+        opacity: .55;
 
         transform:
             scale(.9);
-
     }
 
-    50%{
-
-        opacity:1;
+    50% {
+        opacity: 1;
 
         transform:
             scale(1.08);
-
     }
 
 }
 
 
-@keyframes touchPulse{
+@keyframes touchPulse {
 
-    0%{
+    0% {
 
         box-shadow:
 
@@ -576,10 +471,9 @@ body::after{
 
             0 0 30px
             rgba(100,210,255,.20);
-
     }
 
-    70%{
+    70% {
 
         box-shadow:
 
@@ -588,10 +482,9 @@ body::after{
 
             0 0 40px
             rgba(100,210,255,.25);
-
     }
 
-    100%{
+    100% {
 
         box-shadow:
 
@@ -600,7 +493,303 @@ body::after{
 
             0 0 30px
             rgba(100,210,255,.20);
+    }
 
+}
+
+
+/* ==================================================
+   PASSWORD SCREEN
+================================================== */
+
+.password-screen {
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 10000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 25px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(3,35,65,.65),
+            rgba(20,105,160,.30),
+            rgba(2,25,55,.78)
+        ),
+
+        url("blue-rose.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    opacity: 0;
+
+    transition:
+        opacity .7s ease;
+}
+
+
+.password-screen.show {
+
+    display: flex;
+
+    opacity: 1;
+}
+
+
+.password-box {
+
+    width: 90%;
+    max-width: 360px;
+
+    padding: 35px 25px;
+
+    border-radius: 30px;
+
+    background:
+
+        linear-gradient(
+            145deg,
+            rgba(190,235,255,.20),
+            rgba(10,80,130,.25)
+        );
+
+    border:
+        1px solid
+        rgba(220,248,255,.40);
+
+    backdrop-filter: blur(25px);
+
+    -webkit-backdrop-filter: blur(25px);
+
+    box-shadow:
+
+        0 30px 90px
+        rgba(0,25,55,.55),
+
+        inset 0 1px 0
+        rgba(255,255,255,.30);
+
+    animation:
+        passwordAppear .6s ease;
+}
+
+
+.password-icon {
+
+    font-size: 55px;
+
+    margin-bottom: 15px;
+
+    filter:
+        hue-rotate(145deg)
+        saturate(1.6);
+
+    text-shadow:
+        0 0 25px
+        rgba(150,230,255,.6);
+}
+
+
+.password-box h2 {
+
+    color: white;
+
+    font-size: 21px;
+    font-weight: 400;
+
+    margin-bottom: 8px;
+}
+
+
+.password-box p {
+
+    color: #d3edf5;
+
+    font-size: 12px;
+
+    margin-bottom: 22px;
+}
+
+
+.password-input {
+
+    width: 100%;
+    height: 50px;
+
+    border-radius: 18px;
+
+    border:
+        1px solid
+        rgba(220,250,255,.35);
+
+    outline: none;
+
+    background:
+        rgba(0,35,65,.25);
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    letter-spacing: 7px;
+
+    font-family:
+        'Vazirmatn',
+        sans-serif;
+
+    transition: .25s ease;
+}
+
+
+.password-input:focus {
+
+    border-color:
+        rgba(220,250,255,.75);
+
+    box-shadow:
+        0 0 25px
+        rgba(100,210,255,.20);
+}
+
+
+.password-input::placeholder {
+
+    color:
+        rgba(220,245,255,.45);
+
+    letter-spacing: 1px;
+
+    font-size: 12px;
+}
+
+
+.password-button {
+
+    width: 100%;
+    height: 48px;
+
+    margin-top: 15px;
+
+    border:
+        1px solid
+        rgba(220,250,255,.50);
+
+    border-radius: 18px;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            rgba(150,225,255,.30),
+            rgba(30,120,180,.25)
+        );
+
+    color: white;
+
+    font-family:
+        'Vazirmatn',
+        sans-serif;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+}
+
+
+.password-button:hover {
+
+    transform: scale(1.03);
+
+    box-shadow:
+        0 0 30px
+        rgba(100,210,255,.25);
+}
+
+
+.password-error {
+
+    min-height: 22px;
+
+    margin-top: 12px;
+
+    color: #ffd7df;
+
+    font-size: 11px;
+
+    opacity: 0;
+
+    transition: .25s ease;
+}
+
+
+.password-error.show {
+
+    opacity: 1;
+}
+
+
+.password-box.shake {
+
+    animation:
+        passwordShake .4s ease;
+}
+
+
+@keyframes passwordAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(.94);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes passwordShake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-8px);
+    }
+
+    50% {
+        transform: translateX(8px);
+    }
+
+    75% {
+        transform: translateX(-5px);
     }
 
 }
@@ -610,15 +799,14 @@ body::after{
    MAIN CONTAINER
 ================================================== */
 
-.container{
+.container {
 
-    width:min(92%,540px);
+    width: min(92%,540px);
 
-    margin:auto;
+    margin: auto;
 
     padding:
         58px 0 65px;
-
 }
 
 
@@ -626,49 +814,44 @@ body::after{
    HERO
 ================================================== */
 
-.hero{
+.hero {
 
-    text-align:center;
+    text-align: center;
 
     animation:
         fadeUp 1s ease;
-
 }
 
 
-.small-title{
+.small-title {
 
-    font-size:9px;
+    font-size: 9px;
 
-    letter-spacing:5px;
+    letter-spacing: 5px;
 
-    color:#d4f5ff;
+    color: #d4f5ff;
 
-    margin-bottom:20px;
+    margin-bottom: 20px;
 
-    direction:ltr;
-
+    direction: ltr;
 
     text-shadow:
-
         0 0 20px
         rgba(130,220,255,.55);
-
 }
 
 
-h1{
+h1 {
 
-    font-size:42px;
+    font-size: 42px;
 
-    font-weight:400;
+    font-weight: 400;
 
-    margin-bottom:20px;
+    margin-bottom: 20px;
 
-    letter-spacing:-1px;
+    letter-spacing: -1px;
 
-    color:#ffffff;
-
+    color: #ffffff;
 
     text-shadow:
 
@@ -677,38 +860,32 @@ h1{
 
         0 0 30px
         rgba(160,230,255,.25);
-
 }
 
 
-.intro{
+.intro {
 
-    color:#e4f5fb;
+    color: #e4f5fb;
 
-    font-size:14px;
+    font-size: 14px;
 
-    line-height:2.4;
+    line-height: 2.4;
 
-    font-weight:300;
-
+    font-weight: 300;
 
     text-shadow:
-
         0 2px 12px
         rgba(0,30,60,.55);
-
 }
 
 
-.divider{
+.divider {
 
-    width:85px;
-
-    height:1px;
+    width: 85px;
+    height: 1px;
 
     margin:
         32px auto 36px;
-
 
     background:
 
@@ -719,12 +896,9 @@ h1{
             transparent
         );
 
-
     box-shadow:
-
         0 0 15px
         rgba(130,220,255,.7);
-
 }
 
 
@@ -732,22 +906,18 @@ h1{
    MUSIC CARD
 ================================================== */
 
-.song-card{
+.song-card {
 
-    position:relative;
+    position: relative;
 
     padding:
         34px 20px 28px;
 
-
-    border-radius:32px;
-
+    border-radius: 32px;
 
     border:
-
         1px solid
         rgba(220,248,255,.35);
-
 
     background:
 
@@ -758,14 +928,9 @@ h1{
             rgba(5,55,95,.18)
         );
 
+    backdrop-filter: blur(24px);
 
-    backdrop-filter:
-        blur(24px);
-
-
-    -webkit-backdrop-filter:
-        blur(24px);
-
+    -webkit-backdrop-filter: blur(24px);
 
     box-shadow:
 
@@ -778,36 +943,29 @@ h1{
         inset 0 -1px 0
         rgba(255,255,255,.08);
 
-
-    overflow:hidden;
-
+    overflow: hidden;
 
     animation:
         fadeUp 1s ease .15s both;
-
 }
 
 
-.song-card::before{
+.song-card::before {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    width:280px;
+    width: 280px;
+    height: 280px;
 
-    height:280px;
-
-    top:-170px;
-
-    left:50%;
+    top: -170px;
+    left: 50%;
 
     transform:
         translateX(-50%);
 
-
-    border-radius:50%;
-
+    border-radius: 50%;
 
     background:
 
@@ -817,26 +975,21 @@ h1{
             transparent 70%
         );
 
-
-    pointer-events:none;
-
+    pointer-events: none;
 }
 
 
-.song-card::after{
+.song-card::after {
 
-    content:"";
+    content: "";
 
-    position:absolute;
+    position: absolute;
 
-    top:0;
+    top: 0;
+    left: 10%;
 
-    left:10%;
-
-    width:80%;
-
-    height:1px;
-
+    width: 80%;
+    height: 1px;
 
     background:
 
@@ -847,9 +1000,7 @@ h1{
             transparent
         );
 
-
-    opacity:.7;
-
+    opacity: .7;
 }
 
 
@@ -857,41 +1008,37 @@ h1{
    SONG TITLE
 ================================================== */
 
-.song-title{
+.song-title {
 
-    text-align:center;
+    text-align: center;
 
-    font-size:19px;
+    font-size: 19px;
 
-    font-weight:500;
+    font-weight: 500;
 
-    line-height:1.9;
+    line-height: 1.9;
 
-    margin-bottom:7px;
+    margin-bottom: 7px;
 
-    color:#ffffff;
-
+    color: #ffffff;
 
     text-shadow:
-
         0 2px 15px
         rgba(0,40,75,.55);
-
 }
 
 
-.artist{
+.artist {
 
-    text-align:center;
+    text-align: center;
 
-    font-size:13px;
+    font-size: 13px;
 
-    color:#d1ebf5;
+    color: #d1ebf5;
 
-    font-weight:300;
+    font-weight: 300;
 
-    margin-bottom:28px;
-
+    margin-bottom: 28px;
 }
 
 
@@ -899,85 +1046,65 @@ h1{
    CONTROLS
 ================================================== */
 
-.controls{
+.controls {
 
-    display:flex;
+    display: flex;
 
-    align-items:center;
+    align-items: center;
+    justify-content: center;
 
-    justify-content:center;
+    gap: 17px;
 
-    gap:17px;
-
-    direction:ltr;
-
+    direction: ltr;
 }
 
 
-.control-button{
+.control-button {
 
-    width:46px;
+    width: 46px;
+    height: 46px;
 
-    height:46px;
-
-    border-radius:50%;
-
+    border-radius: 50%;
 
     border:
-
         1px solid
         rgba(210,245,255,.34);
 
-
     background:
-
         rgba(160,225,255,.10);
 
+    color: #e4f9ff;
 
-    color:#e4f9ff;
+    display: flex;
 
+    align-items: center;
+    justify-content: center;
 
-    display:flex;
+    cursor: pointer;
 
-    align-items:center;
+    font-size: 14px;
 
-    justify-content:center;
-
-
-    cursor:pointer;
-
-    font-size:14px;
-
-
-    transition:.25s ease;
-
+    transition: .25s ease;
 
     box-shadow:
-
         inset 0 1px 0
         rgba(255,255,255,.12);
-
 }
 
 
-.control-button:hover{
+.control-button:hover {
 
-    transform:scale(1.08);
-
+    transform: scale(1.08);
 
     background:
         rgba(150,225,255,.22);
 
-
     border-color:
         rgba(220,250,255,.65);
 
-
     box-shadow:
-
         0 0 25px
         rgba(80,200,255,.20);
-
 }
 
 
@@ -985,20 +1112,16 @@ h1{
    PLAY BUTTON
 ================================================== */
 
-.play-button{
+.play-button {
 
-    width:70px;
+    width: 70px;
+    height: 70px;
 
-    height:70px;
-
-    border-radius:50%;
-
+    border-radius: 50%;
 
     border:
-
         1px solid
         rgba(220,250,255,.70);
-
 
     background:
 
@@ -1009,23 +1132,18 @@ h1{
             rgba(20,90,150,.25)
         );
 
+    color: #ffffff;
 
-    color:#ffffff;
+    font-size: 21px;
 
-    font-size:21px;
+    cursor: pointer;
 
-    cursor:pointer;
+    display: flex;
 
+    align-items: center;
+    justify-content: center;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-
-    transition:.3s ease;
-
+    transition: .3s ease;
 
     box-shadow:
 
@@ -1037,14 +1155,12 @@ h1{
 
         inset 0 1px 0
         rgba(255,255,255,.55);
-
 }
 
 
-.play-button:hover{
+.play-button:hover {
 
-    transform:scale(1.09);
-
+    transform: scale(1.09);
 
     box-shadow:
 
@@ -1053,11 +1169,10 @@ h1{
 
         0 0 40px
         rgba(130,225,255,.35);
-
 }
 
 
-.play-button.playing{
+.play-button.playing {
 
     background:
 
@@ -1067,15 +1182,11 @@ h1{
             rgba(25,115,175,.30)
         );
 
-
-    border-color:#d8f8ff;
-
+    border-color: #d8f8ff;
 
     box-shadow:
-
         0 0 35px
         rgba(110,220,255,.45);
-
 }
 
 
@@ -1083,46 +1194,38 @@ h1{
    PROGRESS
 ================================================== */
 
-.progress-wrap{
+.progress-wrap {
 
     margin:
         28px 2px 0;
-
 }
 
 
-.progress{
+.progress {
 
-    width:100%;
+    width: 100%;
+    height: 5px;
 
-    height:5px;
-
-    border-radius:20px;
+    border-radius: 20px;
 
     background:
-
         rgba(255,255,255,.16);
 
+    overflow: hidden;
 
-    overflow:hidden;
-
-    cursor:pointer;
-
+    cursor: pointer;
 
     box-shadow:
-
         inset 0 1px 3px
         rgba(0,30,60,.20);
-
 }
 
 
-.progress-bar{
+.progress-bar {
 
-    height:100%;
+    height: 100%;
 
-    width:0%;
-
+    width: 0%;
 
     background:
 
@@ -1132,32 +1235,27 @@ h1{
             #d7f7ff
         );
 
-
-    border-radius:20px;
-
+    border-radius: 20px;
 
     box-shadow:
-
         0 0 14px
         rgba(150,230,255,.80);
-
 }
 
 
-.time{
+.time {
 
-    display:flex;
+    display: flex;
 
-    justify-content:space-between;
+    justify-content: space-between;
 
-    direction:ltr;
+    direction: ltr;
 
-    color:#c1dce8;
+    color: #c1dce8;
 
-    font-size:10px;
+    font-size: 10px;
 
-    margin-top:8px;
-
+    margin-top: 8px;
 }
 
 
@@ -1165,16 +1263,14 @@ h1{
    LYRICS
 ================================================== */
 
-.lyrics-box{
+.lyrics-box {
 
-    margin-top:27px;
+    margin-top: 27px;
 
     padding:
         21px 12px 18px;
 
-
-    border-radius:25px;
-
+    border-radius: 25px;
 
     background:
 
@@ -1184,74 +1280,63 @@ h1{
             rgba(0,65,110,.17)
         );
 
-
     border:
-
         1px solid
         rgba(205,242,255,.22);
 
+    height: 300px;
 
-    height:300px;
+    overflow-y: auto;
 
-    overflow-y:auto;
-
-
-    scrollbar-width:thin;
+    scrollbar-width: thin;
 
     scrollbar-color:
-
         rgba(170,230,255,.45)
         transparent;
-
 }
 
 
-.lyrics-title{
+.lyrics-title {
 
-    text-align:center;
+    text-align: center;
 
-    color:#d2f5ff;
+    color: #d2f5ff;
 
-    font-size:9px;
+    font-size: 9px;
 
-    letter-spacing:4px;
+    letter-spacing: 4px;
 
-    margin-bottom:18px;
+    margin-bottom: 18px;
 
-    direction:ltr;
-
+    direction: ltr;
 
     text-shadow:
-
         0 0 18px
         rgba(140,225,255,.45);
-
 }
 
 
-.lyrics{
+.lyrics {
 
-    display:flex;
+    display: flex;
 
-    flex-direction:column;
+    flex-direction: column;
 
-    gap:9px;
-
+    gap: 9px;
 }
 
 
-.lyric-line{
+.lyric-line {
 
-    text-align:center;
+    text-align: center;
 
-    color:#d2e8f1;
+    color: #d2e8f1;
 
-    font-size:13px;
+    font-size: 13px;
 
-    line-height:2;
+    line-height: 2;
 
-    padding:4px 7px;
-
+    padding: 4px 7px;
 }
 
 
@@ -1259,16 +1344,15 @@ h1{
    HINT
 ================================================== */
 
-.hint{
+.hint {
 
-    text-align:center;
+    text-align: center;
 
-    font-size:10px;
+    font-size: 10px;
 
-    color:#c1dce7;
+    color: #c1dce7;
 
-    margin-top:15px;
-
+    margin-top: 15px;
 }
 
 
@@ -1276,59 +1360,50 @@ h1{
    FOOTER
 ================================================== */
 
-.footer{
+.footer {
 
-    text-align:center;
+    text-align: center;
 
-    margin-top:50px;
-
+    margin-top: 50px;
 
     animation:
-
         fadeUp 1s ease .3s both;
-
 }
 
 
-.footer-text{
+.footer-text {
 
-    color:#e1f2f7;
+    color: #e1f2f7;
 
-    font-size:13px;
+    font-size: 13px;
 
-    line-height:2.5;
+    line-height: 2.5;
 
-    font-weight:300;
-
+    font-weight: 300;
 
     text-shadow:
-
         0 2px 12px
         rgba(0,30,60,.45);
-
 }
 
 
-.personal-note{
+.personal-note {
 
-    text-align:center;
+    text-align: center;
 
     margin:
         38px auto 0;
 
-
     padding:
         0 14px;
 
+    color: #c8e0e9;
 
-    color:#c8e0e9;
+    font-size: 13px;
 
-    font-size:13px;
+    line-height: 2.5;
 
-    line-height:2.5;
-
-    font-weight:300;
-
+    font-weight: 300;
 }
 
 
@@ -1336,31 +1411,28 @@ h1{
    FINAL MESSAGE
 ================================================== */
 
-.final-message{
+.final-message {
 
-    opacity:1;
+    opacity: 1;
 
-    max-height:none;
+    max-height: none;
 
-    overflow:visible;
+    overflow: visible;
 
-    text-align:center;
+    text-align: center;
 
-    margin-top:30px;
+    margin-top: 30px;
 
     padding:
         20px 14px;
 
+    color: #e1f8ff;
 
-    color:#e1f8ff;
+    font-size: 13px;
 
-    font-size:13px;
+    line-height: 2.5;
 
-    line-height:2.5;
-
-
-    border-radius:22px;
-
+    border-radius: 22px;
 
     background:
 
@@ -1370,18 +1442,13 @@ h1{
             rgba(0,65,110,.15)
         );
 
-
     border:
-
         1px solid
         rgba(210,245,255,.18);
 
-
     box-shadow:
-
         inset 0 1px 0
         rgba(255,255,255,.10);
-
 }
 
 
@@ -1389,20 +1456,17 @@ h1{
    SIGNATURE
 ================================================== */
 
-.signature{
+.signature {
 
-    margin-top:28px;
+    margin-top: 28px;
 
-    color:#b8d9e6;
+    color: #b8d9e6;
 
-    font-size:12px;
-
+    font-size: 12px;
 
     text-shadow:
-
         0 0 15px
         rgba(120,220,255,.25);
-
 }
 
 
@@ -1410,24 +1474,22 @@ h1{
    ANIMATION
 ================================================== */
 
-@keyframes fadeUp{
+@keyframes fadeUp {
 
-    from{
+    from {
 
-        opacity:0;
+        opacity: 0;
 
         transform:
             translateY(18px);
-
     }
 
-    to{
+    to {
 
-        opacity:1;
+        opacity: 1;
 
         transform:
             translateY(0);
-
     }
 
 }
@@ -1437,89 +1499,67 @@ h1{
    MOBILE
 ================================================== */
 
-@media(max-width:420px){
+@media(max-width:420px) {
 
-    body{
+    body {
 
         background-attachment:
             scroll;
-
     }
 
-
-    .container{
+    .container {
 
         padding:
             43px 0 55px;
-
     }
 
+    h1 {
 
-    h1{
-
-        font-size:34px;
-
+        font-size: 34px;
     }
 
+    .small-title {
 
-    .small-title{
-
-        letter-spacing:4px;
-
+        letter-spacing: 4px;
     }
 
-
-    .song-card{
+    .song-card {
 
         padding:
             28px 15px 24px;
 
-        border-radius:28px;
-
+        border-radius: 28px;
     }
 
+    .song-title {
 
-    .song-title{
-
-        font-size:17px;
-
+        font-size: 17px;
     }
 
+    .lyrics-box {
 
-    .lyrics-box{
-
-        height:285px;
-
+        height: 285px;
     }
 
+    .controls {
 
-    .controls{
-
-        gap:14px;
-
+        gap: 14px;
     }
 
+    .entry-content h2 {
 
-    .entry-content h2{
-
-        font-size:20px;
-
+        font-size: 20px;
     }
 
+    .entry-rose {
 
-    .entry-rose{
-
-        font-size:72px;
-
+        font-size: 72px;
     }
 
+    .touch-circle {
 
-    .touch-circle{
-
-        width:60px;
-
-        height:60px;
-
+        width: 60px;
+        height: 60px;
     }
 
 }
@@ -1529,14 +1569,13 @@ h1{
    REDUCED MOTION
 ================================================== */
 
-@media(prefers-reduced-motion:reduce){
+@media(prefers-reduced-motion:reduce) {
 
-    *{
+    * {
 
-        animation:none !important;
+        animation: none !important;
 
-        transition:none !important;
-
+        transition: none !important;
     }
 
 }
@@ -1557,36 +1596,23 @@ h1{
     class="entry-screen"
     id="entryScreen">
 
-
     <div class="entry-glow"></div>
-
 
     <div class="entry-content">
 
-
         <div class="entry-rose">
-
             🌹
-
         </div>
-
 
         <div class="entry-line"></div>
 
-
         <h2>
-
             برای ورود لمس کن 🤍
-
         </h2>
 
-
         <p>
-
             یه آهنگ برای تو...
-
         </p>
-
 
         <div class="touch-circle">
 
@@ -1594,11 +1620,69 @@ h1{
 
         </div>
 
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     PASSWORD SCREEN
+================================================== -->
+
+<div
+    class="password-screen"
+    id="passwordScreen">
+
+    <div
+        class="password-box"
+        id="passwordBox">
+
+        <div class="password-icon">
+            🔐
+        </div>
+
+        <h2>
+            اینجا رمز داره 🤍
+        </h2>
+
+        <p>
+            رمز رو وارد کن تا وارد صفحه بشی
+        </p>
+
+        <input
+            type="password"
+            id="passwordInput"
+            class="password-input"
+            inputmode="numeric"
+            maxlength="4"
+            minlength="4"
+            pattern="[0-9]{4}"
+            placeholder="رمز ورود"
+            autocomplete="off"
+            aria-label="رمز ورود">
+
+        <button
+            type="button"
+            class="password-button"
+            id="passwordButton">
+
+            ورود 🤍
+
+        </button>
+
+        <div
+            class="password-error"
+            id="passwordError">
+
+            رمز اشتباهه... دوباره امتحان کن 🤍
+
+        </div>
 
     </div>
 
-
 </div>
+
 
 
 <!-- ==================================================
@@ -1631,20 +1715,17 @@ h1{
 
 <section class="hero">
 
-
     <div class="small-title">
 
         A LITTLE SOMETHING FOR YOU
 
     </div>
 
-
     <h1>
 
         برای زهرا 🤍
 
     </h1>
-
 
     <p class="intro">
 
@@ -1656,9 +1737,7 @@ h1{
 
     </p>
 
-
     <div class="divider"></div>
-
 
 </section>
 
@@ -1670,13 +1749,11 @@ h1{
 
 <section class="song-card">
 
-
     <div class="song-title">
 
         من عاشق بارون بودم، اون عاشق برف بود
 
     </div>
-
 
     <div class="artist">
 
@@ -1684,11 +1761,10 @@ h1{
 
     </div>
 
-
     <div class="controls">
 
-
         <button
+            type="button"
             class="control-button"
             id="backButton"
             aria-label="15 ثانیه عقب">
@@ -1697,8 +1773,8 @@ h1{
 
         </button>
 
-
         <button
+            type="button"
             class="play-button"
             id="playButton"
             aria-label="پخش آهنگ">
@@ -1707,8 +1783,8 @@ h1{
 
         </button>
 
-
         <button
+            type="button"
             class="control-button"
             id="forwardButton"
             aria-label="15 ثانیه جلو">
@@ -1717,46 +1793,34 @@ h1{
 
         </button>
 
-
     </div>
 
 
     <div class="progress-wrap">
 
-
         <div
             class="progress"
             id="progress">
-
 
             <div
                 class="progress-bar"
                 id="progressBar">
             </div>
 
-
         </div>
 
 
         <div class="time">
 
-
             <span id="currentTime">
-
                 0:00
-
             </span>
-
 
             <span id="duration">
-
                 0:00
-
             </span>
 
-
         </div>
-
 
     </div>
 
@@ -1768,26 +1832,17 @@ h1{
 
     <div class="lyrics-box">
 
-
         <div class="lyrics-title">
-
             LYRICS
-
         </div>
-
 
         <div class="lyrics">
 
-
             <div class="lyric-line">
-
                 متن آهنگ
-
             </div>
 
-
         </div>
-
 
     </div>
 
@@ -1799,17 +1854,16 @@ h1{
     </div>
 
 
+
     <!-- MAIN SONG -->
 
     <audio
         id="music"
         preload="metadata">
 
-
         <source
             src="song.mp3"
             type="audio/mpeg">
-
 
     </audio>
 
@@ -1824,33 +1878,23 @@ h1{
 
 <footer class="footer">
 
-
     <p class="footer-text">
-
 
         امیدوارم هر کدومشون<br>
 
-
         یه جایی از روزت رو قشنگ‌تر کنن. 🌱
-
 
         <br><br>
 
-
         امیدوارم همیشه دلت خوش باشه،
 
-
         <br>
-
 
         ذهنت آروم باشه
 
-
         <br>
 
-
         و روزات پر از اتفاقای خوب.
-
 
     </p>
 
@@ -1858,41 +1902,27 @@ h1{
 
     <p class="personal-note">
 
-
         بعضی چیزا رو نمی‌شه خیلی خوب توضیح داد؛<br>
-
 
         گاهی فقط باید یه آهنگ رو برای یه نفر گذاشت<br>
 
-
         و گفت: «این برای توئه.»
-
 
     </p>
 
 
 
-    <!-- ==================================================
-         ALWAYS VISIBLE MESSAGE
-    ================================================== -->
-
     <div class="final-message">
-
 
         یادت نره این صفحه رو نگه داری...<br>
 
-
         چون ممکنه فردا یادت نباشه از کجا پیداش کردی 😂
-
 
         <br><br>
 
-
         از طرف همون کسی که هنوز<br>
 
-
         منتظر کشتی توی فرودگاهه 😂🤍
-
 
     </div>
 
@@ -1900,12 +1930,9 @@ h1{
 
     <div class="signature">
 
-
         برای یک آدم خاص :)
 
-
     </div>
-
 
 </footer>
 
@@ -1917,20 +1944,38 @@ h1{
 <script>
 
 /* ==================================================
-   ENTRY + BACKGROUND MUSIC
+   ELEMENTS
 ================================================== */
 
 const entryScreen =
-    document.getElementById(
-        "entryScreen"
-    );
-
+    document.getElementById("entryScreen");
 
 const backgroundMusic =
-    document.getElementById(
-        "backgroundMusic"
-    );
+    document.getElementById("backgroundMusic");
 
+const passwordScreen =
+    document.getElementById("passwordScreen");
+
+const passwordInput =
+    document.getElementById("passwordInput");
+
+const passwordButton =
+    document.getElementById("passwordButton");
+
+const passwordError =
+    document.getElementById("passwordError");
+
+const passwordBox =
+    document.getElementById("passwordBox");
+
+
+/* ==================================================
+   PASSWORD
+================================================== */
+
+const correctPassword = "1385";
+
+let passwordOpened = false;
 
 let musicStarted = false;
 
@@ -1939,10 +1984,9 @@ let musicStarted = false;
    FADE IN BACKGROUND MUSIC
 ================================================== */
 
-function fadeInMusic(){
+function fadeInMusic() {
 
     backgroundMusic.volume = 0;
-
 
     const targetVolume = 0.32;
 
@@ -1956,16 +2000,12 @@ function fadeInMusic(){
     const volumeStep =
         targetVolume / steps;
 
-
     let currentStep = 0;
 
-
     const fade =
-        setInterval(function(){
-
+        setInterval(function() {
 
             currentStep++;
-
 
             backgroundMusic.volume =
                 Math.min(
@@ -1973,18 +2013,15 @@ function fadeInMusic(){
                     currentStep * volumeStep
                 );
 
-
-            if(
+            if (
                 currentStep >= steps
-            ){
+            ) {
 
                 clearInterval(fade);
 
             }
 
-
-        },stepTime);
-
+        }, stepTime);
 }
 
 
@@ -1992,63 +2029,64 @@ function fadeInMusic(){
    START EXPERIENCE
 ================================================== */
 
-async function startExperience(){
+async function startExperience() {
 
-    if(musicStarted){
-
+    if (musicStarted) {
         return;
-
     }
-
 
     musicStarted = true;
 
-
-    try{
-
+    try {
 
         backgroundMusic.volume = 0;
 
-
         await backgroundMusic.play();
-
 
         fadeInMusic();
 
-
     }
 
-
-    catch(error){
-
+    catch(error) {
 
         console.log(
             "Background music could not start:",
             error
         );
 
-
     }
 
+    entryScreen.classList.add("hide");
 
-    entryScreen.classList.add(
-        "hide"
-    );
+    setTimeout(function() {
+
+        if (entryScreen) {
+            entryScreen.remove();
+        }
+
+    }, 1300);
+}
 
 
-    setTimeout(
-        function(){
+/* ==================================================
+   OPEN PASSWORD SCREEN
+================================================== */
 
-            if(entryScreen){
+function openPasswordScreen() {
 
-                entryScreen.remove();
+    if (passwordOpened) {
+        return;
+    }
 
-            }
+    passwordOpened = true;
 
-        },
-        1300
-    );
+    passwordScreen.classList.add("show");
 
+    setTimeout(function() {
+
+        passwordInput.focus();
+
+    }, 350);
 }
 
 
@@ -2058,7 +2096,7 @@ async function startExperience(){
 
 entryScreen.addEventListener(
     "click",
-    startExperience
+    openPasswordScreen
 );
 
 
@@ -2068,9 +2106,121 @@ entryScreen.addEventListener(
 
 entryScreen.addEventListener(
     "touchstart",
-    startExperience,
+    openPasswordScreen,
     {
-        passive:true
+        passive: true
+    }
+);
+
+
+/* ==================================================
+   CHECK PASSWORD
+================================================== */
+
+async function checkPassword() {
+
+    const enteredPassword =
+        passwordInput.value.trim();
+
+
+    /* درست */
+
+    if (
+        enteredPassword === correctPassword
+    ) {
+
+        passwordError.classList.remove(
+            "show"
+        );
+
+
+        passwordButton.disabled = true;
+
+        passwordButton.textContent =
+            "در حال ورود... 🤍";
+
+
+        /* شروع موزیک */
+
+        await startExperience();
+
+
+        /* خروج نرم از صفحه رمز */
+
+        passwordScreen.style.opacity = "0";
+
+
+        setTimeout(function() {
+
+            passwordScreen.remove();
+
+        }, 800);
+
+
+        return;
+    }
+
+
+    /* اشتباه */
+
+    passwordError.classList.add(
+        "show"
+    );
+
+
+    passwordBox.classList.remove(
+        "shake"
+    );
+
+
+    /* اجرای دوباره انیمیشن */
+
+    void passwordBox.offsetWidth;
+
+
+    passwordBox.classList.add(
+        "shake"
+    );
+
+
+    passwordInput.value = "";
+
+
+    setTimeout(function() {
+
+        passwordInput.focus();
+
+    }, 100);
+
+}
+
+
+/* ==================================================
+   PASSWORD BUTTON
+================================================== */
+
+passwordButton.addEventListener(
+    "click",
+    checkPassword
+);
+
+
+/* ==================================================
+   ENTER KEY
+================================================== */
+
+passwordInput.addEventListener(
+    "keydown",
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            checkPassword();
+
+        }
+
     }
 );
 
@@ -2080,93 +2230,60 @@ entryScreen.addEventListener(
 ================================================== */
 
 const music =
-    document.getElementById(
-        "music"
-    );
-
+    document.getElementById("music");
 
 const playButton =
-    document.getElementById(
-        "playButton"
-    );
-
+    document.getElementById("playButton");
 
 const backButton =
-    document.getElementById(
-        "backButton"
-    );
-
+    document.getElementById("backButton");
 
 const forwardButton =
-    document.getElementById(
-        "forwardButton"
-    );
-
+    document.getElementById("forwardButton");
 
 const progress =
-    document.getElementById(
-        "progress"
-    );
-
+    document.getElementById("progress");
 
 const progressBar =
-    document.getElementById(
-        "progressBar"
-    );
-
+    document.getElementById("progressBar");
 
 const currentTime =
-    document.getElementById(
-        "currentTime"
-    );
-
+    document.getElementById("currentTime");
 
 const duration =
-    document.getElementById(
-        "duration"
-    );
+    document.getElementById("duration");
 
 
 /* ==================================================
    FORMAT TIME
 ================================================== */
 
-function formatTime(seconds){
+function formatTime(seconds) {
 
-    if(
+    if (
         !Number.isFinite(seconds)
-    ){
+    ) {
 
         return "0:00";
 
     }
 
-
     seconds =
         Math.floor(seconds);
-
 
     const minutes =
         Math.floor(
             seconds / 60
         );
 
-
     const secs =
         seconds % 60;
 
-
     return (
-
         minutes +
-
         ":" +
-
-        String(secs)
-            .padStart(2,"0")
-
+        String(secs).padStart(2,"0")
     );
-
 }
 
 
@@ -2176,58 +2293,43 @@ function formatTime(seconds){
 
 playButton.addEventListener(
     "click",
-    async function(){
+    async function() {
 
-        try{
+        try {
 
-
-            if(music.paused){
-
+            if (music.paused) {
 
                 await music.play();
-
 
                 playButton.classList.add(
                     "playing"
                 );
 
-
                 playButton.textContent =
                     "❚❚";
 
-
             }
 
-
-            else{
-
+            else {
 
                 music.pause();
-
 
                 playButton.classList.remove(
                     "playing"
                 );
 
-
                 playButton.textContent =
                     "▶";
 
-
             }
-
 
         }
 
-
-        catch(error){
-
+        catch(error) {
 
             console.error(error);
 
-
         }
-
 
     }
 );
@@ -2239,8 +2341,7 @@ playButton.addEventListener(
 
 backButton.addEventListener(
     "click",
-    function(){
-
+    function() {
 
         music.currentTime =
 
@@ -2248,7 +2349,6 @@ backButton.addEventListener(
                 0,
                 music.currentTime - 15
             );
-
 
     }
 );
@@ -2260,19 +2360,17 @@ backButton.addEventListener(
 
 forwardButton.addEventListener(
     "click",
-    function(){
+    function() {
 
-
-        if(
+        if (
             !Number.isFinite(
                 music.duration
             )
-        ){
+        ) {
 
             return;
 
         }
-
 
         music.currentTime =
 
@@ -2280,7 +2378,6 @@ forwardButton.addEventListener(
                 music.duration,
                 music.currentTime + 15
             );
-
 
     }
 );
@@ -2292,15 +2389,13 @@ forwardButton.addEventListener(
 
 music.addEventListener(
     "loadedmetadata",
-    function(){
-
+    function() {
 
         duration.textContent =
 
             formatTime(
                 music.duration
             );
-
 
     }
 );
@@ -2312,15 +2407,11 @@ music.addEventListener(
 
 music.addEventListener(
     "timeupdate",
-    function(){
+    function() {
 
-
-        if(!music.duration){
-
+        if (!music.duration) {
             return;
-
         }
-
 
         const percent =
 
@@ -2329,18 +2420,14 @@ music.addEventListener(
                 music.duration
             ) * 100;
 
-
         progressBar.style.width =
-
             percent + "%";
-
 
         currentTime.textContent =
 
             formatTime(
                 music.currentTime
             );
-
 
     }
 );
@@ -2352,20 +2439,14 @@ music.addEventListener(
 
 progress.addEventListener(
     "click",
-    function(event){
+    function(event) {
 
-
-        if(!music.duration){
-
+        if (!music.duration) {
             return;
-
         }
 
-
         const rect =
-
             progress.getBoundingClientRect();
-
 
         const percent =
 
@@ -2380,12 +2461,8 @@ progress.addEventListener(
                 )
             );
 
-
         music.currentTime =
-
-            percent *
-            music.duration;
-
+            percent * music.duration;
 
     }
 );
@@ -2397,25 +2474,20 @@ progress.addEventListener(
 
 music.addEventListener(
     "ended",
-    function(){
-
+    function() {
 
         playButton.classList.remove(
             "playing"
         );
 
-
         playButton.textContent =
             "▶";
-
 
         progressBar.style.width =
             "0%";
 
-
         currentTime.textContent =
             "0:00";
-
 
     }
 );
@@ -2425,4 +2497,4 @@ music.addEventListener(
 
 </body>
 
-   </html>
+</html>
