@@ -9,7 +9,11 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
 
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 body{
   min-height:100vh;
@@ -22,394 +26,773 @@ body{
   overflow-x:hidden;
 }
 
-.container{width:min(92%,520px);margin:auto;padding:52px 0 50px}
-.hero{text-align:center;animation:fadeUp 1s ease}
-.small-title{font-size:10px;letter-spacing:4px;color:#c6a399;margin-bottom:20px;direction:ltr}
-h1{font-size:40px;font-weight:400;margin-bottom:20px}
-.intro{color:#cec3bd;font-size:14px;line-height:2.3;font-weight:300}
-.divider{width:42px;height:1px;background:#b9968b;margin:30px auto 34px;opacity:.7}
+.container{
+  width:min(92%,520px);
+  margin:auto;
+  padding:52px 0 50px;
+}
+
+.hero{
+  text-align:center;
+  animation:fadeUp 1s ease;
+}
+
+.small-title{
+  font-size:10px;
+  letter-spacing:4px;
+  color:#c6a399;
+  margin-bottom:20px;
+  direction:ltr;
+}
+
+h1{
+  font-size:40px;
+  font-weight:400;
+  margin-bottom:20px;
+}
+
+.intro{
+  color:#cec3bd;
+  font-size:14px;
+  line-height:2.3;
+  font-weight:300;
+}
+
+.divider{
+  width:42px;
+  height:1px;
+  background:#b9968b;
+  margin:30px auto 34px;
+  opacity:.7;
+}
 
 .song-card{
   position:relative;
   padding:28px 20px 24px;
   border-radius:28px;
   border:1px solid rgba(220,190,178,.16);
-  background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.018));
+  background:
+    linear-gradient(145deg,
+    rgba(255,255,255,.055),
+    rgba(255,255,255,.018));
   backdrop-filter:blur(15px);
   box-shadow:0 25px 70px rgba(0,0,0,.28);
   animation:fadeUp 1s ease .15s both;
 }
 
 .music-symbol{
-  width:90px;height:90px;margin:0 auto 22px;border-radius:25px;
-  display:flex;align-items:center;justify-content:center;font-size:34px;color:#ead4ca;
+  width:90px;
+  height:90px;
+  margin:0 auto 22px;
+  border-radius:25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:34px;
+  color:#ead4ca;
   background:linear-gradient(145deg,#5d4640,#292223);
   box-shadow:0 15px 35px rgba(0,0,0,.35);
   transition:transform .4s ease,box-shadow .4s ease;
 }
-.playing-symbol{transform:scale(1.04);box-shadow:0 15px 40px rgba(201,169,157,.15)}
 
-.song-title{text-align:center;font-size:19px;font-weight:500;line-height:1.8;margin-bottom:5px}
-.artist{text-align:center;font-size:13px;color:#a99c97;font-weight:300;margin-bottom:23px}
+.playing-symbol{
+  transform:scale(1.04);
+  box-shadow:0 15px 40px rgba(201,169,157,.15);
+}
+
+.song-title{
+  text-align:center;
+  font-size:19px;
+  font-weight:500;
+  line-height:1.8;
+  margin-bottom:5px;
+}
+
+.artist{
+  text-align:center;
+  font-size:13px;
+  color:#a99c97;
+  font-weight:300;
+  margin-bottom:24px;
+}
+
+/* کنترل‌های آهنگ */
+
+.controls{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  direction:ltr;
+}
+
+.control-button{
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  border:1px solid rgba(225,195,183,.22);
+  background:rgba(210,180,168,.07);
+  color:#cdb9b1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  font-size:15px;
+  transition:all .25s ease;
+}
+
+.control-button:hover{
+  transform:scale(1.08);
+  background:rgba(210,180,168,.15);
+}
+
+.control-button:active{
+  transform:scale(.96);
+}
 
 .play-button{
-  width:64px;height:64px;display:flex;align-items:center;justify-content:center;margin:auto;
-  border-radius:50%;border:1px solid rgba(225,195,183,.35);
-  background:rgba(210,180,168,.10);color:#ead5cc;font-size:21px;cursor:pointer;
-  transition:all .3s ease;box-shadow:0 10px 30px rgba(0,0,0,.22);
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  border:1px solid rgba(225,195,183,.35);
+  background:rgba(210,180,168,.10);
+  color:#ead5cc;
+  font-size:21px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .3s ease;
+  box-shadow:0 10px 30px rgba(0,0,0,.22);
 }
-.play-button:hover{transform:scale(1.07);background:rgba(210,180,168,.18)}
-.play-button.playing{background:rgba(210,180,168,.20);border-color:#c9a99d}
 
-.progress-wrap{margin:25px 2px 0}
-.progress{width:100%;height:4px;border-radius:20px;background:rgba(255,255,255,.10);overflow:hidden;cursor:pointer}
-.progress-bar{height:100%;width:0%;background:#c9a99d;border-radius:20px;transition:width .12s linear}
-.time{display:flex;justify-content:space-between;direction:ltr;color:#827571;font-size:10px;margin-top:8px}
+.play-button:hover{
+  transform:scale(1.07);
+  background:rgba(210,180,168,.18);
+}
+
+.play-button.playing{
+  background:rgba(210,180,168,.20);
+  border-color:#c9a99d;
+}
+
+/* نوار پیشرفت */
+
+.progress-wrap{
+  margin:25px 2px 0;
+}
+
+.progress{
+  width:100%;
+  height:4px;
+  border-radius:20px;
+  background:rgba(255,255,255,.10);
+  overflow:hidden;
+  cursor:pointer;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#c9a99d;
+  border-radius:20px;
+  transition:width .12s linear;
+}
+
+.time{
+  display:flex;
+  justify-content:space-between;
+  direction:ltr;
+  color:#827571;
+  font-size:10px;
+  margin-top:8px;
+}
+
+/* متن آهنگ */
 
 .lyrics-box{
-  margin-top:24px;padding:18px 10px 16px;border-radius:22px;
-  background:rgba(0,0,0,.12);border:1px solid rgba(220,190,178,.10);
-  height:300px;overflow:auto;scroll-behavior:smooth;
+  margin-top:25px;
+  padding:20px 12px 18px;
+  border-radius:23px;
+  background:rgba(0,0,0,.12);
+  border:1px solid rgba(220,190,178,.10);
+  height:310px;
+  overflow-y:auto;
+  scroll-behavior:smooth;
 }
-.lyrics-title{text-align:center;color:#a98f87;font-size:10px;letter-spacing:3px;margin-bottom:12px;direction:ltr}
-.lyrics{display:flex;flex-direction:column;gap:8px}
-.lyric-line{
-  text-align:center;color:#6f6561;font-size:13px;line-height:1.9;padding:6px 8px;
-  border-radius:13px;transition:all .28s ease;opacity:.68;
-}
-.lyric-line.active{
-  color:#f3dfd6;font-size:15px;background:rgba(201,169,157,.10);
-  opacity:1;text-shadow:0 0 18px rgba(220,190,178,.12);
-  transform:scale(1.01);
-}
-.lyric-line.past{color:#9b8982;opacity:.82}
 
-.hint{text-align:center;font-size:11px;color:#827571;margin-top:14px}
-.footer{text-align:center;margin-top:45px;animation:fadeUp 1s ease .3s both}
-.footer-text{color:#bdb2ad;font-size:13px;line-height:2.3;font-weight:300}
-.personal-note{text-align:center;margin:39px auto 0;padding:0 14px;color:#bdb2ad;font-size:13px;line-height:2.4;font-weight:300}
-.signature{margin-top:25px;color:#9d8880;font-size:12px}
-.final-message{
-  opacity:0;max-height:0;overflow:hidden;text-align:center;margin-top:0;color:#ead5cc;
-  font-size:13px;line-height:2.3;transition:all 1.2s ease;
+.lyrics-title{
+  text-align:center;
+  color:#a98f87;
+  font-size:10px;
+  letter-spacing:3px;
+  margin-bottom:17px;
+  direction:ltr;
 }
-.final-message.show{opacity:1;max-height:120px;margin-top:28px}
+
+.lyrics{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+
+.lyric-line{
+  text-align:center;
+  color:#b2a49f;
+  font-size:13px;
+  line-height:2;
+  padding:4px 8px;
+}
+
+.hint{
+  text-align:center;
+  font-size:11px;
+  color:#827571;
+  margin-top:14px;
+}
+
+/* پایین صفحه */
+
+.footer{
+  text-align:center;
+  margin-top:45px;
+  animation:fadeUp 1s ease .3s both;
+}
+
+.footer-text{
+  color:#bdb2ad;
+  font-size:13px;
+  line-height:2.3;
+  font-weight:300;
+}
+
+.personal-note{
+  text-align:center;
+  margin:39px auto 0;
+  padding:0 14px;
+  color:#bdb2ad;
+  font-size:13px;
+  line-height:2.4;
+  font-weight:300;
+}
+
+.signature{
+  margin-top:27px;
+  color:#9d8880;
+  font-size:12px;
+}
+
+/* پیام مخفی */
+
+.final-message{
+  opacity:0;
+  max-height:0;
+  overflow:hidden;
+  text-align:center;
+  margin-top:0;
+  color:#ead5cc;
+  font-size:13px;
+  line-height:2.5;
+  transition:all 1.2s ease;
+}
+
+.final-message.show{
+  opacity:1;
+  max-height:160px;
+  margin-top:28px;
+}
 
 @keyframes fadeUp{
-  from{opacity:0;transform:translateY(18px)}
-  to{opacity:1;transform:translateY(0)}
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 @media(max-width:420px){
-  .container{padding-top:42px}
-  h1{font-size:34px}
-  .song-card{padding:25px 15px}
-  .song-title{font-size:17px}
-  .lyrics-box{height:285px}
+
+  .container{
+    padding-top:42px;
+  }
+
+  h1{
+    font-size:34px;
+  }
+
+  .song-card{
+    padding:25px 15px;
+  }
+
+  .song-title{
+    font-size:17px;
+  }
+
+  .lyrics-box{
+    height:285px;
+  }
+
+  .controls{
+    gap:15px;
+  }
 }
 </style>
 </head>
 
 <body>
+
 <main class="container">
 
 <section class="hero">
-  <div class="small-title">A LITTLE SOMETHING FOR YOU</div>
-  <h1>برای زهرا 🤍</h1>
+
+  <div class="small-title">
+    A LITTLE SOMETHING FOR YOU
+  </div>
+
+  <h1>
+    برای زهرا 🤍
+  </h1>
+
   <p class="intro">
     چندتا آهنگ برای وقت‌هایی که<br>
     دلت یه حال خوب، یه لبخند کوچیک<br>
     یا فقط چند دقیقه آرامش می‌خواد.
   </p>
+
   <div class="divider"></div>
+
 </section>
+
 
 <section class="song-card">
 
-  <div class="music-symbol" id="musicSymbol">♫</div>
+  <div class="music-symbol" id="musicSymbol">
+    ♫
+  </div>
 
-  <div class="song-title">من عاشق بارون بودم، اون عاشق برف بود</div>
-  <div class="artist">عمیان</div>
+  <div class="song-title">
+    من عاشق بارون بودم، اون عاشق برف بود
+  </div>
 
-  <button class="play-button" id="playButton" aria-label="پخش آهنگ">▶</button>
+  <div class="artist">
+    عمیان
+  </div>
+
+
+  <!-- کنترل‌های آهنگ -->
+
+  <div class="controls">
+
+    <button
+      class="control-button"
+      id="backButton"
+      aria-label="۱۵ ثانیه عقب">
+      ⏪
+    </button>
+
+    <button
+      class="play-button"
+      id="playButton"
+      aria-label="پخش آهنگ">
+      ▶
+    </button>
+
+    <button
+      class="control-button"
+      id="forwardButton"
+      aria-label="۱۵ ثانیه جلو">
+      ⏩
+    </button>
+
+  </div>
+
+
+  <!-- نوار پیشرفت -->
 
   <div class="progress-wrap">
+
     <div class="progress" id="progress">
-      <div class="progress-bar" id="progressBar"></div>
+
+      <div
+        class="progress-bar"
+        id="progressBar">
+      </div>
+
     </div>
+
     <div class="time">
-      <span id="currentTime">0:00</span>
-      <span id="duration">0:00</span>
+
+      <span id="currentTime">
+        0:00
+      </span>
+
+      <span id="duration">
+        0:00
+      </span>
+
     </div>
+
   </div>
 
-  <div class="lyrics-box" id="lyricsBox">
-    <div class="lyrics-title">LYRICS</div>
-    <div class="lyrics" id="lyrics"></div>
+
+  <!-- متن آهنگ -->
+
+  <div class="lyrics-box">
+
+    <div class="lyrics-title">
+      LYRICS
+    </div>
+
+    <div class="lyrics">
+
+      <div class="lyric-line">از همون اولش</div>
+      <div class="lyric-line">خیلی بینمون فرق بود</div>
+      <div class="lyric-line">من عاشق بارون بودم</div>
+      <div class="lyric-line">اون عاشقه برف بود</div>
+      <div class="lyric-line">من خیلی آروم بودم</div>
+      <div class="lyric-line">اون خیلی پر حرف بود</div>
+      <div class="lyric-line">وای نگذریم از حق</div>
+      <div class="lyric-line">خیلی خوش قلب بود</div>
+      <div class="lyric-line">از الان بجز دوریه تو</div>
+      <div class="lyric-line">هیچی به من نزدیک نیس</div>
+      <div class="lyric-line">درد داره نرو</div>
+      <div class="lyric-line">جفتمون از دست میریم</div>
+      <div class="lyric-line">نمیفهمم داریم تقاص چیو پس میدیم</div>
+      <div class="lyric-line">برو ولی ببین کی برمیگرده</div>
+      <div class="lyric-line">من یا تو</div>
+      <div class="lyric-line">ببین تهش کی گریه کرده</div>
+      <div class="lyric-line">من یا تو</div>
+      <div class="lyric-line">تا صبح همه شهرو میگرده</div>
+      <div class="lyric-line">من یا تو</div>
+      <div class="lyric-line">حرفاتو الان بزن که دیگه دیره فردا</div>
+      <div class="lyric-line">اگه میخوای بری برو</div>
+      <div class="lyric-line">دست بردار</div>
+      <div class="lyric-line">نری دوباره باز بیای</div>
+      <div class="lyric-line">پس فردا</div>
+      <div class="lyric-line">میترسم دلم یاد بگیره بی تو پرواز</div>
+      <div class="lyric-line">به این شرایط بی تو عادت بکنم باز</div>
+      <div class="lyric-line">میترسم اینقدر از همدیگه خبر نگیریم</div>
+      <div class="lyric-line">تا یه جایی که جفتمون از این دوری بمیریم</div>
+      <div class="lyric-line">فراموشت نکردم فقط بیخیال شدم</div>
+      <div class="lyric-line">یادت باشه خودت رفتی من که زورت نکردم</div>
+      <div class="lyric-line">فراموشت نکردم</div>
+      <div class="lyric-line">برو ولی ببین کی برمیگرده</div>
+      <div class="lyric-line">من یا تو</div>
+      <div class="lyric-line">ببین تهش کی گریه کرده</div>
+      <div class="lyric-line">من یا تو</div>
+      <div class="lyric-line">تا صبح همه شهرو میگرده</div>
+      <div class="lyric-line">من یا تو</div>
+      <div class="lyric-line">حرفاتو الان بزن که دیگه دیره فردا</div>
+      <div class="lyric-line">اگه میخوای بری برو</div>
+      <div class="lyric-line">دست بردار</div>
+      <div class="lyric-line">نری دوباره باز بیای</div>
+      <div class="lyric-line">پس فردا</div>
+
+    </div>
+
   </div>
 
-  <div class="hint">برای پخش آهنگ لمس کن</div>
+
+  <div class="hint">
+    برای پخش آهنگ لمس کن
+  </div>
+
 
   <!-- فایل آهنگ باید کنار index.html باشد -->
+
   <audio id="music" preload="metadata">
-    <source src="song.mp3" type="audio/mpeg">
+
+    <source
+      src="song.mp3"
+      type="audio/mpeg">
+
   </audio>
 
 </section>
 
+
 <footer class="footer">
 
   <p class="footer-text">
+
     امیدوارم هر کدومشون<br>
     یه جایی از روزت رو قشنگ‌تر کنن. 🌱
+
     <br><br>
+
     امیدوارم همیشه دلت خوش باشه،
     <br>
     ذهنت آروم باشه
     <br>
     و روزات پر از اتفاقای خوب.
+
   </p>
 
+
   <p class="personal-note">
+
     بعضی چیزا رو نمی‌شه خیلی خوب توضیح داد؛<br>
     گاهی فقط باید یه آهنگ رو برای یه نفر گذاشت<br>
     و گفت: «این برای توئه.»
+
   </p>
 
-  <div class="final-message" id="finalMessage">
-    امیدوارم هر وقت این صفحه رو دیدی،<br>
-    یه لبخند کوچیک روی لبت بیاد. 🤍
+
+  <!-- پیام مخفی بعد از پایان آهنگ -->
+
+  <div
+    class="final-message"
+    id="finalMessage">
+
+    یادت نره این صفحه رو نگه داری...<br>
+    چون ممکنه فردا یادت نباشه از کجا پیداش کردی 😂
+
+    <br><br>
+
+    از طرف همون کسی که هنوز<br>
+    منتظر کشتی توی فرودگاهه 😂🤍
+
   </div>
 
-  <div class="signature">برای یک آدم خاص :)</div>
+
+  <div class="signature">
+    برای یک آدم خاص :)
+  </div>
 
 </footer>
 
 </main>
 
+
 <script>
-const music = document.getElementById("music");
-const playButton = document.getElementById("playButton");
-const progress = document.getElementById("progress");
-const progressBar = document.getElementById("progressBar");
-const currentTime = document.getElementById("currentTime");
-const duration = document.getElementById("duration");
-const lyricsEl = document.getElementById("lyrics");
-const musicSymbol = document.getElementById("musicSymbol");
-const finalMessage = document.getElementById("finalMessage");
 
-/*
-  متن آهنگ
-*/
-const lyricText = [
-  "از همون اولش",
-  "خیلی بینمون فرق بود",
-  "من عاشق بارون بودم",
-  "اون عاشقه برف بود",
-  "من خیلی آروم بودم",
-  "اون خیلی پر حرف بود",
-  "وای نگذریم از حق",
-  "خیلی خوش قلب بود",
-  "از الان بجز دوریه تو",
-  "هیچی به من نزدیک نیس",
-  "درد داره نرو",
-  "جفتمون از دست میریم",
-  "نمیفهمم داریم تقاص چیو پس میدیم",
-  "برو ولی ببین کی برمیگرده",
-  "من یا تو",
-  "ببین تهش کی گریه کرده",
-  "من یا تو",
-  "تا صبح همه شهرو میگرده",
-  "من یا تو",
-  "حرفاتو الان بزن که دیگه دیره فردا",
-  "اگه میخوای بری برو",
-  "دست بردار",
-  "نری دوباره باز بیای",
-  "پس فردا",
-  "میترسم دلم یاد بگیره بی تو پرواز",
-  "به این شرایط بی تو عادت بکنم باز",
-  "میترسم اینقدر از همدیگه خبر نگیریم",
-  "تا یه جایی که جفتمون از این دوری بمیریم",
-  "فراموشت نکردم فقط بیخیال شدم",
-  "یادت باشه خودت رفتی من که زورت نکردم",
-  "فراموشت نکردم",
-  "برو ولی ببین کی برمیگرده",
-  "من یا تو",
-  "ببین تهش کی گریه کرده",
-  "من یا تو",
-  "تا صبح همه شهرو میگرده",
-  "من یا تو",
-  "حرفاتو الان بزن که دیگه دیره فردا",
-  "اگه میخوای بری برو",
-  "دست بردار",
-  "نری دوباره باز بیای",
-  "پس فردا"
-];
+const music =
+  document.getElementById("music");
 
-/*
-  زمان‌بندی بازتنظیم‌شده بر اساس بررسی سیگنال صوتی فایل.
-  شروع هر خط به ثانیه است.
-*/
-const lyricTimes = [
-  2.65,
-  5.42,
-  9.33,
-  11.35,
-  15.21,
-  16.25,
-  20.83,
-  22.79,
-  24.83,
-  29.40,
-  32.16,
-  33.04,
-  37.42,
-  38.80,
-  42.68,
-  45.16,
-  46.65,
-  50.32,
-  52.83,
-  55.45,
-  58.00,
-  62.53,
-  65.77,
-  70.81,
-  73.48,
-  77.32,
-  81.05,
-  86.18,
-  88.74,
-  92.82,
-  96.64,
-  99.11,
-  103.35,
-  105.00,
-  109.10,
-  112.69,
-  116.95,
-  121.45,
-  127.65,
-  131.49,
-  137.56,
-  144.38
-];
+const playButton =
+  document.getElementById("playButton");
 
-lyricText.forEach((text,index)=>{
-  const line = document.createElement("div");
-  line.className = "lyric-line";
-  line.dataset.index = index;
-  line.textContent = text;
-  lyricsEl.appendChild(line);
-});
+const backButton =
+  document.getElementById("backButton");
 
-const lyricEls = [...document.querySelectorAll(".lyric-line")];
-let activeIndex = -1;
+const forwardButton =
+  document.getElementById("forwardButton");
+
+const progress =
+  document.getElementById("progress");
+
+const progressBar =
+  document.getElementById("progressBar");
+
+const currentTime =
+  document.getElementById("currentTime");
+
+const duration =
+  document.getElementById("duration");
+
+const musicSymbol =
+  document.getElementById("musicSymbol");
+
+const finalMessage =
+  document.getElementById("finalMessage");
+
+
+/* تبدیل زمان به دقیقه:ثانیه */
 
 function formatTime(seconds){
-  if(!Number.isFinite(seconds)) return "0:00";
+
+  if(!Number.isFinite(seconds)){
+    return "0:00";
+  }
+
   seconds = Math.floor(seconds);
-  return Math.floor(seconds/60) + ":" + String(seconds%60).padStart(2,"0");
-}
 
-function syncLyrics(time, autoScroll=true){
-  let index = -1;
+  const minutes =
+    Math.floor(seconds / 60);
 
-  for(let i=0;i<lyricTimes.length;i++){
-    if(time >= lyricTimes[i]){
-      index = i;
-    }else{
-      break;
-    }
-  }
+  const secs =
+    seconds % 60;
 
-  if(index === activeIndex) return;
-
-  activeIndex = index;
-
-  lyricEls.forEach((line,i)=>{
-    line.classList.toggle("active", i === index);
-    line.classList.toggle("past", i < index);
-  });
-
-  if(index >= 0 && lyricEls[index] && autoScroll){
-    lyricEls[index].scrollIntoView({
-      behavior:"smooth",
-      block:"center"
-    });
-  }
-}
-
-playButton.addEventListener("click", async ()=>{
-  try{
-    if(music.paused){
-      await music.play();
-
-      playButton.classList.add("playing");
-      playButton.textContent = "❚❚";
-      musicSymbol.classList.add("playing-symbol");
-    }else{
-      music.pause();
-
-      playButton.classList.remove("playing");
-      playButton.textContent = "▶";
-      musicSymbol.classList.remove("playing-symbol");
-    }
-  }catch(error){
-    console.error(error);
-  }
-});
-
-music.addEventListener("loadedmetadata",()=>{
-  duration.textContent = formatTime(music.duration);
-});
-
-music.addEventListener("timeupdate",()=>{
-  if(!music.duration) return;
-
-  progressBar.style.width =
-    (music.currentTime / music.duration * 100) + "%";
-
-  currentTime.textContent =
-    formatTime(music.currentTime);
-
-  syncLyrics(music.currentTime,true);
-});
-
-progress.addEventListener("click",(event)=>{
-  if(!music.duration) return;
-
-  const rect = progress.getBoundingClientRect();
-
-  const percent = Math.min(
-    1,
-    Math.max(
-      0,
-      (event.clientX - rect.left) / rect.width
-    )
+  return (
+    minutes +
+    ":" +
+    String(secs).padStart(2,"0")
   );
+}
 
-  music.currentTime = percent * music.duration;
-  syncLyrics(music.currentTime,false);
-});
 
-music.addEventListener("ended",()=>{
-  playButton.classList.remove("playing");
-  playButton.textContent = "▶";
-  musicSymbol.classList.remove("playing-symbol");
+/* پخش و توقف */
 
-  progressBar.style.width = "0%";
-  currentTime.textContent = "0:00";
+playButton.addEventListener(
+  "click",
+  async function(){
 
-  finalMessage.classList.add("show");
+    try{
 
-  activeIndex = -1;
+      if(music.paused){
 
-  lyricEls.forEach(line=>{
-    line.classList.remove("active");
-    line.classList.remove("past");
-  });
-});
+        await music.play();
+
+        playButton.classList.add("playing");
+        playButton.textContent = "❚❚";
+
+        musicSymbol.classList.add(
+          "playing-symbol"
+        );
+
+      }else{
+
+        music.pause();
+
+        playButton.classList.remove("playing");
+        playButton.textContent = "▶";
+
+        musicSymbol.classList.remove(
+          "playing-symbol"
+        );
+      }
+
+    }catch(error){
+
+      console.error(error);
+
+    }
+
+  }
+);
+
+
+/* ۱۵ ثانیه عقب */
+
+backButton.addEventListener(
+  "click",
+  function(){
+
+    music.currentTime =
+      Math.max(
+        0,
+        music.currentTime - 15
+      );
+
+  }
+);
+
+
+/* ۱۵ ثانیه جلو */
+
+forwardButton.addEventListener(
+  "click",
+  function(){
+
+    if(!Number.isFinite(music.duration)){
+      return;
+    }
+
+    music.currentTime =
+      Math.min(
+        music.duration,
+        music.currentTime + 15
+      );
+
+  }
+);
+
+
+/* نمایش مدت آهنگ */
+
+music.addEventListener(
+  "loadedmetadata",
+  function(){
+
+    duration.textContent =
+      formatTime(music.duration);
+
+  }
+);
+
+
+/* به‌روزرسانی نوار پیشرفت */
+
+music.addEventListener(
+  "timeupdate",
+  function(){
+
+    if(!music.duration){
+      return;
+    }
+
+    const percent =
+      (music.currentTime /
+       music.duration) * 100;
+
+    progressBar.style.width =
+      percent + "%";
+
+    currentTime.textContent =
+      formatTime(music.currentTime);
+
+  }
+);
+
+
+/* کلیک روی نوار برای جلو/عقب رفتن */
+
+progress.addEventListener(
+  "click",
+  function(event){
+
+    if(!music.duration){
+      return;
+    }
+
+    const rect =
+      progress.getBoundingClientRect();
+
+    const percent =
+      Math.min(
+        1,
+        Math.max(
+          0,
+          (event.clientX - rect.left) /
+          rect.width
+        )
+      );
+
+    music.currentTime =
+      percent * music.duration;
+
+  }
+);
+
+
+/* پایان آهنگ */
+
+music.addEventListener(
+  "ended",
+  function(){
+
+    playButton.classList.remove("playing");
+
+    playButton.textContent = "▶";
+
+    musicSymbol.classList.remove(
+      "playing-symbol"
+    );
+
+    progressBar.style.width = "0%";
+
+    currentTime.textContent = "0:00";
+
+    /* نمایش پیام مخفی */
+
+    finalMessage.classList.add("show");
+
+  }
+);
+
 </script>
 
 </body>
