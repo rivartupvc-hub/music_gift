@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>پنل مدیریت آهنگ‌ها | برای زهرا</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: 'Vazirmatn', sans-serif;
+    background: linear-gradient(160deg, #0a2540, #0d3a5c, #071e33);
+    min-height: 100vh;
+    color: #e8f4fa;
+    padding: 30px 16px 60px;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+header h1 {
+    font-size: 26px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+header p {
+    font-size: 13px;
+    color: #a8c8d8;
+    font-weight: 300;
+}
+
+.card {
+    background: rgba(180, 230, 255, 0.08);
+    border: 1px solid rgba(180, 230, 255, 0.2);
+    border-radius: 20px;
+    padding: 24px 20px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(12px);
+}
+
+.card h2 {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 18px;
+    color: #c8e8f8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+label {
+    display: block;
+    font-size: 12.5px;
+    color: #b0d4e4;
+    margin-bottom: 6px;
+    font-weight: 400;
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(180, 230, 255, 0.25);
+    background: rgba(0, 30, 55, 0.35);
+    color: #fff;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    margin-bottom: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+input[type="text"]:focus,
+textarea:focus {
+    border-color: rgba(140, 210, 255, 0.6);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+@media (max-width: 520px) {
+    .row { grid-template-columns: 1fr; }
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 20px;
+    border-radius: 14px;
+    border: none;
+    font-family: 'Vazirmatn', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.25s;
+    font-weight: 500;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #3a9fd4, #1a6a9a);
+    color: white;
+    width: 100%;
+    margin-top: 8px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(40, 140, 200, 0.35);
+}
+
+.btn-secondary {
+    background: rgba(180, 230, 255, 0.12);
+    color: #c8e8f8;
+    border: 1px solid rgba(180, 230, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background: rgba(180, 230, 255, 0.2);
+}
+
+.btn-danger {
+    background: rgba(220, 80, 100, 0.2);
+    color: #ffb0bc;
+    border: 1px solid rgba(220, 80, 100, 0.35);
+    font-size: 12px;
+    padding: 6px 12px;
+}
+
+.btn-danger:hover {
+    background: rgba(220, 80, 100, 0.35);
+}
+
+.song-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.song-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    background: rgba(0, 30, 55, 0.3);
+    border-radius: 14px;
+    border: 1px solid rgba(180, 230, 255, 0.12);
+}
+
+.song-item img {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: #1a4a6a;
+}
+
+.song-item-info {
+    flex: 1;
+    overflow: hidden;
+}
+
+.song-item-info strong {
+    display: block;
+    font-size: 14px;
+    color: #fff;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.song-item-info span {
+    font-size: 12px;
+    color: #9ec0d0;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.actions .btn {
+    flex: 1;
+    min-width: 140px;
+}
+
+.preview-cover {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    object-fit: cover;
+    background: #1a4a6a;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.hint {
+    font-size: 12px;
+    color: #8ab0c4;
+    margin-top: 6px;
+    line-height: 1.6;
+}
+
+.steps {
+    background: rgba(60, 140, 200, 0.12);
+    border: 1px solid rgba(100, 180, 230, 0.25);
+    border-radius: 16px;
+    padding: 18px 16px;
+    margin-bottom: 24px;
+    font-size: 13px;
+    line-height: 1.9;
+    color: #c0dce8;
+}
+
+.steps strong {
+    color: #fff;
+}
+
+.steps ol {
+    padding-right: 20px;
+    margin-top: 8px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: #1a6a9a;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 13px;
+    opacity: 0;
+    transition: all 0.35s;
+    z-index: 100;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.empty {
+    text-align: center;
+    padding: 30px;
+    color: #8ab0c4;
+    font-size: 13px;
+}
+
+.file-name {
+    font-size: 11px;
+    color: #7aa8c0;
+    margin-top: -8px;
+    margin-bottom: 12px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>پنل مدیریت آهنگ‌ها 🤍</h1>
+        <p>آهنگ اضافه کن → فایل‌ها رو دانلود کن → داخل گیتهاب آپلود کن</p>
+    </header>
+
+    <div class="steps">
+        <strong>چطور کار می‌کنه؟</strong>
+        <ol>
+            <li>اطلاعات آهنگ + فایل آهنگ و کاور رو وارد کن</li>
+            <li>دکمه «اضافه به لیست» رو بزن</li>
+            <li>وقتی همه آهنگ‌ها آماده شدن، «دانلود songs.json» و فایل‌های آهنگ/کاور رو بگیر</li>
+            <li>همه رو داخل ریپوی GitHub آپلود کن (جایگزین فایل‌های قبلی)</li>
+        </ol>
+    </div>
+
+    <!-- فرم اضافه کردن -->
+    <div class="card">
+        <h2>➕ اضافه کردن آهنگ جدید</h2>
+
+        <div class="row">
+            <div>
+                <label>عنوان آهنگ</label>
+                <input type="text" id="title" placeholder="مثلاً: من عاشق بارون بودم...">
+            </div>
+            <div>
+                <label>خواننده</label>
+                <input type="text" id="artist" placeholder="مثلاً: عمیان">
+            </div>
+        </div>
+
+        <label>پیام شخصی (زیر عنوان نمایش داده می‌شه)</label>
+        <input type="text" id="message" placeholder="مثلاً: این آهنگ مال روزایی بود که با هم بارون می‌دیدیم">
+
+        <label>متن آهنگ (هر خط یک بیت)</label>
+        <textarea id="lyrics" placeholder="خط اول&#10;خط دوم&#10;خط سوم"></textarea>
+
+        <div class="row">
+            <div>
+                <label>فایل آهنگ (mp3)</label>
+                <input type="file" id="audioFile" accept="audio/mpeg,audio/mp3,audio/*">
+                <div class="file-name" id="audioName"></div>
+            </div>
+            <div>
+                <label>کاور آهنگ (عکس)</label>
+                <input type="file" id="coverFile" accept="image/*">
+                <div class="file-name" id="coverName"></div>
+                <img id="coverPreview" class="preview-cover" alt="">
+            </div>
+        </div>
+
+        <button class="btn btn-primary" id="addBtn">اضافه به لیست</button>
+    </div>
+
+    <!-- لیست آهنگ‌ها -->
+    <div class="card">
+        <h2>📋 لیست آهنگ‌ها (<span id="count">0</span>)</h2>
+        <div class="song-list" id="songList">
+            <div class="empty">هنوز آهنگی اضافه نشده</div>
+        </div>
+
+        <div class="actions">
+            <button class="btn btn-primary" id="downloadJson" style="display:none;">
+                📥 دانلود songs.json
+            </button>
+            <button class="btn btn-secondary" id="downloadAll" style="display:none;">
+                📦 دانلود همه فایل‌ها (راهنما)
+            </button>
+            <button class="btn btn-secondary" id="clearAll" style="display:none;">
+                پاک کردن همه
+            </button>
+        </div>
+    </div>
+
+    <div class="card" style="font-size:13px; line-height:1.9; color:#a8c8d8;">
+        <strong style="color:#fff;">نکته مهم:</strong><br>
+        بعد از دانلود <code>songs.json</code>، فایل‌های mp3 و عکس کاور رو هم با همون اسمی که در json نوشته شده داخل ریپو آپلود کن.<br>
+        اسم فایل‌ها به صورت خودکار ساخته می‌شه (مثلاً <code>song-1.mp3</code> و <code>cover-1.jpg</code>).
+    </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const songs = [];
+let audioBlob = null;
+let coverBlob = null;
+let audioFileName = "";
+let coverFileName = "";
+
+const titleEl = document.getElementById("title");
+const artistEl = document.getElementById("artist");
+const messageEl = document.getElementById("message");
+const lyricsEl = document.getElementById("lyrics");
+const audioFileEl = document.getElementById("audioFile");
+const coverFileEl = document.getElementById("coverFile");
+const audioNameEl = document.getElementById("audioName");
+const coverNameEl = document.getElementById("coverName");
+const coverPreview = document.getElementById("coverPreview");
+const songListEl = document.getElementById("songList");
+const countEl = document.getElementById("count");
+const addBtn = document.getElementById("addBtn");
+const downloadJsonBtn = document.getElementById("downloadJson");
+const downloadAllBtn = document.getElementById("downloadAll");
+const clearAllBtn = document.getElementById("clearAll");
+const toastEl = document.getElementById("toast");
+
+function showToast(msg) {
+    toastEl.textContent = msg;
+    toastEl.classList.add("show");
+    setTimeout(() => toastEl.classList.remove("show"), 2800);
+}
+
+audioFileEl.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    audioBlob = file;
+    audioFileName = file.name;
+    audioNameEl.textContent = "✓ " + file.name;
+});
+
+coverFileEl.addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    coverBlob = file;
+    coverFileName = file.name;
+    coverNameEl.textContent = "✓ " + file.name;
+
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+        coverPreview.src = ev.target.result;
+        coverPreview.style.display = "block";
+    };
+    reader.readAsDataURL(file);
+});
+
+function renderList() {
+    countEl.textContent = songs.length;
+
+    if (songs.length === 0) {
+        songListEl.innerHTML = '<div class="empty">هنوز آهنگی اضافه نشده</div>';
+        downloadJsonBtn.style.display = "none";
+        downloadAllBtn.style.display = "none";
+        clearAllBtn.style.display = "none";
+        return;
+    }
+
+    downloadJsonBtn.style.display = "inline-flex";
+    downloadAllBtn.style.display = "inline-flex";
+    clearAllBtn.style.display = "inline-flex";
+
+    songListEl.innerHTML = "";
+    songs.forEach((s, i) => {
+        const div = document.createElement("div");
+        div.className = "song-item";
+        div.innerHTML = `
+            <img src="${s.coverPreview || ''}" alt="" onerror="this.style.background='#1a4a6a'">
+            <div class="song-item-info">
+                <strong>${s.title}</strong>
+                <span>${s.artist} • ${s.audioName}</span>
+            </div>
+            <button class="btn btn-danger" data-index="${i}">حذف</button>
+        `;
+        div.querySelector("button").addEventListener("click", () => {
+            songs.splice(i, 1);
+            renderList();
+            showToast("آهنگ حذف شد");
+        });
+        songListEl.appendChild(div);
+    });
+}
+
+addBtn.addEventListener("click", () => {
+    const title = titleEl.value.trim();
+    const artist = artistEl.value.trim();
+    const message = messageEl.value.trim();
+    const lyricsRaw = lyricsEl.value.trim();
+
+    if (!title) {
+        showToast("عنوان آهنگ را وارد کن");
+        return;
+    }
+    if (!audioBlob) {
+        showToast("فایل آهنگ را انتخاب کن");
+        return;
+    }
+
+    const index = songs.length + 1;
+    const audioExt = audioFileName.split(".").pop() || "mp3";
+    const coverExt = coverFileName ? (coverFileName.split(".").pop() || "jpg") : "jpg";
+
+    const audioFinalName = `song-${index}.${audioExt}`;
+    const coverFinalName = coverBlob ? `cover-${index}.${coverExt}` : "blue-rose.jpg";
+
+    const lyrics = lyricsRaw
+        ? lyricsRaw.split("\n").map(l => l.trim()).filter(Boolean)
+        : ["متن آهنگ هنوز اضافه نشده"];
+
+    const song = {
+        title,
+        artist: artist || "نامشخص",
+        message: message || "",
+        lyrics,
+        src: audioFinalName,
+        cover: coverFinalName,
+        audioBlob,
+        coverBlob,
+        audioName: audioFinalName,
+        coverPreview: coverPreview.style.display === "block" ? coverPreview.src : ""
+    };
+
+    songs.push(song);
+
+    // reset form
+    titleEl.value = "";
+    artistEl.value = "";
+    messageEl.value = "";
+    lyricsEl.value = "";
+    audioFileEl.value = "";
+    coverFileEl.value = "";
+    audioNameEl.textContent = "";
+    coverNameEl.textContent = "";
+    coverPreview.style.display = "none";
+    coverPreview.src = "";
+    audioBlob = null;
+    coverBlob = null;
+
+    renderList();
+    showToast("آهنگ اضافه شد ✓");
+});
+
+downloadJsonBtn.addEventListener("click", () => {
+    const data = songs.map(s => ({
+        title: s.title,
+        artist: s.artist,
+        message: s.message,
+        lyrics: s.lyrics,
+        src: s.src,
+        cover: s.cover
+    }));
+
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "songs.json";
+    a.click();
+    URL.revokeObjectURL(url);
+    showToast("songs.json دانلود شد");
+});
+
+downloadAllBtn.addEventListener("click", async () => {
+    // دانلود تک‌تک فایل‌های آهنگ و کاور
+    for (let i = 0; i < songs.length; i++) {
+        const s = songs[i];
+
+        // audio
+        if (s.audioBlob) {
+            const url = URL.createObjectURL(s.audioBlob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = s.audioName;
+            a.click();
+            URL.revokeObjectURL(url);
+            await new Promise(r => setTimeout(r, 400));
+        }
+
+        // cover
+        if (s.coverBlob) {
+            const url = URL.createObjectURL(s.coverBlob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = s.cover;
+            a.click();
+            URL.revokeObjectURL(url);
+            await new Promise(r => setTimeout(r, 400));
+        }
+    }
+
+    // json هم دانلود بشه
+    downloadJsonBtn.click();
+    showToast("همه فایل‌ها دانلود شدن — داخل گیتهاب آپلود کن");
+});
+
+clearAllBtn.addEventListener("click", () => {
+    if (confirm("همه آهنگ‌ها پاک بشن؟")) {
+        songs.length = 0;
+        renderList();
+        showToast("لیست پاک شد");
+    }
+});
+
+// اگر قبلاً songs.json وجود داشت، می‌تونی اینجا لود کنی (اختیاری)
+</script>
+</body>
+</html>
