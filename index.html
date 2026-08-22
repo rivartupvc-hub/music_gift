@@ -14,7 +14,7 @@ body{min-height:100vh;font-family:'Vazirmatn',sans-serif;color:#f0f9ff;overflow-
 #particles{position:fixed;inset:0;z-index:0;pointer-events:none}
 body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse at 30% 15%,rgba(160,230,255,.12),transparent 40%),radial-gradient(ellipse at 75% 75%,rgba(50,150,210,.08),transparent 45%)}
 
-/* ========== ENTRY ========== */
+/* ENTRY */
 .entry-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;text-align:center;cursor:pointer;background:linear-gradient(170deg,rgba(2,18,38,.28),rgba(5,50,85,.15),rgba(1,12,30,.38)),url("blue-rose.jpg");background-size:cover;background-position:center 38%;transition:opacity 1.5s cubic-bezier(.4,0,.2,1),visibility 1.5s,transform 1.5s}
 .entry-screen::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 48%,rgba(180,240,255,.1),transparent 55%);pointer-events:none}
 .entry-screen.hide{opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.06)}
@@ -33,7 +33,7 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 @keyframes textGlow{0%,100%{text-shadow:0 2px 40px rgba(0,20,50,.7),0 0 50px rgba(140,220,255,.3)}50%{text-shadow:0 2px 40px rgba(0,20,50,.7),0 0 70px rgba(160,230,255,.5)}}
 @keyframes linePulse{0%,100%{opacity:.7;width:64px}50%{opacity:1;width:80px}}
 
-/* ========== PASSWORD ========== */
+/* PASSWORD */
 .password-screen{position:fixed;inset:0;z-index:10000;display:none;align-items:center;justify-content:center;padding:24px;background:linear-gradient(165deg,rgba(2,18,38,.55),rgba(5,50,85,.25),rgba(1,12,30,.62)),url("blue-rose.jpg");background-size:cover;background-position:center 38%;opacity:0;transition:opacity .7s ease}
 .password-screen.show{display:flex;opacity:1}
 .password-box{width:100%;max-width:350px;padding:36px 24px;border-radius:26px;background:linear-gradient(145deg,rgba(170,225,255,.16),rgba(8,55,95,.28));border:1px solid rgba(210,245,255,.35);backdrop-filter:blur(30px);-webkit-backdrop-filter:blur(30px);box-shadow:0 30px 80px rgba(0,15,40,.5),inset 0 1px 0 rgba(255,255,255,.25);animation:popIn .6s cubic-bezier(.16,1,.3,1);text-align:center}
@@ -52,16 +52,34 @@ body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;back
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}50%{transform:translateX(8px)}75%{transform:translateX(-5px)}}
 @keyframes iconFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
 
-/* ========== ROSE BLOOM ========== */
-.reveal-overlay{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(2,12,30,.65);backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .9s,visibility .9s;pointer-events:none}
+/* ========== PROFESSIONAL ROSE BLOOM ========== */
+.reveal-overlay{position:fixed;inset:0;z-index:9000;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(2,10,25,.75);backdrop-filter:blur(12px);opacity:0;visibility:hidden;transition:opacity .8s,visibility .8s;pointer-events:none}
 .reveal-overlay.show{opacity:1;visibility:visible}
-.bloom-rose{font-size:72px;filter:drop-shadow(0 0 30px rgba(100,200,255,.5));transform:scale(.25) rotate(-20deg);opacity:0;transition:all 1.5s cubic-bezier(.16,1,.3,1) .1s}
-.reveal-overlay.show .bloom-rose{transform:scale(1) rotate(0deg);opacity:1;animation:bloomPulse 2s ease-in-out .8s infinite}
-.reveal-text{font-size:20px;color:#fff;margin-top:18px;text-shadow:0 0 40px rgba(140,220,255,.6);opacity:0;transform:translateY(14px);transition:all .9s cubic-bezier(.16,1,.3,1) .75s}
-.reveal-overlay.show .reveal-text{opacity:1;transform:translateY(0)}
-@keyframes bloomPulse{0%,100%{filter:drop-shadow(0 0 30px rgba(100,200,255,.5))}50%{filter:drop-shadow(0 0 50px rgba(140,230,255,.75))}}
 
-/* ========== MAIN ========== */
+.rose-stage{position:relative;width:160px;height:180px;display:flex;align-items:center;justify-content:center}
+.rose-glow{position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(100,190,255,.35),transparent 70%);filter:blur(20px);opacity:0;transform:scale(.4);transition:all 1.6s cubic-bezier(.16,1,.3,1) .3s}
+.reveal-overlay.show .rose-glow{opacity:1;transform:scale(1)}
+
+/* SVG Rose */
+.rose-svg{width:140px;height:160px;overflow:visible;transform:scale(.35) rotate(-12deg);opacity:0;transition:all 1.8s cubic-bezier(.16,1,.3,1) .15s;filter:drop-shadow(0 0 25px rgba(80,180,255,.45))}
+.reveal-overlay.show .rose-svg{transform:scale(1) rotate(0deg);opacity:1}
+
+.petal{transform-origin:center bottom;transition:transform 1.6s cubic-bezier(.16,1,.3,1)}
+.reveal-overlay.show .petal-1{transition-delay:.25s;transform:rotate(-28deg) translateY(-4px)}
+.reveal-overlay.show .petal-2{transition-delay:.32s;transform:rotate(28deg) translateY(-4px)}
+.reveal-overlay.show .petal-3{transition-delay:.38s;transform:rotate(-48deg) translateY(-2px)}
+.reveal-overlay.show .petal-4{transition-delay:.44s;transform:rotate(48deg) translateY(-2px)}
+.reveal-overlay.show .petal-5{transition-delay:.5s;transform:rotate(-12deg) scale(1.05)}
+.reveal-overlay.show .petal-6{transition-delay:.55s;transform:rotate(12deg) scale(1.05)}
+.reveal-overlay.show .petal-center{transition-delay:.2s;transform:scale(1.1)}
+
+.stem{stroke-dasharray:80;stroke-dashoffset:80;transition:stroke-dashoffset 1.2s ease .1s}
+.reveal-overlay.show .stem{stroke-dashoffset:0}
+
+.reveal-text{font-size:18px;color:#fff;margin-top:28px;text-shadow:0 0 40px rgba(140,220,255,.6);opacity:0;transform:translateY(16px);transition:all 1s cubic-bezier(.16,1,.3,1) 1.1s;letter-spacing:.5px}
+.reveal-overlay.show .reveal-text{opacity:1;transform:translateY(0)}
+
+/* MAIN */
 .container{position:relative;z-index:1;width:min(94%,500px);margin:0 auto;padding:44px 0 80px;opacity:0;transform:translateY(40px);transition:opacity 1.1s cubic-bezier(.16,1,.3,1),transform 1.1s cubic-bezier(.16,1,.3,1)}
 .container.visible{opacity:1;transform:translateY(0)}
 .hero{text-align:center;margin-bottom:6px}
@@ -73,7 +91,6 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
 @keyframes titleShine{0%,100%{text-shadow:0 3px 25px rgba(0,25,55,.5),0 0 35px rgba(140,220,255,.2)}50%{text-shadow:0 3px 25px rgba(0,25,55,.5),0 0 55px rgba(160,230,255,.45)}}
 @keyframes dividerGlow{0%,100%{opacity:.7;box-shadow:0 0 14px rgba(100,200,255,.55)}50%{opacity:1;box-shadow:0 0 22px rgba(140,220,255,.8)}}
 
-/* ========== PLAYLIST ========== */
 .playlist{display:flex;flex-direction:column;gap:10px;margin-bottom:24px;opacity:0;animation:fadeUp .95s ease .7s forwards}
 .playlist-item{display:flex;align-items:center;gap:13px;padding:11px 13px;border-radius:16px;background:rgba(170,225,255,.08);border:1px solid rgba(190,235,255,.18);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);cursor:pointer;transition:all .35s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden}
 .playlist-item::after{content:"";position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.12),transparent);transition:left .6s ease;pointer-events:none}
@@ -90,7 +107,6 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
 .playlist-item.active .playing-dot{opacity:1;animation:blink 1.3s ease-in-out infinite}
 @keyframes blink{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.4);opacity:.65}}
 
-/* ========== SONG CARD ========== */
 .song-card{position:relative;padding:26px 16px 22px;border-radius:26px;border:1px solid rgba(200,240,255,.28);background:linear-gradient(150deg,rgba(165,225,255,.14),rgba(12,80,130,.16),rgba(4,40,70,.14));backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 24px 60px rgba(0,15,40,.38),inset 0 1px 0 rgba(255,255,255,.22);overflow:hidden;opacity:0;animation:fadeUp 1s ease .85s forwards}
 .song-card::before{content:"";position:absolute;width:240px;height:240px;top:-150px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(100,200,255,.16),transparent 70%);pointer-events:none;animation:cardGlow 6s ease-in-out infinite}
 @keyframes cardGlow{0%,100%{opacity:.7;transform:translateX(-50%) scale(1)}50%{opacity:1;transform:translateX(-50%) scale(1.15)}}
@@ -113,7 +129,6 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
 .visualizer.active span:nth-child(7){animation:bar 1.05s ease-in-out infinite .04s}
 @keyframes bar{0%,100%{height:5px}50%{height:24px}}
 
-/* CONTROLS + PLAY WAVE */
 .controls{display:flex;align-items:center;justify-content:center;gap:20px;margin-bottom:16px}
 .control-button{width:42px;height:42px;border-radius:50%;border:1px solid rgba(190,235,255,.3);background:rgba(140,210,255,.08);color:#d8f0ff;font-size:15px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:.25s}
 .control-button:hover{background:rgba(140,210,255,.18);transform:scale(1.08)}
@@ -124,7 +139,6 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
 .play-button.playing::after{animation-delay:1s}
 @keyframes playWave{0%{transform:scale(1);opacity:.6}100%{transform:scale(1.7);opacity:0}}
 
-/* PROGRESS SHINE */
 .progress-wrap{margin-bottom:4px}
 .progress{height:4.5px;background:rgba(170,225,255,.12);border-radius:10px;overflow:hidden;cursor:pointer;position:relative}
 .progress-bar{height:100%;width:0%;background:linear-gradient(90deg,#5ab4e0,#b8e8ff);border-radius:10px;box-shadow:0 0 10px rgba(90,190,255,.5);transition:width .1s linear;position:relative;overflow:hidden}
@@ -132,7 +146,6 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
 @keyframes progressShine{0%{left:-40%}100%{left:120%}}
 .time{display:flex;justify-content:space-between;direction:ltr;font-size:11px;color:#90c0d4;margin-top:6px;font-weight:300}
 
-/* LYRICS */
 .lyrics-box{margin-top:20px;padding:14px 12px;border-radius:16px;background:rgba(0,30,55,.2);border:1px solid rgba(170,225,255,.12);max-height:190px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(120,200,240,.3) transparent}
 .lyrics-title{text-align:center;color:#a0d4e8;font-size:10px;letter-spacing:3px;margin-bottom:12px;direction:ltr;opacity:.75}
 .lyrics{display:flex;flex-direction:column;gap:7px;text-align:center}
@@ -140,7 +153,6 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
 .lyric-line.active{opacity:1;color:#fff;font-weight:400;text-shadow:0 0 18px rgba(140,220,255,.45);transform:scale(1.03)}
 .hint{text-align:center;font-size:11px;color:#7aa8c0;margin-top:12px;font-weight:300;opacity:.65}
 
-/* FOOTER */
 .footer{margin-top:36px;text-align:center;opacity:0;animation:fadeUp 1s ease 1.05s forwards}
 .footer-text{color:#c0dce8;font-size:13px;line-height:2.15;font-weight:300;margin-bottom:20px}
 .personal-note{color:#a0c8d8;font-size:12.5px;line-height:2.05;font-weight:300;margin-bottom:20px;opacity:.9}
@@ -148,11 +160,12 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
 .signature{color:#80b0c8;font-size:12px;font-weight:300;letter-spacing:.4px;animation:sigPulse 4s ease-in-out infinite}
 @keyframes sigPulse{0%,100%{opacity:.7}50%{opacity:1}}
 
-@media(max-width:480px){.entry-content h1{font-size:24px}h1{font-size:28px}.song-cover-wrap{width:100px;height:100px}.song-title{font-size:15px}.controls{gap:16px}.play-button{width:60px;height:60px}.control-button{width:38px;height:38px}.playlist-item{padding:10px 11px;gap:11px}.playlist-cover{width:42px;height:42px}.lyrics-box{max-height:160px}.container{padding:32px 0 60px}.bloom-rose{font-size:56px}}
+@media(max-width:480px){.entry-content h1{font-size:24px}h1{font-size:28px}.song-cover-wrap{width:100px;height:100px}.song-title{font-size:15px}.controls{gap:16px}.play-button{width:60px;height:60px}.control-button{width:38px;height:38px}.playlist-item{padding:10px 11px;gap:11px}.playlist-cover{width:42px;height:42px}.lyrics-box{max-height:160px}.container{padding:32px 0 60px}.rose-stage{width:130px;height:150px}.rose-svg{width:115px;height:130px}}
 </style>
 </head>
 <body>
 <canvas id="particles"></canvas>
+
 <div class="entry-screen" id="entryScreen">
   <div class="entry-content">
     <h1>این گل آبی برای تو</h1>
@@ -161,6 +174,7 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
     <div class="touch-circle"><span>🤍</span></div>
   </div>
 </div>
+
 <div class="password-screen" id="passwordScreen">
   <div class="password-box" id="passwordBox">
     <div class="password-icon">🔐</div>
@@ -171,11 +185,42 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
     <div class="password-error" id="passwordError">رمز اشتباهه... دوباره امتحان کن 🤍</div>
   </div>
 </div>
+
+<!-- PROFESSIONAL ROSE BLOOM -->
 <div class="reveal-overlay" id="revealOverlay">
-  <div class="bloom-rose">🌹</div>
+  <div class="rose-stage">
+    <div class="rose-glow"></div>
+    <svg class="rose-svg" viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- stem -->
+      <path class="stem" d="M60 138 C58 110, 62 90, 60 72" stroke="#2a8a6a" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+      <path class="stem" d="M60 100 C48 95, 42 88, 38 82" stroke="#2a8a6a" stroke-width="2" stroke-linecap="round" fill="none" opacity=".7"/>
+      <!-- outer petals -->
+      <ellipse class="petal petal-3" cx="38" cy="58" rx="22" ry="30" fill="url(#p1)" transform="rotate(-40 38 58)"/>
+      <ellipse class="petal petal-4" cx="82" cy="58" rx="22" ry="30" fill="url(#p2)" transform="rotate(40 82 58)"/>
+      <ellipse class="petal petal-1" cx="45" cy="48" rx="20" ry="28" fill="url(#p3)" transform="rotate(-18 45 48)"/>
+      <ellipse class="petal petal-2" cx="75" cy="48" rx="20" ry="28" fill="url(#p4)" transform="rotate(18 75 48)"/>
+      <!-- inner petals -->
+      <ellipse class="petal petal-5" cx="52" cy="42" rx="16" ry="24" fill="url(#p5)" transform="rotate(-8 52 42)"/>
+      <ellipse class="petal petal-6" cx="68" cy="42" rx="16" ry="24" fill="url(#p6)" transform="rotate(8 68 42)"/>
+      <!-- center -->
+      <ellipse class="petal petal-center" cx="60" cy="40" rx="14" ry="18" fill="url(#center)"/>
+      <ellipse cx="60" cy="38" rx="6" ry="8" fill="#7ec8f0" opacity=".9"/>
+      <defs>
+        <linearGradient id="p1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5eb8e8"/><stop offset="100%" stop-color="#2a7ab0"/></linearGradient>
+        <linearGradient id="p2" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#6ec4f0"/><stop offset="100%" stop-color="#2e80b8"/></linearGradient>
+        <linearGradient id="p3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7ad0f5"/><stop offset="100%" stop-color="#3a90c0"/></linearGradient>
+        <linearGradient id="p4" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8ad8f8"/><stop offset="100%" stop-color="#3e98c8"/></linearGradient>
+        <linearGradient id="p5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#a0e4ff"/><stop offset="100%" stop-color="#4aa8d8"/></linearGradient>
+        <linearGradient id="p6" x1="100%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#b0ecff"/><stop offset="100%" stop-color="#50b0e0"/></linearGradient>
+        <radialGradient id="center" cx="50%" cy="40%" r="60%"><stop offset="0%" stop-color="#c8f0ff"/><stop offset="70%" stop-color="#5ab8e8"/><stop offset="100%" stop-color="#2a80b8"/></radialGradient>
+      </defs>
+    </svg>
+  </div>
   <div class="reveal-text">برای تو باز می‌شه...</div>
 </div>
+
 <audio id="backgroundMusic" preload="auto" loop><source src="background.mp3" type="audio/mpeg"></audio>
+
 <main class="container" id="mainContainer">
   <section class="hero">
     <div class="small-title">A LITTLE SOMETHING FOR YOU</div>
@@ -210,14 +255,31 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
     <div class="signature">برای یک آدم خاص :)</div>
   </footer>
 </main>
+
 <script>
+/* Particles */
 (function(){const canvas=document.getElementById('particles');const ctx=canvas.getContext('2d');let w,h,particles=[],sparkles=[];function resize(){w=canvas.width=window.innerWidth;h=canvas.height=window.innerHeight}window.addEventListener('resize',resize);resize();function createParticle(){return{x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.4+.3,vy:-(Math.random()*.35+.08),vx:(Math.random()-.5)*.15,alpha:Math.random()*.4+.15,life:Math.random()*200+100}}function createSparkle(){return{x:Math.random()*w,y:Math.random()*h,r:Math.random()*2.2+1,alpha:0,maxAlpha:Math.random()*.55+.25,life:0,maxLife:40+Math.random()*50,growing:true}}for(let i=0;i<55;i++)particles.push(createParticle());function draw(){ctx.clearRect(0,0,w,h);for(let i=0;i<particles.length;i++){const p=particles[i];p.y+=p.vy;p.x+=p.vx;p.life--;if(p.y<-10||p.life<=0){particles[i]=createParticle();particles[i].y=h+10}ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=`rgba(180,230,255,${p.alpha})`;ctx.fill()}if(Math.random()<.012&&sparkles.length<6)sparkles.push(createSparkle());for(let i=sparkles.length-1;i>=0;i--){const s=sparkles[i];s.life++;if(s.growing){s.alpha+=s.maxAlpha/20;if(s.alpha>=s.maxAlpha)s.growing=false}else{s.alpha-=s.maxAlpha/25}if(s.life>s.maxLife||s.alpha<=0){sparkles.splice(i,1);continue}ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fillStyle=`rgba(220,245,255,${s.alpha})`;ctx.shadowBlur=12;ctx.shadowColor=`rgba(160,220,255,${s.alpha})`;ctx.fill();ctx.shadowBlur=0}requestAnimationFrame(draw)}draw()})();
+
+/* Heartbeat vibration */
+function heartbeatVibrate(){
+  if(!navigator.vibrate) return;
+  // pattern: short, short, pause, short, short, pause, short, short  (like heartbeat)
+  navigator.vibrate([80, 100, 80, 280, 80, 100, 80, 280, 80, 100, 80]);
+}
 
 let songs=[];
 const entryScreen=document.getElementById("entryScreen"),backgroundMusic=document.getElementById("backgroundMusic"),passwordScreen=document.getElementById("passwordScreen"),passwordInput=document.getElementById("passwordInput"),passwordButton=document.getElementById("passwordButton"),passwordError=document.getElementById("passwordError"),passwordBox=document.getElementById("passwordBox"),revealOverlay=document.getElementById("revealOverlay"),mainContainer=document.getElementById("mainContainer"),playlistEl=document.getElementById("playlist"),songCard=document.getElementById("songCard"),songCover=document.getElementById("songCover"),songTitle=document.getElementById("songTitle"),songArtist=document.getElementById("songArtist"),songMessage=document.getElementById("songMessage"),lyricsEl=document.getElementById("lyrics"),visualizer=document.getElementById("visualizer"),music=document.getElementById("music"),playButton=document.getElementById("playButton"),prevButton=document.getElementById("prevButton"),nextButton=document.getElementById("nextButton"),progress=document.getElementById("progress"),progressBar=document.getElementById("progressBar"),currentTimeEl=document.getElementById("currentTime"),durationEl=document.getElementById("duration");
 const correctPassword="1385";let passwordOpened=false,musicStarted=false,currentIndex=0,lyricLines=[];
 function fadeInMusic(){backgroundMusic.volume=0;const t=.26,s=50,st=2400/s;let c=0;const f=setInterval(()=>{c++;backgroundMusic.volume=Math.min(t,c*(t/s));if(c>=s)clearInterval(f)},st)}
-async function startExperience(){if(musicStarted)return;musicStarted=true;revealOverlay.classList.add("show");try{backgroundMusic.volume=0;await backgroundMusic.play();fadeInMusic()}catch(e){}entryScreen.classList.add("hide");setTimeout(()=>{revealOverlay.classList.remove("show");if(entryScreen)entryScreen.remove();mainContainer.classList.add("visible")},2200)}
+async function startExperience(){
+  if(musicStarted)return;
+  musicStarted=true;
+  heartbeatVibrate();
+  revealOverlay.classList.add("show");
+  try{backgroundMusic.volume=0;await backgroundMusic.play();fadeInMusic()}catch(e){}
+  entryScreen.classList.add("hide");
+  setTimeout(()=>{revealOverlay.classList.remove("show");if(entryScreen)entryScreen.remove();mainContainer.classList.add("visible")},2600)
+}
 function openPasswordScreen(){if(passwordOpened)return;passwordOpened=true;passwordScreen.classList.add("show");setTimeout(()=>passwordInput.focus(),350)}
 entryScreen.addEventListener("click",openPasswordScreen);entryScreen.addEventListener("touchstart",openPasswordScreen,{passive:true});
 async function checkPassword(){const e=passwordInput.value.trim();if(e===correctPassword){passwordError.classList.remove("show");passwordButton.disabled=true;passwordButton.textContent="در حال ورود... 🤍";await startExperience();passwordScreen.style.opacity="0";setTimeout(()=>passwordScreen.remove(),800);return}passwordError.classList.add("show");passwordBox.classList.remove("shake");void passwordBox.offsetWidth;passwordBox.classList.add("shake");passwordInput.value="";setTimeout(()=>passwordInput.focus(),100)}
@@ -241,3 +303,4 @@ init();
 </script>
 </body>
 </html>
+
