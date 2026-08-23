@@ -460,8 +460,39 @@ h1.title{font-size:clamp(28px,7.5vw,34px);font-weight:400;margin-bottom:12px;let
 .lyrics-box{margin-top:30px;max-width:360px;margin-inline:auto;}
 .lyrics-title{font-size:10px;letter-spacing:3px;color:var(--faint);margin-bottom:12px;direction:ltr;}
 .lyrics{font-size:13px;line-height:2.3;color:var(--muted);font-weight:300;}
-.lyrics p{opacity:.45;transition:opacity .4s ease, color .4s ease;padding:2px 0;}
-.lyrics p.active{opacity:1;color:#fff;text-shadow:0 0 12px rgba(140,220,255,.3);}
+.lyrics p{opacity:.85;padding:3px 0;}
+
+/* =========================
+   NOTE CONTENT — for the four placeholder spots (memory notebook,
+   second letter, finale, rose secret). Each one currently holds
+   plain text, but can hold a photo or a poem instead — just swap
+   the placeholder's inner content for one of these:
+
+   PHOTO:
+     <img class="note-photo" src="your-photo.jpg" alt="">
+
+   POEM (each line in its own <span class="verse">):
+     <div class="poem">
+       <span class="verse">مصرع اول</span>
+       <span class="verse">مصرع دوم</span>
+       <span class="poem-mark">❋</span>
+       <span class="verse">مصرع سوم</span>
+       <span class="verse">مصرع چهارم</span>
+     </div>
+========================= */
+.note-photo{
+    display:block; width:100%; max-height:230px; object-fit:cover;
+    border-radius:16px; border:1px solid var(--border);
+    box-shadow:0 16px 44px rgba(0,10,30,.42);
+}
+.poem{
+    font-family:'Noto Nastaliq Urdu','Vazirmatn',serif;
+    font-size:20px; line-height:2.75; color:#f2fbff;
+    text-shadow:0 0 18px rgba(140,220,255,.35);
+    letter-spacing:.2px;
+}
+.poem .verse{display:block;}
+.poem-mark{display:block;font-size:12px;color:var(--azure);opacity:.65;margin:10px 0;letter-spacing:8px;}
 
 .hint{margin-top:22px;font-size:11px;color:var(--faint);opacity:.7;}
 
@@ -493,7 +524,7 @@ h1.title{font-size:clamp(28px,7.5vw,34px);font-weight:400;margin-bottom:12px;let
 ========================= */
 .notebook{margin-top:46px;text-align:center;}
 .notebook-title{font-size:10px;letter-spacing:3px;color:var(--faint);margin-bottom:18px;direction:ltr;}
-.notebook-stage{position:relative;height:180px;max-width:340px;margin:0 auto;}
+.notebook-stage{position:relative;height:220px;max-width:340px;margin:0 auto;}
 .mem-card{
     position:absolute;inset:0;padding:26px 22px;border-radius:20px;
     background:linear-gradient(150deg, var(--glass-strong), rgba(6,35,62,.28));
@@ -694,11 +725,13 @@ html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
     </div>
 </div>
 
-<!-- SECOND LETTER — opens only when asked for, not automatically -->
+<!-- SECOND LETTER — opens only when asked for, not automatically.
+     To replace with a photo:  <img class="note-photo" src="photo.jpg" alt="">
+     To replace with a poem:   <div class="poem"><span class="verse">...</span><span class="verse">...</span></div> -->
 <div id="letter2">
     <div class="letter2-box">
         <p>اینجا یه چیز دیگه‌ست که نمی‌خواستم اول‌کاری بگم.</p>
-        <p>[اینجا رو خودت جایگزین کن — این فقط یه جای‌گیره برای متنی که می‌خوای واقعاً بگی]</p>
+        <p>[اینجا رو خودت جایگزین کن — این فقط یه جای‌گیره برای متنی که می‌خوای واقعاً بگی. می‌تونی به‌جاش عکس یا شعر هم بذاری]</p>
         <p>هر وقت دلت خواست، می‌تونی برگردی و دوباره بخونیش.</p>
         <div class="letter2-close" id="letter2Close">بستن</div>
     </div>
@@ -709,7 +742,7 @@ html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
     <div class="finale-box">
         <div class="finale-icon">🌊</div>
         <p>تا همین‌جا اومدی و همه‌شونو گوش دادی...</p>
-        <p>[این متن هم جای‌گیره — چیزی که می‌خوای به‌عنوان جایزه‌ی آخر بگی رو همین‌جا بنویس]</p>
+        <p>[این متن هم جای‌گیره — چیزی که می‌خوای به‌عنوان جایزه‌ی آخر بگی، یا یه عکس/شعر، رو همین‌جا بذار]</p>
         <div class="finale-close" id="finaleClose">بستن</div>
     </div>
 </div>
@@ -718,7 +751,7 @@ html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
 <div id="roseSecret">
     <div class="rose-secret-box">
         <div class="tag">FOUND IT</div>
-        <p>[یه پیام مخفی کوچیک برای وقتی که پیداش کرد — متن دلخواه خودت رو اینجا بذار]</p>
+        <p>[یه پیام مخفی کوچیک برای وقتی که پیداش کرد — متن، عکس یا شعر دلخواه خودت رو اینجا بذار]</p>
         <div class="rose-secret-close" id="roseSecretClose">بستن</div>
     </div>
 </div>
@@ -813,7 +846,6 @@ html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
 ========================= */
 let songs = [];
 let currentIndex = 0;
-let lyricLines = [];
 
 const el = id => document.getElementById(id);
 const tracklistEl = el('tracklist');
@@ -861,7 +893,6 @@ function renderTracklist(){
 
 function renderLyrics(song){
     lyricsEl.innerHTML = '';
-    lyricLines = [];
     const lines = Array.isArray(song.lyrics) ? song.lyrics : (song.lyrics ? [song.lyrics] : []);
     if(!lines.length){
         const p = document.createElement('p');
@@ -873,15 +904,7 @@ function renderLyrics(song){
         const p = document.createElement('p');
         p.textContent = line;
         lyricsEl.appendChild(p);
-        lyricLines.push(p);
     });
-}
-
-function updateActiveLyric(){
-    if(!lyricLines.length || !musicEl.duration) return;
-    const ratio = musicEl.currentTime / musicEl.duration;
-    const idx = Math.min(lyricLines.length - 1, Math.floor(ratio * lyricLines.length));
-    lyricLines.forEach((p, i) => p.classList.toggle('active', i === idx));
 }
 
 function loadSong(index, autoplay){
@@ -942,7 +965,6 @@ musicEl.addEventListener('timeupdate', () => {
         progressBar.style.width = (musicEl.currentTime / musicEl.duration * 100) + '%';
         curTimeEl.textContent = fmtTime(musicEl.currentTime);
     }
-    updateActiveLyric();
 });
 
 progress.addEventListener('click', (e) => {
@@ -1160,13 +1182,18 @@ initSongs();
    MEMORY NOTEBOOK
    Placeholder memories — swap these lines for the real ones
    whenever you're ready, the structure stays the same.
+
+   Each entry can also be a photo or a poem instead of plain text —
+   these are raw HTML, so e.g.:
+     '<img class="note-photo" src="photo1.jpg" alt="">'
+     '<div class="poem"><span class="verse">...</span><span class="verse">...</span></div>'
 ========================= */
 (function(){
     const MEMORIES = [
         'یه خاطره از یه روز عادی که یهو قشنگ شد...',
         'یه جمله که همیشه یادم می‌مونه...',
         'یه لحظه‌ی کوچیک که برام بزرگ بود...',
-        '[هر کدوم از این‌ها رو با متن واقعی خودت جایگزین کن]'
+        '[هر کدوم از این‌ها رو با متن واقعی، یه عکس، یا یه شعر جایگزین کن — بالای همین کد توضیح داده شده چطور]'
     ];
     const stageEl = el('notebookStage');
     const countEl = el('memCount');
@@ -1510,4 +1537,4 @@ window.addEventListener('load', () => {
 })();
 </script>
 </body>
-</html>
+    </html>
