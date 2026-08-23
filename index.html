@@ -149,8 +149,7 @@ h1{font-size:clamp(30px,8vw,36px);font-weight:400;margin-bottom:14px;letter-spac
 .lyrics-box{margin-top:20px;padding:14px 12px;border-radius:16px;background:rgba(0,30,55,.2);border:1px solid rgba(170,225,255,.12);max-height:190px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:rgba(120,200,240,.3) transparent}
 .lyrics-title{text-align:center;color:#a0d4e8;font-size:10px;letter-spacing:3px;margin-bottom:12px;direction:ltr;opacity:.75}
 .lyrics{display:flex;flex-direction:column;gap:7px;text-align:center}
-.lyric-line{font-size:13px;color:#b8d8e8;font-weight:300;line-height:1.65;opacity:.55;transition:all .4s ease}
-.lyric-line.active{opacity:1;color:#fff;font-weight:400;text-shadow:0 0 18px rgba(140,220,255,.45);transform:scale(1.03)}
+.lyric-line{font-size:13px;color:#b8d8e8;font-weight:300;line-height:1.65;opacity:.55;transition:all
 .hint{text-align:center;font-size:11px;color:#7aa8c0;margin-top:12px;font-weight:300;opacity:.65}
 
 .footer{margin-top:36px;text-align:center;opacity:0;animation:fadeUp 1s ease 1.05s forwards}
@@ -295,8 +294,8 @@ function pauseBackgroundMusic(){if(!backgroundMusic.paused)backgroundMusic.pause
 function resumeBackgroundMusic(){if(backgroundMusic.paused&&music.paused)backgroundMusic.play().catch(()=>{})}
 function formatTime(s){if(!Number.isFinite(s))return"0:00";s=Math.floor(s);return Math.floor(s/60)+":"+String(s%60).padStart(2,"0")}
 music.addEventListener("loadedmetadata",()=>{durationEl.textContent=formatTime(music.duration)});
-music.addEventListener("timeupdate",()=>{if(!music.duration)return;progressBar.style.width=((music.currentTime/music.duration)*100)+"%";currentTimeEl.textContent=formatTime(music.currentTime);if(lyricLines.length>1){const idx=Math.min(lyricLines.length-1,Math.floor((music.currentTime/music.duration)*lyricLines.length));lyricLines.forEach((l,i)=>l.classList.toggle("active",i===idx))}});
-progress.addEventListener("click",e=>{if(!music.duration)return;const rect=progress.getBoundingClientRect();const p=Math.min(1,Math.max(0,(e.clientX-rect.left)/rect.width));music.currentTime=p*music.duration});
+music.addEventListener("timeupdate",()=>{if(!music.duration)return;progressBar.style.width=((music.currentTime/music.duration)*100)+"%";currentTimeEl.textContent=formatTime(music.currentTime);
+progress.addEvene=>{if(!music.duration)return;const rect=progress.getBoundingClientRect();const p=Math.min(1,Math.max(0,(e.clientX-rect.left)/rect.width));music.currentTime=p*music.duration});
 music.addEventListener("ended",()=>loadSong(currentIndex+1,true));
 async function init(){try{const res=await fetch("songs.json?t="+Date.now());if(!res.ok)throw new Error("no json");songs=await res.json();if(!Array.isArray(songs)||!songs.length)throw new Error("empty")}catch(e){songs=[{title:"من عاشق بارون بودم، اون عاشق برف بود",artist:"عمیان",src:"song.mp3",cover:"blue-rose.jpg",message:"این آهنگ مال روزایی بود که با هم بارون می‌دیدیم",lyrics:["من عاشق بارون بودم، اون عاشق برف بود","دلم می‌خواست همیشه کنارش باشم","ولی زندگی گاهی مسیرش فرق می‌کنه","با این حال هنوز اون روزا رو یادمه"]}]}renderPlaylist();loadSong(0,false)}
 init();
