@@ -1979,25 +1979,7 @@ h1:active{
 .seek-btn{font-size:13px;opacity:.9}
 .controls{gap:12px !important}
 
-/* water / light layer on main background */
-.water-layer{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% 0%, rgba(180,230,255,.14), transparent 55%),
-    radial-gradient(circle at 20% 80%, rgba(100,190,255,.08), transparent 40%),
-    radial-gradient(circle at 80% 30%, rgba(140,220,255,.1), transparent 35%);
-  transition: transform .15s ease-out;
-  will-change: transform;
-}
-.light-rays{
-  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
-  background:
-    linear-gradient(115deg, transparent 40%, rgba(200,240,255,.06) 45%, transparent 50%),
-    linear-gradient(250deg, transparent 30%, rgba(160,220,255,.05) 38%, transparent 48%);
-  animation: lightSweep 12s ease-in-out infinite alternate;
-}
-@keyframes lightSweep{
-  0%{opacity:.25;transform:translateX(-2%) translateY(0)}
+
   100%{opacity:.45;transform:translateX(2%) translateY(-1%)}
 }
 
@@ -2045,13 +2027,16 @@ h1:active{
 }
 .rose-glow{background:radial-gradient(circle,rgba(120,210,255,.45),transparent 70%) !important}
 
-/* touch ripple on main */
-.ripple{
-  position:fixed;border-radius:50%;pointer-events:none;z-index:5;
-  background:radial-gradient(circle,rgba(180,230,255,.35) 0%,transparent 70%);
-  transform:scale(0);animation:rippleOut .7s ease-out forwards;
 }
-@keyframes rippleOut{to{transform:scale(4);opacity:0}}
+
+
+#waterCanvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:0.85;
+}
 
 </style>
 </head>
@@ -2060,8 +2045,10 @@ h1:active{
 <body>
 
 <canvas id="particles"></canvas>
-<div class="water-layer" id="waterLayer"></div>
-<div class="light-rays"></div>
+
+<canvas id="waterCanvas"></canvas>
+
+
 
 
 <!-- =========================
@@ -2911,8 +2898,13 @@ h1:active{
 ========================= */
 
 function heartbeatVibrate(){
-    if(!navigator.vibrate) return;
-    navigator.vibrate([100,90,100, 320, 100,90,100, 320, 100,90,100]);
+    // Works on Android Chrome. iOS Safari does NOT support vibration API.
+    if(!navigator.vibrate) {
+      console.log("Vibration not supported on this device/browser");
+      return;
+    }
+    // Strong heartbeat pattern (3 beats)
+    navigator.vibrate([120, 80, 120, 300, 120, 80, 120, 300, 120, 80, 120]);
 }
 function playBloomSound(){
   try{
@@ -3959,37 +3951,122 @@ async function init(){
 init();
 
 
-const back15Button = document.getElementById("back15Button");
-const fwd15Button = document.getElementById("fwd15Button");
-if(back15Button){ back15Button.addEventListener("click", ()=>{ if(music.duration) music.currentTime = Math.max(0, music.currentTime - 15); }); }
-if(fwd15Button){ fwd15Button.addEventListener("click", ()=>{ if(music.duration) music.currentTime = Math.min(music.duration, music.currentTime + 15); }); }
 
+/* =========================
+   REAL WATER RIPPLE (live wallpaper style)
+========================= */
 (function(){
-  const water = document.getElementById("waterLayer");
-  if(!water) return;
-  function apply(x,y){
-    water.style.transform = `translate(${Math.max(-12,Math.min(12,x))}px, ${Math.max(-10,Math.min(10,y))}px) scale(1.05)`;
+  const canvas = document.getElementById("waterCanvas");
+  if(!canvas) return;
+  const ctx = canvas.getContext("2d");
+  let w, h, last = 0;
+  const ripples = [];
+  const MAX = 18;
+
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
   }
-  if(window.DeviceOrientationEvent){
-    window.addEventListener("deviceorientation", (e)=>{
-      if(e.gamma==null||e.beta==null) return;
-      apply(e.gamma*0.35, (e.beta-45)*0.2);
-    }, true);
+  window.addEventListener("resize", resize);
+  resize();
+
+  function addRipple(x, y, force){
+    if(ripples.length >= MAX) ripples.shift();
+    ripples.push({
+      x, y,
+      r: 0,
+      maxR: 80 + force * 120,
+      alpha: 0.35 + force * 0.25,
+      speed: 1.8 + force * 1.2,
+      lineW: 2 + force * 2
+    });
   }
-  window.addEventListener("mousemove", (e)=>{
-    apply((e.clientX/window.innerWidth-0.5)*16, (e.clientY/window.innerHeight-0.5)*12);
-  });
-  document.addEventListener("click", (e)=>{
-    if(e.target.closest(".entry-screen,.password-screen,.reveal-overlay,button,.playlist-item,.progress,.touch-circle")) return;
-    const r=document.createElement("div");
-    r.className="ripple";
-    r.style.cssText=`left:${e.clientX-40}px;top:${e.clientY-40}px;width:80px;height:80px`;
-    document.body.appendChild(r);
-    setTimeout(()=>r.remove(),700);
-  });
+
+  function draw(ts){
+    if(ts - last < 16){ requestAnimationFrame(draw); return; } // ~60fps cap
+    last = ts;
+    ctx.clearRect(0, 0, w, h);
+    for(let i = ripples.length - 1; i >= 0; i--){
+      const p = ripples[i];
+      p.r += p.speed;
+      p.alpha *= 0.965;
+      if(p.alpha < 0.02 || p.r > p.maxR){
+        ripples.splice(i, 1);
+        continue;
+      }
+      // outer ring
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(180, 230, 255, ${p.alpha})`;
+      ctx.lineWidth = p.lineW;
+      ctx.stroke();
+      // soft inner glow
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r * 0.55, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(200, 240, 255, ${p.alpha * 0.4})`;
+      ctx.lineWidth = p.lineW * 0.5;
+      ctx.stroke();
+    }
+    requestAnimationFrame(draw);
+  }
+  requestAnimationFrame(draw);
+
+  // Touch / mouse interaction
+  let dragging = false;
+  let lastX = 0, lastY = 0;
+
+  function pos(e){
+    if(e.touches && e.touches[0]){
+      return {x: e.touches[0].clientX, y: e.touches[0].clientY};
+    }
+    return {x: e.clientX, y: e.clientY};
+  }
+
+  function onStart(e){
+    // don't block UI controls
+    if(e.target.closest && e.target.closest("button, input, .playlist-item, .progress, .password-box, .touch-circle")) return;
+    dragging = true;
+    const p = pos(e);
+    lastX = p.x; lastY = p.y;
+    addRipple(p.x, p.y, 1);
+  }
+  function onMove(e){
+    if(!dragging) return;
+    const p = pos(e);
+    const dx = p.x - lastX, dy = p.y - lastY;
+    const dist = Math.sqrt(dx*dx + dy*dy);
+    if(dist > 18){
+      const force = Math.min(1, dist / 80);
+      addRipple(p.x, p.y, force);
+      lastX = p.x; lastY = p.y;
+    }
+  }
+  function onEnd(){ dragging = false; }
+
+  window.addEventListener("mousedown", onStart);
+  window.addEventListener("mousemove", onMove);
+  window.addEventListener("mouseup", onEnd);
+  window.addEventListener("touchstart", onStart, {passive:true});
+  window.addEventListener("touchmove", onMove, {passive:true});
+  window.addEventListener("touchend", onEnd);
+
+  // also gentle ambient ripples occasionally (very light)
+  setInterval(()=>{
+    if(ripples.length < 4 && document.visibilityState === "visible"){
+      addRipple(Math.random()*w, Math.random()*h*0.7, 0.25);
+    }
+  }, 2800);
+})();
+
+/* seek 15s */
+(function(){
+  const back15 = document.getElementById("back15Button");
+  const fwd15 = document.getElementById("fwd15Button");
+  if(back15) back15.addEventListener("click", ()=>{ if(music && music.duration) music.currentTime = Math.max(0, music.currentTime - 15); });
+  if(fwd15) fwd15.addEventListener("click", ()=>{ if(music && music.duration) music.currentTime = Math.min(music.duration, music.currentTime + 15); });
 })();
 
 </script>
 
 </body>
-                      </html>
+    </html>
