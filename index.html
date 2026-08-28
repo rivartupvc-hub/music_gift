@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0,
-      maximum-scale=1.0, user-scalable=no">
+      content="width=device-width,initial-scale=1.0,
+      maximum-scale=1.0,user-scalable=no">
 
-<meta name="theme-color" content="#07111f">
+<meta name="theme-color" content="#050912">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Music Space">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -27,6 +27,7 @@
     --faint:#718ca0;
 
     --bg:#040a12;
+
     --panel:rgba(255,255,255,.055);
     --panel-strong:rgba(255,255,255,.09);
     --border:rgba(220,240,255,.14);
@@ -36,9 +37,22 @@
     --purple:#a77cff;
     --green:#62dfb1;
     --orange:#ffbd75;
+    --pink:#ff78b7;
+    --red:#ff7187;
+    --gold:#ffd36a;
 
     --accent:var(--cyan);
+
+    --orb1:rgba(40,170,255,.20);
+    --orb2:rgba(160,80,255,.17);
+    --orb3:rgba(30,220,175,.13);
+
+    --theme-speed:18s;
 }
+
+/* =========================================================
+   RESET
+========================================================= */
 
 *{
     box-sizing:border-box;
@@ -54,9 +68,15 @@ html{
 body{
     min-height:100vh;
     overflow-x:hidden;
+
     background:var(--bg);
     color:var(--text);
+
     font-family:'Vazirmatn',sans-serif;
+
+    transition:
+        background 1.8s ease,
+        color 1.2s ease;
 }
 
 /* =========================================================
@@ -66,146 +86,260 @@ body{
 .background{
     position:fixed;
     inset:0;
+
     z-index:-10;
     overflow:hidden;
 
     background:
         radial-gradient(
-            circle at 20% 15%,
-            rgba(70,150,255,.20),
+            circle at 18% 12%,
+            var(--orb1),
             transparent 35%
         ),
         radial-gradient(
-            circle at 80% 25%,
-            rgba(160,90,255,.16),
-            transparent 35%
+            circle at 82% 25%,
+            var(--orb2),
+            transparent 36%
         ),
         radial-gradient(
-            circle at 50% 90%,
-            rgba(40,210,180,.13),
+            circle at 50% 92%,
+            var(--orb3),
             transparent 40%
         ),
-        #040a12;
+        var(--bg);
+
+    transition:
+        background 2s ease;
 }
+
+/*
+   سبک‌تر از نسخه قبلی:
+   فقط دو هاله بزرگ
+*/
 
 .background::before,
 .background::after{
     content:"";
+
     position:absolute;
 
-    width:70vmax;
-    height:70vmax;
+    width:55vmax;
+    height:55vmax;
 
     border-radius:50%;
 
-    filter:blur(90px);
-    opacity:.35;
+    filter:blur(75px);
+
+    opacity:.28;
+
+    will-change:transform;
+
+    pointer-events:none;
 }
 
 .background::before{
-    top:-30vmax;
+    top:-25vmax;
     left:-20vmax;
 
-    background:rgba(55,170,255,.45);
+    background:
+        radial-gradient(
+            circle,
+            var(--orb1),
+            transparent 70%
+        );
 
-    animation:bgMoveOne 24s ease-in-out infinite;
+    animation:
+        bgFloat1 28s ease-in-out infinite alternate;
 }
 
 .background::after{
     right:-25vmax;
-    bottom:-30vmax;
+    bottom:-25vmax;
 
-    background:rgba(170,90,255,.38);
+    background:
+        radial-gradient(
+            circle,
+            var(--orb2),
+            transparent 70%
+        );
 
-    animation:bgMoveTwo 28s ease-in-out infinite;
+    animation:
+        bgFloat2 32s ease-in-out infinite alternate;
 }
 
-@keyframes bgMoveOne{
-    0%,100%{
-        transform:translate(0,0) scale(1);
+@keyframes bgFloat1{
+    from{
+        transform:translate3d(0,0,0) scale(1);
     }
 
-    50%{
-        transform:translate(18vw,15vh) scale(1.2);
+    to{
+        transform:translate3d(15vw,12vh,0) scale(1.16);
     }
 }
 
-@keyframes bgMoveTwo{
-    0%,100%{
-        transform:translate(0,0) scale(1);
+@keyframes bgFloat2{
+    from{
+        transform:translate3d(0,0,0) scale(1);
     }
 
-    50%{
-        transform:translate(-15vw,-12vh) scale(1.15);
+    to{
+        transform:translate3d(-15vw,-12vh,0) scale(1.13);
     }
 }
+
+/* =========================================================
+   COLOR ORBS
+========================================================= */
 
 .color-orb{
     position:absolute;
 
-    width:38vmax;
-    height:38vmax;
+    width:30vmax;
+    height:30vmax;
 
     border-radius:50%;
 
-    filter:blur(80px);
-    opacity:.20;
+    filter:blur(70px);
+
+    opacity:.16;
+
+    will-change:transform;
+
+    pointer-events:none;
 }
 
 .orb-one{
-    top:35%;
-    left:-15%;
+    top:30%;
+    left:-12%;
 
-    background:#00bfff;
+    background:
+        radial-gradient(
+            circle,
+            #00cfff,
+            transparent 70%
+        );
 
-    animation:orbOne 25s ease-in-out infinite;
+    animation:
+        orbOne 34s ease-in-out infinite alternate;
 }
 
 .orb-two{
-    top:20%;
-    right:-15%;
+    top:18%;
+    right:-12%;
 
-    background:#8b5cff;
+    background:
+        radial-gradient(
+            circle,
+            #a95cff,
+            transparent 70%
+        );
 
-    animation:orbTwo 30s ease-in-out infinite;
+    animation:
+        orbTwo 38s ease-in-out infinite alternate;
 }
 
 .orb-three{
-    bottom:-20%;
+    bottom:-15%;
     left:35%;
 
-    background:#20d8a0;
+    background:
+        radial-gradient(
+            circle,
+            #1ee0a8,
+            transparent 70%
+        );
 
-    animation:orbThree 27s ease-in-out infinite;
+    animation:
+        orbThree 31s ease-in-out infinite alternate;
 }
 
 @keyframes orbOne{
-    0%,100%{
-        transform:translate(0,0);
+    from{
+        transform:translate3d(0,0,0);
     }
 
-    50%{
-        transform:translate(25vw,-8vh);
+    to{
+        transform:translate3d(20vw,-7vh,0);
     }
 }
 
 @keyframes orbTwo{
-    0%,100%{
-        transform:translate(0,0);
+    from{
+        transform:translate3d(0,0,0);
     }
 
-    50%{
-        transform:translate(-22vw,12vh);
+    to{
+        transform:translate3d(-20vw,10vh,0);
     }
 }
 
 @keyframes orbThree{
-    0%,100%{
-        transform:translate(0,0);
+    from{
+        transform:translate3d(0,0,0);
     }
 
-    50%{
-        transform:translate(8vw,-18vh);
+    to{
+        transform:translate3d(7vw,-15vh,0);
+    }
+}
+
+/* =========================================================
+   AUTOMATIC COLOR CYCLE
+========================================================= */
+
+body.auto-color{
+    animation:
+        ambientColor var(--theme-speed) linear infinite;
+}
+
+@keyframes ambientColor{
+
+    0%{
+        --orb1:rgba(35,180,255,.20);
+        --orb2:rgba(135,75,255,.17);
+        --orb3:rgba(30,220,175,.13);
+    }
+
+    14%{
+        --orb1:rgba(255,80,170,.19);
+        --orb2:rgba(255,100,80,.16);
+        --orb3:rgba(255,200,70,.13);
+    }
+
+    28%{
+        --orb1:rgba(80,255,210,.18);
+        --orb2:rgba(60,130,255,.18);
+        --orb3:rgba(170,80,255,.13);
+    }
+
+    42%{
+        --orb1:rgba(255,210,80,.19);
+        --orb2:rgba(255,90,150,.16);
+        --orb3:rgba(90,220,255,.13);
+    }
+
+    57%{
+        --orb1:rgba(110,90,255,.19);
+        --orb2:rgba(255,70,190,.16);
+        --orb3:rgba(50,220,150,.13);
+    }
+
+    72%{
+        --orb1:rgba(255,100,70,.18);
+        --orb2:rgba(100,210,255,.18);
+        --orb3:rgba(255,200,80,.13);
+    }
+
+    86%{
+        --orb1:rgba(50,220,255,.20);
+        --orb2:rgba(190,80,255,.17);
+        --orb3:rgba(80,255,170,.13);
+    }
+
+    100%{
+        --orb1:rgba(35,180,255,.20);
+        --orb2:rgba(135,75,255,.17);
+        --orb3:rgba(30,220,175,.13);
     }
 }
 
@@ -218,9 +352,10 @@ body{
     inset:0;
 
     z-index:-5;
+
     pointer-events:none;
 
-    opacity:.035;
+    opacity:.025;
 
     background-image:url(
         "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
@@ -228,7 +363,7 @@ body{
 }
 
 /* =========================================================
-   FLOATING LIGHTS
+   LIGHTS
 ========================================================= */
 
 .lights{
@@ -236,6 +371,7 @@ body{
     inset:0;
 
     pointer-events:none;
+
     z-index:-4;
 
     overflow:hidden;
@@ -244,43 +380,41 @@ body{
 .light{
     position:absolute;
 
-    width:4px;
-    height:4px;
+    width:3px;
+    height:3px;
 
     border-radius:50%;
 
     background:#dff8ff;
 
     box-shadow:
-        0 0 15px rgba(130,220,255,.8);
+        0 0 12px rgba(130,220,255,.65);
 
-    opacity:.15;
+    opacity:.12;
 
-    animation:lightFloat linear infinite;
+    animation:
+        lightFloat linear infinite;
+
+    will-change:transform;
 }
 
 @keyframes lightFloat{
-    0%{
-        transform:
-            translateY(110vh)
-            translateX(0);
 
+    0%{
+        transform:translate3d(0,110vh,0);
         opacity:0;
     }
 
     15%{
-        opacity:.45;
+        opacity:.35;
     }
 
     80%{
-        opacity:.2;
+        opacity:.15;
     }
 
     100%{
-        transform:
-            translateY(-10vh)
-            translateX(50px);
-
+        transform:translate3d(35px,-10vh,0);
         opacity:0;
     }
 }
@@ -302,8 +436,8 @@ body{
     background:#040a12;
 
     transition:
-        opacity .8s ease,
-        visibility .8s ease;
+        opacity .6s ease,
+        visibility .6s ease;
 }
 
 #loader.hide{
@@ -318,12 +452,13 @@ body{
 
     border-radius:50%;
 
-    border:1px solid rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.13);
 
-    border-top-color:var(--cyan);
-    border-right-color:var(--purple);
+    border-top-color:#66d4ff;
+    border-right-color:#a77cff;
 
-    animation:loaderSpin 1s linear infinite;
+    animation:
+        loaderSpin .9s linear infinite;
 }
 
 @keyframes loaderSpin{
@@ -356,16 +491,17 @@ body{
         );
 
     transition:
-        opacity 1s ease,
-        visibility 1s ease,
-        transform 1s ease;
+        opacity .8s ease,
+        visibility .8s ease,
+        transform .8s ease;
 }
 
 #gate.hide{
     opacity:0;
     visibility:hidden;
     pointer-events:none;
-    transform:scale(1.04);
+
+    transform:scale(1.03);
 }
 
 .gate-content{
@@ -375,6 +511,7 @@ body{
 
 .gate-label{
     font-size:10px;
+
     letter-spacing:4px;
 
     color:#8cb6d0;
@@ -383,11 +520,12 @@ body{
 
     margin-bottom:18px;
 
-    animation:fadeUp .9s ease forwards;
+    animation:fadeUp .7s ease forwards;
 }
 
 .gate-title{
     font-size:28px;
+
     font-weight:400;
 
     line-height:1.6;
@@ -396,7 +534,7 @@ body{
 
     margin-bottom:12px;
 
-    animation:fadeUp 1s ease .1s both;
+    animation:fadeUp .8s ease .1s both;
 }
 
 .gate-line{
@@ -414,20 +552,19 @@ body{
         );
 
     box-shadow:
-        0 0 20px rgba(100,210,255,.5);
-
-    animation:linePulse 3s ease-in-out infinite;
+        0 0 18px rgba(100,210,255,.4);
 }
 
 .gate-sub{
     color:var(--muted);
 
     font-size:13px;
+
     font-weight:300;
 
     margin-bottom:38px;
 
-    animation:fadeUp 1s ease .2s both;
+    animation:fadeUp .8s ease .2s both;
 }
 
 .enter-button{
@@ -452,15 +589,16 @@ body{
     justify-content:center;
 
     color:white;
+
     font-size:24px;
 
     cursor:pointer;
 
     box-shadow:
-        0 0 0 0 rgba(100,210,255,.35),
-        0 0 45px rgba(70,170,255,.15);
+        0 0 35px rgba(70,170,255,.15);
 
-    animation:enterPulse 2.5s ease-out infinite;
+    animation:
+        enterPulse 2.6s ease-out infinite;
 }
 
 .enter-button:active{
@@ -468,6 +606,7 @@ body{
 }
 
 @keyframes enterPulse{
+
     0%{
         box-shadow:
             0 0 0 0 rgba(100,210,255,.35),
@@ -476,8 +615,8 @@ body{
 
     70%{
         box-shadow:
-            0 0 0 24px rgba(100,210,255,0),
-            0 0 50px rgba(70,170,255,.25);
+            0 0 0 22px rgba(100,210,255,0),
+            0 0 45px rgba(70,170,255,.20);
     }
 
     100%{
@@ -487,22 +626,11 @@ body{
     }
 }
 
-@keyframes linePulse{
-    0%,100%{
-        width:55px;
-        opacity:.55;
-    }
-
-    50%{
-        width:75px;
-        opacity:1;
-    }
-}
-
 @keyframes fadeUp{
+
     from{
         opacity:0;
-        transform:translateY(16px);
+        transform:translateY(12px);
     }
 
     to{
@@ -530,8 +658,8 @@ body{
 
     background:rgba(2,7,14,.72);
 
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
 
     opacity:0;
 }
@@ -554,24 +682,24 @@ body{
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.10),
+            rgba(255,255,255,.09),
             rgba(255,255,255,.035)
         );
 
     border:1px solid var(--border);
 
     box-shadow:
-        0 25px 70px rgba(0,0,0,.45),
-        inset 0 1px 0 rgba(255,255,255,.15);
+        0 25px 60px rgba(0,0,0,.40);
 
     animation:
-        cardIn .55s cubic-bezier(.16,1,.3,1);
+        cardIn .45s cubic-bezier(.16,1,.3,1);
 }
 
 @keyframes cardIn{
+
     from{
         opacity:0;
-        transform:translateY(20px) scale(.96);
+        transform:translateY(15px) scale(.97);
     }
 
     to{
@@ -581,7 +709,7 @@ body{
 }
 
 .vault-icon{
-    font-size:28px;
+    font-size:30px;
     margin-bottom:12px;
 }
 
@@ -622,14 +750,13 @@ body{
 
 .vault-input:focus{
     border-color:rgba(100,210,255,.55);
-
-    box-shadow:
-        0 0 25px rgba(70,190,255,.15);
 }
 
 .vault-input::placeholder{
     letter-spacing:1px;
+
     font-size:12px;
+
     color:rgba(200,230,245,.4);
 }
 
@@ -655,16 +782,10 @@ body{
     font-family:'Vazirmatn',sans-serif;
 
     cursor:pointer;
-
-    transition:.25s;
 }
 
 .vault-btn:active{
     transform:scale(.97);
-}
-
-.vault-btn:disabled{
-    opacity:.6;
 }
 
 .vault-error{
@@ -677,8 +798,6 @@ body{
     color:#ffb9c5;
 
     opacity:0;
-
-    transition:.25s;
 }
 
 .vault-error.show{
@@ -691,6 +810,7 @@ body{
 
 #stage{
     position:relative;
+
     z-index:1;
 
     width:min(94%,520px);
@@ -698,16 +818,15 @@ body{
     margin:auto;
 
     padding:
-        55px 0
-        90px;
+        55px 0 90px;
 
     opacity:0;
 
-    transform:translateY(25px);
+    transform:translateY(18px);
 
     transition:
-        opacity 1s ease,
-        transform 1s cubic-bezier(.16,1,.3,1);
+        opacity .8s ease,
+        transform .8s ease;
 }
 
 #stage.visible{
@@ -716,7 +835,7 @@ body{
 }
 
 /* =========================================================
-   TOP
+   HERO
 ========================================================= */
 
 .hero{
@@ -726,9 +845,7 @@ body{
 
 .greeting{
     font-size:11px;
-
     color:var(--muted);
-
     margin-bottom:12px;
 }
 
@@ -751,7 +868,7 @@ body{
     margin-bottom:12px;
 
     text-shadow:
-        0 0 30px rgba(100,210,255,.15);
+        0 0 25px rgba(100,210,255,.14);
 }
 
 .intro{
@@ -782,13 +899,12 @@ body{
 }
 
 /* =========================================================
-   SECTION LABEL
+   SECTION
 ========================================================= */
 
 .section-label{
     display:flex;
     align-items:center;
-
     gap:10px;
 
     margin-bottom:15px;
@@ -841,8 +957,8 @@ body{
     cursor:pointer;
 
     transition:
-        background .3s ease,
-        padding .3s ease;
+        background .25s ease,
+        padding .25s ease;
 }
 
 .track:hover{
@@ -882,11 +998,12 @@ body{
         );
 
     box-shadow:
-        0 0 12px rgba(90,190,255,.5);
+        0 0 10px rgba(90,190,255,.45);
 }
 
 .track-num{
     width:27px;
+
     flex:0 0 27px;
 
     text-align:center;
@@ -903,7 +1020,6 @@ body{
 
 .eq{
     position:absolute;
-
     inset:0;
 
     display:flex;
@@ -921,7 +1037,8 @@ body{
 
     background:var(--cyan);
 
-    animation:eq 1s ease-in-out infinite;
+    animation:
+        eq .9s ease-in-out infinite;
 }
 
 .eq i:nth-child(1){
@@ -937,6 +1054,7 @@ body{
 }
 
 @keyframes eq{
+
     0%,100%{
         height:4px;
     }
@@ -959,6 +1077,7 @@ body{
     white-space:nowrap;
 
     overflow:hidden;
+
     text-overflow:ellipsis;
 
     margin-bottom:3px;
@@ -976,6 +1095,7 @@ body{
     white-space:nowrap;
 
     overflow:hidden;
+
     text-overflow:ellipsis;
 }
 
@@ -997,9 +1117,9 @@ body{
 
     font-size:10px;
 
-    opacity:0;
+    opacity:.25;
 
-    transition:.25s;
+    transition:.2s;
 }
 
 .track:hover .track-play,
@@ -1009,7 +1129,9 @@ body{
 
 .track.active .track-play{
     color:white;
-    border-color:rgba(150,225,255,.45);
+
+    border-color:
+        rgba(150,225,255,.45);
 }
 
 /* =========================================================
@@ -1038,13 +1160,18 @@ body{
 
     box-shadow:
         0 0 0 8px rgba(100,200,255,.035),
-        0 25px 70px rgba(0,0,0,.45);
+        0 20px 55px rgba(0,0,0,.42);
 
-    animation:coverSpin 25s linear infinite;
+    animation:
+        coverSpin 25s linear infinite;
 
     animation-play-state:paused;
 
     cursor:pointer;
+
+    transition:
+        box-shadow 1.2s ease,
+        border-color 1.2s ease;
 }
 
 .cover-wrap.playing{
@@ -1056,6 +1183,8 @@ body{
     height:100%;
 
     object-fit:cover;
+
+    display:block;
 }
 
 .cover-wrap::after{
@@ -1074,6 +1203,7 @@ body{
 }
 
 @keyframes coverSpin{
+
     from{
         transform:rotate(0deg);
     }
@@ -1085,6 +1215,7 @@ body{
 
 .song-title{
     font-size:19px;
+
     font-weight:400;
 
     color:#fff;
@@ -1114,6 +1245,93 @@ body{
     line-height:1.9;
 
     font-weight:300;
+}
+
+/* =========================================================
+   STAR SONG MODE
+========================================================= */
+
+body.star-mode .cover-wrap{
+    border-color:rgba(255,211,106,.55);
+
+    box-shadow:
+        0 0 0 8px rgba(255,205,80,.055),
+        0 0 55px rgba(255,180,60,.30),
+        0 20px 60px rgba(0,0,0,.45);
+}
+
+body.star-mode .title{
+    text-shadow:
+        0 0 25px rgba(255,210,100,.25);
+}
+
+body.star-mode .track.active{
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,205,90,.10),
+            rgba(255,100,180,.045)
+        );
+}
+
+body.star-mode .track.active::before{
+    background:
+        linear-gradient(
+            180deg,
+            #ffd76a,
+            #ff8ac8,
+            #9d8cff
+        );
+}
+
+/* ستاره‌های سبک */
+.star-field{
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:-3;
+
+    opacity:0;
+
+    transition:opacity 1s ease;
+
+    overflow:hidden;
+}
+
+.star-field.show{
+    opacity:1;
+}
+
+.star-particle{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    border-radius:50%;
+
+    background:#fff4bd;
+
+    box-shadow:
+        0 0 7px rgba(255,220,120,.8);
+
+    animation:
+        starTwinkle 2s ease-in-out infinite alternate;
+}
+
+@keyframes starTwinkle{
+
+    from{
+        opacity:.15;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:.8;
+        transform:scale(1.5);
+    }
 }
 
 /* =========================================================
@@ -1149,7 +1367,8 @@ body{
 }
 
 .bars.playing i{
-    animation:bars 1s ease-in-out infinite;
+    animation:
+        bars .9s ease-in-out infinite;
 }
 
 .bars i:nth-child(1){
@@ -1181,6 +1400,7 @@ body{
 }
 
 @keyframes bars{
+
     0%,100%{
         height:4px;
     }
@@ -1224,7 +1444,7 @@ body{
 
 .ctl-btn:hover{
     opacity:1;
-    transform:scale(1.08);
+    transform:scale(1.06);
 }
 
 .ctl-btn:active{
@@ -1257,7 +1477,7 @@ body{
     cursor:pointer;
 
     box-shadow:
-        0 0 35px rgba(80,180,255,.15);
+        0 0 30px rgba(80,180,255,.13);
 
     transition:.2s;
 }
@@ -1272,7 +1492,6 @@ body{
 
 .progress-wrap{
     max-width:350px;
-
     margin:auto;
 }
 
@@ -1286,6 +1505,8 @@ body{
     background:rgba(220,240,255,.12);
 
     cursor:pointer;
+
+    overflow:hidden;
 }
 
 .progress-bar{
@@ -1302,7 +1523,9 @@ body{
         );
 
     box-shadow:
-        0 0 12px rgba(90,190,255,.45);
+        0 0 10px rgba(90,190,255,.4);
+
+    transition:width .08s linear;
 }
 
 .time{
@@ -1383,11 +1606,11 @@ body{
 
     border:1px solid var(--border);
 
-    backdrop-filter:blur(16px);
-    -webkit-backdrop-filter:blur(16px);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
 
     box-shadow:
-        0 20px 50px rgba(0,0,0,.25);
+        0 18px 45px rgba(0,0,0,.23);
 
     display:flex;
     align-items:center;
@@ -1402,8 +1625,6 @@ body{
     line-height:2;
 
     font-weight:300;
-
-    transition:.4s;
 }
 
 .moment-box::before{
@@ -1525,7 +1746,6 @@ body{
     z-index:500;
 
     display:flex;
-
     gap:7px;
 
     opacity:0;
@@ -1534,7 +1754,7 @@ body{
 
     pointer-events:none;
 
-    transition:.8s;
+    transition:.6s;
 }
 
 .mood-controls.show{
@@ -1555,7 +1775,7 @@ body{
 
     background:rgba(8,18,30,.55);
 
-    backdrop-filter:blur(12px);
+    backdrop-filter:blur(10px);
 
     color:white;
 
@@ -1563,7 +1783,7 @@ body{
 
     opacity:.75;
 
-    transition:.3s;
+    transition:.25s;
 }
 
 .mood-btn:hover{
@@ -1572,21 +1792,127 @@ body{
 }
 
 .mood-btn.active{
-    background:rgba(255,190,110,.15);
+    background:
+        rgba(255,190,110,.18);
 
-    border-color:rgba(255,205,140,.4);
+    border-color:
+        rgba(255,205,140,.5);
 
     box-shadow:
-        0 0 18px rgba(255,180,100,.2);
+        0 0 20px rgba(255,180,100,.25);
 }
 
 .mood-btn.rain-active{
-    background:rgba(100,190,255,.15);
+    background:
+        rgba(100,190,255,.15);
 
-    border-color:rgba(140,220,255,.4);
+    border-color:
+        rgba(140,220,255,.4);
 
     box-shadow:
         0 0 18px rgba(80,190,255,.2);
+}
+
+/* =========================================================
+   CANDLE MODE
+========================================================= */
+
+body.candle-mode{
+    --bg:#100a07;
+
+    --cyan:#ffc477;
+    --purple:#ff806b;
+
+    --border:rgba(255,220,180,.15);
+
+    --muted:#cdb8a7;
+    --faint:#9e8370;
+}
+
+body.candle-mode .background{
+    background:
+        radial-gradient(
+            circle at 25% 15%,
+            rgba(255,155,70,.23),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 25%,
+            rgba(255,80,90,.17),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 50% 90%,
+            rgba(255,210,100,.12),
+            transparent 40%
+        ),
+        #100a07;
+}
+
+body.candle-mode .background::before{
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,155,60,.45),
+            transparent 70%
+        );
+}
+
+body.candle-mode .background::after{
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,80,90,.30),
+            transparent 70%
+        );
+}
+
+/*
+   شعله واقعی‌تر بدون تصویر خارجی
+*/
+
+body.candle-mode::after{
+    content:"";
+
+    position:fixed;
+
+    width:220px;
+    height:220px;
+
+    left:-80px;
+    bottom:-70px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255,190,90,.28),
+            rgba(255,120,40,.10) 35%,
+            transparent 70%
+        );
+
+    filter:blur(18px);
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    animation:
+        candleGlow 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes candleGlow{
+
+    from{
+        transform:scale(.9);
+        opacity:.55;
+    }
+
+    to{
+        transform:scale(1.15);
+        opacity:1;
+    }
 }
 
 /* =========================================================
@@ -1606,7 +1932,7 @@ body{
 
     opacity:0;
 
-    transition:.6s;
+    transition:opacity .5s;
 }
 
 .rain-layer.show{
@@ -1625,25 +1951,28 @@ body{
     background:
         linear-gradient(
             180deg,
-            rgba(220,245,255,.8),
+            rgba(220,245,255,.65),
             rgba(120,190,230,.02)
         );
 
-    animation:rain linear infinite;
+    animation:
+        rain linear infinite;
 }
 
 @keyframes rain{
+
     to{
         transform:
-            translate(
+            translate3d(
                 var(--drift),
-                120vh
+                120vh,
+                0
             );
     }
 }
 
 /* =========================================================
-   HIDDEN INFO
+   HIDDEN PANEL
 ========================================================= */
 
 #hiddenPanel{
@@ -1660,15 +1989,15 @@ body{
 
     padding:30px;
 
-    background:rgba(2,8,16,.9);
+    background:rgba(2,8,16,.90);
 
-    backdrop-filter:blur(16px);
+    backdrop-filter:blur(12px);
 
     opacity:0;
 
     visibility:hidden;
 
-    transition:.7s;
+    transition:.5s;
 }
 
 #hiddenPanel.show{
@@ -1745,11 +2074,11 @@ body{
 .reveal{
     opacity:0;
 
-    transform:translateY(22px);
+    transform:translateY(16px);
 
     transition:
-        opacity .9s ease,
-        transform .9s cubic-bezier(.16,1,.3,1);
+        opacity .7s ease,
+        transform .7s ease;
 }
 
 .reveal.in{
@@ -1799,41 +2128,69 @@ body{
         transition-duration:.01ms !important;
         scroll-behavior:auto !important;
     }
+
+    body.auto-color{
+        animation:none;
+    }
 }
+
+/* =========================================================
+   PERFORMANCE MODE
+========================================================= */
+
+@media(max-width:600px){
+
+    .background::before,
+    .background::after{
+        filter:blur(55px);
+        opacity:.22;
+    }
+
+    .color-orb{
+        filter:blur(50px);
+        opacity:.12;
+    }
+
+    .moment-box{
+        backdrop-filter:none;
+        -webkit-backdrop-filter:none;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- ======================================================
-     BACKGROUND
-====================================================== -->
+<!-- BACKGROUND -->
 
 <div class="background">
+
     <div class="color-orb orb-one"></div>
     <div class="color-orb orb-two"></div>
     <div class="color-orb orb-three"></div>
+
 </div>
 
 <div class="lights" id="lights"></div>
+
+<div class="star-field" id="starField"></div>
 
 <div class="grain"></div>
 
 <div class="rain-layer" id="rainLayer"></div>
 
 
-<!-- ======================================================
-     LOADER
-====================================================== -->
+<!-- LOADER -->
 
 <div id="loader">
+
     <div class="loader-ring"></div>
+
 </div>
 
 
-<!-- ======================================================
-     ENTRY
-====================================================== -->
+<!-- ENTRY -->
 
 <div id="gate">
 
@@ -1844,13 +2201,13 @@ body{
         </div>
 
         <div class="gate-title">
-            یه فضای کوچیک برای موسیقی
+            یه فضای کوچیک برای چندتا آهنگ
         </div>
 
         <div class="gate-line"></div>
 
         <div class="gate-sub">
-            برای چند دقیقه فاصله از شلوغی روز
+            لمس کن تا واردش بشی
         </div>
 
         <div class="enter-button" id="enterButton">
@@ -1862,16 +2219,14 @@ body{
 </div>
 
 
-<!-- ======================================================
-     PASSWORD
-========================================================= -->
+<!-- PASSWORD -->
 
 <div id="vault">
 
     <div class="vault-card" id="vaultCard">
 
         <div class="vault-icon">
-            🎧
+            🔐
         </div>
 
         <h2>
@@ -1912,9 +2267,7 @@ body{
 </div>
 
 
-<!-- ======================================================
-     HIDDEN PANEL
-====================================================== -->
+<!-- HIDDEN PANEL -->
 
 <div id="hiddenPanel">
 
@@ -1925,10 +2278,11 @@ body{
         </div>
 
         <p>
-            گاهی لازم نیست برای گوش دادن به یه آهنگ
-            دلیل خاصی داشته باشی؛
-            بعضی وقت‌ها فقط انتخاب کردن یه آهنگ خوب
-            و چند دقیقه گوش دادن کافیه.
+            بعضی چیزهای خوب لازم نیست
+            دلیل خاصی داشته باشن؛
+            گاهی فقط یه آهنگ خوبه،
+            یه لحظه‌ی آرومه،
+            یا یه چیز کوچیک برای عوض کردن حال و هوا.
         </p>
 
         <div
@@ -1943,9 +2297,7 @@ body{
 </div>
 
 
-<!-- ======================================================
-     MOOD CONTROLS
-====================================================== -->
+<!-- MOOD CONTROLS -->
 
 <div
     class="mood-controls"
@@ -1956,7 +2308,7 @@ body{
         class="mood-btn"
         id="candleToggle"
         type="button"
-        aria-label="حالت گرم"
+        aria-label="حالت شمع"
     >
         🕯
     </button>
@@ -1973,13 +2325,11 @@ body{
 </div>
 
 
-<!-- ======================================================
-     AUDIO
-====================================================== -->
+<!-- BACKGROUND AUDIO -->
 
 <audio
     id="bgMusic"
-    preload="auto"
+    preload="none"
     loop
 >
     <source
@@ -1988,9 +2338,10 @@ body{
     >
 </audio>
 
+
 <audio
     id="rainSound"
-    preload="auto"
+    preload="none"
     loop
 >
     <source
@@ -2000,9 +2351,7 @@ body{
 </audio>
 
 
-<!-- ======================================================
-     MAIN
-====================================================== -->
+<!-- MAIN -->
 
 <main id="stage">
 
@@ -2062,8 +2411,9 @@ body{
 
             <img
                 id="cover"
-                src="cover.jpg"
+                src="cover-1.jpg"
                 alt="Music cover"
+                decoding="async"
             >
 
         </div>
@@ -2076,12 +2426,14 @@ body{
             —
         </div>
 
+
         <div
             class="song-artist"
             id="songArtist"
         >
             —
         </div>
+
 
         <div
             class="song-message"
@@ -2093,6 +2445,7 @@ body{
             class="bars"
             id="bars"
         >
+
             <i></i>
             <i></i>
             <i></i>
@@ -2100,8 +2453,11 @@ body{
             <i></i>
             <i></i>
             <i></i>
+
         </div>
 
+
+        <!-- CONTROLS -->
 
         <div class="controls">
 
@@ -2152,6 +2508,8 @@ body{
 
         </div>
 
+
+        <!-- PROGRESS -->
 
         <div class="progress-wrap">
 
@@ -2253,7 +2611,7 @@ body{
 
         <p class="footer-text">
             امیدوارم هر آهنگ اینجا<br>
-            چند دقیقه‌ی خوب و آروم برات بسازه.
+            یه چند دقیقه‌ی خوب برات بسازه.
         </p>
 
         <div class="footer-line"></div>
@@ -2263,7 +2621,7 @@ body{
         </div>
 
         <div class="footer-sub">
-            یه فضای کوچیک، برای چند لحظه موسیقی.
+            یه فضای کوچیک، برای چند لحظه‌ی خوب.
         </div>
 
     </footer>
@@ -2272,6 +2630,7 @@ body{
 
 
 <script>
+
 (function(){
 
 "use strict";
@@ -2280,77 +2639,143 @@ body{
    ELEMENTS
 ========================================================= */
 
-const $ = id => document.getElementById(id);
+const $ = id =>
+    document.getElementById(id);
 
-const gate          = $("gate");
-const enterButton   = $("enterButton");
+const gate =
+    $("gate");
 
-const vault         = $("vault");
-const vaultCard     = $("vaultCard");
-const vaultInput    = $("vaultInput");
-const vaultBtn      = $("vaultBtn");
-const vaultError    = $("vaultError");
+const enterButton =
+    $("enterButton");
 
-const stage         = $("stage");
+const vault =
+    $("vault");
 
-const tracklist     = $("tracklist");
+const vaultCard =
+    $("vaultCard");
 
-const coverWrap     = $("coverWrap");
-const cover         = $("cover");
+const vaultInput =
+    $("vaultInput");
 
-const songTitle     = $("songTitle");
-const songArtist    = $("songArtist");
-const songMessage   = $("songMessage");
+const vaultBtn =
+    $("vaultBtn");
 
-const lyrics        = $("lyrics");
+const vaultError =
+    $("vaultError");
 
-const music         = $("music");
-const bgMusic       = $("bgMusic");
-const rainSound     = $("rainSound");
+const stage =
+    $("stage");
 
-const playBtn       = $("playBtn");
+const tracklist =
+    $("tracklist");
 
-const prevBtn       = $("prevBtn");
-const nextBtn       = $("nextBtn");
+const coverWrap =
+    $("coverWrap");
 
-const back15        = $("back15");
-const fwd15         = $("fwd15");
+const cover =
+    $("cover");
 
-const progress      = $("progress");
-const progressBar   = $("progressBar");
+const songTitle =
+    $("songTitle");
 
-const curTime       = $("curTime");
-const durTime       = $("durTime");
+const songArtist =
+    $("songArtist");
 
-const bars          = $("bars");
+const songMessage =
+    $("songMessage");
 
-const moodControls  = $("moodControls");
+const lyrics =
+    $("lyrics");
 
-const candleToggle  = $("candleToggle");
-const rainToggle    = $("rainToggle");
+const music =
+    $("music");
 
-const rainLayer     = $("rainLayer");
+const bgMusic =
+    $("bgMusic");
 
-const hiddenPanel   = $("hiddenPanel");
-const hiddenClose   = $("hiddenClose");
+const rainSound =
+    $("rainSound");
 
-const momentBox     = $("momentBox");
-const momentPrev    = $("momentPrev");
-const momentNext    = $("momentNext");
-const momentCount   = $("momentCount");
+const playBtn =
+    $("playBtn");
+
+const prevBtn =
+    $("prevBtn");
+
+const nextBtn =
+    $("nextBtn");
+
+const back15 =
+    $("back15");
+
+const fwd15 =
+    $("fwd15");
+
+const progress =
+    $("progress");
+
+const progressBar =
+    $("progressBar");
+
+const curTime =
+    $("curTime");
+
+const durTime =
+    $("durTime");
+
+const bars =
+    $("bars");
+
+const moodControls =
+    $("moodControls");
+
+const candleToggle =
+    $("candleToggle");
+
+const rainToggle =
+    $("rainToggle");
+
+const rainLayer =
+    $("rainLayer");
+
+const starField =
+    $("starField");
+
+const hiddenPanel =
+    $("hiddenPanel");
+
+const hiddenClose =
+    $("hiddenClose");
+
+const momentBox =
+    $("momentBox");
+
+const momentPrev =
+    $("momentPrev");
+
+const momentNext =
+    $("momentNext");
+
+const momentCount =
+    $("momentCount");
 
 
 /* =========================================================
    SETTINGS
 ========================================================= */
 
-const CORRECT_PASSWORD = "1385";
+const CORRECT_PASSWORD =
+    "1385";
 
 let songs = [];
+
 let currentIndex = 0;
 
 let musicStarted = false;
+
 let rainActive = false;
+
+let candleActive = false;
 
 
 /* =========================================================
@@ -2359,27 +2784,70 @@ let rainActive = false;
 
 function formatTime(seconds){
 
-    if(!isFinite(seconds) || seconds < 0){
+    if(
+        !isFinite(seconds) ||
+        seconds < 0
+    ){
         seconds = 0;
     }
 
     const minutes =
-        Math.floor(seconds / 60);
+        Math.floor(
+            seconds / 60
+        );
 
     const secondsPart =
-        Math.floor(seconds % 60);
+        Math.floor(
+            seconds % 60
+        );
 
     return (
         minutes +
         ":" +
-        (secondsPart < 10 ? "0" : "") +
+        (
+            secondsPart < 10
+            ? "0"
+            : ""
+        ) +
         secondsPart
     );
+
 }
 
 
 /* =========================================================
-   SONGS
+   ESCAPE
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value)
+        .replaceAll(
+            "&",
+            "&amp;"
+        )
+        .replaceAll(
+            "<",
+            "&lt;"
+        )
+        .replaceAll(
+            ">",
+            "&gt;"
+        )
+        .replaceAll(
+            '"',
+            "&quot;"
+        )
+        .replaceAll(
+            "'",
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================================
+   LOAD SONGS
 ========================================================= */
 
 async function loadSongs(){
@@ -2393,7 +2861,7 @@ async function loadSongs(){
             );
 
         if(!response.ok){
-            throw new Error("songs.json not found");
+            throw new Error();
         }
 
         const data =
@@ -2403,7 +2871,7 @@ async function loadSongs(){
             !Array.isArray(data) ||
             !data.length
         ){
-            throw new Error("Empty playlist");
+            throw new Error();
         }
 
         songs = data;
@@ -2420,18 +2888,16 @@ async function loadSongs(){
                     "عمیان",
 
                 src:
-                    "song.mp3",
+                    "song-1.mp3",
 
                 cover:
-                    "cover.jpg",
+                    "cover-1.jpg",
 
                 message:
-                    "گاهی یه آهنگ خوب فقط کافیه تا چند دقیقه فضای روز رو عوض کنه.",
+                    "گاهی یک آهنگ خوب، فقط برای چند دقیقه فضای روز رو عوض می‌کنه.",
 
                 lyrics:[
-                    "متن آهنگ را اینجا قرار بده.",
-                    "هر خط به صورت ساده نمایش داده می‌شود.",
-                    "می‌توانی متن کامل آهنگ را در songs.json قرار بدهی."
+                    "متن آهنگ را اینجا قرار بده."
                 ]
             }
 
@@ -2439,117 +2905,147 @@ async function loadSongs(){
 
     }
 
-    loadSong(0,false);
+    loadSong(
+        0,
+        false
+    );
+
 }
 
 
 /* =========================================================
-   RENDER PLAYLIST
+   PLAYLIST
 ========================================================= */
 
 function renderPlaylist(){
 
-    tracklist.innerHTML =
-        songs.map((song,index)=>{
+    let html = "";
 
-            const active =
-                index === currentIndex;
+    for(
+        let i = 0;
+        i < songs.length;
+        i++
+    ){
 
-            return `
+        const song =
+            songs[i];
 
-                <div
-                    class="track ${active ? "active" : ""}"
-                    data-index="${index}"
-                >
+        const active =
+            i === currentIndex;
 
-                    <div class="track-num">
+        html += `
 
-                        ${
-                            active
-                            ?
-                            `
-                            <div class="eq">
-                                <i></i>
-                                <i></i>
-                                <i></i>
-                            </div>
-                            `
-                            :
-                            String(index + 1)
-                                .padStart(2,"0")
-                        }
+            <div
+                class="track ${active ? "active" : ""}"
+                data-index="${i}"
+            >
 
+                <div class="track-num">
+
+                    ${
+                        active
+                        ?
+                        `
+                        <div class="eq">
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                        </div>
+                        `
+                        :
+                        String(i + 1)
+                            .padStart(2,"0")
+                    }
+
+                </div>
+
+                <div class="track-body">
+
+                    <div class="track-title">
+                        ${escapeHTML(
+                            song.title ||
+                            "بدون نام"
+                        )}
                     </div>
 
-                    <div class="track-body">
-
-                        <div class="track-title">
-                            ${escapeHTML(song.title || "بدون نام")}
-                        </div>
-
-                        <div class="track-artist">
-                            ${escapeHTML(song.artist || "")}
-                        </div>
-
-                    </div>
-
-                    <div class="track-play">
-
-                        ${
-                            active && !music.paused
-                            ? "❚❚"
-                            : "▶"
-                        }
-
+                    <div class="track-artist">
+                        ${escapeHTML(
+                            song.artist ||
+                            ""
+                        )}
                     </div>
 
                 </div>
 
-            `;
+                <div class="track-play">
+                    ${
+                        active &&
+                        !music.paused
+                        ? "❚❚"
+                        : "▶"
+                    }
+                </div>
 
-        }).join("");
+            </div>
 
+        `;
 
-    tracklist
-        .querySelectorAll(".track")
-        .forEach(track=>{
+    }
 
-            track.addEventListener(
-                "click",
-                ()=>{
-
-                    const index =
-                        Number(
-                            track.dataset.index
-                        );
-
-                    loadSong(
-                        index,
-                        true
-                    );
-
-                }
-            );
-
-        });
+    tracklist.innerHTML =
+        html;
 
 }
 
 
 /* =========================================================
-   ESCAPE HTML
+   PLAYLIST CLICK
 ========================================================= */
 
-function escapeHTML(value){
+tracklist.addEventListener(
+    "click",
+    event => {
 
-    return String(value)
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+        const track =
+            event.target.closest(
+                ".track"
+            );
 
-}
+        if(!track){
+            return;
+        }
+
+        const index =
+            Number(
+                track.dataset.index
+            );
+
+        if(
+            index === currentIndex
+        ){
+
+            if(music.paused){
+
+                music
+                    .play()
+                    .catch(()=>{});
+
+            }else{
+
+                music.pause();
+
+            }
+
+            return;
+        }
+
+        loadSong(
+            index,
+            true
+        );
+
+    }
+);
 
 
 /* =========================================================
@@ -2562,21 +3058,30 @@ function renderLyrics(song){
 
     let lines = [];
 
-    if(Array.isArray(song.lyrics)){
+    if(
+        Array.isArray(
+            song.lyrics
+        )
+    ){
 
-        lines = song.lyrics;
+        lines =
+            song.lyrics;
 
-    }else if(song.lyrics){
+    }else if(
+        song.lyrics
+    ){
 
-        lines = [song.lyrics];
+        lines =
+            [song.lyrics];
 
     }
-
 
     if(!lines.length){
 
         const p =
-            document.createElement("p");
+            document.createElement(
+                "p"
+            );
 
         p.textContent =
             "متن آهنگ هنوز اضافه نشده.";
@@ -2586,17 +3091,82 @@ function renderLyrics(song){
         return;
     }
 
+    const fragment =
+        document.createDocumentFragment();
 
-    lines.forEach(line=>{
+    for(
+        const line of lines
+    ){
 
         const p =
-            document.createElement("p");
+            document.createElement(
+                "p"
+            );
 
-        p.textContent = line;
+        p.textContent =
+            line;
 
-        lyrics.appendChild(p);
+        fragment.appendChild(p);
 
-    });
+    }
+
+    lyrics.appendChild(
+        fragment
+    );
+
+}
+
+
+/* =========================================================
+   STAR DETECTION
+========================================================= */
+
+function isStarSong(song){
+
+    if(!song){
+        return false;
+    }
+
+    const title =
+        String(
+            song.title || ""
+        ).toLowerCase();
+
+    const artist =
+        String(
+            song.artist || ""
+        ).toLowerCase();
+
+    return (
+        title.includes("ستاره") &&
+        (
+            artist.includes("حمید") ||
+            artist.includes("عسکری") ||
+            artist.includes("hamid")
+        )
+    );
+
+}
+
+
+/* =========================================================
+   STAR MODE
+========================================================= */
+
+function setStarMode(song){
+
+    const active =
+        isStarSong(song);
+
+    document.body.classList.toggle(
+        "star-mode",
+        active
+    );
+
+    starField.classList.toggle(
+        "show",
+        active
+    );
 
 }
 
@@ -2605,12 +3175,14 @@ function renderLyrics(song){
    LOAD SONG
 ========================================================= */
 
-function loadSong(index,autoplay){
+function loadSong(
+    index,
+    autoplay
+){
 
     if(!songs.length){
         return;
     }
-
 
     currentIndex =
         (
@@ -2619,61 +3191,49 @@ function loadSong(index,autoplay){
         ) %
         songs.length;
 
-
     const song =
         songs[currentIndex];
 
-
     cover.src =
         song.cover ||
-        "cover.jpg";
-
+        "cover-1.jpg";
 
     cover.alt =
         song.title ||
         "Music cover";
 
-
     songTitle.textContent =
         song.title ||
         "—";
-
 
     songArtist.textContent =
         song.artist ||
         "—";
 
-
     songMessage.textContent =
         song.message ||
         "";
 
-
     renderLyrics(song);
 
+    setStarMode(song);
 
     music.src =
         song.src ||
         "";
 
-
     music.load();
-
 
     progressBar.style.width =
         "0%";
 
-
     curTime.textContent =
         "0:00";
-
 
     durTime.textContent =
         "0:00";
 
-
     renderPlaylist();
-
 
     if(autoplay){
 
@@ -2683,7 +3243,9 @@ function loadSong(index,autoplay){
 
     }else{
 
-        updatePlayingUI(false);
+        updatePlayingUI(
+            false
+        );
 
     }
 
@@ -2691,28 +3253,32 @@ function loadSong(index,autoplay){
 
 
 /* =========================================================
-   PLAYING UI
+   UI
 ========================================================= */
 
-function updatePlayingUI(playing){
+function updatePlayingUI(
+    playing
+){
 
     playBtn.textContent =
         playing
         ? "❚❚"
         : "▶";
 
-
     coverWrap.classList.toggle(
         "playing",
         playing
     );
-
 
     bars.classList.toggle(
         "playing",
         playing
     );
 
+    /*
+       فقط در تغییر حالت واقعی
+       playlist دوباره ساخته می‌شود.
+    */
 
     renderPlaylist();
 
@@ -2773,10 +3339,6 @@ back15.addEventListener(
     "click",
     ()=>{
 
-        if(!music.duration){
-            return;
-        }
-
         music.currentTime =
             Math.max(
                 0,
@@ -2813,7 +3375,9 @@ music.addEventListener(
     "play",
     ()=>{
 
-        updatePlayingUI(true);
+        updatePlayingUI(
+            true
+        );
 
         duckBackground();
 
@@ -2825,7 +3389,9 @@ music.addEventListener(
     "pause",
     ()=>{
 
-        updatePlayingUI(false);
+        updatePlayingUI(
+            false
+        );
 
         resumeBackground();
 
@@ -2846,6 +3412,11 @@ music.addEventListener(
 );
 
 
+/*
+   timeupdate خودش نسبتاً کم‌دفعات است.
+   از transition سنگین هم استفاده نکردیم.
+*/
+
 music.addEventListener(
     "timeupdate",
     ()=>{
@@ -2858,12 +3429,11 @@ music.addEventListener(
             (
                 music.currentTime /
                 music.duration
-            ) * 100;
-
+            ) *
+            100;
 
         progressBar.style.width =
             percentage + "%";
-
 
         curTime.textContent =
             formatTime(
@@ -2888,21 +3458,19 @@ music.addEventListener(
 
 
 /* =========================================================
-   PROGRESS CLICK
+   PROGRESS
 ========================================================= */
 
 progress.addEventListener(
-    "click",
-    event=>{
+    "pointerdown",
+    event => {
 
         if(!music.duration){
             return;
         }
 
-
         const rect =
             progress.getBoundingClientRect();
-
 
         const ratio =
             (
@@ -2910,7 +3478,6 @@ progress.addEventListener(
                 rect.left
             ) /
             rect.width;
-
 
         music.currentTime =
             Math.max(
@@ -2930,50 +3497,90 @@ progress.addEventListener(
    BACKGROUND MUSIC
 ========================================================= */
 
+let bgFadeTimer = null;
+
+
 function fadeBackgroundIn(){
 
-    bgMusic.volume = 0;
+    if(
+        rainActive ||
+        !music.paused
+    ){
+        return;
+    }
+
+    clearInterval(
+        bgFadeTimer
+    );
+
+    bgMusic.volume =
+        Math.min(
+            bgMusic.volume || 0,
+            .16
+        );
 
     bgMusic
         .play()
         .catch(()=>{});
 
+    let volume =
+        bgMusic.volume;
 
-    let volume = 0;
+    bgFadeTimer =
+        setInterval(
+            ()=>{
 
-    const interval =
-        setInterval(()=>{
+                if(
+                    rainActive ||
+                    !music.paused
+                ){
 
-            volume =
-                Math.min(
-                    .20,
-                    volume + .01
-                );
+                    clearInterval(
+                        bgFadeTimer
+                    );
 
-            bgMusic.volume =
-                volume;
+                    return;
+                }
 
+                volume =
+                    Math.min(
+                        .16,
+                        volume + .012
+                    );
 
-            if(volume >= .20){
+                bgMusic.volume =
+                    volume;
 
-                clearInterval(interval);
+                if(
+                    volume >= .16
+                ){
 
-            }
+                    clearInterval(
+                        bgFadeTimer
+                    );
 
-        },70);
+                }
+
+            },
+            70
+        );
 
 }
 
 
 function duckBackground(){
 
-    if(bgMusic.paused){
-        return;
+    clearInterval(
+        bgFadeTimer
+    );
+
+    if(
+        !bgMusic.paused
+    ){
+
+        bgMusic.pause();
+
     }
-
-    bgMusic.volume = 0;
-
-    bgMusic.pause();
 
 }
 
@@ -3001,11 +3608,15 @@ enterButton.addEventListener(
     "click",
     ()=>{
 
-        vault.classList.add("show");
+        vault.classList.add(
+            "show"
+        );
 
         setTimeout(
-            ()=>vaultInput.focus(),
-            250
+            ()=>{
+                vaultInput.focus();
+            },
+            200
         );
 
     }
@@ -3021,19 +3632,20 @@ function checkPassword(){
     const value =
         vaultInput.value.trim();
 
-
-    if(value === CORRECT_PASSWORD){
+    if(
+        value ===
+        CORRECT_PASSWORD
+    ){
 
         vaultError.classList.remove(
             "show"
         );
 
-
-        vaultBtn.disabled = true;
+        vaultBtn.disabled =
+            true;
 
         vaultBtn.textContent =
             "...";
-
 
         setTimeout(
             ()=>{
@@ -3049,19 +3661,15 @@ function checkPassword(){
                 startExperience();
 
             },
-            350
+            300
         );
 
-
         return;
-
     }
-
 
     vaultError.classList.add(
         "show"
     );
-
 
     vaultCard.animate(
         [
@@ -3087,16 +3695,18 @@ function checkPassword(){
             }
         ],
         {
-            duration:400
+            duration:350
         }
     );
 
-
-    vaultInput.value = "";
+    vaultInput.value =
+        "";
 
     setTimeout(
-        ()=>vaultInput.focus(),
-        50
+        ()=>{
+            vaultInput.focus();
+        },
+        30
     );
 
 }
@@ -3110,9 +3720,12 @@ vaultBtn.addEventListener(
 
 vaultInput.addEventListener(
     "keydown",
-    event=>{
+    event => {
 
-        if(event.key === "Enter"){
+        if(
+            event.key ===
+            "Enter"
+        ){
 
             checkPassword();
 
@@ -3123,7 +3736,7 @@ vaultInput.addEventListener(
 
 
 /* =========================================================
-   START EXPERIENCE
+   START
 ========================================================= */
 
 async function startExperience(){
@@ -3132,29 +3745,36 @@ async function startExperience(){
         return;
     }
 
-    musicStarted = true;
+    musicStarted =
+        true;
 
+    /*
+       رنگ‌ها از همین لحظه شروع می‌شوند.
+    */
+
+    document.body.classList.add(
+        "auto-color"
+    );
 
     try{
 
-        bgMusic.volume = .15;
+        bgMusic.volume =
+            .14;
 
         await bgMusic.play();
 
     }catch(error){
 
         /*
-         * Browser autoplay restrictions
-         * are intentionally ignored.
-         */
+           مرورگر اجازه autoplay نداد؛
+           مشکلی نیست.
+        */
 
     }
-
 
     stage.classList.add(
         "visible"
     );
-
 
     moodControls.classList.add(
         "show"
@@ -3171,23 +3791,25 @@ const moments = [
 
     "یه فضای کوچیک برای آهنگ‌هایی که ارزش دوباره شنیدن دارن.",
 
-    "بعضی آهنگ‌ها یه حال و هوای خاص با خودشون میارن.",
+    "بعضی آهنگ‌ها فقط آهنگ نیستن؛ یه حال و هوا رو با خودشون میارن.",
 
     "برای وقت‌هایی که چند دقیقه فاصله گرفتن از شلوغی روز خوبه.",
 
-    "گاهی انتخاب یه آهنگ خوب، خودش یه تغییر کوچیک توی حال و هواست."
+    "هر آهنگی اینجا یه انتخابه؛ بدون دلیل خاص، فقط چون حس خوبی می‌ده."
 
 ];
 
 
-let momentIndex = 0;
+let momentIndex =
+    0;
 
 
 function renderMoment(){
 
     momentBox.textContent =
-        moments[momentIndex];
-
+        moments[
+            momentIndex
+        ];
 
     momentCount.textContent =
         `${momentIndex + 1} / ${moments.length}`;
@@ -3237,7 +3859,9 @@ renderMoment();
    HIDDEN PANEL
 ========================================================= */
 
-let coverTaps = 0;
+let coverTaps =
+    0;
+
 let coverResetTimer;
 
 
@@ -3247,22 +3871,21 @@ coverWrap.addEventListener(
 
         coverTaps++;
 
-
         clearTimeout(
             coverResetTimer
         );
-
 
         coverResetTimer =
             setTimeout(
                 ()=>{
                     coverTaps = 0;
                 },
-                2000
+                1800
             );
 
-
-        if(coverTaps >= 5){
+        if(
+            coverTaps >= 5
+        ){
 
             coverTaps = 0;
 
@@ -3279,11 +3902,9 @@ coverWrap.addEventListener(
 hiddenClose.addEventListener(
     "click",
     ()=>{
-
         hiddenPanel.classList.remove(
             "show"
         );
-
     }
 );
 
@@ -3296,47 +3917,50 @@ candleToggle.addEventListener(
     "click",
     ()=>{
 
-        document.body.classList.toggle(
-            "candle-mode"
-        );
+        candleActive =
+            !candleActive;
 
+        document.body.classList.toggle(
+            "candle-mode",
+            candleActive
+        );
 
         candleToggle.classList.toggle(
-            "active"
+            "active",
+            candleActive
         );
 
+        /*
+           در حالت شمع، چرخه رنگ
+           متوقف می‌شود تا تم گرم بماند.
+        */
 
-        if(
-            document.body.classList.contains(
-                "candle-mode"
-            )
-        ){
+        if(candleActive){
 
-            document.documentElement.style
-                .setProperty(
-                    "--cyan",
-                    "#ffc477"
-                );
+            document.body.classList.remove(
+                "auto-color"
+            );
 
-            document.documentElement.style
-                .setProperty(
-                    "--purple",
-                    "#ff8f70"
-                );
+            /*
+               اگر موسیقی اصلی در حال پخش نیست،
+               صدای پس‌زمینه گرم‌تر ادامه پیدا می‌کند.
+            */
+
+            if(
+                music.paused &&
+                musicStarted &&
+                !rainActive
+            ){
+
+                fadeBackgroundIn();
+
+            }
 
         }else{
 
-            document.documentElement.style
-                .setProperty(
-                    "--cyan",
-                    "#66d4ff"
-                );
-
-            document.documentElement.style
-                .setProperty(
-                    "--purple",
-                    "#a77cff"
-                );
+            document.body.classList.add(
+                "auto-color"
+            );
 
         }
 
@@ -3348,26 +3972,49 @@ candleToggle.addEventListener(
    RAIN
 ========================================================= */
 
+let rainBuilt =
+    false;
+
+
 function buildRain(){
 
-    let html = "";
+    if(rainBuilt){
+        return;
+    }
+
+    rainBuilt =
+        true;
+
+    const fragment =
+        document.createDocumentFragment();
 
     for(
         let i = 0;
-        i < 75;
+        i < 45;
         i++
     ){
 
+        const drop =
+            document.createElement(
+                "div"
+            );
+
+        drop.className =
+            "rain-drop";
+
         const left =
-            Math.random() * 100;
+            Math.random() *
+            100;
 
         const height =
             12 +
-            Math.random() * 24;
+            Math.random() *
+            24;
 
         const duration =
-            .45 +
-            Math.random() * .55;
+            .55 +
+            Math.random() *
+            .65;
 
         const delay =
             -Math.random() * 2;
@@ -3376,31 +4023,34 @@ function buildRain(){
             -50 -
             Math.random() * 60;
 
+        drop.style.left =
+            left + "vw";
 
-        html += `
+        drop.style.height =
+            height + "px";
 
-            <div
-                class="rain-drop"
-                style="
-                    left:${left}vw;
-                    height:${height}px;
-                    animation-duration:${duration}s;
-                    animation-delay:${delay}s;
-                    --drift:${drift}px;
-                "
-            ></div>
+        drop.style.animationDuration =
+            duration + "s";
 
-        `;
+        drop.style.animationDelay =
+            delay + "s";
+
+        drop.style.setProperty(
+            "--drift",
+            drift + "px"
+        );
+
+        fragment.appendChild(
+            drop
+        );
 
     }
 
-
-    rainLayer.innerHTML = html;
+    rainLayer.appendChild(
+        fragment
+    );
 
 }
-
-
-buildRain();
 
 
 rainToggle.addEventListener(
@@ -3410,38 +4060,38 @@ rainToggle.addEventListener(
         rainActive =
             !rainActive;
 
-
         rainToggle.classList.toggle(
             "rain-active",
             rainActive
         );
 
-
-        rainLayer.classList.toggle(
-            "show",
-            rainActive
-        );
-
-
         if(rainActive){
+
+            buildRain();
+
+            rainLayer.classList.add(
+                "show"
+            );
 
             duckBackground();
 
-
             rainSound.volume =
-                .14;
-
+                .13;
 
             rainSound
                 .play()
                 .catch(()=>{});
 
-
         }else{
+
+            rainLayer.classList.remove(
+                "show"
+            );
 
             rainSound.pause();
 
-            rainSound.currentTime = 0;
+            rainSound.currentTime =
+                0;
 
             resumeBackground();
 
@@ -3449,6 +4099,60 @@ rainToggle.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   STAR FIELD
+========================================================= */
+
+(function buildStars(){
+
+    const fragment =
+        document.createDocumentFragment();
+
+    for(
+        let i = 0;
+        i < 28;
+        i++
+    ){
+
+        const star =
+            document.createElement(
+                "span"
+            );
+
+        star.className =
+            "star-particle";
+
+        star.style.left =
+            (
+                Math.random() *
+                100
+            ) + "vw";
+
+        star.style.top =
+            (
+                Math.random() *
+                100
+            ) + "vh";
+
+        star.style.animationDelay =
+            (
+                -Math.random() *
+                2
+            ) + "s";
+
+        fragment.appendChild(
+            star
+        );
+
+    }
+
+    starField.appendChild(
+        fragment
+    );
+
+})();
 
 
 /* =========================================================
@@ -3468,49 +4172,51 @@ if(
 
     const observer =
         new IntersectionObserver(
-            entries=>{
+            entries => {
 
-                entries.forEach(
-                    entry=>{
+                for(
+                    const entry
+                    of entries
+                ){
 
-                        if(
-                            entry.isIntersecting
-                        ){
+                    if(
+                        entry.isIntersecting
+                    ){
 
+                        entry.target
+                            .classList
+                            .add("in");
+
+                        observer.unobserve(
                             entry.target
-                                .classList
-                                .add("in");
-
-
-                            observer.unobserve(
-                                entry.target
-                            );
-
-                        }
+                        );
 
                     }
-                );
+
+                }
 
             },
             {
-                threshold:.12,
-
+                threshold:.08,
                 rootMargin:
-                    "0px 0px -30px 0px"
+                    "0px 0px -20px 0px"
             }
         );
 
-
     revealElements.forEach(
         element =>
-            observer.observe(element)
+            observer.observe(
+                element
+            )
     );
 
 }else{
 
     revealElements.forEach(
         element =>
-            element.classList.add("in")
+            element.classList.add(
+                "in"
+            )
     );
 
 }
@@ -3525,14 +4231,11 @@ if(
     const greeting =
         $("greeting");
 
-
     const hour =
         new Date().getHours();
 
-
     let text =
         "روز بخیر";
-
 
     if(
         hour >= 5 &&
@@ -3565,7 +4268,6 @@ if(
 
     }
 
-
     greeting.textContent =
         text;
 
@@ -3581,9 +4283,18 @@ if(
     const host =
         $("lights");
 
+    /*
+       قبلاً 24 بود.
+       برای موبایل سبک‌تر: 14
+    */
 
-    const count = 24;
+    const count =
+        window.innerWidth < 600
+        ? 14
+        : 20;
 
+    const fragment =
+        document.createDocumentFragment();
 
     for(
         let i = 0;
@@ -3592,174 +4303,18 @@ if(
     ){
 
         const light =
-            document.createElement("span");
-
+            document.createElement(
+                "span"
+            );
 
         light.className =
             "light";
 
-
         light.style.left =
-            Math.random() * 100 +
-            "vw";
-
+            (
+                Math.random() *
+                100
+            ) + "vw";
 
         light.style.animationDuration =
-            12 +
-            Math.random() * 18 +
-            "s";
-
-
-        light.style.animationDelay =
-            -Math.random() * 20 +
-            "s";
-
-
-        light.style.transform =
-            `scale(${
-                .5 +
-                Math.random() * 1.2
-            })`;
-
-
-        host.appendChild(
-            light
-        );
-
-    }
-
-})();
-
-
-/* =========================================================
-   KEYBOARD
-========================================================= */
-
-window.addEventListener(
-    "keydown",
-    event=>{
-
-        const tag =
-            event.target?.tagName
-            ?.toLowerCase();
-
-
-        if(
-            tag === "input" ||
-            tag === "textarea"
-        ){
-
-            return;
-
-        }
-
-
-        if(
-            !stage.classList.contains(
-                "visible"
-            )
-        ){
-
-            return;
-
-        }
-
-
-        if(event.code === "Space"){
-
-            event.preventDefault();
-
-            if(music.paused){
-
-                music.play()
-                    .catch(()=>{});
-
-            }else{
-
-                music.pause();
-
-            }
-
-        }
-
-
-        if(
-            event.code ===
-            "ArrowLeft"
-        ){
-
-            loadSong(
-                currentIndex - 1,
-                true
-            );
-
-        }
-
-
-        if(
-            event.code ===
-            "ArrowRight"
-        ){
-
-            loadSong(
-                currentIndex + 1,
-                true
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-loadSongs();
-
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-window.addEventListener(
-    "load",
-    ()=>{
-
-        setTimeout(
-            ()=>{
-
-                const loader =
-                    $("loader");
-
-
-                if(!loader){
-                    return;
-                }
-
-
-                loader.classList.add(
-                    "hide"
-                );
-
-
-                setTimeout(
-                    ()=>{
-                        loader.remove();
-                    },
-                    800
-                );
-
-            },
-            450
-        );
-
-    }
-);
-
-})();
-</script>
-
-</body>
-      </html>
+           
