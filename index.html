@@ -3,747 +3,739 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<meta name="theme-color" content="#050912">
+<meta name="theme-color" content="#0b0d12">
 <title>Music Space</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
 
 :root {
-  --text: #eef7ff;
-  --muted: #a8bfd0;
-  --faint: #718ca0;
-  --bg: #040a12;
-  --border: rgba(220,240,255,.14);
-  --cyan: #66d4ff;
-  --purple: #a77cff;
-  --pink: #ff78b7;
-  --gold: #ffd36a;
-  --orb1: rgba(40,170,255,.22);
-  --orb2: rgba(160,80,255,.18);
-  --orb3: rgba(30,220,175,.14);
+  --bg: #0b0d12;
+  --surface: #14171f;
+  --surface-2: #1a1e28;
+  --border: rgba(255,255,255,0.06);
+  --text: #f0f4f8;
+  --text-2: #a0aec0;
+  --text-3: #718096;
+  --accent: #5b9dff;
+  --accent-soft: rgba(91,157,255,0.15);
+  --radius: 16px;
+  --radius-sm: 12px;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html { scroll-behavior: smooth; }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-  min-height: 100vh;
-  overflow-x: hidden;
+  font-family: 'Vazirmatn', sans-serif;
   background: var(--bg);
   color: var(--text);
-  font-family: 'Vazirmatn', sans-serif;
-  transition: background 2s ease;
-}
-
-/* ========== BACKGROUND ========== */
-.background {
-  position: fixed; inset: 0; z-index: -10; overflow: hidden;
-  background:
-    radial-gradient(circle at 18% 12%, var(--orb1), transparent 35%),
-    radial-gradient(circle at 82% 25%, var(--orb2), transparent 36%),
-    radial-gradient(circle at 50% 92%, var(--orb3), transparent 40%),
-    var(--bg);
-  transition: background 2.5s ease;
-}
-.background::before, .background::after {
-  content: "";
-  position: absolute;
-  width: 55vmax; height: 55vmax;
-  border-radius: 50%;
-  filter: blur(80px);
-  opacity: .25;
-  pointer-events: none;
-}
-.background::before {
-  top: -25vmax; left: -20vmax;
-  background: radial-gradient(circle, var(--orb1), transparent 70%);
-  animation: float1 32s ease-in-out infinite alternate;
-}
-.background::after {
-  right: -25vmax; bottom: -25vmax;
-  background: radial-gradient(circle, var(--orb2), transparent 70%);
-  animation: float2 38s ease-in-out infinite alternate;
-}
-@keyframes float1 { from { transform: translate(0,0) scale(1); } to { transform: translate(12vw,10vh) scale(1.12); } }
-@keyframes float2 { from { transform: translate(0,0) scale(1); } to { transform: translate(-12vw,-10vh) scale(1.1); } }
-
-body.auto-color { animation: richColors 48s linear infinite; }
-
-@keyframes richColors {
-  0%   { --orb1: rgba(40,160,255,.22); --orb2: rgba(140,70,255,.18); --orb3: rgba(30,210,170,.14); }
-  12%  { --orb1: rgba(255,90,170,.20); --orb2: rgba(255,120,80,.16); --orb3: rgba(255,200,70,.13); }
-  25%  { --orb1: rgba(80,255,210,.18); --orb2: rgba(70,140,255,.18); --orb3: rgba(180,80,255,.14); }
-  37%  { --orb1: rgba(255,210,90,.20); --orb2: rgba(255,100,160,.16); --orb3: rgba(100,220,255,.13); }
-  50%  { --orb1: rgba(120,90,255,.20); --orb2: rgba(255,80,190,.16); --orb3: rgba(60,220,160,.14); }
-  62%  { --orb1: rgba(255,110,80,.18); --orb2: rgba(110,210,255,.18); --orb3: rgba(255,200,90,.13); }
-  75%  { --orb1: rgba(60,220,255,.22); --orb2: rgba(200,80,255,.17); --orb3: rgba(90,255,180,.13); }
-  87%  { --orb1: rgba(255,160,100,.19); --orb2: rgba(160,100,255,.17); --orb3: rgba(100,200,255,.14); }
-  100% { --orb1: rgba(40,160,255,.22); --orb2: rgba(140,70,255,.18); --orb3: rgba(30,210,170,.14); }
+  overflow-x: hidden;
+  line-height: 1.5;
 }
 
 /* ========== LOADER ========== */
 #loader {
-  position: fixed; inset: 0; z-index: 99999;
-  display: flex; align-items: center; justify-content: center;
-  background: #040a12;
-  transition: opacity .6s ease, visibility .6s ease;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
 }
-#loader.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-.loader-ring {
-  width: 42px; height: 42px; border-radius: 50%;
-  border: 1px solid rgba(255,255,255,.13);
-  border-top-color: #66d4ff;
-  border-right-color: #a77cff;
-  animation: spin .9s linear infinite;
+#loader.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+.loader-spinner {
+  width: 36px;
+  height: 36px;
+  border: 2px solid rgba(255,255,255,0.08);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
 
 /* ========== GATE ========== */
 #gate {
-  position: fixed; inset: 0; z-index: 9000;
-  display: flex; align-items: center; justify-content: center;
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#gate.hide {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.gate-box {
   text-align: center;
-  background: radial-gradient(circle at center, rgba(70,150,255,.1), transparent 50%);
-  transition: opacity .8s ease, visibility .8s ease, transform .8s ease;
+  padding: 0 24px;
 }
-#gate.hide { opacity: 0; visibility: hidden; pointer-events: none; transform: scale(1.03); }
-.gate-content { width: 88%; max-width: 380px; }
-.gate-label { font-size: 10px; letter-spacing: 4px; color: #8cb6d0; direction: ltr; margin-bottom: 18px; }
-.gate-title { font-size: 28px; font-weight: 400; line-height: 1.6; color: #f4fbff; margin-bottom: 12px; text-shadow: 0 0 30px rgba(100,210,255,.3); }
-.gate-line { width: 55px; height: 1px; margin: 0 auto 18px; background: linear-gradient(90deg, transparent, #9de6ff, transparent); box-shadow: 0 0 18px rgba(100,210,255,.4); }
-.gate-sub { color: var(--muted); font-size: 13px; font-weight: 300; margin-bottom: 38px; }
-.enter-button {
-  width: 72px; height: 72px; margin: auto; border-radius: 50%;
-  border: 1px solid rgba(210,240,255,.35);
-  background: linear-gradient(135deg, rgba(100,210,255,.14), rgba(150,100,255,.12));
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-size: 24px; cursor: pointer;
-  box-shadow: 0 0 40px rgba(70,170,255,.25);
-  animation: pulse 2.6s ease-out infinite;
+.gate-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--text-3);
+  margin-bottom: 16px;
+  direction: ltr;
 }
-.enter-button:active { transform: scale(.93); }
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(100,210,255,.35), 0 0 40px rgba(70,170,255,.25); }
-  70% { box-shadow: 0 0 0 22px rgba(100,210,255,0), 0 0 50px rgba(70,170,255,.3); }
-  100% { box-shadow: 0 0 0 0 rgba(100,210,255,0), 0 0 40px rgba(70,170,255,.25); }
+.gate-title {
+  font-size: 26px;
+  font-weight: 500;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+.gate-sub {
+  font-size: 14px;
+  color: var(--text-2);
+  margin-bottom: 40px;
+  font-weight: 300;
+}
+.enter-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid rgba(91,157,255,0.3);
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s;
+}
+.enter-btn:active {
+  transform: scale(0.94);
 }
 
-/* ========== VAULT ========== */
+/* ========== PASSWORD ========== */
 #vault {
-  position: fixed; inset: 0; z-index: 9500;
-  display: none; align-items: center; justify-content: center;
-  padding: 24px; background: rgba(2,7,14,.75);
-  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  position: fixed;
+  inset: 0;
+  z-index: 9500;
+  background: rgba(11,13,18,0.85);
+  backdrop-filter: blur(12px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
-#vault.show { display: flex; }
+#vault.show {
+  display: flex;
+}
 .vault-card {
-  width: 100%; max-width: 340px; padding: 32px 24px; text-align: center;
-  border-radius: 24px;
-  background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.03));
+  width: 100%;
+  max-width: 340px;
+  background: var(--surface);
   border: 1px solid var(--border);
-  box-shadow: 0 25px 60px rgba(0,0,0,.4);
+  border-radius: 20px;
+  padding: 32px 24px;
+  text-align: center;
 }
-.vault-icon { font-size: 30px; margin-bottom: 12px; }
-.vault-card h2 { font-size: 18px; font-weight: 400; margin-bottom: 7px; }
-.vault-card p { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
+.vault-card h2 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.vault-card p {
+  font-size: 13px;
+  color: var(--text-2);
+  margin-bottom: 24px;
+}
 .vault-input {
-  width: 100%; height: 50px; border-radius: 14px;
-  border: 1px solid rgba(210,240,255,.2);
-  background: rgba(0,10,22,.45); color: white;
-  text-align: center; font-size: 20px; letter-spacing: 9px;
-  outline: none; font-family: 'Vazirmatn', sans-serif;
+  width: 100%;
+  height: 48px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text);
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: 8px;
+  outline: none;
+  font-family: inherit;
+  margin-bottom: 16px;
 }
-.vault-input:focus { border-color: rgba(100,210,255,.55); box-shadow: 0 0 20px rgba(100,210,255,.15); }
+.vault-input:focus {
+  border-color: var(--accent);
+}
 .vault-btn {
-  width: 100%; height: 48px; margin-top: 14px; border-radius: 14px;
-  border: 1px solid rgba(210,240,255,.25);
-  background: linear-gradient(135deg, rgba(80,190,255,.22), rgba(140,90,255,.2));
-  color: white; font-family: 'Vazirmatn', sans-serif; cursor: pointer;
+  width: 100%;
+  height: 46px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 500;
 }
-.vault-error { min-height: 18px; margin-top: 10px; font-size: 11px; color: #ffb9c5; opacity: 0; }
-.vault-error.show { opacity: 1; }
+.vault-error {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #fc8181;
+  min-height: 18px;
+  opacity: 0;
+}
+.vault-error.show {
+  opacity: 1;
+}
 
 /* ========== MAIN ========== */
 #stage {
-  position: relative; z-index: 1;
-  width: min(94%, 520px); margin: auto;
-  padding: 55px 0 90px;
-  opacity: 0; transform: translateY(18px);
-  transition: opacity .8s ease, transform .8s ease;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 40px 20px 100px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
-#stage.visible { opacity: 1; transform: translateY(0); }
+#stage.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
-.hero { text-align: center; margin-bottom: 30px; }
-.greeting { font-size: 11px; color: var(--muted); margin-bottom: 12px; }
-.hero-label { font-size: 9px; letter-spacing: 4px; color: #82b6d0; direction: ltr; margin-bottom: 13px; }
-.title {
-  font-size: 31px; font-weight: 400; margin-bottom: 12px;
-  text-shadow: 0 0 30px rgba(100,210,255,.35), 0 0 60px rgba(160,100,255,.2);
+/* Header */
+.header {
+  text-align: center;
+  margin-bottom: 36px;
 }
-.intro { color: var(--muted); font-size: 13px; line-height: 2; font-weight: 300; margin-top: 12px; }
-
-.section-label {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 15px; color: var(--faint);
-  font-size: 9px; letter-spacing: 3px; direction: ltr;
+.header-label {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: var(--text-3);
+  margin-bottom: 8px;
+  direction: ltr;
 }
-.section-label::before {
-  content: ""; width: 25px; height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(120,210,255,.5));
+.header-title {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.header-desc {
+  font-size: 13px;
+  color: var(--text-2);
+  font-weight: 300;
+  line-height: 1.7;
 }
 
 /* Playlist */
-.tracklist { margin-top: 34px; border-top: 1px solid var(--border); }
-.track {
-  position: relative; display: flex; align-items: center; gap: 13px;
-  padding: 15px 5px; border-bottom: 1px solid var(--border);
-  cursor: pointer; transition: background .25s ease;
+.section-title {
+  font-size: 12px;
+  color: var(--text-3);
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  direction: ltr;
 }
-.track:hover { background: rgba(255,255,255,.03); }
-.track.active {
-  background: linear-gradient(90deg, rgba(80,190,255,.1), rgba(150,90,255,.05));
-}
-.track.active::before {
-  content: ""; position: absolute; right: 0; top: 20%; bottom: 20%;
-  width: 2px; border-radius: 3px;
-  background: linear-gradient(180deg, var(--cyan), var(--purple));
-  box-shadow: 0 0 12px rgba(90,190,255,.5);
-}
-.track-num { width: 27px; text-align: center; color: var(--faint); font-size: 11px; }
-.track.active .track-num { color: transparent; position: relative; }
-.eq { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; gap: 2px; }
-.eq i { width: 2px; height: 5px; border-radius: 3px; background: var(--cyan); animation: eq .9s ease-in-out infinite; }
-.eq i:nth-child(1){animation-delay:-.6s} .eq i:nth-child(2){animation-delay:-.2s} .eq i:nth-child(3){animation-delay:-.8s}
-@keyframes eq { 0%,100%{height:4px} 50%{height:13px} }
-.track-body { flex: 1; min-width: 0; }
-.track-title { font-size: 13.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 3px; }
-.track.active .track-title { color: #fff; text-shadow: 0 0 15px rgba(100,210,255,.4); }
-.track-artist { color: var(--faint); font-size: 10.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.track-play {
-  width: 30px; height: 30px; border-radius: 50%;
+.tracklist {
+  background: var(--surface);
   border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--muted); font-size: 10px; opacity: .3;
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 40px;
 }
-.track.active .track-play { opacity: 1; color: white; border-color: rgba(150,225,255,.45); box-shadow: 0 0 15px rgba(100,210,255,.3); }
+.track {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+  border-bottom: 1px solid var(--border);
+}
+.track:last-child {
+  border-bottom: none;
+}
+.track:active {
+  background: rgba(255,255,255,0.03);
+}
+.track.active {
+  background: var(--accent-soft);
+}
+.track-num {
+  width: 24px;
+  font-size: 12px;
+  color: var(--text-3);
+  text-align: center;
+  flex-shrink: 0;
+}
+.track.active .track-num {
+  color: var(--accent);
+}
+.track-info {
+  flex: 1;
+  min-width: 0;
+}
+.track-title {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-bottom: 2px;
+}
+.track.active .track-title {
+  color: var(--accent);
+}
+.track-artist {
+  font-size: 12px;
+  color: var(--text-3);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.track-icon {
+  font-size: 12px;
+  color: var(--text-3);
+  opacity: 0.5;
+}
+.track.active .track-icon {
+  color: var(--accent);
+  opacity: 1;
+}
 
 /* Player */
-.player { margin-top: 55px; text-align: center; }
-.cover-wrap {
-  position: relative; width: 155px; height: 155px; margin: 0 auto 24px;
-  border-radius: 50%; overflow: hidden;
-  border: 1px solid rgba(210,240,255,.2);
-  box-shadow: 0 0 0 8px rgba(100,200,255,.04), 0 0 40px rgba(100,180,255,.15), 0 20px 55px rgba(0,0,0,.4);
-  animation: spinCover 25s linear infinite;
-  animation-play-state: paused;
+.player {
+  text-align: center;
 }
-.cover-wrap.playing { animation-play-state: running; }
-.cover-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.cover-wrap::after {
-  content: ""; position: absolute; inset: 39%; border-radius: 50%;
-  background: #07111c; box-shadow: inset 0 0 10px rgba(0,0,0,.7);
+.cover {
+  width: 180px;
+  height: 180px;
+  border-radius: 20px;
+  object-fit: cover;
+  margin: 0 auto 24px;
+  display: block;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  background: var(--surface-2);
 }
-@keyframes spinCover { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
 .song-title {
-  font-size: 19px; font-weight: 400; color: #fff; margin-bottom: 6px;
-  text-shadow: 0 0 20px rgba(100,210,255,.4);
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 6px;
 }
-.song-artist { font-size: 11px; color: var(--muted); margin-bottom: 15px; }
-.song-message { max-width: 350px; margin: 0 auto 20px; color: #b9cedc; font-size: 12px; line-height: 1.9; font-weight: 300; }
+.song-artist {
+  font-size: 13px;
+  color: var(--text-2);
+  margin-bottom: 28px;
+}
 
-.bars { height: 24px; display: flex; align-items: flex-end; justify-content: center; gap: 3px; margin-bottom: 22px; opacity: .7; }
-.bars i { width: 3px; height: 4px; border-radius: 3px; background: linear-gradient(180deg, var(--cyan), var(--purple)); }
-.bars.playing i { animation: bars .9s ease-in-out infinite; }
-.bars i:nth-child(1){animation-delay:-.8s} .bars i:nth-child(2){animation-delay:-.4s} .bars i:nth-child(3){animation-delay:-.2s}
-.bars i:nth-child(4){animation-delay:-.7s} .bars i:nth-child(5){animation-delay:-.1s} .bars i:nth-child(6){animation-delay:-.5s} .bars i:nth-child(7){animation-delay:-.3s}
-@keyframes bars { 0%,100%{height:4px} 50%{height:21px} }
-
-.controls { display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; }
-.ctl-btn { border: none; background: none; color: var(--text); font-size: 15px; cursor: pointer; opacity: .7; padding: 8px; transition: .2s; }
-.ctl-btn:hover { opacity: 1; transform: scale(1.08); }
-.play-btn {
-  width: 58px; height: 58px; border-radius: 50%;
-  border: 1px solid rgba(210,240,255,.35);
-  background: linear-gradient(135deg, rgba(70,200,255,.28), rgba(145,90,255,.25));
-  color: white; font-size: 18px;
-  display: flex; align-items: center; justify-content: center;
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.ctrl {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 18px;
   cursor: pointer;
-  box-shadow: 0 0 35px rgba(80,180,255,.25);
-  transition: .2s;
+  opacity: 0.7;
+  padding: 8px;
+  transition: opacity 0.2s, transform 0.15s;
 }
-.play-btn:active { transform: scale(.92); }
+.ctrl:active {
+  transform: scale(0.9);
+  opacity: 1;
+}
+.play-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(91,157,255,0.3);
+  transition: transform 0.15s;
+}
+.play-btn:active {
+  transform: scale(0.94);
+}
 
-.progress-wrap { max-width: 350px; margin: auto; }
+/* Progress */
+.progress-wrap {
+  max-width: 320px;
+  margin: 0 auto 8px;
+}
 .progress {
-  position: relative; height: 4px; border-radius: 5px;
-  background: rgba(220,240,255,.12); cursor: pointer; overflow: hidden;
+  height: 4px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 4px;
+  cursor: pointer;
+  overflow: hidden;
 }
 .progress-bar {
-  width: 0%; height: 100%; border-radius: 5px;
-  background: linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
-  box-shadow: 0 0 12px rgba(90,190,255,.5);
-  transition: width .08s linear;
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  border-radius: 4px;
+  transition: width 0.1s linear;
 }
-.time { display: flex; justify-content: space-between; margin-top: 7px; color: var(--faint); font-size: 10px; direction: ltr; }
-
-/* Lyrics - colored lines */
-.lyrics-box { max-width: 370px; margin: 35px auto 0; }
-.lyrics-title { color: var(--faint); font-size: 9px; letter-spacing: 3px; margin-bottom: 14px; direction: ltr; }
-.lyrics { font-size: 13px; line-height: 2.5; font-weight: 300; }
-.lyrics p { margin: 0; padding: 4px 0; transition: color .6s ease; }
-.lyrics p:nth-child(6n+1) { color: #ffd36a; text-shadow: 0 0 12px rgba(255,211,106,.3); }
-.lyrics p:nth-child(6n+2) { color: #66d4ff; text-shadow: 0 0 12px rgba(102,212,255,.3); }
-.lyrics p:nth-child(6n+3) { color: #c084fc; text-shadow: 0 0 12px rgba(192,132,252,.3); }
-.lyrics p:nth-child(6n+4) { color: #ff8fab; text-shadow: 0 0 12px rgba(255,143,171,.3); }
-.lyrics p:nth-child(6n+5) { color: #5eead4; text-shadow: 0 0 12px rgba(94,234,212,.3); }
-.lyrics p:nth-child(6n+6) { color: #fbbf24; text-shadow: 0 0 12px rgba(251,191,36,.3); }
-
-/* Moments & Footer */
-.moments { margin-top: 65px; }
-.moment-box {
-  min-height: 150px; padding: 28px 22px; border-radius: 20px;
-  background: linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.02));
-  border: 1px solid var(--border);
-  display: flex; align-items: center; justify-content: center;
-  text-align: center; color: #dbeaf3; font-size: 13px; line-height: 2; font-weight: 300;
+.time {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-3);
+  max-width: 320px;
+  margin: 8px auto 0;
+  direction: ltr;
 }
-.moment-controls { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 15px; }
-.moment-controls button {
-  width: 34px; height: 34px; border-radius: 50%;
-  border: 1px solid var(--border); background: rgba(255,255,255,.04);
-  color: var(--text); cursor: pointer;
-}
-.moment-count { color: var(--faint); font-size: 10px; direction: ltr; }
 
-.footer { margin-top: 70px; text-align: center; }
-.footer-text { color: var(--muted); font-size: 12.5px; line-height: 2.2; font-weight: 300; }
-.footer-line { width: 35px; height: 1px; margin: 22px auto; background: linear-gradient(90deg, transparent, rgba(150,220,255,.5), transparent); }
-.footer-title { color: #cde9f7; font-size: 12px; letter-spacing: 1px; }
-.footer-sub { margin-top: 7px; color: var(--faint); font-size: 10px; }
-
-/* Mood buttons */
-.mood-controls {
-  position: fixed; top: 17px; left: 17px; z-index: 500;
-  display: flex; gap: 7px; opacity: 0; transform: translateY(-8px);
-  pointer-events: none; transition: .6s;
+/* Lyrics */
+.lyrics-box {
+  margin-top: 40px;
+  text-align: center;
 }
-.mood-controls.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
-.mood-btn {
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 1px solid var(--border); background: rgba(8,18,30,.55);
-  backdrop-filter: blur(10px); color: white; cursor: pointer; opacity: .75; transition: .25s;
+.lyrics-label {
+  font-size: 11px;
+  color: var(--text-3);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+  direction: ltr;
 }
-.mood-btn:hover { opacity: 1; transform: scale(1.05); }
-.mood-btn.active { background: rgba(255,190,110,.18); border-color: rgba(255,205,140,.5); box-shadow: 0 0 20px rgba(255,180,100,.25); }
-.mood-btn.rain-active { background: rgba(100,190,255,.15); border-color: rgba(140,220,255,.4); box-shadow: 0 0 18px rgba(80,190,255,.2); }
-
-/* Candle & Rain */
-body.candle-mode { --bg: #100a07; --cyan: #ffc477; --purple: #ff806b; --border: rgba(255,220,180,.15); --muted: #cdb8a7; --faint: #9e8370; }
-body.candle-mode .background {
-  background:
-    radial-gradient(circle at 25% 15%, rgba(255,155,70,.23), transparent 35%),
-    radial-gradient(circle at 80% 25%, rgba(255,80,90,.17), transparent 35%),
-    radial-gradient(circle at 50% 90%, rgba(255,210,100,.12), transparent 40%),
-    #100a07;
+.lyrics {
+  font-size: 14px;
+  color: var(--text-2);
+  line-height: 2.2;
+  font-weight: 300;
 }
-.rain-layer { position: fixed; inset: 0; z-index: -2; pointer-events: none; overflow: hidden; opacity: 0; transition: opacity .5s; }
-.rain-layer.show { opacity: 1; }
-.rain-drop {
-  position: absolute; top: -10vh; width: 1px; border-radius: 4px;
-  background: linear-gradient(180deg, rgba(220,245,255,.65), rgba(120,190,230,.02));
-  animation: rain linear infinite;
+.lyrics p {
+  margin: 0;
+  padding: 2px 0;
 }
-@keyframes rain { to { transform: translate3d(var(--drift), 120vh, 0); } }
 
-.reveal { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.in { opacity: 1; transform: translateY(0); }
-
-@media (max-width: 380px) {
-  .title { font-size: 27px; }
-  .cover-wrap { width: 130px; height: 130px; }
-  .song-title { font-size: 17px; }
+/* Footer */
+.footer {
+  margin-top: 60px;
+  text-align: center;
+  font-size: 12px;
+  color: var(--text-3);
+  font-weight: 300;
+  line-height: 1.8;
 }
 </style>
 </head>
 <body>
 
-<div class="background"></div>
-<div id="loader"><div class="loader-ring"></div></div>
+<!-- Loader -->
+<div id="loader">
+  <div class="loader-spinner"></div>
+</div>
 
+<!-- Gate -->
 <div id="gate">
-  <div class="gate-content">
-    <div class="gate-label">PERSONAL MUSIC SPACE</div>
-    <div class="gate-title">یه فضای کوچیک برای چندتا آهنگ</div>
-    <div class="gate-line"></div>
-    <div class="gate-sub">لمس کن تا واردش بشی</div>
-    <div class="enter-button" id="enterButton">♪</div>
+  <div class="gate-box">
+    <div class="gate-label">MUSIC SPACE</div>
+    <div class="gate-title">یه فضای کوچیک برای موسیقی</div>
+    <div class="gate-sub">برای ورود لمس کن</div>
+    <div class="enter-btn" id="enterBtn">♪</div>
   </div>
 </div>
 
+<!-- Password -->
 <div id="vault">
-  <div class="vault-card" id="vaultCard">
-    <div class="vault-icon">🔐</div>
-    <h2>ورود به Music Space</h2>
-    <p>رمز ورود رو وارد کن</p>
-    <input id="vaultInput" class="vault-input" type="password" inputmode="numeric" autocomplete="off" placeholder="رمز ورود">
-    <button id="vaultBtn" class="vault-btn" type="button">ورود</button>
-    <div id="vaultError" class="vault-error">رمز درست نیست، دوباره امتحان کن.</div>
+  <div class="vault-card">
+    <h2>ورود</h2>
+    <p>رمز را وارد کنید</p>
+    <input id="passInput" class="vault-input" type="password" inputmode="numeric" maxlength="8" placeholder="••••">
+    <button id="passBtn" class="vault-btn">ورود</button>
+    <div id="passError" class="vault-error">رمز اشتباه است</div>
   </div>
 </div>
 
-<div class="mood-controls" id="moodControls">
-  <button class="mood-btn" id="candleToggle" type="button">🕯</button>
-  <button class="mood-btn" id="rainToggle" type="button">🌧</button>
-</div>
-
-<audio id="bgMusic" preload="none" loop><source src="background.mp3" type="audio/mpeg"></audio>
-<audio id="rainSound" preload="none" loop><source src="rain.mp3" type="audio/mpeg"></audio>
-
+<!-- Main -->
 <main id="stage">
-  <section class="hero">
-    <div class="greeting" id="greeting"></div>
-    <div class="hero-label">PERSONAL MUSIC SPACE</div>
-    <h1 class="title">یه جای کوچیک برای موسیقی</h1>
-    <p class="intro">چندتا آهنگ برای وقت‌هایی که<br>دلت یه فضای آروم، یه حال تازه<br>یا فقط چند دقیقه موسیقی می‌خواد.</p>
-  </section>
+  <div class="header">
+    <div class="header-label">PERSONAL PLAYLIST</div>
+    <h1 class="header-title">موسیقی</h1>
+    <p class="header-desc">چند آهنگ برای لحظه‌های مختلف</p>
+  </div>
 
-  <section class="reveal">
-    <div class="section-label">PLAYLIST</div>
-    <nav class="tracklist" id="tracklist"></nav>
-  </section>
+  <div class="section-title">PLAYLIST</div>
+  <div class="tracklist" id="tracklist">
+    <!-- tracks will be injected -->
+  </div>
 
-  <section class="player reveal">
-    <div class="cover-wrap" id="coverWrap">
-      <img id="cover" src="cover-1.jpg" alt="cover">
-    </div>
+  <div class="player">
+    <img id="cover" class="cover" src="" alt="cover">
     <div class="song-title" id="songTitle">—</div>
     <div class="song-artist" id="songArtist">—</div>
-    <div class="song-message" id="songMessage"></div>
-    <div class="bars" id="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
     <div class="controls">
-      <button class="ctl-btn" id="prevBtn">⏮</button>
-      <button class="ctl-btn" id="back15">⏪</button>
+      <button class="ctrl" id="prevBtn">⏮</button>
+      <button class="ctrl" id="back15">⏪</button>
       <button class="play-btn" id="playBtn">▶</button>
-      <button class="ctl-btn" id="fwd15">⏩</button>
-      <button class="ctl-btn" id="nextBtn">⏭</button>
+      <button class="ctrl" id="fwd15">⏩</button>
+      <button class="ctrl" id="nextBtn">⏭</button>
     </div>
 
     <div class="progress-wrap">
-      <div class="progress" id="progress"><div class="progress-bar" id="progressBar"></div></div>
-      <div class="time"><span id="curTime">0:00</span><span id="durTime">0:00</span></div>
+      <div class="progress" id="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="time">
+      <span id="currentTime">0:00</span>
+      <span id="duration">0:00</span>
     </div>
 
     <div class="lyrics-box">
-      <div class="lyrics-title">LYRICS</div>
+      <div class="lyrics-label">LYRICS</div>
       <div class="lyrics" id="lyrics"></div>
     </div>
-    <audio id="music" preload="metadata"></audio>
-  </section>
+  </div>
 
-  <section class="moments reveal">
-    <div class="section-label">MOMENTS</div>
-    <div class="moment-box" id="momentBox"></div>
-    <div class="moment-controls">
-      <button id="momentPrev">←</button>
-      <span class="moment-count" id="momentCount">1 / 1</span>
-      <button id="momentNext">→</button>
-    </div>
-  </section>
-
-  <footer class="footer reveal">
-    <p class="footer-text">امیدوارم هر آهنگ اینجا<br>یه چند دقیقه‌ی خوب برات بسازه.</p>
-    <div class="footer-line"></div>
-    <div class="footer-title">MUSIC · MOMENTS · MOOD</div>
-    <div class="footer-sub">یه فضای کوچیک، برای چند لحظه‌ی خوب.</div>
-  </footer>
+  <div class="footer">
+    برای لحظه‌های خوب
+  </div>
 </main>
 
-<div class="rain-layer" id="rainLayer"></div>
+<audio id="audio" preload="metadata"></audio>
 
 <script>
-(function(){
-  "use strict";
+(function() {
+  const PASSWORD = "1385";
+  let songs = [];
+  let current = 0;
+  let isPlaying = false;
+
   const $ = id => document.getElementById(id);
 
-  const gate = $("gate"), enterButton = $("enterButton");
-  const vault = $("vault"), vaultCard = $("vaultCard"), vaultInput = $("vaultInput");
-  const vaultBtn = $("vaultBtn"), vaultError = $("vaultError");
-  const stage = $("stage"), tracklist = $("tracklist");
-  const coverWrap = $("coverWrap"), cover = $("cover");
-  const songTitle = $("songTitle"), songArtist = $("songArtist"), songMessage = $("songMessage");
-  const lyrics = $("lyrics"), music = $("music");
-  const bgMusic = $("bgMusic"), rainSound = $("rainSound");
-  const playBtn = $("playBtn"), prevBtn = $("prevBtn"), nextBtn = $("nextBtn");
-  const back15 = $("back15"), fwd15 = $("fwd15");
-  const progress = $("progress"), progressBar = $("progressBar");
-  const curTime = $("curTime"), durTime = $("durTime"), bars = $("bars");
-  const moodControls = $("moodControls"), candleToggle = $("candleToggle"), rainToggle = $("rainToggle");
-  const rainLayer = $("rainLayer"), loader = $("loader");
-  const momentBox = $("momentBox"), momentPrev = $("momentPrev"), momentNext = $("momentNext"), momentCount = $("momentCount");
+  // Elements
+  const loader = $("loader");
+  const gate = $("gate");
+  const enterBtn = $("enterBtn");
+  const vault = $("vault");
+  const passInput = $("passInput");
+  const passBtn = $("passBtn");
+  const passError = $("passError");
+  const stage = $("stage");
+  const tracklist = $("tracklist");
+  const cover = $("cover");
+  const songTitle = $("songTitle");
+  const songArtist = $("songArtist");
+  const playBtn = $("playBtn");
+  const prevBtn = $("prevBtn");
+  const nextBtn = $("nextBtn");
+  const back15 = $("back15");
+  const fwd15 = $("fwd15");
+  const progress = $("progress");
+  const progressBar = $("progressBar");
+  const currentTime = $("currentTime");
+  const duration = $("duration");
+  const lyrics = $("lyrics");
+  const audio = $("audio");
 
-  const CORRECT_PASSWORD = "1385";
-  let songs = [], currentIndex = 0, musicStarted = false, rainActive = false, candleActive = false;
-
+  // Format time
   function formatTime(s) {
-    if (!isFinite(s) || s < 0) s = 0;
+    if (!s || !isFinite(s)) return "0:00";
     const m = Math.floor(s / 60);
     const sec = Math.floor(s % 60);
     return m + ":" + (sec < 10 ? "0" : "") + sec;
   }
 
-  function escapeHTML(v) {
-    return String(v).replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
-  }
-
+  // Load songs
   async function loadSongs() {
     try {
       const res = await fetch("songs.json?t=" + Date.now());
-      if (!res.ok) throw new Error();
       const data = await res.json();
-      if (!Array.isArray(data) || !data.length) throw new Error();
-      songs = data;
+      if (Array.isArray(data) && data.length) {
+        songs = data;
+      } else {
+        throw new Error();
+      }
     } catch {
       songs = [{
-        title: "من عاشق بارون بودم، اون عاشق برف بود",
-        artist: "عمیان",
+        title: "آهنگ نمونه",
+        artist: "نامشخص",
         src: "song-1.mp3",
         cover: "cover-1.jpg",
-        message: "گاهی یک آهنگ خوب، فقط برای چند دقیقه فضای روز رو عوض می‌کنه.",
-        lyrics: ["متن آهنگ را اینجا قرار بده."]
+        lyrics: ["متن آهنگ در دسترس نیست"]
       }];
     }
-    loadSong(0, false);
-    setTimeout(() => loader.classList.add("hide"), 400);
+    renderPlaylist();
+    loadTrack(0, false);
+    loader.classList.add("hide");
   }
 
+  // Render playlist
   function renderPlaylist() {
     let html = "";
     songs.forEach((song, i) => {
-      const active = i === currentIndex;
+      const active = i === current ? "active" : "";
       html += `
-        <div class="track ${active ? "active" : ""}" data-index="${i}">
-          <div class="track-num">${active ? '<div class="eq"><i></i><i></i><i></i></div>' : String(i+1).padStart(2,"0")}</div>
-          <div class="track-body">
-            <div class="track-title">${escapeHTML(song.title || "بدون نام")}</div>
-            <div class="track-artist">${escapeHTML(song.artist || "")}</div>
+        <div class="track ${active}" data-index="${i}">
+          <div class="track-num">${i + 1}</div>
+          <div class="track-info">
+            <div class="track-title">${song.title || "بدون نام"}</div>
+            <div class="track-artist">${song.artist || ""}</div>
           </div>
-          <div class="track-play">${active && !music.paused ? "❚❚" : "▶"}</div>
-        </div>`;
+          <div class="track-icon">${i === current && isPlaying ? "❚❚" : "▶"}</div>
+        </div>
+      `;
     });
     tracklist.innerHTML = html;
   }
+
+  // Load track
+  function loadTrack(index, autoplay = false) {
+    if (!songs.length) return;
+    current = (index + songs.length) % songs.length;
+    const song = songs[current];
+
+    cover.src = song.cover || "";
+    songTitle.textContent = song.title || "—";
+    songArtist.textContent = song.artist || "—";
+
+    // Lyrics
+    lyrics.innerHTML = "";
+    const lines = Array.isArray(song.lyrics) ? song.lyrics : [];
+    if (lines.length) {
+      lines.forEach(line => {
+        if (line && line.trim()) {
+          const p = document.createElement("p");
+          p.textContent = line;
+          lyrics.appendChild(p);
+        }
+      });
+    } else {
+      lyrics.innerHTML = "<p>متن آهنگ موجود نیست</p>";
+    }
+
+    audio.src = song.src || "";
+    audio.load();
+    progressBar.style.width = "0%";
+    currentTime.textContent = "0:00";
+    duration.textContent = "0:00";
+
+    renderPlaylist();
+
+    if (autoplay) {
+      audio.play().then(() => {
+        isPlaying = true;
+        playBtn.textContent = "❚❚";
+        renderPlaylist();
+      }).catch(() => {});
+    } else {
+      isPlaying = false;
+      playBtn.textContent = "▶";
+    }
+  }
+
+  // Events
+  enterBtn.addEventListener("click", () => {
+    vault.classList.add("show");
+    setTimeout(() => passInput.focus(), 200);
+  });
+
+  function checkPass() {
+    if (passInput.value.trim() === PASSWORD) {
+      passError.classList.remove("show");
+      vault.classList.remove("show");
+      gate.classList.add("hide");
+      stage.classList.add("visible");
+    } else {
+      passError.classList.add("show");
+      passInput.value = "";
+      passInput.focus();
+    }
+  }
+
+  passBtn.addEventListener("click", checkPass);
+  passInput.addEventListener("keydown", e => {
+    if (e.key === "Enter") checkPass();
+  });
 
   tracklist.addEventListener("click", e => {
     const track = e.target.closest(".track");
     if (!track) return;
     const index = Number(track.dataset.index);
-    if (index === currentIndex) {
-      music.paused ? music.play().catch(()=>{}) : music.pause();
-      return;
+    if (index === current) {
+      togglePlay();
+    } else {
+      loadTrack(index, true);
     }
-    loadSong(index, true);
   });
 
-  function renderLyrics(song) {
-    lyrics.innerHTML = "";
-    let lines = Array.isArray(song.lyrics) ? song.lyrics : (song.lyrics ? [song.lyrics] : []);
-    if (!lines.length) {
-      const p = document.createElement("p");
-      p.textContent = "متن آهنگ هنوز اضافه نشده.";
-      lyrics.appendChild(p);
-      return;
+  function togglePlay() {
+    if (audio.paused) {
+      audio.play().then(() => {
+        isPlaying = true;
+        playBtn.textContent = "❚❚";
+        renderPlaylist();
+      }).catch(() => {});
+    } else {
+      audio.pause();
+      isPlaying = false;
+      playBtn.textContent = "▶";
+      renderPlaylist();
     }
-    lines.forEach(line => {
-      const p = document.createElement("p");
-      p.textContent = line;
-      lyrics.appendChild(p);
-    });
   }
 
-  function loadSong(index, autoplay) {
-    if (!songs.length) return;
-    currentIndex = (index + songs.length) % songs.length;
-    const song = songs[currentIndex];
-    cover.src = song.cover || "cover-1.jpg";
-    songTitle.textContent = song.title || "—";
-    songArtist.textContent = song.artist || "—";
-    songMessage.textContent = song.message || "";
-    renderLyrics(song);
-    music.src = song.src || "";
-    music.load();
-    progressBar.style.width = "0%";
-    curTime.textContent = "0:00";
-    durTime.textContent = "0:00";
-    renderPlaylist();
-    if (autoplay) music.play().catch(()=>{});
-    else updatePlayingUI(false);
-  }
-
-  function updatePlayingUI(playing) {
-    playBtn.textContent = playing ? "❚❚" : "▶";
-    coverWrap.classList.toggle("playing", playing);
-    bars.classList.toggle("playing", playing);
-    renderPlaylist();
-  }
-
-  playBtn.addEventListener("click", () => music.paused ? music.play().catch(()=>{}) : music.pause());
-  prevBtn.addEventListener("click", () => loadSong(currentIndex - 1, true));
-  nextBtn.addEventListener("click", () => loadSong(currentIndex + 1, true));
-  back15.addEventListener("click", () => music.currentTime = Math.max(0, music.currentTime - 15));
-  fwd15.addEventListener("click", () => { if (music.duration) music.currentTime = Math.min(music.duration, music.currentTime + 15); });
-
-  music.addEventListener("play", () => { updatePlayingUI(true); duckBackground(); });
-  music.addEventListener("pause", () => { updatePlayingUI(false); resumeBackground(); });
-  music.addEventListener("loadedmetadata", () => durTime.textContent = formatTime(music.duration));
-  music.addEventListener("timeupdate", () => {
-    if (!music.duration) return;
-    progressBar.style.width = (music.currentTime / music.duration * 100) + "%";
-    curTime.textContent = formatTime(music.currentTime);
+  playBtn.addEventListener("click", togglePlay);
+  prevBtn.addEventListener("click", () => loadTrack(current - 1, true));
+  nextBtn.addEventListener("click", () => loadTrack(current + 1, true));
+  back15.addEventListener("click", () => {
+    audio.currentTime = Math.max(0, audio.currentTime - 15);
   });
-  music.addEventListener("ended", () => loadSong(currentIndex + 1, true));
+  fwd15.addEventListener("click", () => {
+    if (audio.duration) {
+      audio.currentTime = Math.min(audio.duration, audio.currentTime + 15);
+    }
+  });
 
-  progress.addEventListener("pointerdown", e => {
-    if (!music.duration) return;
+  audio.addEventListener("loadedmetadata", () => {
+    duration.textContent = formatTime(audio.duration);
+  });
+
+  audio.addEventListener("timeupdate", () => {
+    if (!audio.duration) return;
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progressBar.style.width = percent + "%";
+    currentTime.textContent = formatTime(audio.currentTime);
+  });
+
+  audio.addEventListener("ended", () => {
+    loadTrack(current + 1, true);
+  });
+
+  progress.addEventListener("click", e => {
+    if (!audio.duration) return;
     const rect = progress.getBoundingClientRect();
-    const ratio = (e.clientX - rect.left) / rect.width;
-    music.currentTime = Math.max(0, Math.min(1, ratio)) * music.duration;
+    const percent = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = percent * audio.duration;
   });
-
-  let bgFadeTimer = null;
-  function fadeBackgroundIn() {
-    if (rainActive || !music.paused) return;
-    clearInterval(bgFadeTimer);
-    bgMusic.volume = Math.min(bgMusic.volume || 0, .15);
-    bgMusic.play().catch(()=>{});
-    let vol = bgMusic.volume;
-    bgFadeTimer = setInterval(() => {
-      if (rainActive || !music.paused) { clearInterval(bgFadeTimer); return; }
-      vol = Math.min(.15, vol + .01);
-      bgMusic.volume = vol;
-      if (vol >= .15) clearInterval(bgFadeTimer);
-    }, 70);
-  }
-  function duckBackground() { clearInterval(bgFadeTimer); if (!bgMusic.paused) bgMusic.pause(); }
-  function resumeBackground() { if (rainActive || !music.paused || !musicStarted) return; fadeBackgroundIn(); }
-
-  enterButton.addEventListener("click", () => {
-    vault.classList.add("show");
-    setTimeout(() => vaultInput.focus(), 200);
-  });
-
-  function checkPassword() {
-    if (vaultInput.value.trim() === CORRECT_PASSWORD) {
-      vaultError.classList.remove("show");
-      vaultBtn.disabled = true;
-      vaultBtn.textContent = "...";
-      setTimeout(() => {
-        vault.classList.remove("show");
-        gate.classList.add("hide");
-        startExperience();
-      }, 280);
-    } else {
-      vaultError.classList.add("show");
-      vaultCard.animate([{transform:"translateX(0)"},{transform:"translateX(-7px)"},{transform:"translateX(7px)"},{transform:"translateX(0)"}], {duration:350});
-      vaultInput.value = "";
-      setTimeout(() => vaultInput.focus(), 30);
-    }
-  }
-  vaultBtn.addEventListener("click", checkPassword);
-  vaultInput.addEventListener("keydown", e => { if (e.key === "Enter") checkPassword(); });
-
-  async function startExperience() {
-    if (musicStarted) return;
-    musicStarted = true;
-    document.body.classList.add("auto-color");
-    try { bgMusic.volume = .13; await bgMusic.play(); } catch {}
-    stage.classList.add("visible");
-    moodControls.classList.add("show");
-  }
-
-  const moments = [
-    "یه فضای کوچیک برای آهنگ‌هایی که ارزش دوباره شنیدن دارن.",
-    "بعضی آهنگ‌ها فقط آهنگ نیستن؛ یه حال و هوا رو با خودشون میارن.",
-    "برای وقت‌هایی که چند دقیقه فاصله گرفتن از شلوغی روز خوبه.",
-    "هر آهنگی اینجا یه انتخابه؛ بدون دلیل خاص، فقط چون حس خوبی می‌ده."
-  ];
-  let momentIndex = 0;
-  function renderMoment() {
-    momentBox.textContent = moments[momentIndex];
-    momentCount.textContent = `${momentIndex + 1} / ${moments.length}`;
-  }
-  momentPrev.addEventListener("click", () => { momentIndex = (momentIndex - 1 + moments.length) % moments.length; renderMoment(); });
-  momentNext.addEventListener("click", () => { momentIndex = (momentIndex + 1) % moments.length; renderMoment(); });
-  renderMoment();
-
-  candleToggle.addEventListener("click", () => {
-    candleActive = !candleActive;
-    document.body.classList.toggle("candle-mode", candleActive);
-    candleToggle.classList.toggle("active", candleActive);
-    if (candleActive) document.body.classList.remove("auto-color");
-    else document.body.classList.add("auto-color");
-  });
-
-  let rainBuilt = false;
-  function buildRain() {
-    if (rainBuilt) return;
-    rainBuilt = true;
-    const frag = document.createDocumentFragment();
-    for (let i = 0; i < 40; i++) {
-      const drop = document.createElement("div");
-      drop.className = "rain-drop";
-      drop.style.left = Math.random() * 100 + "vw";
-      drop.style.height = (12 + Math.random() * 22) + "px";
-      drop.style.animationDuration = (.55 + Math.random() * .6) + "s";
-      drop.style.animationDelay = (-Math.random() * 2) + "s";
-      drop.style.setProperty("--drift", (-50 - Math.random() * 50) + "px");
-      frag.appendChild(drop);
-    }
-    rainLayer.appendChild(frag);
-  }
-
-  rainToggle.addEventListener("click", () => {
-    rainActive = !rainActive;
-    rainToggle.classList.toggle("rain-active", rainActive);
-    if (rainActive) {
-      buildRain();
-      rainLayer.classList.add("show");
-      duckBackground();
-      rainSound.volume = .12;
-      rainSound.play().catch(()=>{});
-    } else {
-      rainLayer.classList.remove("show");
-      rainSound.pause();
-      rainSound.currentTime = 0;
-      resumeBackground();
-    }
-  });
-
-  // Reveal
-  const reveals = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window) {
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); obs.unobserve(e.target); } });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => obs.observe(el));
-  } else {
-    reveals.forEach(el => el.classList.add("in"));
-  }
-
-  // Greeting
-  (function() {
-    const h = new Date().getHours();
-    let t = "روز بخیر";
-    if (h >= 5 && h < 11) t = "صبح بخیر ☀️";
-    else if (h >= 11 && h < 17) t = "روز بخیر 🌤";
-    else if (h >= 17 && h < 21) t = "عصر بخیر 🌆";
-    else t = "شب بخیر 🌙";
-    $("greeting").textContent = t;
-  })();
 
   // Start
   loadSongs();
 })();
 </script>
 </body>
-    </html>
+  </html>
