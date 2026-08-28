@@ -2,36 +2,24 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width,initial-scale=1.0,
-      maximum-scale=1.0,user-scalable=no">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <meta name="theme-color" content="#050912">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Music Space">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
 <title>Music Space</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600&display=swap');
 
-/* =========================================================
-   ROOT
-========================================================= */
-
 :root{
     --text:#eef7ff;
     --muted:#a8bfd0;
     --faint:#718ca0;
-
     --bg:#040a12;
-
     --panel:rgba(255,255,255,.055);
     --panel-strong:rgba(255,255,255,.09);
     --border:rgba(220,240,255,.14);
-
     --cyan:#66d4ff;
     --blue:#5f8cff;
     --purple:#a77cff;
@@ -40,4281 +28,833 @@
     --pink:#ff78b7;
     --red:#ff7187;
     --gold:#ffd36a;
-
     --accent:var(--cyan);
-
     --orb1:rgba(40,170,255,.20);
     --orb2:rgba(160,80,255,.17);
     --orb3:rgba(30,220,175,.13);
-
     --theme-speed:18s;
 }
 
-/* =========================================================
-   RESET
-========================================================= */
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color:transparent;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
 body{
-    min-height:100vh;
-    overflow-x:hidden;
-
-    background:var(--bg);
-    color:var(--text);
-
+    min-height:100vh;overflow-x:hidden;
+    background:var(--bg);color:var(--text);
     font-family:'Vazirmatn',sans-serif;
-
-    transition:
-        background 1.8s ease,
-        color 1.2s ease;
+    transition:background 1.8s ease,color 1.2s ease;
 }
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
+/* BACKGROUND */
 .background{
-    position:fixed;
-    inset:0;
-
-    z-index:-10;
-    overflow:hidden;
-
+    position:fixed;inset:0;z-index:-10;overflow:hidden;
     background:
-        radial-gradient(
-            circle at 18% 12%,
-            var(--orb1),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 82% 25%,
-            var(--orb2),
-            transparent 36%
-        ),
-        radial-gradient(
-            circle at 50% 92%,
-            var(--orb3),
-            transparent 40%
-        ),
+        radial-gradient(circle at 18% 12%,var(--orb1),transparent 35%),
+        radial-gradient(circle at 82% 25%,var(--orb2),transparent 36%),
+        radial-gradient(circle at 50% 92%,var(--orb3),transparent 40%),
         var(--bg);
-
-    transition:
-        background 2s ease;
+    transition:background 2s ease;
 }
-
-/*
-   سبک‌تر از نسخه قبلی:
-   فقط دو هاله بزرگ
-*/
-
-.background::before,
-.background::after{
-    content:"";
-
-    position:absolute;
-
-    width:55vmax;
-    height:55vmax;
-
-    border-radius:50%;
-
-    filter:blur(75px);
-
-    opacity:.28;
-
-    will-change:transform;
-
-    pointer-events:none;
+.background::before,.background::after{
+    content:"";position:absolute;width:55vmax;height:55vmax;border-radius:50%;
+    filter:blur(75px);opacity:.28;will-change:transform;pointer-events:none;
 }
-
 .background::before{
-    top:-25vmax;
-    left:-20vmax;
-
-    background:
-        radial-gradient(
-            circle,
-            var(--orb1),
-            transparent 70%
-        );
-
-    animation:
-        bgFloat1 28s ease-in-out infinite alternate;
+    top:-25vmax;left:-20vmax;
+    background:radial-gradient(circle,var(--orb1),transparent 70%);
+    animation:bgFloat1 28s ease-in-out infinite alternate;
 }
-
 .background::after{
-    right:-25vmax;
-    bottom:-25vmax;
-
-    background:
-        radial-gradient(
-            circle,
-            var(--orb2),
-            transparent 70%
-        );
-
-    animation:
-        bgFloat2 32s ease-in-out infinite alternate;
+    right:-25vmax;bottom:-25vmax;
+    background:radial-gradient(circle,var(--orb2),transparent 70%);
+    animation:bgFloat2 32s ease-in-out infinite alternate;
 }
+@keyframes bgFloat1{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(15vw,12vh,0) scale(1.16)}}
+@keyframes bgFloat2{from{transform:translate3d(0,0,0) scale(1)}to{transform:translate3d(-15vw,-12vh,0) scale(1.13)}}
 
-@keyframes bgFloat1{
-    from{
-        transform:translate3d(0,0,0) scale(1);
-    }
+.color-orb{position:absolute;width:30vmax;height:30vmax;border-radius:50%;filter:blur(70px);opacity:.16;will-change:transform;pointer-events:none}
+.orb-one{top:30%;left:-12%;background:radial-gradient(circle,#00cfff,transparent 70%);animation:orbOne 34s ease-in-out infinite alternate}
+.orb-two{top:18%;right:-12%;background:radial-gradient(circle,#a95cff,transparent 70%);animation:orbTwo 38s ease-in-out infinite alternate}
+.orb-three{bottom:-15%;left:35%;background:radial-gradient(circle,#1ee0a8,transparent 70%);animation:orbThree 31s ease-in-out infinite alternate}
+@keyframes orbOne{from{transform:translate3d(0,0,0)}to{transform:translate3d(20vw,-7vh,0)}}
+@keyframes orbTwo{from{transform:translate3d(0,0,0)}to{transform:translate3d(-20vw,10vh,0)}}
+@keyframes orbThree{from{transform:translate3d(0,0,0)}to{transform:translate3d(7vw,-15vh,0)}}
 
-    to{
-        transform:translate3d(15vw,12vh,0) scale(1.16);
-    }
-}
-
-@keyframes bgFloat2{
-    from{
-        transform:translate3d(0,0,0) scale(1);
-    }
-
-    to{
-        transform:translate3d(-15vw,-12vh,0) scale(1.13);
-    }
-}
-
-/* =========================================================
-   COLOR ORBS
-========================================================= */
-
-.color-orb{
-    position:absolute;
-
-    width:30vmax;
-    height:30vmax;
-
-    border-radius:50%;
-
-    filter:blur(70px);
-
-    opacity:.16;
-
-    will-change:transform;
-
-    pointer-events:none;
-}
-
-.orb-one{
-    top:30%;
-    left:-12%;
-
-    background:
-        radial-gradient(
-            circle,
-            #00cfff,
-            transparent 70%
-        );
-
-    animation:
-        orbOne 34s ease-in-out infinite alternate;
-}
-
-.orb-two{
-    top:18%;
-    right:-12%;
-
-    background:
-        radial-gradient(
-            circle,
-            #a95cff,
-            transparent 70%
-        );
-
-    animation:
-        orbTwo 38s ease-in-out infinite alternate;
-}
-
-.orb-three{
-    bottom:-15%;
-    left:35%;
-
-    background:
-        radial-gradient(
-            circle,
-            #1ee0a8,
-            transparent 70%
-        );
-
-    animation:
-        orbThree 31s ease-in-out infinite alternate;
-}
-
-@keyframes orbOne{
-    from{
-        transform:translate3d(0,0,0);
-    }
-
-    to{
-        transform:translate3d(20vw,-7vh,0);
-    }
-}
-
-@keyframes orbTwo{
-    from{
-        transform:translate3d(0,0,0);
-    }
-
-    to{
-        transform:translate3d(-20vw,10vh,0);
-    }
-}
-
-@keyframes orbThree{
-    from{
-        transform:translate3d(0,0,0);
-    }
-
-    to{
-        transform:translate3d(7vw,-15vh,0);
-    }
-}
-
-/* =========================================================
-   AUTOMATIC COLOR CYCLE
-========================================================= */
-
-body.auto-color{
-    animation:
-        ambientColor var(--theme-speed) linear infinite;
-}
-
+body.auto-color{animation:ambientColor var(--theme-speed) linear infinite}
 @keyframes ambientColor{
-
-    0%{
-        --orb1:rgba(35,180,255,.20);
-        --orb2:rgba(135,75,255,.17);
-        --orb3:rgba(30,220,175,.13);
-    }
-
-    14%{
-        --orb1:rgba(255,80,170,.19);
-        --orb2:rgba(255,100,80,.16);
-        --orb3:rgba(255,200,70,.13);
-    }
-
-    28%{
-        --orb1:rgba(80,255,210,.18);
-        --orb2:rgba(60,130,255,.18);
-        --orb3:rgba(170,80,255,.13);
-    }
-
-    42%{
-        --orb1:rgba(255,210,80,.19);
-        --orb2:rgba(255,90,150,.16);
-        --orb3:rgba(90,220,255,.13);
-    }
-
-    57%{
-        --orb1:rgba(110,90,255,.19);
-        --orb2:rgba(255,70,190,.16);
-        --orb3:rgba(50,220,150,.13);
-    }
-
-    72%{
-        --orb1:rgba(255,100,70,.18);
-        --orb2:rgba(100,210,255,.18);
-        --orb3:rgba(255,200,80,.13);
-    }
-
-    86%{
-        --orb1:rgba(50,220,255,.20);
-        --orb2:rgba(190,80,255,.17);
-        --orb3:rgba(80,255,170,.13);
-    }
-
-    100%{
-        --orb1:rgba(35,180,255,.20);
-        --orb2:rgba(135,75,255,.17);
-        --orb3:rgba(30,220,175,.13);
-    }
-}
-
-/* =========================================================
-   GRAIN
-========================================================= */
-
-.grain{
-    position:fixed;
-    inset:0;
-
-    z-index:-5;
-
-    pointer-events:none;
-
-    opacity:.025;
-
-    background-image:url(
-        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"
-    );
-}
-
-/* =========================================================
-   LIGHTS
-========================================================= */
-
-.lights{
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-4;
-
-    overflow:hidden;
-}
-
-.light{
-    position:absolute;
-
-    width:3px;
-    height:3px;
-
-    border-radius:50%;
-
-    background:#dff8ff;
-
-    box-shadow:
-        0 0 12px rgba(130,220,255,.65);
-
-    opacity:.12;
-
-    animation:
-        lightFloat linear infinite;
-
-    will-change:transform;
-}
-
-@keyframes lightFloat{
-
-    0%{
-        transform:translate3d(0,110vh,0);
-        opacity:0;
-    }
-
-    15%{
-        opacity:.35;
-    }
-
-    80%{
-        opacity:.15;
-    }
-
-    100%{
-        transform:translate3d(35px,-10vh,0);
-        opacity:0;
-    }
-}
-
-/* =========================================================
-   LOADER
-========================================================= */
-
-#loader{
-    position:fixed;
-    inset:0;
-
-    z-index:99999;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#040a12;
-
-    transition:
-        opacity .6s ease,
-        visibility .6s ease;
-}
-
-#loader.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-.loader-ring{
-    width:42px;
-    height:42px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(255,255,255,.13);
-
-    border-top-color:#66d4ff;
-    border-right-color:#a77cff;
-
-    animation:
-        loaderSpin .9s linear infinite;
-}
-
-@keyframes loaderSpin{
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* =========================================================
-   ENTRY
-========================================================= */
-
-#gate{
-    position:fixed;
-    inset:0;
-
-    z-index:9000;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(70,150,255,.10),
-            transparent 50%
-        );
-
-    transition:
-        opacity .8s ease,
-        visibility .8s ease,
-        transform .8s ease;
-}
-
-#gate.hide{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-
-    transform:scale(1.03);
-}
-
-.gate-content{
-    width:88%;
-    max-width:380px;
-}
-
-.gate-label{
-    font-size:10px;
-
-    letter-spacing:4px;
-
-    color:#8cb6d0;
-
-    direction:ltr;
-
-    margin-bottom:18px;
-
-    animation:fadeUp .7s ease forwards;
-}
-
-.gate-title{
-    font-size:28px;
-
-    font-weight:400;
-
-    line-height:1.6;
-
-    color:#f4fbff;
-
-    margin-bottom:12px;
-
-    animation:fadeUp .8s ease .1s both;
-}
-
-.gate-line{
-    width:55px;
-    height:1px;
-
-    margin:0 auto 18px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            #9de6ff,
-            transparent
-        );
-
-    box-shadow:
-        0 0 18px rgba(100,210,255,.4);
-}
-
-.gate-sub{
-    color:var(--muted);
-
-    font-size:13px;
-
-    font-weight:300;
-
-    margin-bottom:38px;
-
-    animation:fadeUp .8s ease .2s both;
-}
-
-.enter-button{
-    width:72px;
-    height:72px;
-
-    margin:auto;
-
-    border-radius:50%;
-
-    border:1px solid rgba(210,240,255,.35);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(100,210,255,.14),
-            rgba(150,100,255,.12)
-        );
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:white;
-
-    font-size:24px;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 0 35px rgba(70,170,255,.15);
-
-    animation:
-        enterPulse 2.6s ease-out infinite;
-}
-
-.enter-button:active{
-    transform:scale(.93);
-}
-
-@keyframes enterPulse{
-
-    0%{
-        box-shadow:
-            0 0 0 0 rgba(100,210,255,.35),
-            0 0 35px rgba(70,170,255,.15);
-    }
-
-    70%{
-        box-shadow:
-            0 0 0 22px rgba(100,210,255,0),
-            0 0 45px rgba(70,170,255,.20);
-    }
-
-    100%{
-        box-shadow:
-            0 0 0 0 rgba(100,210,255,0),
-            0 0 35px rgba(70,170,255,.15);
-    }
-}
-
-@keyframes fadeUp{
-
-    from{
-        opacity:0;
-        transform:translateY(12px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* =========================================================
-   PASSWORD
-========================================================= */
-
-#vault{
-    position:fixed;
-    inset:0;
-
-    z-index:9500;
-
-    display:none;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:24px;
-
-    background:rgba(2,7,14,.72);
-
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
-
-    opacity:0;
-}
-
-#vault.show{
-    display:flex;
-    opacity:1;
-}
-
-.vault-card{
-    width:100%;
-    max-width:340px;
-
-    padding:32px 24px;
-
-    text-align:center;
-
-    border-radius:24px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.09),
-            rgba(255,255,255,.035)
-        );
-
-    border:1px solid var(--border);
-
-    box-shadow:
-        0 25px 60px rgba(0,0,0,.40);
-
-    animation:
-        cardIn .45s cubic-bezier(.16,1,.3,1);
-}
-
-@keyframes cardIn{
-
-    from{
-        opacity:0;
-        transform:translateY(15px) scale(.97);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-.vault-icon{
-    font-size:30px;
-    margin-bottom:12px;
-}
-
-.vault-card h2{
-    font-size:18px;
-    font-weight:400;
-    margin-bottom:7px;
-}
-
-.vault-card p{
-    font-size:12px;
-    color:var(--muted);
-    margin-bottom:20px;
-}
-
-.vault-input{
-    width:100%;
-    height:50px;
-
-    border-radius:14px;
-
-    border:1px solid rgba(210,240,255,.2);
-
-    background:rgba(0,10,22,.45);
-
-    color:white;
-
-    text-align:center;
-
-    font-size:20px;
-
-    letter-spacing:9px;
-
-    outline:none;
-
-    font-family:'Vazirmatn',sans-serif;
-}
-
-.vault-input:focus{
-    border-color:rgba(100,210,255,.55);
-}
-
-.vault-input::placeholder{
-    letter-spacing:1px;
-
-    font-size:12px;
-
-    color:rgba(200,230,245,.4);
-}
-
-.vault-btn{
-    width:100%;
-    height:48px;
-
-    margin-top:14px;
-
-    border-radius:14px;
-
-    border:1px solid rgba(210,240,255,.25);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(80,190,255,.20),
-            rgba(140,90,255,.18)
-        );
-
-    color:white;
-
-    font-family:'Vazirmatn',sans-serif;
-
-    cursor:pointer;
-}
-
-.vault-btn:active{
-    transform:scale(.97);
-}
-
-.vault-error{
-    min-height:18px;
-
-    margin-top:10px;
-
-    font-size:11px;
-
-    color:#ffb9c5;
-
-    opacity:0;
-}
-
-.vault-error.show{
-    opacity:1;
-}
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-#stage{
-    position:relative;
-
-    z-index:1;
-
-    width:min(94%,520px);
-
-    margin:auto;
-
-    padding:
-        55px 0 90px;
-
-    opacity:0;
-
-    transform:translateY(18px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s ease;
-}
-
-#stage.visible{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.greeting{
-    font-size:11px;
-    color:var(--muted);
-    margin-bottom:12px;
-}
-
-.hero-label{
-    font-size:9px;
-
-    letter-spacing:4px;
-
-    color:#82b6d0;
-
-    direction:ltr;
-
-    margin-bottom:13px;
-}
-
-.title{
-    font-size:31px;
-    font-weight:400;
-
-    margin-bottom:12px;
-
-    text-shadow:
-        0 0 25px rgba(100,210,255,.14);
-}
-
-.intro{
-    color:var(--muted);
-
-    font-size:13px;
-
-    line-height:2;
-
-    font-weight:300;
-
-    margin-top:12px;
-}
-
-.hero-divider{
-    width:1px;
-    height:35px;
-
-    margin:22px auto 0;
-
-    background:
-        linear-gradient(
-            180deg,
-            transparent,
-            rgba(150,220,255,.45),
-            transparent
-        );
-}
-
-/* =========================================================
-   SECTION
-========================================================= */
-
-.section-label{
-    display:flex;
-    align-items:center;
-    gap:10px;
-
-    margin-bottom:15px;
-
-    color:var(--faint);
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    direction:ltr;
-}
-
-.section-label::before{
-    content:"";
-
-    width:25px;
-    height:1px;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(120,210,255,.5)
-        );
-}
-
-/* =========================================================
-   PLAYLIST
-========================================================= */
-
-.tracklist{
-    margin-top:34px;
-
-    border-top:1px solid var(--border);
-}
-
-.track{
-    position:relative;
-
-    display:flex;
-    align-items:center;
-
-    gap:13px;
-
-    padding:15px 5px;
-
-    border-bottom:1px solid var(--border);
-
-    cursor:pointer;
-
-    transition:
-        background .25s ease,
-        padding .25s ease;
-}
-
-.track:hover{
-    background:rgba(255,255,255,.025);
-}
-
-.track.active{
-    background:
-        linear-gradient(
-            90deg,
-            rgba(80,190,255,.08),
-            rgba(150,90,255,.04)
-        );
-
-    padding-right:13px;
-}
-
-.track.active::before{
-    content:"";
-
-    position:absolute;
-
-    right:0;
-
-    top:20%;
-    bottom:20%;
-
-    width:2px;
-
-    border-radius:3px;
-
-    background:
-        linear-gradient(
-            180deg,
-            var(--cyan),
-            var(--purple)
-        );
-
-    box-shadow:
-        0 0 10px rgba(90,190,255,.45);
-}
-
-.track-num{
-    width:27px;
-
-    flex:0 0 27px;
-
-    text-align:center;
-
-    color:var(--faint);
-
-    font-size:11px;
-}
-
-.track.active .track-num{
-    color:transparent;
-    position:relative;
-}
-
-.eq{
-    position:absolute;
-    inset:0;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:2px;
-}
-
-.eq i{
-    width:2px;
-    height:5px;
-
-    border-radius:3px;
-
-    background:var(--cyan);
-
-    animation:
-        eq .9s ease-in-out infinite;
-}
-
-.eq i:nth-child(1){
-    animation-delay:-.6s;
-}
-
-.eq i:nth-child(2){
-    animation-delay:-.2s;
-}
-
-.eq i:nth-child(3){
-    animation-delay:-.8s;
-}
-
-@keyframes eq{
-
-    0%,100%{
-        height:4px;
-    }
-
-    50%{
-        height:13px;
-    }
-}
-
-.track-body{
-    flex:1;
-    min-width:0;
-}
-
-.track-title{
-    color:var(--text);
-
-    font-size:13.5px;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    margin-bottom:3px;
-}
-
-.track.active .track-title{
-    color:#fff;
-}
-
-.track-artist{
-    color:var(--faint);
-
-    font-size:10.5px;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-}
-
-.track-play{
-    width:30px;
-    height:30px;
-
-    flex:0 0 30px;
-
-    border-radius:50%;
-
-    border:1px solid var(--border);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    color:var(--muted);
-
-    font-size:10px;
-
-    opacity:.25;
-
-    transition:.2s;
-}
-
-.track:hover .track-play,
-.track.active .track-play{
-    opacity:1;
-}
-
-.track.active .track-play{
-    color:white;
-
-    border-color:
-        rgba(150,225,255,.45);
-}
-
-/* =========================================================
-   PLAYER
-========================================================= */
-
-.player{
-    margin-top:55px;
-
-    text-align:center;
-}
-
-.cover-wrap{
-    position:relative;
-
-    width:155px;
-    height:155px;
-
-    margin:0 auto 24px;
-
-    border-radius:50%;
-
-    overflow:hidden;
-
-    border:1px solid rgba(210,240,255,.18);
-
-    box-shadow:
-        0 0 0 8px rgba(100,200,255,.035),
-        0 20px 55px rgba(0,0,0,.42);
-
-    animation:
-        coverSpin 25s linear infinite;
-
-    animation-play-state:paused;
-
-    cursor:pointer;
-
-    transition:
-        box-shadow 1.2s ease,
-        border-color 1.2s ease;
-}
-
-.cover-wrap.playing{
-    animation-play-state:running;
-}
-
-.cover-wrap img{
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    display:block;
-}
-
-.cover-wrap::after{
-    content:"";
-
-    position:absolute;
-
-    inset:39%;
-
-    border-radius:50%;
-
-    background:#07111c;
-
-    box-shadow:
-        inset 0 0 10px rgba(0,0,0,.7);
-}
-
-@keyframes coverSpin{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-.song-title{
-    font-size:19px;
-
-    font-weight:400;
-
-    color:#fff;
-
-    padding:0 10px;
-
-    margin-bottom:6px;
-}
-
-.song-artist{
-    font-size:11px;
-
-    color:var(--muted);
-
-    margin-bottom:15px;
-}
-
-.song-message{
-    max-width:350px;
-
-    margin:0 auto 20px;
-
-    color:#b9cedc;
-
-    font-size:12px;
-
-    line-height:1.9;
-
-    font-weight:300;
-}
-
-/* =========================================================
-   STAR SONG MODE
-========================================================= */
-
-body.star-mode .cover-wrap{
-    border-color:rgba(255,211,106,.55);
-
-    box-shadow:
-        0 0 0 8px rgba(255,205,80,.055),
-        0 0 55px rgba(255,180,60,.30),
-        0 20px 60px rgba(0,0,0,.45);
-}
-
-body.star-mode .title{
-    text-shadow:
-        0 0 25px rgba(255,210,100,.25);
-}
-
-body.star-mode .track.active{
-    background:
-        linear-gradient(
-            90deg,
-            rgba(255,205,90,.10),
-            rgba(255,100,180,.045)
-        );
-}
-
-body.star-mode .track.active::before{
-    background:
-        linear-gradient(
-            180deg,
-            #ffd76a,
-            #ff8ac8,
-            #9d8cff
-        );
-}
-
-/* ستاره‌های سبک */
-.star-field{
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-3;
-
-    opacity:0;
-
-    transition:opacity 1s ease;
-
-    overflow:hidden;
-}
-
-.star-field.show{
-    opacity:1;
-}
-
-.star-particle{
-    position:absolute;
-
-    width:2px;
-    height:2px;
-
-    border-radius:50%;
-
-    background:#fff4bd;
-
-    box-shadow:
-        0 0 7px rgba(255,220,120,.8);
-
-    animation:
-        starTwinkle 2s ease-in-out infinite alternate;
-}
-
-@keyframes starTwinkle{
-
-    from{
-        opacity:.15;
-        transform:scale(.7);
-    }
-
-    to{
-        opacity:.8;
-        transform:scale(1.5);
-    }
-}
-
-/* =========================================================
-   VISUALIZER
-========================================================= */
-
-.bars{
-    height:24px;
-
-    display:flex;
-    align-items:flex-end;
-    justify-content:center;
-
-    gap:3px;
-
-    margin-bottom:22px;
-
-    opacity:.65;
-}
-
-.bars i{
-    width:3px;
-    height:4px;
-
-    border-radius:3px;
-
-    background:
-        linear-gradient(
-            180deg,
-            var(--cyan),
-            var(--purple)
-        );
-}
-
-.bars.playing i{
-    animation:
-        bars .9s ease-in-out infinite;
-}
-
-.bars i:nth-child(1){
-    animation-delay:-.8s;
-}
-
-.bars i:nth-child(2){
-    animation-delay:-.4s;
-}
-
-.bars i:nth-child(3){
-    animation-delay:-.2s;
-}
-
-.bars i:nth-child(4){
-    animation-delay:-.7s;
-}
-
-.bars i:nth-child(5){
-    animation-delay:-.1s;
-}
-
-.bars i:nth-child(6){
-    animation-delay:-.5s;
-}
-
-.bars i:nth-child(7){
-    animation-delay:-.3s;
-}
-
-@keyframes bars{
-
-    0%,100%{
-        height:4px;
-    }
-
-    50%{
-        height:21px;
-    }
-}
-
-/* =========================================================
-   CONTROLS
-========================================================= */
-
-.controls{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:15px;
-
-    margin-bottom:20px;
-}
-
-.ctl-btn{
-    border:none;
-
-    background:none;
-
-    color:var(--text);
-
-    font-size:15px;
-
-    cursor:pointer;
-
-    opacity:.7;
-
-    padding:8px;
-
-    transition:.2s;
-}
-
-.ctl-btn:hover{
-    opacity:1;
-    transform:scale(1.06);
-}
-
-.ctl-btn:active{
-    transform:scale(.9);
-}
-
-.play-btn{
-    width:58px;
-    height:58px;
-
-    border-radius:50%;
-
-    border:1px solid rgba(210,240,255,.35);
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(70,200,255,.25),
-            rgba(145,90,255,.22)
-        );
-
-    color:white;
-
-    font-size:18px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 0 30px rgba(80,180,255,.13);
-
-    transition:.2s;
-}
-
-.play-btn:active{
-    transform:scale(.92);
-}
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-.progress-wrap{
-    max-width:350px;
-    margin:auto;
-}
-
-.progress{
-    position:relative;
-
-    height:4px;
-
-    border-radius:5px;
-
-    background:rgba(220,240,255,.12);
-
-    cursor:pointer;
-
-    overflow:hidden;
-}
-
-.progress-bar{
-    width:0%;
-    height:100%;
-
-    border-radius:5px;
-
-    background:
-        linear-gradient(
-            90deg,
-            var(--cyan),
-            var(--purple)
-        );
-
-    box-shadow:
-        0 0 10px rgba(90,190,255,.4);
-
-    transition:width .08s linear;
-}
-
-.time{
-    display:flex;
-    justify-content:space-between;
-
-    margin-top:7px;
-
-    color:var(--faint);
-
-    font-size:10px;
-
-    direction:ltr;
-}
-
-/* =========================================================
-   LYRICS
-========================================================= */
-
-.lyrics-box{
-    max-width:370px;
-
-    margin:35px auto 0;
-}
-
-.lyrics-title{
-    color:var(--faint);
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    margin-bottom:14px;
-
-    direction:ltr;
-}
-
-.lyrics{
-    color:#aebfcd;
-
-    font-size:13px;
-
-    line-height:2.4;
-
-    font-weight:300;
-}
-
-.lyrics p{
-    margin:0;
-    padding:3px 0;
-
-    opacity:.88;
-}
-
-/* =========================================================
-   MOMENTS
-========================================================= */
-
-.moments{
-    margin-top:65px;
-}
-
-.moment-box{
-    position:relative;
-
-    min-height:150px;
-
-    padding:28px 22px;
-
-    border-radius:20px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.075),
-            rgba(255,255,255,.025)
-        );
-
-    border:1px solid var(--border);
-
-    backdrop-filter:blur(10px);
-    -webkit-backdrop-filter:blur(10px);
-
-    box-shadow:
-        0 18px 45px rgba(0,0,0,.23);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    text-align:center;
-
-    color:#dbeaf3;
-
-    font-size:13px;
-
-    line-height:2;
-
-    font-weight:300;
-}
-
-.moment-box::before{
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:50%;
-
-    width:45px;
-    height:1px;
-
-    transform:translateX(-50%);
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            var(--cyan),
-            transparent
-        );
-}
-
-.moment-controls{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:18px;
-
-    margin-top:15px;
-}
-
-.moment-controls button{
-    width:34px;
-    height:34px;
-
-    border-radius:50%;
-
-    border:1px solid var(--border);
-
-    background:rgba(255,255,255,.035);
-
-    color:var(--text);
-
-    cursor:pointer;
-}
-
-.moment-count{
-    color:var(--faint);
-
-    font-size:10px;
-
-    direction:ltr;
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-.footer{
-    margin-top:70px;
-
-    text-align:center;
-}
-
-.footer-text{
-    color:var(--muted);
-
-    font-size:12.5px;
-
-    line-height:2.2;
-
-    font-weight:300;
-}
-
-.footer-line{
-    width:35px;
-    height:1px;
-
-    margin:22px auto;
-
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(150,220,255,.5),
-            transparent
-        );
-}
-
-.footer-title{
-    color:#cde9f7;
-
-    font-size:12px;
-
-    letter-spacing:1px;
-}
-
-.footer-sub{
-    margin-top:7px;
-
-    color:var(--faint);
-
-    font-size:10px;
-}
-
-/* =========================================================
-   MOOD BUTTONS
-========================================================= */
-
-.mood-controls{
-    position:fixed;
-
-    top:17px;
-    left:17px;
-
-    z-index:500;
-
-    display:flex;
-    gap:7px;
-
-    opacity:0;
-
-    transform:translateY(-8px);
-
-    pointer-events:none;
-
-    transition:.6s;
-}
-
-.mood-controls.show{
-    opacity:1;
-
-    transform:translateY(0);
-
-    pointer-events:auto;
-}
-
-.mood-btn{
-    width:38px;
-    height:38px;
-
-    border-radius:50%;
-
-    border:1px solid var(--border);
-
-    background:rgba(8,18,30,.55);
-
-    backdrop-filter:blur(10px);
-
-    color:white;
-
-    cursor:pointer;
-
-    opacity:.75;
-
-    transition:.25s;
-}
-
-.mood-btn:hover{
-    opacity:1;
-    transform:scale(1.05);
-}
-
-.mood-btn.active{
-    background:
-        rgba(255,190,110,.18);
-
-    border-color:
-        rgba(255,205,140,.5);
-
-    box-shadow:
-        0 0 20px rgba(255,180,100,.25);
-}
-
-.mood-btn.rain-active{
-    background:
-        rgba(100,190,255,.15);
-
-    border-color:
-        rgba(140,220,255,.4);
-
-    box-shadow:
-        0 0 18px rgba(80,190,255,.2);
-}
-
-/* =========================================================
-   CANDLE MODE
-========================================================= */
-
-body.candle-mode{
-    --bg:#100a07;
-
-    --cyan:#ffc477;
-    --purple:#ff806b;
-
-    --border:rgba(255,220,180,.15);
-
-    --muted:#cdb8a7;
-    --faint:#9e8370;
-}
-
-body.candle-mode .background{
-    background:
-        radial-gradient(
-            circle at 25% 15%,
-            rgba(255,155,70,.23),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 80% 25%,
-            rgba(255,80,90,.17),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 50% 90%,
-            rgba(255,210,100,.12),
-            transparent 40%
-        ),
-        #100a07;
-}
-
-body.candle-mode .background::before{
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,155,60,.45),
-            transparent 70%
-        );
-}
-
-body.candle-mode .background::after{
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,80,90,.30),
-            transparent 70%
-        );
-}
-
-/*
-   شعله واقعی‌تر بدون تصویر خارجی
-*/
-
-body.candle-mode::after{
-    content:"";
-
-    position:fixed;
-
-    width:220px;
-    height:220px;
-
-    left:-80px;
-    bottom:-70px;
-
-    border-radius:50%;
-
-    background:
-        radial-gradient(
-            ellipse at center,
-            rgba(255,190,90,.28),
-            rgba(255,120,40,.10) 35%,
-            transparent 70%
-        );
-
-    filter:blur(18px);
-
-    pointer-events:none;
-
-    z-index:-1;
-
-    animation:
-        candleGlow 2.4s ease-in-out infinite alternate;
-}
-
-@keyframes candleGlow{
-
-    from{
-        transform:scale(.9);
-        opacity:.55;
-    }
-
-    to{
-        transform:scale(1.15);
-        opacity:1;
-    }
-}
-
-/* =========================================================
-   RAIN
-========================================================= */
-
-.rain-layer{
-    position:fixed;
-
-    inset:0;
-
-    z-index:-2;
-
-    pointer-events:none;
-
-    overflow:hidden;
-
-    opacity:0;
-
-    transition:opacity .5s;
-}
-
-.rain-layer.show{
-    opacity:1;
-}
-
-.rain-drop{
-    position:absolute;
-
-    top:-10vh;
-
-    width:1px;
-
-    border-radius:4px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(220,245,255,.65),
-            rgba(120,190,230,.02)
-        );
-
-    animation:
-        rain linear infinite;
-}
-
-@keyframes rain{
-
-    to{
-        transform:
-            translate3d(
-                var(--drift),
-                120vh,
-                0
-            );
-    }
-}
-
-/* =========================================================
-   HIDDEN PANEL
-========================================================= */
-
-#hiddenPanel{
-    position:fixed;
-
-    inset:0;
-
-    z-index:9700;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:30px;
-
-    background:rgba(2,8,16,.90);
-
-    backdrop-filter:blur(12px);
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.5s;
-}
-
-#hiddenPanel.show{
-    opacity:1;
-    visibility:visible;
-}
-
-.hidden-box{
-    width:100%;
-    max-width:360px;
-
-    padding:30px 24px;
-
-    text-align:center;
-
-    border-radius:22px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.08),
-            rgba(255,255,255,.025)
-        );
-
-    border:1px solid var(--border);
-}
-
-.hidden-box .label{
-    color:var(--faint);
-
-    font-size:9px;
-
-    letter-spacing:3px;
-
-    direction:ltr;
-
-    margin-bottom:15px;
-}
-
-.hidden-box p{
-    color:#d9e9f2;
-
-    font-size:13.5px;
-
-    line-height:2.15;
-
-    font-weight:300;
-
-    margin-bottom:18px;
-}
-
-.close-btn{
-    display:inline-block;
-
-    padding:10px 25px;
-
-    border-radius:30px;
-
-    border:1px solid var(--border);
-
-    background:rgba(255,255,255,.05);
-
-    color:white;
-
-    font-size:11px;
-
-    cursor:pointer;
-}
-
-/* =========================================================
-   REVEAL
-========================================================= */
-
-.reveal{
-    opacity:0;
-
-    transform:translateY(16px);
-
-    transition:
-        opacity .7s ease,
-        transform .7s ease;
-}
-
-.reveal.in{
-    opacity:1;
-    transform:translateY(0);
-}
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
+    0%{--orb1:rgba(35,180,255,.20);--orb2:rgba(135,75,255,.17);--orb3:rgba(30,220,175,.13)}
+    14%{--orb1:rgba(255,80,170,.19);--orb2:rgba(255,100,80,.16);--orb3:rgba(255,200,70,.13)}
+    28%{--orb1:rgba(80,255,210,.18);--orb2:rgba(60,130,255,.18);--orb3:rgba(170,80,255,.13)}
+    42%{--orb1:rgba(255,210,80,.19);--orb2:rgba(255,90,150,.16);--orb3:rgba(90,220,255,.13)}
+    57%{--orb1:rgba(110,90,255,.19);--orb2:rgba(255,70,190,.16);--orb3:rgba(50,220,150,.13)}
+    72%{--orb1:rgba(255,100,70,.18);--orb2:rgba(100,210,255,.18);--orb3:rgba(255,200,80,.13)}
+    86%{--orb1:rgba(50,220,255,.20);--orb2:rgba(190,80,255,.17);--orb3:rgba(80,255,170,.13)}
+    100%{--orb1:rgba(35,180,255,.20);--orb2:rgba(135,75,255,.17);--orb3:rgba(30,220,175,.13)}
+}
+
+.grain{position:fixed;inset:0;z-index:-5;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.lights{position:fixed;inset:0;pointer-events:none;z-index:-4;overflow:hidden}
+.light{position:absolute;width:3px;height:3px;border-radius:50%;background:#dff8ff;box-shadow:0 0 12px rgba(130,220,255,.65);opacity:.12;animation:lightFloat linear infinite;will-change:transform}
+@keyframes lightFloat{0%{transform:translate3d(0,110vh,0);opacity:0}15%{opacity:.35}80%{opacity:.15}100%{transform:translate3d(35px,-10vh,0);opacity:0}}
+
+/* LOADER */
+#loader{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#040a12;transition:opacity .6s ease,visibility .6s ease}
+#loader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.loader-ring{width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.13);border-top-color:#66d4ff;border-right-color:#a77cff;animation:loaderSpin .9s linear infinite}
+@keyframes loaderSpin{to{transform:rotate(360deg)}}
+
+/* ENTRY */
+#gate{position:fixed;inset:0;z-index:9000;display:flex;align-items:center;justify-content:center;text-align:center;background:radial-gradient(circle at center,rgba(70,150,255,.10),transparent 50%);transition:opacity .8s ease,visibility .8s ease,transform .8s ease}
+#gate.hide{opacity:0;visibility:hidden;pointer-events:none;transform:scale(1.03)}
+.gate-content{width:88%;max-width:380px}
+.gate-label{font-size:10px;letter-spacing:4px;color:#8cb6d0;direction:ltr;margin-bottom:18px;animation:fadeUp .7s ease forwards}
+.gate-title{font-size:28px;font-weight:400;line-height:1.6;color:#f4fbff;margin-bottom:12px;animation:fadeUp .8s ease .1s both}
+.gate-line{width:55px;height:1px;margin:0 auto 18px;background:linear-gradient(90deg,transparent,#9de6ff,transparent);box-shadow:0 0 18px rgba(100,210,255,.4)}
+.gate-sub{color:var(--muted);font-size:13px;font-weight:300;margin-bottom:38px;animation:fadeUp .8s ease .2s both}
+.enter-button{width:72px;height:72px;margin:auto;border-radius:50%;border:1px solid rgba(210,240,255,.35);background:linear-gradient(135deg,rgba(100,210,255,.14),rgba(150,100,255,.12));display:flex;align-items:center;justify-content:center;color:white;font-size:24px;cursor:pointer;box-shadow:0 0 35px rgba(70,170,255,.15);animation:enterPulse 2.6s ease-out infinite}
+.enter-button:active{transform:scale(.93)}
+@keyframes enterPulse{0%{box-shadow:0 0 0 0 rgba(100,210,255,.35),0 0 35px rgba(70,170,255,.15)}70%{box-shadow:0 0 0 22px rgba(100,210,255,0),0 0 45px rgba(70,170,255,.20)}100%{box-shadow:0 0 0 0 rgba(100,210,255,0),0 0 35px rgba(70,170,255,.15)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+/* PASSWORD */
+#vault{position:fixed;inset:0;z-index:9500;display:none;align-items:center;justify-content:center;padding:24px;background:rgba(2,7,14,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0}
+#vault.show{display:flex;opacity:1}
+.vault-card{width:100%;max-width:340px;padding:32px 24px;text-align:center;border-radius:24px;background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.035));border:1px solid var(--border);box-shadow:0 25px 60px rgba(0,0,0,.40);animation:cardIn .45s cubic-bezier(.16,1,.3,1)}
+@keyframes cardIn{from{opacity:0;transform:translateY(15px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
+.vault-icon{font-size:30px;margin-bottom:12px}
+.vault-card h2{font-size:18px;font-weight:400;margin-bottom:7px}
+.vault-card p{font-size:12px;color:var(--muted);margin-bottom:20px}
+.vault-input{width:100%;height:50px;border-radius:14px;border:1px solid rgba(210,240,255,.2);background:rgba(0,10,22,.45);color:white;text-align:center;font-size:20px;letter-spacing:9px;outline:none;font-family:'Vazirmatn',sans-serif}
+.vault-input:focus{border-color:rgba(100,210,255,.55)}
+.vault-input::placeholder{letter-spacing:1px;font-size:12px;color:rgba(200,230,245,.4)}
+.vault-btn{width:100%;height:48px;margin-top:14px;border-radius:14px;border:1px solid rgba(210,240,255,.25);background:linear-gradient(135deg,rgba(80,190,255,.20),rgba(140,90,255,.18));color:white;font-family:'Vazirmatn',sans-serif;cursor:pointer}
+.vault-btn:active{transform:scale(.97)}
+.vault-error{min-height:18px;margin-top:10px;font-size:11px;color:#ffb9c5;opacity:0}
+.vault-error.show{opacity:1}
+
+/* MAIN */
+#stage{position:relative;z-index:1;width:min(94%,520px);margin:auto;padding:55px 0 90px;opacity:0;transform:translateY(18px);transition:opacity .8s ease,transform .8s ease}
+#stage.visible{opacity:1;transform:translateY(0)}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:30px}
+.greeting{font-size:11px;color:var(--muted);margin-bottom:12px}
+.hero-label{font-size:9px;letter-spacing:4px;color:#82b6d0;direction:ltr;margin-bottom:13px}
+.title{font-size:31px;font-weight:400;margin-bottom:12px;text-shadow:0 0 25px rgba(100,210,255,.14)}
+.intro{color:var(--muted);font-size:13px;line-height:2;font-weight:300;margin-top:12px}
+.hero-divider{width:1px;height:35px;margin:22px auto 0;background:linear-gradient(180deg,transparent,rgba(150,220,255,.45),transparent)}
+
+/* SECTION */
+.section-label{display:flex;align-items:center;gap:10px;margin-bottom:15px;color:var(--faint);font-size:9px;letter-spacing:3px;direction:ltr}
+.section-label::before{content:"";width:25px;height:1px;background:linear-gradient(90deg,transparent,rgba(120,210,255,.5))}
+
+/* PLAYLIST */
+.tracklist{margin-top:34px;border-top:1px solid var(--border)}
+.track{position:relative;display:flex;align-items:center;gap:13px;padding:15px 5px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .25s ease,padding .25s ease}
+.track:hover{background:rgba(255,255,255,.025)}
+.track.active{background:linear-gradient(90deg,rgba(80,190,255,.08),rgba(150,90,255,.04));padding-right:13px}
+.track.active::before{content:"";position:absolute;right:0;top:20%;bottom:20%;width:2px;border-radius:3px;background:linear-gradient(180deg,var(--cyan),var(--purple));box-shadow:0 0 10px rgba(90,190,255,.45)}
+.track-num{width:27px;flex:0 0 27px;text-align:center;color:var(--faint);font-size:11px}
+.track.active .track-num{color:transparent;position:relative}
+.eq{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:2px}
+.eq i{width:2px;height:5px;border-radius:3px;background:var(--cyan);animation:eq .9s ease-in-out infinite}
+.eq i:nth-child(1){animation-delay:-.6s}.eq i:nth-child(2){animation-delay:-.2s}.eq i:nth-child(3){animation-delay:-.8s}
+@keyframes eq{0%,100%{height:4px}50%{height:13px}}
+.track-body{flex:1;min-width:0}
+.track-title{color:var(--text);font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:3px}
+.track.active .track-title{color:#fff}
+.track-artist{color:var(--faint);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.track-play{width:30px;height:30px;flex:0 0 30px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:10px;opacity:.25;transition:.2s}
+.track:hover .track-play,.track.active .track-play{opacity:1}
+.track.active .track-play{color:white;border-color:rgba(150,225,255,.45)}
+
+/* PLAYER */
+.player{margin-top:55px;text-align:center}
+.cover-wrap{position:relative;width:155px;height:155px;margin:0 auto 24px;border-radius:50%;overflow:hidden;border:1px solid rgba(210,240,255,.18);box-shadow:0 0 0 8px rgba(100,200,255,.035),0 20px 55px rgba(0,0,0,.42);animation:coverSpin 25s linear infinite;animation-play-state:paused;cursor:pointer;transition:box-shadow 1.2s ease,border-color 1.2s ease}
+.cover-wrap.playing{animation-play-state:running}
+.cover-wrap img{width:100%;height:100%;object-fit:cover;display:block}
+.cover-wrap::after{content:"";position:absolute;inset:39%;border-radius:50%;background:#07111c;box-shadow:inset 0 0 10px rgba(0,0,0,.7)}
+@keyframes coverSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.song-title{font-size:19px;font-weight:400;color:#fff;padding:0 10px;margin-bottom:6px}
+.song-artist{font-size:11px;color:var(--muted);margin-bottom:15px}
+.song-message{max-width:350px;margin:0 auto 20px;color:#b9cedc;font-size:12px;line-height:1.9;font-weight:300}
+
+/* STAR MODE */
+body.star-mode .cover-wrap{border-color:rgba(255,211,106,.55);box-shadow:0 0 0 8px rgba(255,205,80,.055),0 0 55px rgba(255,180,60,.30),0 20px 60px rgba(0,0,0,.45)}
+body.star-mode .title{text-shadow:0 0 25px rgba(255,210,100,.25)}
+body.star-mode .track.active{background:linear-gradient(90deg,rgba(255,205,90,.10),rgba(255,100,180,.045))}
+body.star-mode .track.active::before{background:linear-gradient(180deg,#ffd76a,#ff8ac8,#9d8cff)}
+.star-field{position:fixed;inset:0;pointer-events:none;z-index:-3;opacity:0;transition:opacity 1s ease;overflow:hidden}
+.star-field.show{opacity:1}
+.star-particle{position:absolute;width:2px;height:2px;border-radius:50%;background:#fff4bd;box-shadow:0 0 7px rgba(255,220,120,.8);animation:starTwinkle 2s ease-in-out infinite alternate}
+@keyframes starTwinkle{from{opacity:.15;transform:scale(.7)}to{opacity:.8;transform:scale(1.5)}}
+
+/* VISUALIZER */
+.bars{height:24px;display:flex;align-items:flex-end;justify-content:center;gap:3px;margin-bottom:22px;opacity:.65}
+.bars i{width:3px;height:4px;border-radius:3px;background:linear-gradient(180deg,var(--cyan),var(--purple))}
+.bars.playing i{animation:bars .9s ease-in-out infinite}
+.bars i:nth-child(1){animation-delay:-.8s}.bars i:nth-child(2){animation-delay:-.4s}.bars i:nth-child(3){animation-delay:-.2s}
+.bars i:nth-child(4){animation-delay:-.7s}.bars i:nth-child(5){animation-delay:-.1s}.bars i:nth-child(6){animation-delay:-.5s}.bars i:nth-child(7){animation-delay:-.3s}
+@keyframes bars{0%,100%{height:4px}50%{height:21px}}
+
+/* CONTROLS */
+.controls{display:flex;align-items:center;justify-content:center;gap:15px;margin-bottom:20px}
+.ctl-btn{border:none;background:none;color:var(--text);font-size:15px;cursor:pointer;opacity:.7;padding:8px;transition:.2s}
+.ctl-btn:hover{opacity:1;transform:scale(1.06)}
+.ctl-btn:active{transform:scale(.9)}
+.play-btn{width:58px;height:58px;border-radius:50%;border:1px solid rgba(210,240,255,.35);background:linear-gradient(135deg,rgba(70,200,255,.25),rgba(145,90,255,.22));color:white;font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 0 30px rgba(80,180,255,.13);transition:.2s}
+.play-btn:active{transform:scale(.92)}
+
+/* PROGRESS */
+.progress-wrap{max-width:350px;margin:auto}
+.progress{position:relative;height:4px;border-radius:5px;background:rgba(220,240,255,.12);cursor:pointer;overflow:hidden}
+.progress-bar{width:0%;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--cyan),var(--purple));box-shadow:0 0 10px rgba(90,190,255,.4);transition:width .08s linear}
+.time{display:flex;justify-content:space-between;margin-top:7px;color:var(--faint);font-size:10px;direction:ltr}
+
+/* LYRICS */
+.lyrics-box{max-width:370px;margin:35px auto 0}
+.lyrics-title{color:var(--faint);font-size:9px;letter-spacing:3px;margin-bottom:14px;direction:ltr}
+.lyrics{color:#aebfcd;font-size:13px;line-height:2.4;font-weight:300}
+.lyrics p{margin:0;padding:3px 0;opacity:.88}
+
+/* MOMENTS */
+.moments{margin-top:65px}
+.moment-box{position:relative;min-height:150px;padding:28px 22px;border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.075),rgba(255,255,255,.025));border:1px solid var(--border);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 18px 45px rgba(0,0,0,.23);display:flex;align-items:center;justify-content:center;text-align:center;color:#dbeaf3;font-size:13px;line-height:2;font-weight:300}
+.moment-box::before{content:"";position:absolute;top:0;left:50%;width:45px;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,var(--cyan),transparent)}
+.moment-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:15px}
+.moment-controls button{width:34px;height:34px;border-radius:50%;border:1px solid var(--border);background:rgba(255,255,255,.035);color:var(--text);cursor:pointer}
+.moment-count{color:var(--faint);font-size:10px;direction:ltr}
+
+/* FOOTER */
+.footer{margin-top:70px;text-align:center}
+.footer-text{color:var(--muted);font-size:12.5px;line-height:2.2;font-weight:300}
+.footer-line{width:35px;height:1px;margin:22px auto;background:linear-gradient(90deg,transparent,rgba(150,220,255,.5),transparent)}
+.footer-title{color:#cde9f7;font-size:12px;letter-spacing:1px}
+.footer-sub{margin-top:7px;color:var(--faint);font-size:10px}
+
+/* MOOD */
+.mood-controls{position:fixed;top:17px;left:17px;z-index:500;display:flex;gap:7px;opacity:0;transform:translateY(-8px);pointer-events:none;transition:.6s}
+.mood-controls.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.mood-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:rgba(8,18,30,.55);backdrop-filter:blur(10px);color:white;cursor:pointer;opacity:.75;transition:.25s}
+.mood-btn:hover{opacity:1;transform:scale(1.05)}
+.mood-btn.active{background:rgba(255,190,110,.18);border-color:rgba(255,205,140,.5);box-shadow:0 0 20px rgba(255,180,100,.25)}
+.mood-btn.rain-active{background:rgba(100,190,255,.15);border-color:rgba(140,220,255,.4);box-shadow:0 0 18px rgba(80,190,255,.2)}
+
+/* CANDLE */
+body.candle-mode{--bg:#100a07;--cyan:#ffc477;--purple:#ff806b;--border:rgba(255,220,180,.15);--muted:#cdb8a7;--faint:#9e8370}
+body.candle-mode .background{background:radial-gradient(circle at 25% 15%,rgba(255,155,70,.23),transparent 35%),radial-gradient(circle at 80% 25%,rgba(255,80,90,.17),transparent 35%),radial-gradient(circle at 50% 90%,rgba(255,210,100,.12),transparent 40%),#100a07}
+body.candle-mode .background::before{background:radial-gradient(circle,rgba(255,155,60,.45),transparent 70%)}
+body.candle-mode .background::after{background:radial-gradient(circle,rgba(255,80,90,.30),transparent 70%)}
+body.candle-mode::after{content:"";position:fixed;width:220px;height:220px;left:-80px;bottom:-70px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,190,90,.28),rgba(255,120,40,.10) 35%,transparent 70%);filter:blur(18px);pointer-events:none;z-index:-1;animation:candleGlow 2.4s ease-in-out infinite alternate}
+@keyframes candleGlow{from{transform:scale(.9);opacity:.55}to{transform:scale(1.15);opacity:1}}
+
+/* RAIN */
+.rain-layer{position:fixed;inset:0;z-index:-2;pointer-events:none;overflow:hidden;opacity:0;transition:opacity .5s}
+.rain-layer.show{opacity:1}
+.rain-drop{position:absolute;top:-10vh;width:1px;border-radius:4px;background:linear-gradient(180deg,rgba(220,245,255,.65),rgba(120,190,230,.02));animation:rain linear infinite}
+@keyframes rain{to{transform:translate3d(var(--drift),120vh,0)}}
+
+/* HIDDEN */
+#hiddenPanel{position:fixed;inset:0;z-index:9700;display:flex;align-items:center;justify-content:center;padding:30px;background:rgba(2,8,16,.90);backdrop-filter:blur(12px);opacity:0;visibility:hidden;transition:.5s}
+#hiddenPanel.show{opacity:1;visibility:visible}
+.hidden-box{width:100%;max-width:360px;padding:30px 24px;text-align:center;border-radius:22px;background:linear-gradient(145deg,rgba(255,255,255,.08),rgba(255,255,255,.025));border:1px solid var(--border)}
+.hidden-box .label{color:var(--faint);font-size:9px;letter-spacing:3px;direction:ltr;margin-bottom:15px}
+.hidden-box p{color:#d9e9f2;font-size:13.5px;line-height:2.15;font-weight:300;margin-bottom:18px}
+.close-btn{display:inline-block;padding:10px 25px;border-radius:30px;border:1px solid var(--border);background:rgba(255,255,255,.05);color:white;font-size:11px;cursor:pointer}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:translateY(0)}
+
+/* RESPONSIVE */
 @media(max-width:380px){
-
-    #stage{
-        width:92%;
-    }
-
-    .title{
-        font-size:27px;
-    }
-
-    .cover-wrap{
-        width:130px;
-        height:130px;
-    }
-
-    .song-title{
-        font-size:17px;
-    }
-
-    .controls{
-        gap:10px;
-    }
+    #stage{width:92%}
+    .title{font-size:27px}
+    .cover-wrap{width:130px;height:130px}
+    .song-title{font-size:17px}
+    .controls{gap:10px}
 }
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
 @media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-        animation-duration:.01ms !important;
-        animation-iteration-count:1 !important;
-        transition-duration:.01ms !important;
-        scroll-behavior:auto !important;
-    }
-
-    body.auto-color{
-        animation:none;
-    }
+    *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+    body.auto-color{animation:none}
 }
-
-/* =========================================================
-   PERFORMANCE MODE
-========================================================= */
-
 @media(max-width:600px){
-
-    .background::before,
-    .background::after{
-        filter:blur(55px);
-        opacity:.22;
-    }
-
-    .color-orb{
-        filter:blur(50px);
-        opacity:.12;
-    }
-
-    .moment-box{
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
-    }
+    .background::before,.background::after{filter:blur(55px);opacity:.22}
+    .color-orb{filter:blur(50px);opacity:.12}
+    .moment-box{backdrop-filter:none;-webkit-backdrop-filter:none}
 }
-
 </style>
 </head>
-
 <body>
 
-<!-- BACKGROUND -->
-
 <div class="background">
-
     <div class="color-orb orb-one"></div>
     <div class="color-orb orb-two"></div>
     <div class="color-orb orb-three"></div>
-
 </div>
 
 <div class="lights" id="lights"></div>
-
 <div class="star-field" id="starField"></div>
-
 <div class="grain"></div>
-
 <div class="rain-layer" id="rainLayer"></div>
 
-
-<!-- LOADER -->
-
-<div id="loader">
-
-    <div class="loader-ring"></div>
-
-</div>
-
-
-<!-- ENTRY -->
+<div id="loader"><div class="loader-ring"></div></div>
 
 <div id="gate">
-
     <div class="gate-content">
-
-        <div class="gate-label">
-            PERSONAL MUSIC SPACE
-        </div>
-
-        <div class="gate-title">
-            یه فضای کوچیک برای چندتا آهنگ
-        </div>
-
+        <div class="gate-label">PERSONAL MUSIC SPACE</div>
+        <div class="gate-title">یه فضای کوچیک برای چندتا آهنگ</div>
         <div class="gate-line"></div>
-
-        <div class="gate-sub">
-            لمس کن تا واردش بشی
-        </div>
-
-        <div class="enter-button" id="enterButton">
-            ♪
-        </div>
-
+        <div class="gate-sub">لمس کن تا واردش بشی</div>
+        <div class="enter-button" id="enterButton">♪</div>
     </div>
-
 </div>
-
-
-<!-- PASSWORD -->
 
 <div id="vault">
-
     <div class="vault-card" id="vaultCard">
-
-        <div class="vault-icon">
-            🔐
-        </div>
-
-        <h2>
-            ورود به Music Space
-        </h2>
-
-        <p>
-            رمز ورود رو وارد کن
-        </p>
-
-        <input
-            id="vaultInput"
-            class="vault-input"
-            type="password"
-            inputmode="numeric"
-            autocomplete="off"
-            placeholder="رمز ورود"
-            aria-label="رمز ورود"
-        >
-
-        <button
-            id="vaultBtn"
-            class="vault-btn"
-            type="button"
-        >
-            ورود
-        </button>
-
-        <div
-            id="vaultError"
-            class="vault-error"
-        >
-            رمز درست نیست، دوباره امتحان کن.
-        </div>
-
+        <div class="vault-icon">🔐</div>
+        <h2>ورود به Music Space</h2>
+        <p>رمز ورود رو وارد کن</p>
+        <input id="vaultInput" class="vault-input" type="password" inputmode="numeric" autocomplete="off" placeholder="رمز ورود" aria-label="رمز ورود">
+        <button id="vaultBtn" class="vault-btn" type="button">ورود</button>
+        <div id="vaultError" class="vault-error">رمز درست نیست، دوباره امتحان کن.</div>
     </div>
-
 </div>
-
-
-<!-- HIDDEN PANEL -->
 
 <div id="hiddenPanel">
-
     <div class="hidden-box">
-
-        <div class="label">
-            SMALL DISCOVERY
-        </div>
-
-        <p>
-            بعضی چیزهای خوب لازم نیست
-            دلیل خاصی داشته باشن؛
-            گاهی فقط یه آهنگ خوبه،
-            یه لحظه‌ی آرومه،
-            یا یه چیز کوچیک برای عوض کردن حال و هوا.
-        </p>
-
-        <div
-            class="close-btn"
-            id="hiddenClose"
-        >
-            بستن
-        </div>
-
+        <div class="label">SMALL DISCOVERY</div>
+        <p>بعضی چیزهای خوب لازم نیست دلیل خاصی داشته باشن؛ گاهی فقط یه آهنگ خوبه، یه لحظه‌ی آرومه، یا یه چیز کوچیک برای عوض کردن حال و هوا.</p>
+        <div class="close-btn" id="hiddenClose">بستن</div>
     </div>
-
 </div>
 
-
-<!-- MOOD CONTROLS -->
-
-<div
-    class="mood-controls"
-    id="moodControls"
->
-
-    <button
-        class="mood-btn"
-        id="candleToggle"
-        type="button"
-        aria-label="حالت شمع"
-    >
-        🕯
-    </button>
-
-    <button
-        class="mood-btn"
-        id="rainToggle"
-        type="button"
-        aria-label="باران"
-    >
-        🌧
-    </button>
-
+<div class="mood-controls" id="moodControls">
+    <button class="mood-btn" id="candleToggle" type="button" aria-label="حالت شمع">🕯</button>
+    <button class="mood-btn" id="rainToggle" type="button" aria-label="باران">🌧</button>
 </div>
 
-
-<!-- BACKGROUND AUDIO -->
-
-<audio
-    id="bgMusic"
-    preload="none"
-    loop
->
-    <source
-        src="background.mp3"
-        type="audio/mpeg"
-    >
-</audio>
-
-
-<audio
-    id="rainSound"
-    preload="none"
-    loop
->
-    <source
-        src="rain.mp3"
-        type="audio/mpeg"
-    >
-</audio>
-
-
-<!-- MAIN -->
+<audio id="bgMusic" preload="none" loop><source src="background.mp3" type="audio/mpeg"></audio>
+<audio id="rainSound" preload="none" loop><source src="rain.mp3" type="audio/mpeg"></audio>
 
 <main id="stage">
-
-    <!-- HERO -->
-
     <section class="hero">
-
-        <div
-            class="greeting"
-            id="greeting"
-        ></div>
-
-        <div class="hero-label">
-            PERSONAL MUSIC SPACE
-        </div>
-
-        <h1 class="title">
-            یه جای کوچیک برای موسیقی
-        </h1>
-
-        <p class="intro">
-            چندتا آهنگ برای وقت‌هایی که<br>
-            دلت یه فضای آروم، یه حال تازه<br>
-            یا فقط چند دقیقه موسیقی می‌خواد.
-        </p>
-
+        <div class="greeting" id="greeting"></div>
+        <div class="hero-label">PERSONAL MUSIC SPACE</div>
+        <h1 class="title">یه جای کوچیک برای موسیقی</h1>
+        <p class="intro">چندتا آهنگ برای وقت‌هایی که<br>دلت یه فضای آروم، یه حال تازه<br>یا فقط چند دقیقه موسیقی می‌خواد.</p>
         <div class="hero-divider"></div>
-
     </section>
-
-
-    <!-- PLAYLIST -->
 
     <section class="reveal">
-
-        <div class="section-label">
-            PLAYLIST
-        </div>
-
-        <nav
-            class="tracklist"
-            id="tracklist"
-        ></nav>
-
+        <div class="section-label">PLAYLIST</div>
+        <nav class="tracklist" id="tracklist"></nav>
     </section>
-
-
-    <!-- PLAYER -->
 
     <section class="player reveal">
-
-        <div
-            class="cover-wrap"
-            id="coverWrap"
-            title="برای یک چیز مخفی چند بار لمس کن"
-        >
-
-            <img
-                id="cover"
-                src="cover-1.jpg"
-                alt="Music cover"
-                decoding="async"
-            >
-
+        <div class="cover-wrap" id="coverWrap" title="برای یک چیز مخفی چند بار لمس کن">
+            <img id="cover" src="cover-1.jpg" alt="Music cover" decoding="async">
         </div>
-
-
-        <div
-            class="song-title"
-            id="songTitle"
-        >
-            —
-        </div>
-
-
-        <div
-            class="song-artist"
-            id="songArtist"
-        >
-            —
-        </div>
-
-
-        <div
-            class="song-message"
-            id="songMessage"
-        ></div>
-
-
-        <div
-            class="bars"
-            id="bars"
-        >
-
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-
-        </div>
-
-
-        <!-- CONTROLS -->
+        <div class="song-title" id="songTitle">—</div>
+        <div class="song-artist" id="songArtist">—</div>
+        <div class="song-message" id="songMessage"></div>
+        <div class="bars" id="bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
 
         <div class="controls">
-
-            <button
-                class="ctl-btn"
-                id="prevBtn"
-                type="button"
-                aria-label="قبلی"
-            >
-                ⏮
-            </button>
-
-            <button
-                class="ctl-btn"
-                id="back15"
-                type="button"
-                aria-label="۱۵ ثانیه عقب"
-            >
-                ⏪
-            </button>
-
-            <button
-                class="play-btn"
-                id="playBtn"
-                type="button"
-                aria-label="پخش"
-            >
-                ▶
-            </button>
-
-            <button
-                class="ctl-btn"
-                id="fwd15"
-                type="button"
-                aria-label="۱۵ ثانیه جلو"
-            >
-                ⏩
-            </button>
-
-            <button
-                class="ctl-btn"
-                id="nextBtn"
-                type="button"
-                aria-label="بعدی"
-            >
-                ⏭
-            </button>
-
+            <button class="ctl-btn" id="prevBtn" type="button" aria-label="قبلی">⏮</button>
+            <button class="ctl-btn" id="back15" type="button" aria-label="۱۵ ثانیه عقب">⏪</button>
+            <button class="play-btn" id="playBtn" type="button" aria-label="پخش">▶</button>
+            <button class="ctl-btn" id="fwd15" type="button" aria-label="۱۵ ثانیه جلو">⏩</button>
+            <button class="ctl-btn" id="nextBtn" type="button" aria-label="بعدی">⏭</button>
         </div>
-
-
-        <!-- PROGRESS -->
 
         <div class="progress-wrap">
-
-            <div
-                class="progress"
-                id="progress"
-            >
-
-                <div
-                    class="progress-bar"
-                    id="progressBar"
-                ></div>
-
-            </div>
-
-            <div class="time">
-
-                <span id="curTime">
-                    0:00
-                </span>
-
-                <span id="durTime">
-                    0:00
-                </span>
-
-            </div>
-
+            <div class="progress" id="progress"><div class="progress-bar" id="progressBar"></div></div>
+            <div class="time"><span id="curTime">0:00</span><span id="durTime">0:00</span></div>
         </div>
-
-
-        <!-- LYRICS -->
 
         <div class="lyrics-box">
-
-            <div class="lyrics-title">
-                LYRICS
-            </div>
-
-            <div
-                class="lyrics"
-                id="lyrics"
-            ></div>
-
+            <div class="lyrics-title">LYRICS</div>
+            <div class="lyrics" id="lyrics"></div>
         </div>
 
-
-        <audio
-            id="music"
-            preload="metadata"
-        ></audio>
-
+        <audio id="music" preload="metadata"></audio>
     </section>
-
-
-    <!-- MOMENTS -->
 
     <section class="moments reveal">
-
-        <div class="section-label">
-            MOMENTS
-        </div>
-
-        <div
-            class="moment-box"
-            id="momentBox"
-        ></div>
-
+        <div class="section-label">MOMENTS</div>
+        <div class="moment-box" id="momentBox"></div>
         <div class="moment-controls">
-
-            <button
-                id="momentPrev"
-                type="button"
-            >
-                ←
-            </button>
-
-            <span
-                class="moment-count"
-                id="momentCount"
-            >
-                1 / 1
-            </span>
-
-            <button
-                id="momentNext"
-                type="button"
-            >
-                →
-            </button>
-
+            <button id="momentPrev" type="button">←</button>
+            <span class="moment-count" id="momentCount">1 / 1</span>
+            <button id="momentNext" type="button">→</button>
         </div>
-
     </section>
 
-
-    <!-- FOOTER -->
-
     <footer class="footer reveal">
-
-        <p class="footer-text">
-            امیدوارم هر آهنگ اینجا<br>
-            یه چند دقیقه‌ی خوب برات بسازه.
-        </p>
-
+        <p class="footer-text">امیدوارم هر آهنگ اینجا<br>یه چند دقیقه‌ی خوب برات بسازه.</p>
         <div class="footer-line"></div>
-
-        <div class="footer-title">
-            MUSIC · MOMENTS · MOOD
-        </div>
-
-        <div class="footer-sub">
-            یه فضای کوچیک، برای چند لحظه‌ی خوب.
-        </div>
-
+        <div class="footer-title">MUSIC · MOMENTS · MOOD</div>
+        <div class="footer-sub">یه فضای کوچیک، برای چند لحظه‌ی خوب.</div>
     </footer>
-
 </main>
 
-
 <script>
-
 (function(){
-
 "use strict";
 
-/* =========================================================
-   ELEMENTS
-========================================================= */
+const $ = id => document.getElementById(id);
 
-const $ = id =>
-    document.getElementById(id);
+const gate = $("gate");
+const enterButton = $("enterButton");
+const vault = $("vault");
+const vaultCard = $("vaultCard");
+const vaultInput = $("vaultInput");
+const vaultBtn = $("vaultBtn");
+const vaultError = $("vaultError");
+const stage = $("stage");
+const tracklist = $("tracklist");
+const coverWrap = $("coverWrap");
+const cover = $("cover");
+const songTitle = $("songTitle");
+const songArtist = $("songArtist");
+const songMessage = $("songMessage");
+const lyrics = $("lyrics");
+const music = $("music");
+const bgMusic = $("bgMusic");
+const rainSound = $("rainSound");
+const playBtn = $("playBtn");
+const prevBtn = $("prevBtn");
+const nextBtn = $("nextBtn");
+const back15 = $("back15");
+const fwd15 = $("fwd15");
+const progress = $("progress");
+const progressBar = $("progressBar");
+const curTime = $("curTime");
+const durTime = $("durTime");
+const bars = $("bars");
+const moodControls = $("moodControls");
+const candleToggle = $("candleToggle");
+const rainToggle = $("rainToggle");
+const rainLayer = $("rainLayer");
+const starField = $("starField");
+const hiddenPanel = $("hiddenPanel");
+const hiddenClose = $("hiddenClose");
+const momentBox = $("momentBox");
+const momentPrev = $("momentPrev");
+const momentNext = $("momentNext");
+const momentCount = $("momentCount");
+const loader = $("loader");
 
-const gate =
-    $("gate");
-
-const enterButton =
-    $("enterButton");
-
-const vault =
-    $("vault");
-
-const vaultCard =
-    $("vaultCard");
-
-const vaultInput =
-    $("vaultInput");
-
-const vaultBtn =
-    $("vaultBtn");
-
-const vaultError =
-    $("vaultError");
-
-const stage =
-    $("stage");
-
-const tracklist =
-    $("tracklist");
-
-const coverWrap =
-    $("coverWrap");
-
-const cover =
-    $("cover");
-
-const songTitle =
-    $("songTitle");
-
-const songArtist =
-    $("songArtist");
-
-const songMessage =
-    $("songMessage");
-
-const lyrics =
-    $("lyrics");
-
-const music =
-    $("music");
-
-const bgMusic =
-    $("bgMusic");
-
-const rainSound =
-    $("rainSound");
-
-const playBtn =
-    $("playBtn");
-
-const prevBtn =
-    $("prevBtn");
-
-const nextBtn =
-    $("nextBtn");
-
-const back15 =
-    $("back15");
-
-const fwd15 =
-    $("fwd15");
-
-const progress =
-    $("progress");
-
-const progressBar =
-    $("progressBar");
-
-const curTime =
-    $("curTime");
-
-const durTime =
-    $("durTime");
-
-const bars =
-    $("bars");
-
-const moodControls =
-    $("moodControls");
-
-const candleToggle =
-    $("candleToggle");
-
-const rainToggle =
-    $("rainToggle");
-
-const rainLayer =
-    $("rainLayer");
-
-const starField =
-    $("starField");
-
-const hiddenPanel =
-    $("hiddenPanel");
-
-const hiddenClose =
-    $("hiddenClose");
-
-const momentBox =
-    $("momentBox");
-
-const momentPrev =
-    $("momentPrev");
-
-const momentNext =
-    $("momentNext");
-
-const momentCount =
-    $("momentCount");
-
-
-/* =========================================================
-   SETTINGS
-========================================================= */
-
-const CORRECT_PASSWORD =
-    "1385";
-
+const CORRECT_PASSWORD = "1385";
 let songs = [];
-
 let currentIndex = 0;
-
 let musicStarted = false;
-
 let rainActive = false;
-
 let candleActive = false;
 
-
-/* =========================================================
-   TIME
-========================================================= */
-
 function formatTime(seconds){
-
-    if(
-        !isFinite(seconds) ||
-        seconds < 0
-    ){
-        seconds = 0;
-    }
-
-    const minutes =
-        Math.floor(
-            seconds / 60
-        );
-
-    const secondsPart =
-        Math.floor(
-            seconds % 60
-        );
-
-    return (
-        minutes +
-        ":" +
-        (
-            secondsPart < 10
-            ? "0"
-            : ""
-        ) +
-        secondsPart
-    );
-
+    if(!isFinite(seconds) || seconds < 0) seconds = 0;
+    const minutes = Math.floor(seconds / 60);
+    const secondsPart = Math.floor(seconds % 60);
+    return minutes + ":" + (secondsPart < 10 ? "0" : "") + secondsPart;
 }
-
-
-/* =========================================================
-   ESCAPE
-========================================================= */
 
 function escapeHTML(value){
-
     return String(value)
-        .replaceAll(
-            "&",
-            "&amp;"
-        )
-        .replaceAll(
-            "<",
-            "&lt;"
-        )
-        .replaceAll(
-            ">",
-            "&gt;"
-        )
-        .replaceAll(
-            '"',
-            "&quot;"
-        )
-        .replaceAll(
-            "'",
-            "&#039;"
-        );
-
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
 }
-
-
-/* =========================================================
-   LOAD SONGS
-========================================================= */
 
 async function loadSongs(){
-
     try{
-
-        const response =
-            await fetch(
-                "songs.json?t=" +
-                Date.now()
-            );
-
-        if(!response.ok){
-            throw new Error();
-        }
-
-        const data =
-            await response.json();
-
-        if(
-            !Array.isArray(data) ||
-            !data.length
-        ){
-            throw new Error();
-        }
-
+        const response = await fetch("songs.json?t=" + Date.now());
+        if(!response.ok) throw new Error();
+        const data = await response.json();
+        if(!Array.isArray(data) || !data.length) throw new Error();
         songs = data;
-
     }catch(error){
-
-        songs = [
-
-            {
-                title:
-                    "من عاشق بارون بودم، اون عاشق برف بود",
-
-                artist:
-                    "عمیان",
-
-                src:
-                    "song-1.mp3",
-
-                cover:
-                    "cover-1.jpg",
-
-                message:
-                    "گاهی یک آهنگ خوب، فقط برای چند دقیقه فضای روز رو عوض می‌کنه.",
-
-                lyrics:[
-                    "متن آهنگ را اینجا قرار بده."
-                ]
-            }
-
-        ];
-
+        songs = [{
+            title: "من عاشق بارون بودم، اون عاشق برف بود",
+            artist: "عمیان",
+            src: "song-1.mp3",
+            cover: "cover-1.jpg",
+            message: "گاهی یک آهنگ خوب، فقط برای چند دقیقه فضای روز رو عوض می‌کنه.",
+            lyrics: ["متن آهنگ را اینجا قرار بده."]
+        }];
     }
-
-    loadSong(
-        0,
-        false
-    );
-
+    loadSong(0, false);
 }
-
-
-/* =========================================================
-   PLAYLIST
-========================================================= */
 
 function renderPlaylist(){
-
     let html = "";
-
-    for(
-        let i = 0;
-        i < songs.length;
-        i++
-    ){
-
-        const song =
-            songs[i];
-
-        const active =
-            i === currentIndex;
-
+    for(let i = 0; i < songs.length; i++){
+        const song = songs[i];
+        const active = i === currentIndex;
         html += `
-
-            <div
-                class="track ${active ? "active" : ""}"
-                data-index="${i}"
-            >
-
+            <div class="track ${active ? "active" : ""}" data-index="${i}">
                 <div class="track-num">
-
-                    ${
-                        active
-                        ?
-                        `
-                        <div class="eq">
-                            <i></i>
-                            <i></i>
-                            <i></i>
-                        </div>
-                        `
-                        :
-                        String(i + 1)
-                            .padStart(2,"0")
-                    }
-
+                    ${active ? `<div class="eq"><i></i><i></i><i></i></div>` : String(i + 1).padStart(2,"0")}
                 </div>
-
                 <div class="track-body">
-
-                    <div class="track-title">
-                        ${escapeHTML(
-                            song.title ||
-                            "بدون نام"
-                        )}
-                    </div>
-
-                    <div class="track-artist">
-                        ${escapeHTML(
-                            song.artist ||
-                            ""
-                        )}
-                    </div>
-
+                    <div class="track-title">${escapeHTML(song.title || "بدون نام")}</div>
+                    <div class="track-artist">${escapeHTML(song.artist || "")}</div>
                 </div>
-
-                <div class="track-play">
-                    ${
-                        active &&
-                        !music.paused
-                        ? "❚❚"
-                        : "▶"
-                    }
-                </div>
-
-            </div>
-
-        `;
-
+                <div class="track-play">${active && !music.paused ? "❚❚" : "▶"}</div>
+            </div>`;
     }
-
-    tracklist.innerHTML =
-        html;
-
+    tracklist.innerHTML = html;
 }
 
-
-/* =========================================================
-   PLAYLIST CLICK
-========================================================= */
-
-tracklist.addEventListener(
-    "click",
-    event => {
-
-        const track =
-            event.target.closest(
-                ".track"
-            );
-
-        if(!track){
-            return;
-        }
-
-        const index =
-            Number(
-                track.dataset.index
-            );
-
-        if(
-            index === currentIndex
-        ){
-
-            if(music.paused){
-
-                music
-                    .play()
-                    .catch(()=>{});
-
-            }else{
-
-                music.pause();
-
-            }
-
-            return;
-        }
-
-        loadSong(
-            index,
-            true
-        );
-
+tracklist.addEventListener("click", event => {
+    const track = event.target.closest(".track");
+    if(!track) return;
+    const index = Number(track.dataset.index);
+    if(index === currentIndex){
+        if(music.paused) music.play().catch(()=>{});
+        else music.pause();
+        return;
     }
-);
-
-
-/* =========================================================
-   LYRICS
-========================================================= */
+    loadSong(index, true);
+});
 
 function renderLyrics(song){
-
     lyrics.innerHTML = "";
-
     let lines = [];
-
-    if(
-        Array.isArray(
-            song.lyrics
-        )
-    ){
-
-        lines =
-            song.lyrics;
-
-    }else if(
-        song.lyrics
-    ){
-
-        lines =
-            [song.lyrics];
-
-    }
-
+    if(Array.isArray(song.lyrics)) lines = song.lyrics;
+    else if(song.lyrics) lines = [song.lyrics];
     if(!lines.length){
-
-        const p =
-            document.createElement(
-                "p"
-            );
-
-        p.textContent =
-            "متن آهنگ هنوز اضافه نشده.";
-
+        const p = document.createElement("p");
+        p.textContent = "متن آهنگ هنوز اضافه نشده.";
         lyrics.appendChild(p);
-
         return;
     }
-
-    const fragment =
-        document.createDocumentFragment();
-
-    for(
-        const line of lines
-    ){
-
-        const p =
-            document.createElement(
-                "p"
-            );
-
-        p.textContent =
-            line;
-
+    const fragment = document.createDocumentFragment();
+    for(const line of lines){
+        const p = document.createElement("p");
+        p.textContent = line;
         fragment.appendChild(p);
-
     }
-
-    lyrics.appendChild(
-        fragment
-    );
-
+    lyrics.appendChild(fragment);
 }
-
-
-/* =========================================================
-   STAR DETECTION
-========================================================= */
 
 function isStarSong(song){
-
-    if(!song){
-        return false;
-    }
-
-    const title =
-        String(
-            song.title || ""
-        ).toLowerCase();
-
-    const artist =
-        String(
-            song.artist || ""
-        ).toLowerCase();
-
-    return (
-        title.includes("ستاره") &&
-        (
-            artist.includes("حمید") ||
-            artist.includes("عسکری") ||
-            artist.includes("hamid")
-        )
-    );
-
+    if(!song) return false;
+    const title = String(song.title || "").toLowerCase();
+    const artist = String(song.artist || "").toLowerCase();
+    return title.includes("ستاره") && (artist.includes("حمید") || artist.includes("عسکری") || artist.includes("hamid"));
 }
-
-
-/* =========================================================
-   STAR MODE
-========================================================= */
 
 function setStarMode(song){
-
-    const active =
-        isStarSong(song);
-
-    document.body.classList.toggle(
-        "star-mode",
-        active
-    );
-
-    starField.classList.toggle(
-        "show",
-        active
-    );
-
+    const active = isStarSong(song);
+    document.body.classList.toggle("star-mode", active);
+    starField.classList.toggle("show", active);
 }
 
-
-/* =========================================================
-   LOAD SONG
-========================================================= */
-
-function loadSong(
-    index,
-    autoplay
-){
-
-    if(!songs.length){
-        return;
-    }
-
-    currentIndex =
-        (
-            index +
-            songs.length
-        ) %
-        songs.length;
-
-    const song =
-        songs[currentIndex];
-
-    cover.src =
-        song.cover ||
-        "cover-1.jpg";
-
-    cover.alt =
-        song.title ||
-        "Music cover";
-
-    songTitle.textContent =
-        song.title ||
-        "—";
-
-    songArtist.textContent =
-        song.artist ||
-        "—";
-
-    songMessage.textContent =
-        song.message ||
-        "";
-
+function loadSong(index, autoplay){
+    if(!songs.length) return;
+    currentIndex = (index + songs.length) % songs.length;
+    const song = songs[currentIndex];
+    cover.src = song.cover || "cover-1.jpg";
+    cover.alt = song.title || "Music cover";
+    songTitle.textContent = song.title || "—";
+    songArtist.textContent = song.artist || "—";
+    songMessage.textContent = song.message || "";
     renderLyrics(song);
-
     setStarMode(song);
-
-    music.src =
-        song.src ||
-        "";
-
+    music.src = song.src || "";
     music.load();
-
-    progressBar.style.width =
-        "0%";
-
-    curTime.textContent =
-        "0:00";
-
-    durTime.textContent =
-        "0:00";
-
+    progressBar.style.width = "0%";
+    curTime.textContent = "0:00";
+    durTime.textContent = "0:00";
     renderPlaylist();
-
-    if(autoplay){
-
-        music
-            .play()
-            .catch(()=>{});
-
-    }else{
-
-        updatePlayingUI(
-            false
-        );
-
-    }
-
+    if(autoplay) music.play().catch(()=>{});
+    else updatePlayingUI(false);
 }
 
-
-/* =========================================================
-   UI
-========================================================= */
-
-function updatePlayingUI(
-    playing
-){
-
-    playBtn.textContent =
-        playing
-        ? "❚❚"
-        : "▶";
-
-    coverWrap.classList.toggle(
-        "playing",
-        playing
-    );
-
-    bars.classList.toggle(
-        "playing",
-        playing
-    );
-
-    /*
-       فقط در تغییر حالت واقعی
-       playlist دوباره ساخته می‌شود.
-    */
-
+function updatePlayingUI(playing){
+    playBtn.textContent = playing ? "❚❚" : "▶";
+    coverWrap.classList.toggle("playing", playing);
+    bars.classList.toggle("playing", playing);
     renderPlaylist();
-
 }
 
+playBtn.addEventListener("click", ()=>{
+    if(music.paused) music.play().catch(()=>{});
+    else music.pause();
+});
 
-/* =========================================================
-   PLAYER
-========================================================= */
+prevBtn.addEventListener("click", ()=> loadSong(currentIndex - 1, true));
+nextBtn.addEventListener("click", ()=> loadSong(currentIndex + 1, true));
 
-playBtn.addEventListener(
-    "click",
-    ()=>{
+back15.addEventListener("click", ()=>{
+    music.currentTime = Math.max(0, music.currentTime - 15);
+});
 
-        if(music.paused){
+fwd15.addEventListener("click", ()=>{
+    if(!music.duration) return;
+    music.currentTime = Math.min(music.duration, music.currentTime + 15);
+});
 
-            music
-                .play()
-                .catch(()=>{});
+music.addEventListener("play", ()=>{
+    updatePlayingUI(true);
+    duckBackground();
+});
 
-        }else{
+music.addEventListener("pause", ()=>{
+    updatePlayingUI(false);
+    resumeBackground();
+});
 
-            music.pause();
+music.addEventListener("loadedmetadata", ()=>{
+    durTime.textContent = formatTime(music.duration);
+});
 
-        }
+music.addEventListener("timeupdate", ()=>{
+    if(!music.duration) return;
+    const percentage = (music.currentTime / music.duration) * 100;
+    progressBar.style.width = percentage + "%";
+    curTime.textContent = formatTime(music.currentTime);
+});
 
-    }
-);
+music.addEventListener("ended", ()=> loadSong(currentIndex + 1, true));
 
-
-prevBtn.addEventListener(
-    "click",
-    ()=>{
-
-        loadSong(
-            currentIndex - 1,
-            true
-        );
-
-    }
-);
-
-
-nextBtn.addEventListener(
-    "click",
-    ()=>{
-
-        loadSong(
-            currentIndex + 1,
-            true
-        );
-
-    }
-);
-
-
-back15.addEventListener(
-    "click",
-    ()=>{
-
-        music.currentTime =
-            Math.max(
-                0,
-                music.currentTime - 15
-            );
-
-    }
-);
-
-
-fwd15.addEventListener(
-    "click",
-    ()=>{
-
-        if(!music.duration){
-            return;
-        }
-
-        music.currentTime =
-            Math.min(
-                music.duration,
-                music.currentTime + 15
-            );
-
-    }
-);
-
-
-/* =========================================================
-   AUDIO EVENTS
-========================================================= */
-
-music.addEventListener(
-    "play",
-    ()=>{
-
-        updatePlayingUI(
-            true
-        );
-
-        duckBackground();
-
-    }
-);
-
-
-music.addEventListener(
-    "pause",
-    ()=>{
-
-        updatePlayingUI(
-            false
-        );
-
-        resumeBackground();
-
-    }
-);
-
-
-music.addEventListener(
-    "loadedmetadata",
-    ()=>{
-
-        durTime.textContent =
-            formatTime(
-                music.duration
-            );
-
-    }
-);
-
-
-/*
-   timeupdate خودش نسبتاً کم‌دفعات است.
-   از transition سنگین هم استفاده نکردیم.
-*/
-
-music.addEventListener(
-    "timeupdate",
-    ()=>{
-
-        if(!music.duration){
-            return;
-        }
-
-        const percentage =
-            (
-                music.currentTime /
-                music.duration
-            ) *
-            100;
-
-        progressBar.style.width =
-            percentage + "%";
-
-        curTime.textContent =
-            formatTime(
-                music.currentTime
-            );
-
-    }
-);
-
-
-music.addEventListener(
-    "ended",
-    ()=>{
-
-        loadSong(
-            currentIndex + 1,
-            true
-        );
-
-    }
-);
-
-
-/* =========================================================
-   PROGRESS
-========================================================= */
-
-progress.addEventListener(
-    "pointerdown",
-    event => {
-
-        if(!music.duration){
-            return;
-        }
-
-        const rect =
-            progress.getBoundingClientRect();
-
-        const ratio =
-            (
-                event.clientX -
-                rect.left
-            ) /
-            rect.width;
-
-        music.currentTime =
-            Math.max(
-                0,
-                Math.min(
-                    1,
-                    ratio
-                )
-            ) *
-            music.duration;
-
-    }
-);
-
-
-/* =========================================================
-   BACKGROUND MUSIC
-========================================================= */
+progress.addEventListener("pointerdown", event => {
+    if(!music.duration) return;
+    const rect = progress.getBoundingClientRect();
+    const ratio = (event.clientX - rect.left) / rect.width;
+    music.currentTime = Math.max(0, Math.min(1, ratio)) * music.duration;
+});
 
 let bgFadeTimer = null;
 
-
 function fadeBackgroundIn(){
-
-    if(
-        rainActive ||
-        !music.paused
-    ){
-        return;
-    }
-
-    clearInterval(
-        bgFadeTimer
-    );
-
-    bgMusic.volume =
-        Math.min(
-            bgMusic.volume || 0,
-            .16
-        );
-
-    bgMusic
-        .play()
-        .catch(()=>{});
-
-    let volume =
-        bgMusic.volume;
-
-    bgFadeTimer =
-        setInterval(
-            ()=>{
-
-                if(
-                    rainActive ||
-                    !music.paused
-                ){
-
-                    clearInterval(
-                        bgFadeTimer
-                    );
-
-                    return;
-                }
-
-                volume =
-                    Math.min(
-                        .16,
-                        volume + .012
-                    );
-
-                bgMusic.volume =
-                    volume;
-
-                if(
-                    volume >= .16
-                ){
-
-                    clearInterval(
-                        bgFadeTimer
-                    );
-
-                }
-
-            },
-            70
-        );
-
+    if(rainActive || !music.paused) return;
+    clearInterval(bgFadeTimer);
+    bgMusic.volume = Math.min(bgMusic.volume || 0, .16);
+    bgMusic.play().catch(()=>{});
+    let volume = bgMusic.volume;
+    bgFadeTimer = setInterval(()=>{
+        if(rainActive || !music.paused){
+            clearInterval(bgFadeTimer);
+            return;
+        }
+        volume = Math.min(.16, volume + .012);
+        bgMusic.volume = volume;
+        if(volume >= .16) clearInterval(bgFadeTimer);
+    }, 70);
 }
-
 
 function duckBackground(){
-
-    clearInterval(
-        bgFadeTimer
-    );
-
-    if(
-        !bgMusic.paused
-    ){
-
-        bgMusic.pause();
-
-    }
-
+    clearInterval(bgFadeTimer);
+    if(!bgMusic.paused) bgMusic.pause();
 }
-
 
 function resumeBackground(){
-
-    if(
-        rainActive ||
-        !music.paused ||
-        !musicStarted
-    ){
-        return;
-    }
-
+    if(rainActive || !music.paused || !musicStarted) return;
     fadeBackgroundIn();
-
 }
 
-
-/* =========================================================
-   ENTER
-========================================================= */
-
-enterButton.addEventListener(
-    "click",
-    ()=>{
-
-        vault.classList.add(
-            "show"
-        );
-
-        setTimeout(
-            ()=>{
-                vaultInput.focus();
-            },
-            200
-        );
-
-    }
-);
-
-
-/* =========================================================
-   PASSWORD
-========================================================= */
+enterButton.addEventListener("click", ()=>{
+    vault.classList.add("show");
+    setTimeout(()=> vaultInput.focus(), 200);
+});
 
 function checkPassword(){
-
-    const value =
-        vaultInput.value.trim();
-
-    if(
-        value ===
-        CORRECT_PASSWORD
-    ){
-
-        vaultError.classList.remove(
-            "show"
-        );
-
-        vaultBtn.disabled =
-            true;
-
-        vaultBtn.textContent =
-            "...";
-
-        setTimeout(
-            ()=>{
-
-                vault.classList.remove(
-                    "show"
-                );
-
-                gate.classList.add(
-                    "hide"
-                );
-
-                startExperience();
-
-            },
-            300
-        );
-
+    const value = vaultInput.value.trim();
+    if(value === CORRECT_PASSWORD){
+        vaultError.classList.remove("show");
+        vaultBtn.disabled = true;
+        vaultBtn.textContent = "...";
+        setTimeout(()=>{
+            vault.classList.remove("show");
+            gate.classList.add("hide");
+            startExperience();
+        }, 300);
         return;
     }
-
-    vaultError.classList.add(
-        "show"
-    );
-
-    vaultCard.animate(
-        [
-            {
-                transform:
-                    "translateX(0)"
-            },
-            {
-                transform:
-                    "translateX(-7px)"
-            },
-            {
-                transform:
-                    "translateX(7px)"
-            },
-            {
-                transform:
-                    "translateX(-4px)"
-            },
-            {
-                transform:
-                    "translateX(0)"
-            }
-        ],
-        {
-            duration:350
-        }
-    );
-
-    vaultInput.value =
-        "";
-
-    setTimeout(
-        ()=>{
-            vaultInput.focus();
-        },
-        30
-    );
-
+    vaultError.classList.add("show");
+    vaultCard.animate([
+        {transform:"translateX(0)"},
+        {transform:"translateX(-7px)"},
+        {transform:"translateX(7px)"},
+        {transform:"translateX(-4px)"},
+        {transform:"translateX(0)"}
+    ], {duration:350});
+    vaultInput.value = "";
+    setTimeout(()=> vaultInput.focus(), 30);
 }
 
-
-vaultBtn.addEventListener(
-    "click",
-    checkPassword
-);
-
-
-vaultInput.addEventListener(
-    "keydown",
-    event => {
-
-        if(
-            event.key ===
-            "Enter"
-        ){
-
-            checkPassword();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   START
-========================================================= */
+vaultBtn.addEventListener("click", checkPassword);
+vaultInput.addEventListener("keydown", event => {
+    if(event.key === "Enter") checkPassword();
+});
 
 async function startExperience(){
-
-    if(musicStarted){
-        return;
-    }
-
-    musicStarted =
-        true;
-
-    /*
-       رنگ‌ها از همین لحظه شروع می‌شوند.
-    */
-
-    document.body.classList.add(
-        "auto-color"
-    );
-
+    if(musicStarted) return;
+    musicStarted = true;
+    document.body.classList.add("auto-color");
     try{
-
-        bgMusic.volume =
-            .14;
-
+        bgMusic.volume = .14;
         await bgMusic.play();
-
-    }catch(error){
-
-        /*
-           مرورگر اجازه autoplay نداد؛
-           مشکلی نیست.
-        */
-
-    }
-
-    stage.classList.add(
-        "visible"
-    );
-
-    moodControls.classList.add(
-        "show"
-    );
-
+    }catch(e){}
+    stage.classList.add("visible");
+    moodControls.classList.add("show");
 }
-
-
-/* =========================================================
-   MOMENTS
-========================================================= */
 
 const moments = [
-
     "یه فضای کوچیک برای آهنگ‌هایی که ارزش دوباره شنیدن دارن.",
-
     "بعضی آهنگ‌ها فقط آهنگ نیستن؛ یه حال و هوا رو با خودشون میارن.",
-
     "برای وقت‌هایی که چند دقیقه فاصله گرفتن از شلوغی روز خوبه.",
-
     "هر آهنگی اینجا یه انتخابه؛ بدون دلیل خاص، فقط چون حس خوبی می‌ده."
-
 ];
-
-
-let momentIndex =
-    0;
-
+let momentIndex = 0;
 
 function renderMoment(){
-
-    momentBox.textContent =
-        moments[
-            momentIndex
-        ];
-
-    momentCount.textContent =
-        `${momentIndex + 1} / ${moments.length}`;
-
+    momentBox.textContent = moments[momentIndex];
+    momentCount.textContent = `${momentIndex + 1} / ${moments.length}`;
 }
 
-
-momentPrev.addEventListener(
-    "click",
-    ()=>{
-
-        momentIndex =
-            (
-                momentIndex -
-                1 +
-                moments.length
-            ) %
-            moments.length;
-
-        renderMoment();
-
-    }
-);
-
-
-momentNext.addEventListener(
-    "click",
-    ()=>{
-
-        momentIndex =
-            (
-                momentIndex +
-                1
-            ) %
-            moments.length;
-
-        renderMoment();
-
-    }
-);
-
-
+momentPrev.addEventListener("click", ()=>{
+    momentIndex = (momentIndex - 1 + moments.length) % moments.length;
+    renderMoment();
+});
+momentNext.addEventListener("click", ()=>{
+    momentIndex = (momentIndex + 1) % moments.length;
+    renderMoment();
+});
 renderMoment();
 
-
-/* =========================================================
-   HIDDEN PANEL
-========================================================= */
-
-let coverTaps =
-    0;
-
+let coverTaps = 0;
 let coverResetTimer;
-
-
-coverWrap.addEventListener(
-    "click",
-    ()=>{
-
-        coverTaps++;
-
-        clearTimeout(
-            coverResetTimer
-        );
-
-        coverResetTimer =
-            setTimeout(
-                ()=>{
-                    coverTaps = 0;
-                },
-                1800
-            );
-
-        if(
-            coverTaps >= 5
-        ){
-
-            coverTaps = 0;
-
-            hiddenPanel.classList.add(
-                "show"
-            );
-
-        }
-
+coverWrap.addEventListener("click", ()=>{
+    coverTaps++;
+    clearTimeout(coverResetTimer);
+    coverResetTimer = setTimeout(()=> coverTaps = 0, 1800);
+    if(coverTaps >= 5){
+        coverTaps = 0;
+        hiddenPanel.classList.add("show");
     }
-);
+});
+hiddenClose.addEventListener("click", ()=> hiddenPanel.classList.remove("show"));
 
-
-hiddenClose.addEventListener(
-    "click",
-    ()=>{
-        hiddenPanel.classList.remove(
-            "show"
-        );
+candleToggle.addEventListener("click", ()=>{
+    candleActive = !candleActive;
+    document.body.classList.toggle("candle-mode", candleActive);
+    candleToggle.classList.toggle("active", candleActive);
+    if(candleActive){
+        document.body.classList.remove("auto-color");
+        if(music.paused && musicStarted && !rainActive) fadeBackgroundIn();
+    }else{
+        document.body.classList.add("auto-color");
     }
-);
+});
 
-
-/* =========================================================
-   CANDLE MODE
-========================================================= */
-
-candleToggle.addEventListener(
-    "click",
-    ()=>{
-
-        candleActive =
-            !candleActive;
-
-        document.body.classList.toggle(
-            "candle-mode",
-            candleActive
-        );
-
-        candleToggle.classList.toggle(
-            "active",
-            candleActive
-        );
-
-        /*
-           در حالت شمع، چرخه رنگ
-           متوقف می‌شود تا تم گرم بماند.
-        */
-
-        if(candleActive){
-
-            document.body.classList.remove(
-                "auto-color"
-            );
-
-            /*
-               اگر موسیقی اصلی در حال پخش نیست،
-               صدای پس‌زمینه گرم‌تر ادامه پیدا می‌کند.
-            */
-
-            if(
-                music.paused &&
-                musicStarted &&
-                !rainActive
-            ){
-
-                fadeBackgroundIn();
-
-            }
-
-        }else{
-
-            document.body.classList.add(
-                "auto-color"
-            );
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   RAIN
-========================================================= */
-
-let rainBuilt =
-    false;
-
-
+let rainBuilt = false;
 function buildRain(){
-
-    if(rainBuilt){
-        return;
+    if(rainBuilt) return;
+    rainBuilt = true;
+    const fragment = document.createDocumentFragment();
+    for(let i = 0; i < 45; i++){
+        const drop = document.createElement("div");
+        drop.className = "rain-drop";
+        const left = Math.random() * 100;
+        const height = 12 + Math.random() * 24;
+        const duration = .55 + Math.random() * .65;
+        const delay = -Math.random() * 2;
+        const drift = -50 - Math.random() * 60;
+        drop.style.left = left + "vw";
+        drop.style.height = height + "px";
+        drop.style.animationDuration = duration + "s";
+        drop.style.animationDelay = delay + "s";
+        drop.style.setProperty("--drift", drift + "px");
+        fragment.appendChild(drop);
     }
-
-    rainBuilt =
-        true;
-
-    const fragment =
-        document.createDocumentFragment();
-
-    for(
-        let i = 0;
-        i < 45;
-        i++
-    ){
-
-        const drop =
-            document.createElement(
-                "div"
-            );
-
-        drop.className =
-            "rain-drop";
-
-        const left =
-            Math.random() *
-            100;
-
-        const height =
-            12 +
-            Math.random() *
-            24;
-
-        const duration =
-            .55 +
-            Math.random() *
-            .65;
-
-        const delay =
-            -Math.random() * 2;
-
-        const drift =
-            -50 -
-            Math.random() * 60;
-
-        drop.style.left =
-            left + "vw";
-
-        drop.style.height =
-            height + "px";
-
-        drop.style.animationDuration =
-            duration + "s";
-
-        drop.style.animationDelay =
-            delay + "s";
-
-        drop.style.setProperty(
-            "--drift",
-            drift + "px"
-        );
-
-        fragment.appendChild(
-            drop
-        );
-
-    }
-
-    rainLayer.appendChild(
-        fragment
-    );
-
+    rainLayer.appendChild(fragment);
 }
 
-
-rainToggle.addEventListener(
-    "click",
-    ()=>{
-
-        rainActive =
-            !rainActive;
-
-        rainToggle.classList.toggle(
-            "rain-active",
-            rainActive
-        );
-
-        if(rainActive){
-
-            buildRain();
-
-            rainLayer.classList.add(
-                "show"
-            );
-
-            duckBackground();
-
-            rainSound.volume =
-                .13;
-
-            rainSound
-                .play()
-                .catch(()=>{});
-
-        }else{
-
-            rainLayer.classList.remove(
-                "show"
-            );
-
-            rainSound.pause();
-
-            rainSound.currentTime =
-                0;
-
-            resumeBackground();
-
-        }
-
+rainToggle.addEventListener("click", ()=>{
+    rainActive = !rainActive;
+    rainToggle.classList.toggle("rain-active", rainActive);
+    if(rainActive){
+        buildRain();
+        rainLayer.classList.add("show");
+        duckBackground();
+        rainSound.volume = .13;
+        rainSound.play().catch(()=>{});
+    }else{
+        rainLayer.classList.remove("show");
+        rainSound.pause();
+        rainSound.currentTime = 0;
+        resumeBackground();
     }
-);
-
-
-/* =========================================================
-   STAR FIELD
-========================================================= */
+});
 
 (function buildStars(){
-
-    const fragment =
-        document.createDocumentFragment();
-
-    for(
-        let i = 0;
-        i < 28;
-        i++
-    ){
-
-        const star =
-            document.createElement(
-                "span"
-            );
-
-        star.className =
-            "star-particle";
-
-        star.style.left =
-            (
-                Math.random() *
-                100
-            ) + "vw";
-
-        star.style.top =
-            (
-                Math.random() *
-                100
-            ) + "vh";
-
-        star.style.animationDelay =
-            (
-                -Math.random() *
-                2
-            ) + "s";
-
-        fragment.appendChild(
-            star
-        );
-
+    const fragment = document.createDocumentFragment();
+    for(let i = 0; i < 28; i++){
+        const star = document.createElement("span");
+        star.className = "star-particle";
+        star.style.left = (Math.random() * 100) + "vw";
+        star.style.top = (Math.random() * 100) + "vh";
+        star.style.animationDelay = (-Math.random() * 2) + "s";
+        fragment.appendChild(star);
     }
-
-    starField.appendChild(
-        fragment
-    );
-
+    starField.appendChild(fragment);
 })();
 
-
-/* =========================================================
-   REVEAL
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(
-        ".reveal"
-    );
-
-
-if(
-    "IntersectionObserver"
-    in window
-){
-
-    const observer =
-        new IntersectionObserver(
-            entries => {
-
-                for(
-                    const entry
-                    of entries
-                ){
-
-                    if(
-                        entry.isIntersecting
-                    ){
-
-                        entry.target
-                            .classList
-                            .add("in");
-
-                        observer.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                }
-
-            },
-            {
-                threshold:.08,
-                rootMargin:
-                    "0px 0px -20px 0px"
+const revealElements = document.querySelectorAll(".reveal");
+if("IntersectionObserver" in window){
+    const observer = new IntersectionObserver(entries => {
+        for(const entry of entries){
+            if(entry.isIntersecting){
+                entry.target.classList.add("in");
+                observer.unobserve(entry.target);
             }
-        );
-
-    revealElements.forEach(
-        element =>
-            observer.observe(
-                element
-            )
-    );
-
+        }
+    }, {threshold:.08, rootMargin:"0px 0px -20px 0px"});
+    revealElements.forEach(el => observer.observe(el));
 }else{
-
-    revealElements.forEach(
-        element =>
-            element.classList.add(
-                "in"
-            )
-    );
-
+    revealElements.forEach(el => el.classList.add("in"));
 }
 
-
-/* =========================================================
-   GREETING
-========================================================= */
-
 (function(){
-
-    const greeting =
-        $("greeting");
-
-    const hour =
-        new Date().getHours();
-
-    let text =
-        "روز بخیر";
-
-    if(
-        hour >= 5 &&
-        hour < 11
-    ){
-
-        text =
-            "صبح بخیر ☀️";
-
-    }else if(
-        hour >= 11 &&
-        hour < 17
-    ){
-
-        text =
-            "روز بخیر 🌤";
-
-    }else if(
-        hour >= 17 &&
-        hour < 21
-    ){
-
-        text =
-            "عصر بخیر 🌆";
-
-    }else{
-
-        text =
-            "شب بخیر 🌙";
-
-    }
-
-    greeting.textContent =
-        text;
-
+    const greeting = $("greeting");
+    const hour = new Date().getHours();
+    let text = "روز بخیر";
+    if(hour >= 5 && hour < 11) text = "صبح بخیر ☀️";
+    else if(hour >= 11 && hour < 17) text = "روز بخیر 🌤";
+    else if(hour >= 17 && hour < 21) text = "عصر بخیر 🌆";
+    else text = "شب بخیر 🌙";
+    greeting.textContent = text;
 })();
 
-
-/* =========================================================
-   LIGHT PARTICLES
-========================================================= */
-
 (function(){
+    const host = $("lights");
+    const count = window.innerWidth < 600 ? 14 : 20;
+    const fragment = document.createDocumentFragment();
+    for(let i = 0; i < count; i++){
+        const light = document.createElement("span");
+        light.className = "light";
+        light.style.left = (Math.random() * 100) + "vw";
+        light.style.animationDuration = (8 + Math.random() * 12) + "s";
+        light.style.animationDelay = (-Math.random() * 15) + "s";
+        fragment.appendChild(light);
+    }
+    host.appendChild(fragment);
+})();
 
-    const host =
-        $("lights");
+// Init
+loadSongs().then(()=>{
+    setTimeout(()=>{
+        loader.classList.add("hide");
+    }, 600);
+});
 
-    /*
-       قبلاً 24 بود.
-       برای موبایل سبک‌تر: 14
-    */
-
-    const count =
-        window.innerWidth < 600
-        ? 14
-        : 20;
-
-    const fragment =
-        document.createDocumentFragment();
-
-    for(
-        let i = 0;
-        i < count;
-        i++
-    ){
-
-        const light =
-            document.createElement(
-                "span"
-            );
-
-        light.className =
-            "light";
-
-        light.style.left =
-            (
-                Math.random() *
-                100
-            ) + "vw";
-
-        light.style.animationDuration =
-           
+})();
+</script>
+</body>
+</html>
