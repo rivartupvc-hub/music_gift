@@ -454,10 +454,51 @@ body.has-mini #stage{padding-bottom:170px;}
 .progress-bar{height:100%;width:0%;border-radius:3px;background:linear-gradient(90deg, var(--azure), #cdeeff);box-shadow:0 0 10px rgba(120,210,255,.5);}
 .time{display:flex;justify-content:space-between;font-size:10.5px;color:var(--faint);margin-top:6px;font-variant-numeric:tabular-nums;}
 
-.lyrics-box{margin-top:30px;max-width:360px;margin-inline:auto;}
-.lyrics-title{font-size:10px;letter-spacing:3px;color:var(--faint);margin-bottom:12px;direction:ltr;}
-.lyrics{font-size:13px;line-height:2.3;color:var(--muted);font-weight:300;}
-.lyrics p{opacity:.85;padding:3px 0;}
+/* =========================
+   LYRICS PANEL — sits right under the playlist, closed by
+   default, expands smoothly the moment a song is picked.
+   The body has its own capped height + internal scroll so a
+   long lyric never stretches the whole page.
+========================= */
+.lyrics-panel{
+    border-radius:16px;
+    background:var(--glass);
+    border:1px solid transparent;
+    overflow:hidden;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    max-height:0;
+    opacity:0;
+    margin-top:0;
+    transition:max-height .5s cubic-bezier(.16,1,.3,1), opacity .4s ease, margin-top .4s ease, border-color .4s ease;
+}
+.lyrics-panel.visible{
+    max-height:600px;
+    opacity:1;
+    margin-top:14px;
+    border-color:var(--border);
+}
+.lyrics-panel-head{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:14px 18px;cursor:pointer;user-select:none;
+}
+.lyrics-panel-head:active{opacity:.8;}
+.lyrics-panel-title{font-size:11px;letter-spacing:2px;color:var(--faint);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.lyrics-panel-title .song-name{color:var(--ink);font-size:13px;letter-spacing:0;font-weight:500;}
+.lyrics-panel-arrow{font-size:11px;color:var(--faint);transition:transform .35s ease;flex:0 0 auto;}
+.lyrics-panel.collapsed .lyrics-panel-arrow{transform:rotate(-90deg);}
+.lyrics-panel-body{
+    overflow-y:auto;
+    max-height:320px;
+    padding:0 18px 18px;
+    font-size:13px;line-height:2.3;color:var(--muted);font-weight:300;
+    border-top:1px solid var(--border);
+    transition:max-height .4s ease, opacity .3s ease, border-color .4s ease;
+}
+.lyrics-panel-body p{opacity:.85;padding:3px 0;}
+.lyrics-panel.collapsed .lyrics-panel-body{max-height:0;opacity:0;overflow:hidden;padding-top:0;padding-bottom:0;border-color:transparent;}
+.lyrics-panel-body::-webkit-scrollbar{width:5px;}
+.lyrics-panel-body::-webkit-scrollbar-thumb{background:rgba(190,230,255,.25);border-radius:3px;}
 
 .hint{margin-top:22px;font-size:11px;color:var(--faint);opacity:.7;}
 
@@ -573,6 +614,14 @@ html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
 <main id="stage">
     <nav class="tracklist reveal" id="tracklist"></nav>
 
+    <div class="lyrics-panel" id="lyricsPanel">
+        <div class="lyrics-panel-head" id="lyricsPanelHead">
+            <div class="lyrics-panel-title">متن آهنگ <span class="song-name" id="lyricsPanelSong"></span></div>
+            <div class="lyrics-panel-arrow">▾</div>
+        </div>
+        <div class="lyrics-panel-body" id="lyrics"></div>
+    </div>
+
     <section class="player reveal">
         <div class="cover-wrap" id="coverWrap"><img id="cover" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%235fc0ee'/%3E%3Cstop offset='50%25' stop-color='%238a6fd8'/%3E%3Cstop offset='100%25' stop-color='%2347c2b0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='200' height='200' fill='url(%23g)'/%3E%3C/svg%3E" alt="cover"></div>
         <div class="song-title" id="songTitle">—</div>
@@ -601,11 +650,6 @@ html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
         <div class="progress-wrap">
             <div class="progress" id="progress"><div class="progress-bar" id="progressBar"></div></div>
             <div class="time"><span id="curTime">0:00</span><span id="durTime">0:00</span></div>
-        </div>
-
-        <div class="lyrics-box">
-            <div class="lyrics-title">LYRICS</div>
-            <div class="lyrics" id="lyrics"></div>
         </div>
 
         <div class="hint">برای پخش لمس کن</div>
@@ -663,6 +707,9 @@ const songTitleEl = el('songTitle');
 const songArtistEl = el('songArtist');
 const songMessageEl = el('songMessage');
 const lyricsEl = el('lyrics');
+const lyricsPanel = el('lyricsPanel');
+const lyricsPanelHead = el('lyricsPanelHead');
+const lyricsPanelSong = el('lyricsPanelSong');
 const musicEl = el('music');
 const bgMusic = el('bgMusic');
 const playBtn = el('playBtn');
@@ -728,6 +775,12 @@ function loadSong(index, autoplay){
     renderLyrics(song);
     renderTracklist();
 
+    /* open the lyrics panel (right under the playlist) for the
+       newly picked song, expanded by default */
+    lyricsPanelSong.textContent = song.title || '';
+    lyricsPanel.classList.add('visible');
+    lyricsPanel.classList.remove('collapsed');
+
     musicEl.src = song.src || '';
     progressBar.style.width = '0%';
     curTimeEl.textContent = '0:00';
@@ -744,6 +797,13 @@ function loadSong(index, autoplay){
     } else {
         setPlayingUI(false);
     }
+}
+
+/* let the user manually fold the lyrics panel open/closed */
+if(lyricsPanelHead){
+    lyricsPanelHead.addEventListener('click', () => {
+        lyricsPanel.classList.toggle('collapsed');
+    });
 }
 
 function setPlayingUI(playing){
