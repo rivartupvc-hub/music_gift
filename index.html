@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="theme-color" content="#050f1c">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-title" content="برای تو">
+<meta name="apple-mobile-web-app-title" content="پلی‌لیست">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>برای تو</title>
+<title>پلی‌لیست</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%235fc0ee'/%3E%3Cstop offset='50%25' stop-color='%238a6fd8'/%3E%3Cstop offset='100%25' stop-color='%2347c2b0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='url(%23g)'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%235fc0ee'/%3E%3Cstop offset='50%25' stop-color='%238a6fd8'/%3E%3Cstop offset='100%25' stop-color='%2347c2b0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='180' height='180' rx='40' fill='url(%23g)'/%3E%3C/svg%3E">
 <style>
@@ -42,17 +42,17 @@ body{
 
 /* =========================
    PERSISTENT ANIMATED FIELD
-   fixed for the entire page — a slowly flowing multi-color
-   gradient (no photo dependency) that stays alive all the way
-   down through the playlist and player.
+   fixed for the entire page — a bright, cheerful multi-color
+   gradient that keeps drifting and shifting hue, smoothly and
+   endlessly (never a sudden jump), all the way down the page.
 ========================= */
 .deep-field{
     position:fixed;
     inset:0;
     z-index:-3;
-    background:linear-gradient(120deg, #0a1730 0%, #16264c 20%, #223a5e 40%, #2e2a5c 60%, #1c3a52 80%, #0c1b32 100%);
-    background-size:320% 320%;
-    animation:fieldFlow 26s ease-in-out infinite;
+    background:linear-gradient(120deg, #ff6fb3 0%, #7c6cf0 20%, #4fc3f7 40%, #4ade80 60%, #ffd166 80%, #ff6fb3 100%);
+    background-size:400% 400%;
+    animation:fieldFlow 24s ease-in-out infinite, hueShift 30s linear infinite;
 }
 @keyframes fieldFlow{
     0%{background-position:8% 20%;}
@@ -60,10 +60,15 @@ body{
     66%{background-position:35% 85%;}
     100%{background-position:8% 20%;}
 }
+@keyframes hueShift{
+    0%{filter:hue-rotate(0deg) saturate(1.15);}
+    50%{filter:hue-rotate(180deg) saturate(1.3);}
+    100%{filter:hue-rotate(360deg) saturate(1.15);}
+}
 .deep-field::after{
     content:"";
     position:absolute; inset:0;
-    background:radial-gradient(ellipse 120% 60% at 50% 0%, rgba(2,8,16,0), rgba(2,8,16,.78) 85%);
+    background:radial-gradient(ellipse 120% 60% at 50% 0%, rgba(4,10,20,0), rgba(4,10,20,.62) 85%);
 }
 @media (prefers-reduced-motion:reduce){
     .deep-field{animation:none;}
@@ -77,11 +82,11 @@ body{
     position:absolute;
     border-radius:50%;
     filter:blur(50px);
-    opacity:.5;
+    opacity:.55;
 }
-.caustics span:nth-child(1){width:60vmax;height:60vmax; top:-20vmax; left:-15vmax; animation:driftA 22s ease-in-out infinite; background:radial-gradient(circle, rgba(95,192,238,.55), transparent 70%);}
-.caustics span:nth-child(2){width:45vmax;height:45vmax; bottom:-15vmax; right:-10vmax; animation:driftB 26s ease-in-out infinite; opacity:.4; background:radial-gradient(circle, rgba(160,110,220,.5), transparent 70%);}
-.caustics span:nth-child(3){width:38vmax;height:38vmax; top:40%; left:60%; animation:driftC 30s ease-in-out infinite; opacity:.32; background:radial-gradient(circle, rgba(80,200,180,.5), transparent 70%);}
+.caustics span:nth-child(1){width:60vmax;height:60vmax; top:-20vmax; left:-15vmax; animation:driftA 22s ease-in-out infinite; background:radial-gradient(circle, rgba(255,110,180,.6), transparent 70%);}
+.caustics span:nth-child(2){width:45vmax;height:45vmax; bottom:-15vmax; right:-10vmax; animation:driftB 26s ease-in-out infinite; opacity:.45; background:radial-gradient(circle, rgba(120,190,255,.6), transparent 70%);}
+.caustics span:nth-child(3){width:38vmax;height:38vmax; top:40%; left:60%; animation:driftC 30s ease-in-out infinite; opacity:.4; background:radial-gradient(circle, rgba(255,214,102,.55), transparent 70%);}
 @keyframes driftA{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(6vw,8vh) scale(1.12);}}
 @keyframes driftB{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-7vw,-5vh) scale(1.08);}}
 @keyframes driftC{0%,100%{transform:translate(0,0) scale(1);}50%{transform:translate(-5vw,6vh) scale(.94);}}
@@ -96,6 +101,62 @@ body{
     position:fixed; inset:0; z-index:-1; pointer-events:none;
     opacity:.05; mix-blend-mode:overlay;
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* petals — the one signature ambient motion, drifting the whole
+   height of the page, slow and quiet, pure CSS so it costs nothing */
+.petals{position:fixed; inset:0; z-index:-1; pointer-events:none; overflow:hidden;}
+.petal-fall{
+    position:absolute; top:-6vh;
+    width:9px; height:12px;
+    background:linear-gradient(160deg, #bfe6ff, #5fb3e0 60%, #2f7ba8);
+    border-radius:60% 5% 60% 5%;
+    opacity:0;
+    animation:fall linear infinite;
+    filter:drop-shadow(0 0 6px rgba(120,205,245,.35));
+}
+@keyframes fall{
+    0%{transform:translateY(0) translateX(0) rotate(0deg); opacity:0;}
+    8%{opacity:.55;}
+    92%{opacity:.4;}
+    100%{transform:translateY(112vh) translateX(var(--drift,40px)) rotate(340deg); opacity:0;}
+}
+@media (prefers-reduced-motion:reduce){
+    .petal-fall{animation:none !important; display:none;}
+}
+
+/* rain mode — the petals fade out and a dedicated, denser rain
+   layer takes over, for a proper downpour instead of a few drops */
+body.rain-mode .petals{opacity:0;}
+.petals{transition:opacity .5s ease;}
+
+.rain-layer{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:0;transition:opacity .7s ease;}
+.rain-layer.show{opacity:1;}
+.rain-drop{
+    position:absolute; top:-12vh;
+    width:1.5px;
+    background:linear-gradient(180deg, rgba(230,248,255,.95), rgba(150,210,240,.05));
+    border-radius:3px;
+    animation:rainFall linear infinite;
+}
+.rain-splash{
+    position:absolute; bottom:-2px;
+    width:5px; height:1.5px; border-radius:50%;
+    background:rgba(200,235,255,.35);
+    animation:rainSplash linear infinite;
+}
+@keyframes rainFall{
+    0%{transform:translate(0,0);}
+    100%{transform:translate(var(--rdrift, -60px), 122vh);}
+}
+@keyframes rainSplash{
+    0%,88%{opacity:0;transform:scale(.4);}
+    90%{opacity:.6;transform:scale(1);}
+    100%{opacity:0;transform:scale(1.8);}
+}
+@media (prefers-reduced-motion:reduce){
+    .rain-drop,.rain-splash{animation:none !important;}
+    .rain-layer{display:none;}
 }
 
 /* =========================
@@ -294,21 +355,6 @@ body.has-mini #stage{padding-bottom:170px;}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1);}
 .reveal.in{opacity:1;transform:translateY(0);}
 
-.hero{text-align:center;margin-bottom:8px;}
-.greeting{font-size:11.5px;color:var(--muted);margin-bottom:10px;opacity:0;animation:fadeUp .9s ease .02s forwards;letter-spacing:.2px;}
-.eyebrow{font-size:10px;letter-spacing:4px;color:#b3dff2;margin-bottom:12px;direction:ltr;text-shadow:0 0 18px rgba(100,200,255,.4);opacity:0;animation:fadeUp .9s ease .1s forwards;}
-h1.title{font-size:clamp(28px,7.5vw,34px);font-weight:400;margin-bottom:12px;letter-spacing:-.5px;text-shadow:0 3px 22px rgba(0,25,55,.5), 0 0 30px rgba(140,220,255,.18);opacity:0;animation:fadeUp .9s ease .25s forwards;cursor:pointer;}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
-
-
-.intro{color:var(--muted);font-size:13px;line-height:2;font-weight:300;margin:10px 0 26px;opacity:0;animation:fadeUp .9s ease .4s forwards;}
-.hairline{width:1px;height:34px;margin:0 auto;background:linear-gradient(180deg, transparent, rgba(150,225,255,.5), transparent);opacity:0;animation:fadeUp .9s ease .5s forwards;}
-
-.ornament{display:flex;align-items:center;justify-content:center;gap:10px;margin:6px 0 4px;opacity:0;animation:fadeUp .9s ease .55s forwards;}
-.ornament::before,.ornament::after{content:"";width:26px;height:1px;background:linear-gradient(90deg, transparent, rgba(150,225,255,.45));}
-.ornament::after{background:linear-gradient(90deg, rgba(150,225,255,.45), transparent);}
-.ornament span{font-size:11px;color:var(--azure);text-shadow:0 0 10px rgba(120,210,255,.5);}
-
 /* =========================
    TRACKLIST — rebuilt playlist
    No per-song thumbnail images: the blue rose stays the single
@@ -420,7 +466,30 @@ h1.title{font-size:clamp(28px,7.5vw,34px);font-weight:400;margin-bottom:12px;let
 ========================= */
 .footer{margin-top:70px;text-align:center;}
 .footer-text{font-size:12.5px;color:var(--muted);line-height:2.1;font-weight:300;opacity:.85;}
-.footer-mark{margin-top:18px;font-size:18px;opacity:.6;}
+
+/* =========================
+   MOOD CONTROLS (candle + rain)
+========================= */
+.mood-controls{
+    position:fixed;top:18px;left:18px;z-index:500;display:flex;gap:8px;
+    opacity:0;transform:translateY(-8px);pointer-events:none;transition:opacity .8s ease, transform .8s ease;
+}
+.mood-controls.show{opacity:1;transform:translateY(0);pointer-events:auto;}
+.mood-btn{
+    width:38px;height:38px;border-radius:50%;border:1px solid var(--border);
+    background:rgba(10,25,45,.4);backdrop-filter:blur(10px);
+    display:flex;align-items:center;justify-content:center;font-size:15px;cursor:pointer;
+    transition:all .3s ease;opacity:.75;
+}
+.mood-btn:hover{opacity:1;transform:scale(1.06);}
+.mood-btn.active{background:rgba(255,190,120,.16);border-color:rgba(255,205,140,.4);opacity:1;box-shadow:0 0 18px rgba(255,180,100,.25);}
+.mood-btn.rain-active{background:rgba(150,225,255,.16);border-color:rgba(170,230,255,.4);opacity:1;box-shadow:0 0 18px rgba(120,210,255,.25);}
+
+/* candle mode: shifts the whole palette warmer */
+body.candle-mode{--azure:#f0b878;--azure-soft:rgba(240,184,120,.32);}
+body.candle-mode .deep-field{animation:none; filter:sepia(.22) saturate(1.05) hue-rotate(-10deg) brightness(.95);}
+body.candle-mode .caustics span{background:radial-gradient(circle, rgba(255,195,130,.5), transparent 70%);}
+
 /* touch water trail — light DOM droplets, auto-removed */
 .droplet{
     position:fixed;z-index:40;border-radius:50%;pointer-events:none;
@@ -430,12 +499,23 @@ h1.title{font-size:clamp(28px,7.5vw,34px);font-weight:400;margin-bottom:12px;let
 }
 @keyframes dropletFade{to{transform:translate(-50%,-50%) scale(2.4);opacity:0;}}
 
+/* =========================
+   STARRY DEPTH — a handful of quiet twinkling points,
+   like light filtering down through water
+========================= */
+.stars{position:fixed;inset:0;z-index:-2;pointer-events:none;}
+.star{position:absolute;border-radius:50%;background:#dff3ff;animation:twinkle ease-in-out infinite;}
+@keyframes twinkle{0%,100%{opacity:.15;}50%{opacity:.85;}}
+@media (prefers-reduced-motion:reduce){.star{animation:none;opacity:.4;}}
+
 /* custom scrollbar */
 ::-webkit-scrollbar{width:6px;}
 ::-webkit-scrollbar-track{background:transparent;}
 ::-webkit-scrollbar-thumb{background:rgba(140,210,255,.28);border-radius:6px;}
 ::-webkit-scrollbar-thumb:hover{background:rgba(140,210,255,.45);}
 html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
+
+.cover-wrap{position:relative;}
 
 @media (max-width:380px){
     .song-title{font-size:17px;}
@@ -451,7 +531,10 @@ html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
 
 <div class="deep-field"></div>
 <div class="caustics"><span></span><span></span><span></span></div>
+<div class="stars" id="stars"></div>
 <div class="grain"></div>
+<div class="petals" id="petals"></div>
+<div class="rain-layer" id="rainLayer"></div>
 
 <!-- ENTRY -->
 <div id="gate">
@@ -475,19 +558,19 @@ html{scrollbar-width:thin;scrollbar-color:rgba(140,210,255,.35) transparent;}
     </div>
 </div>
 
+<div class="mood-controls" id="moodControls">
+    <button type="button" class="mood-btn" id="candleToggle" aria-label="حالت شمع" title="حالت شمع">🕯️</button>
+    <button type="button" class="mood-btn" id="rainToggle" aria-label="صدای بارون" title="صدای بارون">🌧️</button>
+</div>
+
 <audio id="bgMusic" preload="auto" loop>
     <source src="background.mp3" type="audio/mpeg">
 </audio>
+<audio id="rainSound" preload="auto" loop>
+    <source src="rain.mp3" type="audio/mpeg">
+</audio>
 
 <main id="stage">
-    <section class="hero">
-        <div class="greeting" id="greeting"></div>
-        <div class="eyebrow">A LITTLE SOMETHING FOR YOU</div>
-        <h1 class="title" id="secretTrigger">برای تو</h1>
-        <p class="intro">چندتا آهنگ برای وقت‌هایی که<br>دلت یه حال خوب، یه لبخند کوچیک<br>یا فقط چند دقیقه آرامش می‌خواد.</p>
-        <div class="ornament"><span>❀</span></div>
-    </section>
-
     <nav class="tracklist reveal" id="tracklist"></nav>
 
     <section class="player reveal">
@@ -851,8 +934,9 @@ function fadeInBgMusic(){
 }
 
 /* fade the ambient background track out and stop it — used whenever
-   a real track starts, so sounds never pile up */
+   a real track or the rain starts, so sounds never pile up */
 let bgDuckTimer = null;
+let rainActive = false;
 function duckBgMusic(){
     if(bgMusic.paused) return;
     clearInterval(bgDuckTimer);
@@ -869,7 +953,7 @@ function duckBgMusic(){
 
 /* bring the ambient track back once nothing else is playing over it */
 function resumeBgMusic(){
-    if(!musicEl.paused || !musicStarted) return;
+    if(rainActive || !musicEl.paused || !musicStarted) return;
     clearInterval(bgDuckTimer);
     bgMusic.play().catch(()=>{});
     fadeInBgMusic();
@@ -893,7 +977,8 @@ async function startExperience(){
     setTimeout(() => {
         gate.remove();
         stage.classList.add('visible');
-    }, 1300);
+        el('moodControls').classList.add('show');
+    }, 900);
 }
 
 async function checkPassword(){
@@ -942,6 +1027,90 @@ vaultInput.addEventListener('keydown', (e) => { if(e.key === 'Enter') checkPassw
 })();
 
 initSongs();
+
+/* =========================
+   STARRY DEPTH
+========================= */
+(function(){
+    const host = el('stars');
+    if(!host) return;
+    const COUNT = 26;
+    let html = '';
+    for(let i = 0; i < COUNT; i++){
+        const size = (1 + Math.random() * 1.6).toFixed(1);
+        const top = (Math.random() * 100).toFixed(1);
+        const left = (Math.random() * 100).toFixed(1);
+        const dur = (3 + Math.random() * 5).toFixed(1);
+        const delay = (-Math.random() * 6).toFixed(1);
+        html += `<span class="star" style="width:${size}px;height:${size}px;top:${top}%;left:${left}%;animation-duration:${dur}s;animation-delay:${delay}s;"></span>`;
+    }
+    host.innerHTML = html;
+})();
+
+/* =========================
+   MOOD CONTROLS — candle warmth + soft rain loop
+========================= */
+(function(){
+    const candleBtn = el('candleToggle');
+    const rainBtn = el('rainToggle');
+    const rain = el('rainSound');
+    const rainLayer = el('rainLayer');
+    if(!candleBtn || !rainBtn) return;
+
+    /* build a proper downpour once — many drops + a few ground
+       splashes, shown/hidden together instead of regenerated */
+    if(rainLayer){
+        let html = '';
+        for(let i = 0; i < 70; i++){
+            const left = (Math.random() * 100).toFixed(1);
+            const height = (14 + Math.random() * 22).toFixed(0);
+            const dur = (0.45 + Math.random() * 0.5).toFixed(2);
+            const delay = (-Math.random() * 2).toFixed(2);
+            const drift = (-70 - Math.random() * 40).toFixed(0) + 'px';
+            const opacity = (0.35 + Math.random() * 0.45).toFixed(2);
+            html += `<div class="rain-drop" style="left:${left}vw;height:${height}px;animation-duration:${dur}s;animation-delay:${delay}s;--rdrift:${drift};opacity:${opacity};"></div>`;
+        }
+        for(let i = 0; i < 18; i++){
+            const left = (Math.random() * 100).toFixed(1);
+            const dur = (0.6 + Math.random() * 0.6).toFixed(2);
+            const delay = (-Math.random() * 1.4).toFixed(2);
+            html += `<div class="rain-splash" style="left:${left}vw;animation-duration:${dur}s;animation-delay:${delay}s;"></div>`;
+        }
+        rainLayer.innerHTML = html;
+    }
+
+    candleBtn.addEventListener('click', () => {
+        document.body.classList.toggle('candle-mode');
+        candleBtn.classList.toggle('active');
+    });
+
+    rainBtn.addEventListener('click', () => {
+        rainActive = !rainActive;
+        rainBtn.classList.toggle('rain-active', rainActive);
+        document.body.classList.toggle('rain-mode', rainActive);
+        if(rainLayer) rainLayer.classList.toggle('show', rainActive);
+
+        if(rainActive){
+            duckBgMusic();
+            rain.volume = 0;
+            rain.play().catch(()=>{});
+            let v = 0;
+            const iv = setInterval(() => {
+                v = Math.min(0.18, v + 0.012);
+                rain.volume = v;
+                if(v >= 0.18) clearInterval(iv);
+            }, 60);
+        } else {
+            let v = rain.volume;
+            const iv = setInterval(() => {
+                v = Math.max(0, v - 0.02);
+                rain.volume = v;
+                if(v <= 0){ clearInterval(iv); rain.pause(); }
+            }, 40);
+            resumeBgMusic();
+        }
+    });
+})();
 
 /* =========================
    SCROLL PROGRESS — a thin rising water-line at the top
@@ -1041,6 +1210,31 @@ initSongs();
 
     window.addEventListener('mousemove', fromMouse, {passive:true});
     window.addEventListener('touchmove', fromTouch, {passive:true});
+})();
+
+/* =========================
+   PETALS — spawn a handful once, let pure CSS animate them
+   forever (staggered delay/duration/drift per petal)
+========================= */
+(function(){
+    const host = el('petals');
+    if(!host) return;
+    const COUNT = 10;
+    for(let i = 0; i < COUNT; i++){
+        const p = document.createElement('div');
+        p.className = 'petal-fall';
+        const left = Math.random() * 100;
+        const duration = 16 + Math.random() * 14;
+        const delay = -Math.random() * 24;
+        const drift = (Math.random() * 90 - 45).toFixed(0) + 'px';
+        const scale = (0.7 + Math.random() * 0.7).toFixed(2);
+        p.style.left = left + 'vw';
+        p.style.animationDuration = duration + 's';
+        p.style.animationDelay = delay + 's';
+        p.style.setProperty('--drift', drift);
+        p.style.transform = `scale(${scale})`;
+        host.appendChild(p);
+    }
 })();
 
 /* =========================
